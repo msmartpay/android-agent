@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="2dp"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gas Bill Payment"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/border_line"
+                android:layout_marginBottom="15dp"
+                android:padding="10dp"
+                android:gravity="center"/>
+            </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/id_gas_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:ms_hint="@string/operator"
+            android:backgroundTint="@color/colorPrimary"
+            android:popupBackground="@color/spinnerColor"
+            style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/editHintColor">
+
+                    <EditText
+                        android:id="@+id/id_gas_consumer_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Consumer / Account Number"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:textColor="@color/colorPrimary" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/editHintColor"
+                    android:layout_marginLeft="2dp">
+
+                    <EditText
+                        android:id="@+id/id_gas_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount"
+                        android:inputType="number"
+                        android:textColor="@color/colorPrimary"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:maxLength="5"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/editHintColor">
+                        <EditText
+                            android:id="@+id/et_add1"
+                            style="@style/et_electricity_payment"
+                            android:layout_below="@+id/id_gas_spinner"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:hint="Enter Consumer/Account Number " />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:gravity="center">
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColorHint="@color/editHintColor">
+
+            <EditText
+                android:id="@+id/edit_email_gas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:ems="10"
+                android:hint="Email ID"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/editHintColor"
+            android:layout_marginLeft="2dp">
+
+            <EditText
+                android:id="@+id/id_gas_contactno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contact Number"
+                android:inputType="number"
+                android:textColor="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                android:maxLength="10"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear_proceed_gas"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_border">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Proceed"
+            android:textColor="@color/whitecolor"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:foreground="?attr/selectableItemBackgroundBorderless"/>
+    </LinearLayout>
+
+</RelativeLayout>

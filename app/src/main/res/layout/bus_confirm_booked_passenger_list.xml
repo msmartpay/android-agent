@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="PNR No"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_pnr_list"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Age"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_age_list"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Fare"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_fare_list"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Reporting Time"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_reporting_time"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Ticket Number"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_ticket_number"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Passenger Name"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_passenger_name_list"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Seat No"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_seat_no_list"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:weightSum="1"
+            android:background="@color/light_white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/tv_details"
+                android:layout_weight="1"
+                android:text="Boarding Point"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Place"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_boarding_place"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Contact Number"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_boarding_contact_number"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Time"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_boarding_time"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Address"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_boarding_address"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="LandMark"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_boarding_landmark"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:weightSum="1"
+            android:background="@color/light_white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Dropping Point"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="14dp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Place"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_dropping_place"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Contact Number"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_dropping_contact_number"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Time"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_dropping_time"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="Address"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_dropping_address"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                style="@style/tv_details"
+                android:text="LandMark"
+                android:textStyle="bold"
+                android:layout_weight=".7"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_weight=".1"/>
+
+            <TextView
+                android:id="@+id/tview_dropping_landmark"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

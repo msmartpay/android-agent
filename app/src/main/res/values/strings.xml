@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">MSmartPay</string>
+    <string name="report"> If you have encountered any issue or have any feedback, please click on Call Button.</string>
+    <string name="support">support@smartkinda.in</string>
+    <string name="app_name_sapce">Smart Kinda</string>
+    <string name="email_id">support@smartkinda.com</string>
+    <string name="website"><u>www.msmartpay.in</u></string>
+    <string name="url">http://msmartpay.in</string>
+    <string name="app_name_year"> © 2018 Instaload</string>
+    <string name="powerd_by">Powered By\nInstaload</string>
+    <string name="adult">support@smartkinda.com</string>
+    <string name="child"><u>www.smartkinda.com</u></string>
+    <string name="infant">Infant\n 2 Years</string>
+
+    <string-array name="bank_type">
+        <item>NEFT</item>
+        <item>IMPS</item>
+        <item>RTGS</item>
+        <item>CASH</item>
+        <item>QR Scan</item>
+        <item>UPI</item>
+    </string-array>
+
+    <string name="flight_prompt">Choose a Class</string>
+    <string-array name="flight_class">
+        <item>ECONOMY</item>
+        <item>BUSINESS</item>
+        <item>FIRSTCLASS</item>
+        <item>PREMIUMECONOMY</item>
+    </string-array>
+    <string-array name="plan_circle">
+        <item>Andhra Pradesh Telangana</item>
+        <item>Assam</item>
+        <item>Bihar  Jharkhand</item>
+        <item>Chennai </item>
+        <item>Chhattisgarh</item>
+        <item>Delhi NCR</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu Kashmir</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Kolkata</item>
+        <item>Madhya Pradesh Chhattisgarh</item>
+        <item>Maharashtra Goa</item>
+        <item>Mumbai</item>
+        <item>North East</item>
+        <item>Orissa</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Tamil Nadu</item>
+        <item>UP East</item>
+        <item>UP West</item>
+        <item>West Bengal</item>
+    </string-array>
+    <string-array name="states">
+        <item>--- Select State ---</item>
+        <item>Andaman And Nicobar</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadar And Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim </item>
+        <item>Tamil Nadu</item>
+        <item>Tripura</item>
+        <item>Uttarakhand</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+    <string-array name="plan_type">
+        <item>Mobile</item>
+        <item>Dth</item>
+    </string-array>
+    <string name="facebook_id">193420561207745</string>
+    <string name="recharged">Recharge</string>
+    <string name="billpayment">Billpayment</string>
+    <string name="travelling">Travel</string>
+    <!-- <string name="finance">Finance</string>-->
+    <string name="bus">Bus</string>
+    <string name="airplane">Flight</string>
+    <string name="hotel">Hotel</string>
+    <string name="finance">Finance</string>
+    <string name="Aeps">Aeps</string>
+    <string name="pay_operator_model">OpModelJson</string>
+    <string name="operator">Select Operator</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
+    <string name="view_plan">View Plan</string>
+    <string name="offers">Offer</string>
+    <string name="view_customer_details">Customer Details</string>
+    <string name="title_activity_aeps">AEPSActivity</string>
+    <string name="launch_activity">Launch Activity</string>
+    <string name="stop_location_updates_button_text">stop location updates</string>
+</resources>

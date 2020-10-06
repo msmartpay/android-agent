@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_leave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_leave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:focusableInTouchMode="false"
+                    android:hint="Leave From"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/colorPrimary" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/til_leave"
+                android:hint="Destination To">
+
+                <EditText
+                    android:id="@+id/et_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:focusableInTouchMode="false"
+                    android:paddingBottom="15dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/colorPrimary" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/iv_swap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/til_leave"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/swap" />
+
+            <LinearLayout
+                android:id="@+id/ll_dat_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/til_destination"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_onward"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_onward"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="Journey Date">
+
+                        <EditText
+                            android:id="@+id/et_onward"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:paddingBottom="15dp"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/calender" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="No. of Passengers"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_no"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/border"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_adult_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/minus" />
+
+                        <TextView
+                            android:id="@+id/tv_adult"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:text="1"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/iv_adult_plus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/add" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button"
+                style="@style/btn_main"
+                android:layout_alignParentBottom="false"
+                android:layout_below="@+id/ll_dat_"
+                android:layout_marginTop="50dp"
+                android:text="Search Bus" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

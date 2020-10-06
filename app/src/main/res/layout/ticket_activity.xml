@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+
+<LinearLayout
+    android:id="@+id/activity_ticket"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/tv_ticket"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Operator" />
+
+        <TextView
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/operator_ticketactivity"
+            style="@style/tv_ticket" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textStyle="bold"
+            style="@style/tv_ticket"
+            android:gravity="left"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Mobile Number" />
+
+        <TextView
+            android:id="@+id/mobileno_ticketactivity"
+            style="@style/tv_ticket"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/tv_ticket"
+            android:textStyle="bold"
+            android:gravity="left"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Transaction ID" />
+    
+    <TextView
+        android:id="@+id/transaction_ticketactivity"
+        style="@style/tv_ticket" />
+        </LinearLayout>
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_marginTop="25dp"
+    android:textColorHint="@color/hintcolor"
+    android:layout_height="wrap_content">
+    <EditText
+
+        android:id="@+id/remark"
+        style="@style/et_electricity_payment"
+        android:ems="10"
+        android:hint="Enter Remark"
+        android:inputType="text">
+
+        <requestFocus />
+    </EditText>
+</com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
+</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
+            <Button
+                android:id="@+id/ticketsubmit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/round_border"
+                android:text="Submit Ticket"
+                android:textColor="@color/whitecolor"
+                android:textSize="18.0dip"/>
+</LinearLayout>
+</RelativeLayout>

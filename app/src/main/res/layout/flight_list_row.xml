@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whitecolor"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_comp_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/tick_ok" />
+
+            <TextView
+                android:id="@+id/tv_comp_model_code"
+                style="@style/tv_flight_row"
+                android:gravity="center"
+                android:text="Refundale"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_depart_time"
+                style="@style/tv_flight_row"
+                android:text="00.00"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_stops"
+                style="@style/tv_flight_row"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_arrival_time"
+                style="@style/tv_flight_row"
+                android:gravity="center"
+                android:text="00.00"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_duration_time"
+                style="@style/tv_flight_row"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_flight_amount"
+                style="@style/tv_flight_row"
+                android:text="0.0"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/iv_flight_refund"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tv_flight_amount"
+                android:src="@drawable/tick_ok" />
+
+            <TextView
+                android:id="@+id/tv_flight_arefund"
+                style="@style/tv_flight_row"
+                android:layout_below="@+id/tv_flight_amount"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/iv_flight_refund"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

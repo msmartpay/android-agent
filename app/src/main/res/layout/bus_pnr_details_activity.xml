@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/activity_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="55dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/tv_pnr_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="PNR"
+            android:textColor="@color/whitecolor"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textSize="13dp"
+            android:layout_marginLeft="5dp"/>
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="3dp">
+
+            <TextView
+                android:id="@+id/tv_orgin_to_destination"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Orgin To Destination"
+                android:textColor="@color/whitecolor"
+                android:textStyle="normal"
+                android:textSize="13dp"
+                android:layout_weight=".5"
+                android:layout_marginLeft="5dp"/>
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Date Time"
+                android:textColor="@color/whitecolor"
+                android:textStyle="normal"
+                android:textSize="13dp"
+                android:gravity="right"
+                android:layout_weight=".5"
+                android:layout_marginRight="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whitecolor"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="3dp">
+
+            <TextView
+                android:id="@+id/tv_transport_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Transporter Name"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/whitecolor">
+        </ListView>
+        </LinearLayout>
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/id_proceed"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/round_border"
+            android:text="Proceed"
+            android:textColor="@color/whitecolor"/>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

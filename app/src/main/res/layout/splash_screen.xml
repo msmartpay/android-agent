@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lin_lay"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/msmartpayicon"
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="center"/>
+
+   <!-- <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:text="IRFAN ANSARI"
+        android:layout_marginBottom="150dp"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimaryDark"/>-->
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="65dp"
+        android:layout_height="64dp"
+        android:id="@+id/progressBar"
+        android:max="48"
+        android:progress="1" />
+
+</LinearLayout>

@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    card_view:cardCornerRadius="5dp"
+                    card_view:cardElevation="2dp"
+                    card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_line"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:weightSum="2"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1.7"
+                        android:text="Contact Detail"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btn_contact_deatails"
+                        android:layout_width="0dp"
+                        android:layout_height="27dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight=".3"
+                        android:background="@drawable/round_border"
+                        android:text="Edit"
+                        android:textAllCaps="false"
+                        android:textColor="@color/whitecolor"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:cardCornerRadius="5dp"
+                    card_view:cardElevation="2dp"
+                    card_view:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/editHintColor"
+                            android:hint="Email Id">
+
+                            <EditText
+                                android:id="@+id/edit_passenser_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:textColor="@color/colorPrimary"
+                                android:paddingLeft="10dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                          <!--  <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".3"
+                                android:gravity="left"
+                                android:text="+91 "
+                                android:textColor="@color/colorPrimary"
+                                android:textStyle="bold" />-->
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor">
+
+                                <EditText
+                                    android:id="@+id/edit_mobile_number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:hint="Mobile Number"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:textColor="@color/colorPrimary"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/editHintColor">
+
+                            <EditText
+                                android:id="@+id/edit_passenser_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:hint="Address"
+                                android:textColor="@color/colorPrimary"
+                                android:paddingLeft="10dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/editHintColor">
+
+                            <EditText
+                                android:id="@+id/edit_passenser_city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:hint="City"
+                                android:textColor="@color/colorPrimary"
+                                android:paddingLeft="10dp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <Spinner
+                            android:id="@+id/spinner_passenser_country"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:popupBackground="@color/spinnerColor" />
+
+                        <Spinner
+                            android:id="@+id/spinner_passenser_id_card"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:popupBackground="@color/spinnerColor" />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/editHintColor">
+
+                            <EditText
+                                android:id="@+id/edit_passenser_id_proof_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:hint="Id proof number"
+                                android:textColor="@color/colorPrimary"
+                                android:paddingLeft="10dp"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    card_view:cardCornerRadius="5dp"
+                    card_view:cardElevation="2dp"
+                    card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_line"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Passenser Info"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/total_fare"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="Total Fare Rs."
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="15dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.7"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorPrimary"
+                                        android:hint="Seat Number">
+
+                                        <EditText
+                                            android:id="@+id/tv_seat_number1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:textColor="@color/colorPrimary"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="false"
+                                            android:paddingLeft="10dp"
+                                            android:textStyle="bold"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btn_seat_1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="27dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight=".3"
+                                    android:background="@drawable/round_border"
+                                    android:text="Edit"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="10dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_seat_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Name">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser1_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_passenser1_gender"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Age">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser1_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_boarding_passenser1"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <Spinner
+                                android:id="@+id/spinner_dropping_passenser1"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+                    </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:padding="15dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.7"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorPrimary"
+                                        android:hint="Seat Number">
+
+                                        <EditText
+                                            android:id="@+id/tv_seat_number2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:textColor="@color/colorPrimary"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="false"
+                                            android:paddingLeft="10dp"
+                                            android:textStyle="bold"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btn_seat_2"
+                                    android:layout_width="0dp"
+                                    android:layout_height="27dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight=".3"
+                                    android:background="@drawable/round_border"
+                                    android:text="Edit"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="10dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_seat_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Name">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser2_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_passenser2_gender"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Age">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser2_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_boarding_passenser2"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <Spinner
+                                android:id="@+id/spinner_dropping_passenser2"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+</LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:padding="15dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.7"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                   <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorPrimary"
+                                        android:hint="Seat Number">
+
+                                        <EditText
+                                            android:id="@+id/tv_seat_number3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:textColor="@color/colorPrimary"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="false"
+                                            android:paddingLeft="10dp"
+                                            android:textStyle="bold"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btn_seat_3"
+                                    android:layout_width="0dp"
+                                    android:layout_height="27dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight=".3"
+                                    android:background="@drawable/round_border"
+                                    android:text="Edit"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="10dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_seat_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Name">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser3_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_passenser3_gender"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Age">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser3_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_boarding_passenser3"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <Spinner
+                                android:id="@+id/spinner_dropping_passenser3"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+</LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:padding="15dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.7"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorPrimary"
+                                        android:hint="Seat Number">
+
+                                        <EditText
+                                            android:id="@+id/tv_seat_number4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:textColor="@color/colorPrimary"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="false"
+                                            android:paddingLeft="10dp"
+                                            android:textStyle="bold"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btn_seat_4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="27dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight=".3"
+                                    android:background="@drawable/round_border"
+                                    android:text="Edit"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="10dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_seat_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Name">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser4_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_passenser4_gender"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Age">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser4_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_boarding_passenser4"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <Spinner
+                                android:id="@+id/spinner_dropping_passenser4"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+</LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:padding="15dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.7"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorPrimary"
+                                        android:hint="Seat Number">
+
+                                        <EditText
+                                            android:id="@+id/tv_seat_number5"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:textColor="@color/colorPrimary"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="false"
+                                            android:paddingLeft="10dp"
+                                            android:textStyle="bold"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btn_seat_5"
+                                    android:layout_width="0dp"
+                                    android:layout_height="27dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight=".3"
+                                    android:background="@drawable/round_border"
+                                    android:text="Edit"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="10dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_seat_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Name">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser5_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_passenser5_gender"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Age">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser5_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_boarding_passenser5"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <Spinner
+                                android:id="@+id/spinner_dropping_passenser5"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+</LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:padding="15dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.7"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorPrimary"
+                                        android:hint="Seat Number">
+
+                                        <EditText
+                                            android:id="@+id/tv_seat_number6"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:textColor="@color/colorPrimary"
+                                            android:enabled="false"
+                                            android:focusableInTouchMode="false"
+                                            android:paddingLeft="10dp"
+                                            android:textStyle="bold"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btn_seat_6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="27dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight=".3"
+                                    android:background="@drawable/round_border"
+                                    android:text="Edit"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="10dp"
+                                    android:textStyle="normal" />
+                            </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_seat_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Name">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser6_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_passenser6_gender"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/editHintColor"
+                                android:hint="Age">
+
+                                <EditText
+                                    android:id="@+id/edit_passenser6_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/colorPrimary"
+                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
+                                    android:paddingLeft="10dp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Spinner
+                                android:id="@+id/spinner_boarding_passenser6"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+
+                            <Spinner
+                                android:id="@+id/spinner_dropping_passenser6"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:popupBackground="@color/spinnerColor" />
+</LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tv_make_payment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_border"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Confirm Payment"
+            android:textColor="@color/whitecolor"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:orientation="vertical"
+		android:padding="2dip">
+
+		<ScrollView
+			android:id="@+id/scrollView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:paddingLeft="20dp"
+				android:paddingRight="20dp"
+				android:paddingTop="5dp"
+				android:gravity="center_horizontal"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Date Time"
+						android:textStyle="bold" />
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".1"
+						android:text=":"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_date_time"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Service Delivery Tid"
+						android:textStyle="bold" />
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".1"
+						android:text=":"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_ser_deliv_tid"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+					<TextView
+						android:id="@+id/textView2"
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Requested Amount"
+						android:textStyle="bold" />
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".1"
+						android:text=":"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_request_amount"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Beneficiary Name"
+						android:textStyle="bold" />
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".1"
+						android:text=":"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_bene_name"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Bank Name"
+						android:textStyle="bold" />
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".1"
+						android:text=":"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_bank_name"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Account Number"
+						android:textStyle="bold" />
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".1"
+						android:text=":"
+						android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_acc_number"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Bank IFSC Code"
+						android:textStyle="bold" />
+
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight=".1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_ifsc_code"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Txn Type"
+						android:textStyle="bold" />
+
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight=".1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_txn_type"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:weightSum="2"
+					android:padding="2dp">
+
+					<TextView
+						style="@style/tv_details"
+						android:layout_weight=".8"
+						android:text="Status"
+						android:textStyle="bold" />
+
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight=".1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+					<TextView
+						android:id="@+id/tv_status"
+						style="@style/tv_details"
+						android:layout_weight="1.1" />
+				</LinearLayout>
+			</LinearLayout>
+		</ScrollView>
+	</LinearLayout>
+
+	<Button
+			android:id="@+id/btn_ok"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/round_border"
+			android:text="Done"
+		  	android:textSize="18dp"
+			android:textColor="@android:color/white" />
+</LinearLayout>

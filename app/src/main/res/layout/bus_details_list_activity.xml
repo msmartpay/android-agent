@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/activity_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/date_picker"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/doj_with_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOJ and No. of Seat"
+            android:textColor="@color/whitecolor"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/whitecolor"
+            android:listSelector="@color/colorLightPrimary"
+            android:choiceMode="singleChoice">
+        </ListView>
+
+        <TextView
+            android:id="@+id/tv_empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="No Bus Details Available !!!"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+   <!-- <android.support.design.widget.FloatingActionButton
+        android:id="@+id/float_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="15dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_add_white_24dp"
+        android:elevation="6dp"
+        app:pressedTranslationZ="12dp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_float"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:weightSum="1.5">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/float_departure"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight=".5"
+            android:elevation="6dp"
+            android:src="@drawable/ic_av_timer_white_24dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:pressedTranslationZ="12dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/float_fare"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="0.5"
+            android:elevation="6dp"
+            android:src="@drawable/float_price_icon"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:pressedTranslationZ="12dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/float_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="0.5"
+            android:elevation="6dp"
+            android:src="@drawable/ic_event_seat_white_24dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:pressedTranslationZ="12dp" />
+    </LinearLayout>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_add_white_24dp" />
+
+    <FrameLayout
+        android:id="@+id/layout_float"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/float_fare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="116dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/float_price_icon" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/float_departure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="116dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/ic_av_timer_white_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/float_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="77dp"
+            android:layout_marginRight="80dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/ic_event_seat_white_24dp" />
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

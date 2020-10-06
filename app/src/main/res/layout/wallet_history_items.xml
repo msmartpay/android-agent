@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_statement_adapter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/ac"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:text=""
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ac"
+        android:text="11/04/2016"
+        android:textColor="@color/colorPrimary"
+        android:textSize="11dp"
+        android:layout_marginTop="5dip"/>
+
+    <TextView
+        android:id="@+id/txn_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/date"
+        android:layout_alignBottom="@+id/date"
+        android:layout_toRightOf="@+id/ac"
+        android:text="123456789123456"
+        android:textColor="@color/colorPrimary"
+        android:textSize="11dp" />
+
+    <TextView
+        android:id="@+id/cd"
+        android:layout_width="10dp"
+        android:layout_height="20dp"
+        android:layout_alignLeft="@+id/txn_id"
+        android:layout_alignTop="@+id/ac"
+        android:text="-"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/symbole"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_alignBaseline="@+id/cd"
+        android:layout_alignBottom="@+id/cd"
+        android:layout_toRightOf="@+id/cd"
+        android:text="\u20B9"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/amt"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/symbole"
+        android:layout_alignBottom="@+id/symbole"
+        android:layout_toRightOf="@+id/symbole"
+        android:text="Amount"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cd"
+        android:layout_alignParentRight="true"
+        android:text="Status"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp" />
+    <TextView
+        android:id="@+id/tv_current_amt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status"
+        android:layout_alignParentRight="true"
+        android:text="Status"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13dp" />
+
+
+</RelativeLayout>

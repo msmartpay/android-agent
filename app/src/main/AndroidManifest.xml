@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="msmartpay.in">
+
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" android:protectionLevel="dangerous"/>
+    <permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:protectionLevel="dangerous"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!-- TODO: Step 1.0, Review Permissions: Specify permissions you are using. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".aeps.AEPSActivity"
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".aeps.ActivateServiceActivity"
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.plans.PlansActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.PrepaidMobileActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.PostpaidMobileActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.DthRechargeActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.DataCardRechargeActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.LandlinePayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.ElectricityPayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.GasPayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.WaterPayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.InsurancePayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.SuccessDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".helpAndSupport.HelpSupportActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".QRActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".helpAndSupport.AboutUsWebViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.QuickPayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.WalletHistoryActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.TransactionHistoryReceipt"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.TicketActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.TransactionSearchActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.TransSearchList"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.BalanceRequestActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".myWallet.MyEarningActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".OTPRegisterActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".RegisterComplete"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".MyProfile"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.BusBookingSearchActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.PnrDetailsActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.reportActivityExpand.BookingHistoryExpand"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.ConfirmTicketDetailsExpandable"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.SeatSelectionActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.CheckPnrStatusActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.TravellersDetailConfirmation"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".busBooking.TravellersDetail"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".busBooking.DetailsOfBusListActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.BusBookingSearchActivity_H"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".busBooking.BusBookingLeave"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.SenderVerifyRegisterActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.ImpsNeftTxnRecieptActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.MoneyTransferActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.ImpsNeftActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".moneyTransferNew.TransactionReceiptActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.SenderFullHistoryActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.AddBeneficiaryActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.Bank_name_search"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.SenderRegistrationActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".moneyTransferNew.SenderHistoryActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".moneyTransferNew.RefundLiveStatusActivity" />
+        <activity
+            android:name=".flight.FlightActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".flight.FlightActivityTest"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".flight.FlightCity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".flight.FlightList"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".flight.PassengerDetails"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".flight.ConfirmFlightBooking"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".flight.FlightBookingSucces"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".flight.FlightPnrStatusActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".hotelBooking.Testing"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".rechargeBillPay.BillPayActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".dmr2Moneytrasfer.AddBeneficiaryActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.Bank_name_search"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".dmr2Moneytrasfer.ImpsNeftActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.ImpsNeftTxnRecieptActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.MoneyTransferActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".dmr2Moneytrasfer.RefundLiveStatusActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.SenderFullHistoryActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.SenderHistoryActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.SenderRegistrationActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".dmr2Moneytrasfer.SenderVerifyRegisterActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".dmr2Moneytrasfer.TransactionReceiptActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+
+
+        <activity android:name=".collectBanks.CollectBankActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <service android:name=".location.GoogleService" />
+        <service android:name=".location.LocationJobIntent"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".location.LocationMonitoringService"/>
+    </application>
+
+</manifest>

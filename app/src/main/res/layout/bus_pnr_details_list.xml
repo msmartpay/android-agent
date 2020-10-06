@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#FFFFFF"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight=".3"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="10sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:buttonTint="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1.7">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+            android:padding="2dp">
+
+    <TextView
+        android:id="@+id/tv_passenger_name"
+        android:layout_width="0dp"
+        android:layout_weight="1.2"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Passenger Name"
+        android:textSize="13dp"
+        android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_seat_number"
+            android:layout_width="0dp"
+            android:layout_weight=".8"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Seat No"
+            android:textSize="13dp"
+            android:textStyle="normal"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:weightSum="2"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/tv_ticket_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Ticket Number"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:layout_weight="1.2"/>
+
+            <TextView
+                android:id="@+id/tv_age"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Age"
+                android:textSize="13dp"
+                android:textStyle="normal"
+                android:layout_weight=".8"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_penality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Penality Amount"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:layout_weight="1.2"/>
+
+
+            <TextView
+                android:id="@+id/tv_fare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Fare"
+                android:textSize="13dp"
+                android:textStyle="normal"
+                android:layout_weight=".8"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+</LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

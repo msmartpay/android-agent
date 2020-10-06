@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/bus_logo"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_traveler_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:text="Traveler Name"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_bus_timing"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight=".5"
+                        android:padding="5dp"
+                        android:text="Bus Timing"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="10dp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_bus_type"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="0.3"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Bus Type"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp"
+                        android:textStyle="bold"
+                        android:typeface="sans" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/tv_seat_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:text="Seat Type"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:textColor="@color/manoj"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_pending_seats"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center_horizontal"
+                        android:text="Pend Seat"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp"
+                        android:typeface="sans" />
+                </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+</android.support.v7.widget.CardView>-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whitecolor"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/bus_logo"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/tv_traveler_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="Traveler Name"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/tv_bus_timing"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight=".5"
+                            android:padding="5dp"
+                            android:text="Bus Timing"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10dp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tv_bus_type"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0.3"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:text="Bus Type"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        android:weightSum="1">
+
+
+                        <TextView
+                            android:id="@+id/tv_seat_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="Seat Type"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1000"
+                            android:textColor="@color/manoj"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:background="@drawable/textview_rounded"
+                            android:gravity="center"
+                            android:padding="10dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_pending_seats"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.2"
+                            android:gravity="center_horizontal"
+                            android:text="Pend Seat"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="10dp"
+                            android:typeface="sans" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/circle_white"
+        android:padding="10dp"
+        android:src="@drawable/icon_bus_small"
+        android:elevation="2dp"
+        android:layout_marginTop="1dp"/>
+
+</RelativeLayout>

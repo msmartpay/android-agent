@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingBottom="55dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".7"
+                android:text="Payee Name"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".1"
+                android:text=":"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tv_payee_name"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".7"
+                android:text="Payee Account Number"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".1"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_payee_acc_no"
+                style="@style/tv_details"
+                android:layout_weight="1.2" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="2">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight=".7"
+                    android:text="Payee IFSC"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight=".1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_payee_ifsc"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".7"
+                android:text="Enter Amount"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".1"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Amount"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="#000000"
+                    android:textColorHint="#999999"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="2">
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".7"
+                android:text="Enter Remark"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                style="@style/tv_details"
+                android:layout_weight=".1"
+                android:text=":"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:hint="Enter Remark"
+                    android:textColor="#000000"
+                    android:textColorHint="#999999"
+                    android:backgroundTint="@color/colorPrimary" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:weightSum="2">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+
+                    <RadioButton
+                        android:id="@+id/radio_imps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checked="true"
+                        android:text="IMPS"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:buttonTint="@color/colorPrimary"/>
+                    <RadioButton
+                        android:id="@+id/radio_neft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.13"
+                        android:textStyle="bold"
+                        android:text="NEFT"
+                        android:textSize="16dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:checked = "false"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/txtsubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Proceed"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

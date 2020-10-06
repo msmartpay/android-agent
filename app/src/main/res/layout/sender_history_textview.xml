@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tview_ser_deliv.tid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:hint="Service Delivery TID"
+            android:textColor="@color/btncolor"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tview_account_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:gravity="right"
+            android:hint="Account Number"
+            android:textColor="@color/btncolor"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tview_date_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.2"
+            android:hint="Date Time"
+            android:textColor="@color/btncolor"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/tview_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".8"
+            android:gravity="right"
+            android:text="Status"
+            android:textColor="@color/btncolor"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:weightSum="1"
+       android:padding="5dp">
+
+       <TextView
+           android:id="@+id/tview_request_amt"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:text="Requested Amount"
+           android:layout_weight=".7"
+           android:textColor="@color/manoj"
+           android:textSize="10dp"
+           android:gravity="start|center"/>
+
+       <Button
+           android:id="@+id/btn_live_status"
+           android:layout_width="0dp"
+           android:layout_height="30dp"
+           android:background="@drawable/rounded_button"
+           android:textColor="@color/whitecolor"
+           android:text="Live Status"
+           android:textSize="12sp"
+           android:layout_marginLeft="50dp"
+           android:layout_weight=".3"
+           android:textAllCaps="false"
+           android:padding="5dp"
+           android:gravity="center"/>
+   </LinearLayout>
+
+</LinearLayout>
