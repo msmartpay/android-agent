@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:gravity="center_horizontal"
                 android:padding="16dp">
 
                 <fr.ganfra.materialspinner.MaterialSpinner
@@ -98,26 +99,22 @@
 
                 <LinearLayout
                     android:id="@+id/icic_qr_code"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
                     android:layout_height="280dp"
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
                     android:layout_margin="5dp"
                     android:background="@drawable/icici_qr_code"
-                    android:visibility="gone">
-
-                </LinearLayout>
+                    android:visibility="visible"/>
 
                 <LinearLayout
                     android:id="@+id/upi_qr_code"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
                     android:layout_height="280dp"
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
                     android:background="@drawable/bhim_upi"
-                    android:visibility="gone">
-
-                </LinearLayout>
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
