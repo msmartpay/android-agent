@@ -19,8 +19,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:padding="16dp">
 
                 <fr.ganfra.materialspinner.MaterialSpinner
@@ -101,35 +101,35 @@
                     android:id="@+id/icic_qr_code"
                     android:layout_width="250dp"
                     android:layout_height="280dp"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
                     android:layout_margin="5dp"
                     android:background="@drawable/icici_qr_code"
-                    android:visibility="visible"/>
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/upi_qr_code"
                     android:layout_width="250dp"
                     android:layout_height="280dp"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/bhim_upi"
-                    android:visibility="gone"/>
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
 
-
         </androidx.cardview.widget.CardView>
     </ScrollView>
+
     <Button
         android:id="@+id/id_balance_request_submit"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/round_border"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:text="Submit Request"
         android:textColor="@color/whitecolor"
-        android:textSize="18.0dip"
-        android:layout_alignParentBottom="true"
-        android:foreground="?attr/selectableItemBackgroundBorderless"/>
+        android:textSize="18.0dip" />
 </RelativeLayout>

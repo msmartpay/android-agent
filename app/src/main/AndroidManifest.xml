@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="msmartpay.in">
+    package="agent.msmartpay.in">
 
     <permission android:name="android.permission.ACCESS_FINE_LOCATION" android:protectionLevel="dangerous"/>
     <permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:protectionLevel="dangerous"/>
@@ -20,7 +20,7 @@
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
     <application
-        android:name=".MyApp"
+        android:name="agent.msmartpay.in.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -34,13 +34,13 @@
             android:required="false" />
 
         <activity
-            android:name=".aeps.AEPSActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.aeps.AEPSActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="agent.msmartpay.in.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,288 +49,288 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="agent.msmartpay.in.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".aeps.ActivateServiceActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.aeps.ActivateServiceActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MainActivity"
+            android:name="agent.msmartpay.in.MainActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.plans.PlansActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.plans.PlansActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.PrepaidMobileActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.PrepaidMobileActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.PostpaidMobileActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.PostpaidMobileActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.DthRechargeActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.DthRechargeActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.DataCardRechargeActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.DataCardRechargeActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.LandlinePayActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.LandlinePayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.ElectricityPayActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.ElectricityPayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.GasPayActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.GasPayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.WaterPayActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.WaterPayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.InsurancePayActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.InsurancePayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.SuccessDetailActivity"
+            android:name="agent.msmartpay.in.rechargeBillPay.SuccessDetailActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".helpAndSupport.HelpSupportActivity"
+            android:name="agent.msmartpay.in.helpAndSupport.HelpSupportActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".QRActivity"
+            android:name="agent.msmartpay.in.QRActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".helpAndSupport.AboutUsWebViewActivity"
+            android:name="agent.msmartpay.in.helpAndSupport.AboutUsWebViewActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.QuickPayActivity"
+            android:name="agent.msmartpay.in.myWallet.QuickPayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.WalletHistoryActivity"
+            android:name="agent.msmartpay.in.myWallet.WalletHistoryActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.TransactionHistoryReceipt"
+            android:name="agent.msmartpay.in.myWallet.TransactionHistoryReceipt"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.TicketActivity"
+            android:name="agent.msmartpay.in.myWallet.TicketActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.TransactionSearchActivity"
+            android:name="agent.msmartpay.in.myWallet.TransactionSearchActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.TransSearchList"
+            android:name="agent.msmartpay.in.myWallet.TransSearchList"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.BalanceRequestActivity"
+            android:name="agent.msmartpay.in.myWallet.BalanceRequestActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".myWallet.MyEarningActivity"
+            android:name="agent.msmartpay.in.myWallet.MyEarningActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name="agent.msmartpay.in.ResetPasswordActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".OTPRegisterActivity"
+            android:name="agent.msmartpay.in.OTPRegisterActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".RegisterComplete"
+            android:name="agent.msmartpay.in.RegisterComplete"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MyProfile"
+            android:name="agent.msmartpay.in.MyProfile"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.BusBookingSearchActivity"
+            android:name="agent.msmartpay.in.busBooking.BusBookingSearchActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.PnrDetailsActivity"
+            android:name="agent.msmartpay.in.busBooking.PnrDetailsActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.reportActivityExpand.BookingHistoryExpand"
+            android:name="agent.msmartpay.in.busBooking.reportActivityExpand.BookingHistoryExpand"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.ConfirmTicketDetailsExpandable"
+            android:name="agent.msmartpay.in.busBooking.ConfirmTicketDetailsExpandable"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.SeatSelectionActivity"
+            android:name="agent.msmartpay.in.busBooking.SeatSelectionActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.CheckPnrStatusActivity"
+            android:name="agent.msmartpay.in.busBooking.CheckPnrStatusActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.TravellersDetailConfirmation"
+            android:name="agent.msmartpay.in.busBooking.TravellersDetailConfirmation"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".busBooking.TravellersDetail"
+            android:name="agent.msmartpay.in.busBooking.TravellersDetail"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".busBooking.DetailsOfBusListActivity"
+            android:name="agent.msmartpay.in.busBooking.DetailsOfBusListActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.BusBookingSearchActivity_H"
+            android:name="agent.msmartpay.in.busBooking.BusBookingSearchActivity_H"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".busBooking.BusBookingLeave"
+            android:name="agent.msmartpay.in.busBooking.BusBookingLeave"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.SenderVerifyRegisterActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.SenderVerifyRegisterActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.ImpsNeftTxnRecieptActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.ImpsNeftTxnRecieptActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.MoneyTransferActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.MoneyTransferActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.ImpsNeftActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.ImpsNeftActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".moneyTransferNew.TransactionReceiptActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.TransactionReceiptActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.SenderFullHistoryActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.SenderFullHistoryActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.AddBeneficiaryActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.AddBeneficiaryActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.Bank_name_search"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.Bank_name_search"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.SenderRegistrationActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.SenderRegistrationActivity"
+            android:parentActivityName="agent.msmartpay.in.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".moneyTransferNew.SenderHistoryActivity"
+            android:name="agent.msmartpay.in.moneyTransferNew.SenderHistoryActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".moneyTransferNew.RefundLiveStatusActivity" />
+        <activity android:name="agent.msmartpay.in.moneyTransferNew.RefundLiveStatusActivity" />
         <activity
-            android:name=".flight.FlightActivity"
+            android:name="agent.msmartpay.in.flight.FlightActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".flight.FlightActivityTest"
+            android:name="agent.msmartpay.in.flight.FlightActivityTest"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".flight.FlightCity"
+            android:name="agent.msmartpay.in.flight.FlightCity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".flight.FlightList"
+            android:name="agent.msmartpay.in.flight.FlightList"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".flight.PassengerDetails"
+            android:name="agent.msmartpay.in.flight.PassengerDetails"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".flight.ConfirmFlightBooking"
+            android:name="agent.msmartpay.in.flight.ConfirmFlightBooking"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".flight.FlightBookingSucces"
+            android:name="agent.msmartpay.in.flight.FlightBookingSucces"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".flight.FlightPnrStatusActivity"
+            android:name="agent.msmartpay.in.flight.FlightPnrStatusActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".hotelBooking.Testing"
+            android:name="agent.msmartpay.in.hotelBooking.Testing"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".rechargeBillPay.BillPayActivity"
+        <activity android:name="agent.msmartpay.in.rechargeBillPay.BillPayActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".dmr2Moneytrasfer.AddBeneficiaryActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.AddBeneficiaryActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.Bank_name_search"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.Bank_name_search"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".dmr2Moneytrasfer.ImpsNeftActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.ImpsNeftActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.ImpsNeftTxnRecieptActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.ImpsNeftTxnRecieptActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.MoneyTransferActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.MoneyTransferActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".dmr2Moneytrasfer.RefundLiveStatusActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.RefundLiveStatusActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.SenderFullHistoryActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.SenderFullHistoryActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.SenderHistoryActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.SenderHistoryActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.SenderRegistrationActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.SenderRegistrationActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".dmr2Moneytrasfer.SenderVerifyRegisterActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.SenderVerifyRegisterActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".dmr2Moneytrasfer.TransactionReceiptActivity"
+        <activity android:name="agent.msmartpay.in.dmr2Moneytrasfer.TransactionReceiptActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
 
-        <activity android:name=".collectBanks.CollectBankActivity"
+        <activity android:name="agent.msmartpay.in.collectBanks.CollectBankActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
@@ -338,11 +338,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name=".location.GoogleService" />
-        <service android:name=".location.LocationJobIntent"
+        <service android:name="agent.msmartpay.in.location.GoogleService" />
+        <service android:name="agent.msmartpay.in.location.LocationJobIntent"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
-        <service android:name=".location.LocationMonitoringService"/>
+        <service android:name="agent.msmartpay.in.location.LocationMonitoringService"/>
     </application>
 
 </manifest>
