@@ -10,24 +10,19 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -50,83 +45,39 @@ public class BaseActivity extends AppCompatActivity {
     public static Gson gson;
 
 
-    public Gson getGson(){
-        if(gson==null)
+    public Gson getGson() {
+        if (gson == null)
             gson = new Gson();
         return gson;
     }
 
 
-
-
-    public  void m2(String tag, String str){
-        String temp="";
-        final int CHUNK_SIZE =500;
+    public void m2(String tag, String str) {
+        String temp = "";
+        final int CHUNK_SIZE = 500;
         int offset = 0;
-        while (str.length()>=(offset+CHUNK_SIZE)){
-            String strFinal="";
-            strFinal = str.substring(offset, offset+CHUNK_SIZE);
-            temp = temp+strFinal+"\n";
-            offset+=CHUNK_SIZE;
+        while (str.length() >= (offset + CHUNK_SIZE)) {
+            String strFinal = "";
+            strFinal = str.substring(offset, offset + CHUNK_SIZE);
+            temp = temp + strFinal + "\n";
+            offset += CHUNK_SIZE;
         }
-        temp = temp+str.substring(offset);
+        temp = temp + str.substring(offset);
 
         L.m2(tag, temp);
     }
-    public void loadImage(Context ctx, String str , ImageView imgview, final ProgressBar progressBar){
-        Glide.with(ctx)
-                .load(str)
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        if(progressBar.getVisibility()== View.VISIBLE) {
-                        progressBar.setVisibility(View.GONE);
-                    }
-                        return false;
-                    }
 
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        if(progressBar.getVisibility()== View.VISIBLE) {
-                            progressBar.setVisibility(View.GONE);
-                        }
-                        return false;
-                    }
-                })
-                .into(imgview);
-    }
-    public static void loadImageStatic(Context ctx, String str , ImageView imgview, final ProgressBar progressBar){
-        Glide.with(ctx)
-                .load(str)
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                     if(progressBar.getVisibility()== View.VISIBLE) {
-                         progressBar.setVisibility(View.GONE);
-                     }
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        if(progressBar.getVisibility()== View.VISIBLE) {
-                            progressBar.setVisibility(View.GONE);
-                        }
-                        return false;
-                    }
-                })
-                .into(imgview);
-    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    public static void  getSocketTimeOut(JsonObjectRequest objectRequest){
+    public static void getSocketTimeOut(JsonObjectRequest objectRequest) {
         objectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 HttpURL.MY_SOCKET_TIMEOUT_MS, /*DefaultRetryPolicy.DEFAULT_MAX_RETRIES*/0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
+
     //Check Internet Connection
     public boolean isConnectionAvailable() {
         if (isOnline() == false) {
@@ -162,6 +113,7 @@ public class BaseActivity extends AppCompatActivity {
 
         return conn;
     }
+
     // ProgressDialog progressDialog; I have declared earlier.
     public void showPDialog(String msg) {
         progressDialog = new ProgressDialog(BaseActivity.this);
@@ -191,9 +143,10 @@ public class BaseActivity extends AppCompatActivity {
         editor.commit();
 
     }
+
     public static void createSourceFile(Context ctx, String data) {
         FileWriter writer = null;
-       // File cDir;
+        // File cDir;
         File tempFile;
 
         try {
@@ -213,6 +166,7 @@ public class BaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public static String getDiskCacheDir(Context context) {
         String cachePath = null;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
@@ -223,6 +177,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         return cachePath;
     }
+
     public static String readSourceFile(Context ctx) {
         Log.v("Read file called", "");
         String strLine = "";
@@ -234,7 +189,7 @@ public class BaseActivity extends AppCompatActivity {
             //cDir = ctx.getExternalCacheDir();
 
             //** Getting a reference to temporary file, if created earlier *//*
-            tempFile = new File(/*cDir.getPath()*/ getDiskCacheDir(ctx)+ "/" + "msmart.txt");
+            tempFile = new File(/*cDir.getPath()*/ getDiskCacheDir(ctx) + "/" + "msmart.txt");
             if (!tempFile.exists()) {
                 return null;
             } else {
@@ -256,20 +211,21 @@ public class BaseActivity extends AppCompatActivity {
         }
         return text.toString();
     }
-    public void showKeyBoard(){
+
+    public void showKeyBoard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
-    public void hideKeyBoard(View view){
+    public void hideKeyBoard(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public static void viewAnimationAddList(Context context, View view, int position, int lastPosition) {
-       // Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_bottom);
-       // Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.listview_slide_left : R.anim.listview_slide_left);
-       // view.startAnimation(animation);
+        // Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_bottom);
+        // Animation animation = AnimationUtils.loadAnimation(context, (position > lastPosition) ? R.anim.listview_slide_left : R.anim.listview_slide_left);
+        // view.startAnimation(animation);
 
     }
 
