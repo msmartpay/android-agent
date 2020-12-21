@@ -1,5 +1,6 @@
 package in.msmartpay.agent.rechargeBillPay;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,10 +9,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import androidx.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -26,11 +27,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.rechargeBillPay.plans.PlansActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
@@ -40,18 +52,15 @@ import in.msmartpay.agent.utility.RandomNumber;
 import in.msmartpay.agent.utility.Service;
 import in.msmartpay.agent.utility.Util;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-public class PrepaidMobileActivity extends BaseActivity {
-
+public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener {
+    public static final int REQ_LOCATION_CODE = 9001;
+    private static final String TAG = PrepaidMobileActivity.class.getSimpleName();
+    private String latitude = "";
+    private String longitude = "";
     private static final int REQUEST_PLAN = 0212;
     private LinearLayout linear_proceed;
     private EditText edit_prepaid_mobile, edit_amount;
-    private TextView tv_view_plan,tv_view_offer;
+    private TextView tv_view_plan, tv_view_offer;
     private Spinner spinner_oprater;
     private ImageView image_contactlist;
     private String operatorData;
@@ -68,26 +77,32 @@ public class PrepaidMobileActivity extends BaseActivity {
     private OperatorListModel listModel = null;
     private String opcode = null;
 
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+    private boolean isTxnClick = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recharge_prepaid_activity);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Prepaid");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = PrepaidMobileActivity.this;
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+
         sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         txn_key = sharedPreferences.getString("txn-key", null);
         agentID = sharedPreferences.getString("agentonlyid", null);
-        edit_prepaid_mobile =  findViewById(R.id.edit_prepaid_mobile);
-        edit_amount =  findViewById(R.id.edit_amount);
-        spinner_oprater =  findViewById(R.id.spinner_oprater);
+
+        edit_prepaid_mobile = findViewById(R.id.edit_prepaid_mobile);
+        edit_amount = findViewById(R.id.edit_amount);
+        spinner_oprater = findViewById(R.id.spinner_oprater);
         image_contactlist = (ImageView) findViewById(R.id.image_contactlist);
         linear_proceed = (LinearLayout) findViewById(R.id.linear_proceed);
         tv_view_plan = findViewById(R.id.tv_view_plan);
-        tv_view_offer= findViewById(R.id.tv_view_offer);
+        tv_view_offer = findViewById(R.id.tv_view_offer);
 
         image_contactlist.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
@@ -109,12 +124,12 @@ public class PrepaidMobileActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(!TextUtils.isEmpty(s)&& s.length()==10){
-                if(spinner_oprater.getSelectedItem()!=null)
-                tv_view_offer.setVisibility(View.VISIBLE);
-            }else {
-                tv_view_offer.setVisibility(View.GONE);
-            }
+                if (!TextUtils.isEmpty(s) && s.length() == 10) {
+                    if (spinner_oprater.getSelectedItem() != null)
+                        tv_view_offer.setVisibility(View.VISIBLE);
+                } else {
+                    tv_view_offer.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -125,19 +140,19 @@ public class PrepaidMobileActivity extends BaseActivity {
         spinner_oprater.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if(position>-1){
-                listModel = OperatorList.get(position);
-                opcode = listModel.getOpCode();
-                tv_view_plan.setVisibility(View.VISIBLE);
-                   if(!TextUtils.isEmpty(edit_prepaid_mobile.getText().toString())&& edit_prepaid_mobile.getText().toString().length()==10){
-                       tv_view_offer.setVisibility(View.VISIBLE);
-                   }else {
-                       tv_view_offer.setVisibility(View.GONE);
-                   }
-                }else {
-                   tv_view_plan.setVisibility(View.GONE);
-                   tv_view_offer.setVisibility(View.GONE);
-               }
+                if (position > -1) {
+                    listModel = OperatorList.get(position);
+                    opcode = listModel.getOpCode();
+                    tv_view_plan.setVisibility(View.VISIBLE);
+                    if (!TextUtils.isEmpty(edit_prepaid_mobile.getText().toString()) && edit_prepaid_mobile.getText().toString().length() == 10) {
+                        tv_view_offer.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_view_offer.setVisibility(View.GONE);
+                    }
+                } else {
+                    tv_view_plan.setVisibility(View.GONE);
+                    tv_view_offer.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -156,7 +171,10 @@ public class PrepaidMobileActivity extends BaseActivity {
                     edit_amount.requestFocus();
                     Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    proceedConfirmationDialog();
+                    if (!isTxnClick) {
+                        isTxnClick = true;
+                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                    }
                 }
             } else {
                 Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
@@ -165,19 +183,28 @@ public class PrepaidMobileActivity extends BaseActivity {
 
         tv_view_plan.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlansActivity.class);
-            intent.putExtra("type","mobile");
-            intent.putExtra("operator",listModel.getDisplayName());
-            intent.putExtra("mobile","");
-            startActivityForResult(intent,REQUEST_PLAN);
+            intent.putExtra("type", "mobile");
+            intent.putExtra("operator", listModel.getDisplayName());
+            intent.putExtra("mobile", "");
+            startActivityForResult(intent, REQUEST_PLAN);
         });
         tv_view_offer.setOnClickListener(v -> {
-            Intent intent = new Intent(context,PlansActivity.class);
-            intent.putExtra("type","mobile");
-            intent.putExtra("operator",listModel.getDisplayName());
-            intent.putExtra("mobile",edit_prepaid_mobile.getText().toString());
-            startActivityForResult(intent,REQUEST_PLAN);
+            Intent intent = new Intent(context, PlansActivity.class);
+            intent.putExtra("type", "mobile");
+            intent.putExtra("operator", listModel.getDisplayName());
+            intent.putExtra("mobile", edit_prepaid_mobile.getText().toString());
+            startActivityForResult(intent, REQUEST_PLAN);
         });
     }
+
+    private void startRechargeProcess() {
+       /* if (latitude.isEmpty() || longitude.isEmpty()) {
+            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
+        } else {*/
+        proceedConfirmationDialog();
+        // }
+    }
+
 
     //===========operatorCodeRequest==============
     private void operatorsCodeRequest() {
@@ -191,7 +218,7 @@ public class PrepaidMobileActivity extends BaseActivity {
             JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
                     .put("txn_key", txn_key)
-                    .put("service","mobile");
+                    .put("service", "mobile");
             L.m2("url-operators", operator_code_url);
             L.m2("Request--operators", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, operator_code_url, jsonObjectReq,
@@ -208,7 +235,7 @@ public class PrepaidMobileActivity extends BaseActivity {
                                     for (int i = 0; i < operatorJsonArray.length(); i++) {
                                         JSONObject obj = operatorJsonArray.getJSONObject(i);
 
-                                        if(obj.getString("Service").equalsIgnoreCase("mobile")){
+                                        if (obj.getString("Service").equalsIgnoreCase("mobile")) {
                                             OperatorListModel operatorListModel = new OperatorListModel();
                                             //operatorListModel.setSubService(obj.getString("SubService"));
                                             operatorListModel.setBillFetch(obj.getString("BillFetch"));
@@ -225,7 +252,7 @@ public class PrepaidMobileActivity extends BaseActivity {
                                     }
                                     operatorAdaptor = new CustomOperatorClass(context, OperatorList);
                                     spinner_oprater.setAdapter(operatorAdaptor);
-                                    if (OperatorList.size()==0){
+                                    if (OperatorList.size() == 0) {
                                         Toast.makeText(context, "No Operator Available!", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
@@ -235,9 +262,7 @@ public class PrepaidMobileActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }, new Response.ErrorListener()
-
-            {
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pd.dismiss();
@@ -305,14 +330,14 @@ public class PrepaidMobileActivity extends BaseActivity {
             JSONObject jsonObjectReq = new JSONObject();
             jsonObjectReq.put("agent_id", agentID);
             jsonObjectReq.put("txn_key", txn_key);
-            jsonObjectReq .put("service", "Mobile");
+            jsonObjectReq.put("service", "Mobile");
             jsonObjectReq.put("operator", opcode);
             jsonObjectReq.put("mobile_no", edit_prepaid_mobile.getText().toString().trim());
             jsonObjectReq.put("amount", edit_amount.getText().toString().trim());
             jsonObjectReq.put("request_id", RandomNumber.getTranId_14());
             jsonObjectReq.put("OpCode", opcode);
-            jsonObjectReq.put("latitude", Util.LoadPrefData(context,getString(R.string.latitude)));
-            jsonObjectReq.put("longitude", Util.LoadPrefData(context,getString(R.string.longitude)) );
+            jsonObjectReq.put("latitude", Util.LoadPrefData(context, getString(R.string.latitude)));
+            jsonObjectReq.put("longitude", Util.LoadPrefData(context, getString(R.string.longitude)));
             jsonObjectReq.put("ip", Util.getIpAddress(context));
 
             L.m2("url-prepaid", recharge_Url);
@@ -366,11 +391,14 @@ public class PrepaidMobileActivity extends BaseActivity {
             L.m2("Contact", "Response: " + data.toString());
             uriContact = data.getData();
             retrieveContactNumber();
-        }else if(requestCode == REQUEST_PLAN && resultCode == RESULT_OK){
-            if(data!=null){
-                if(data.getStringExtra("price")!=null)
+        } else if (requestCode == REQUEST_PLAN && resultCode == RESULT_OK) {
+            if (data != null) {
+                if (data.getStringExtra("price") != null)
                     edit_amount.setText(data.getStringExtra("price"));
             }
+        }
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == Activity.RESULT_OK) {
+            gpsTrackerPresenter.onStart();
         }
     }
 
@@ -434,6 +462,36 @@ public class PrepaidMobileActivity extends BaseActivity {
         }
     }
 
+    //--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
+        if (isTxnClick) {
+            isTxnClick = false;
+            startRechargeProcess();
+        }
+    }
+
+    @Override
+    public void locationError(String msg) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTrackerPresenter.onPause();
+    }
 
     @Override
     public void onBackPressed() {

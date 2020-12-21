@@ -1,5 +1,6 @@
 package in.msmartpay.agent.rechargeBillPay;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,7 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -26,7 +27,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.rechargeBillPay.plans.PlansActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
@@ -35,22 +44,15 @@ import in.msmartpay.agent.utility.Mysingleton;
 import in.msmartpay.agent.utility.RandomNumber;
 import in.msmartpay.agent.utility.Util;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-public class DthRechargeActivity extends BaseActivity {
+public class DthRechargeActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener {
+    public static final int REQ_LOCATION_CODE = 9001;
+    private static final String TAG = DthRechargeActivity.class.getSimpleName();
     private static final int REQUEST_PLAN = 0212;
     private LinearLayout linear_proceed_dth;
     private EditText edit_account_no_dth, edit_amount_dth;
-    private TextView tv_view_plan,tv_view_offer,tv_cust_details,tv_details;
+    private TextView tv_view_plan, tv_view_offer, tv_cust_details, tv_details;
 
     private Spinner spinner_oprater_dth;
-    private String operatorData;
-    private static final int REQUEST_CODE_PICK_CONTACTS = 1;
-    private Uri uriContact;
     private ProgressDialog pd;
     private Context context;
     private String dth_url = HttpURL.RECHARGE_URL;
@@ -61,8 +63,10 @@ public class DthRechargeActivity extends BaseActivity {
     private ArrayList<OperatorListModel> OperatorList = null;
     private CustomOperatorClass operatorAdaptor;
     private OperatorListModel listModel = null;
-
     private String opcode = null;
+
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+    private boolean isTxnClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +77,17 @@ public class DthRechargeActivity extends BaseActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = DthRechargeActivity.this;
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
 
         sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         txn_key = sharedPreferences.getString("txn-key", null);
         agentID = sharedPreferences.getString("agentonlyid", null);
-        edit_account_no_dth =  findViewById(R.id.edit_account_no_dth);
-        edit_amount_dth =  findViewById(R.id.edit_amount_dth);
-        spinner_oprater_dth =  findViewById(R.id.spinner_oprater_dth);
+        edit_account_no_dth = findViewById(R.id.edit_account_no_dth);
+        edit_amount_dth = findViewById(R.id.edit_amount_dth);
+        spinner_oprater_dth = findViewById(R.id.spinner_oprater_dth);
         linear_proceed_dth = (LinearLayout) findViewById(R.id.linear_proceed_dth);
         tv_view_plan = findViewById(R.id.tv_view_plan);
-        tv_view_offer= findViewById(R.id.tv_view_offer);
+        tv_view_offer = findViewById(R.id.tv_view_offer);
         tv_cust_details = findViewById(R.id.tv_cust_details);
         tv_details = findViewById(R.id.tv_details);
         //For OperatorList
@@ -91,14 +96,11 @@ public class DthRechargeActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        tv_cust_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isConnectionAvailable()) {
-                    customerDetailsRequest();
-                } else {
-                    Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
-                }
+        tv_cust_details.setOnClickListener(v -> {
+            if (isConnectionAvailable()) {
+                customerDetailsRequest();
+            } else {
+                Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
             }
         });
         edit_account_no_dth.addTextChangedListener(new TextWatcher() {
@@ -109,11 +111,11 @@ public class DthRechargeActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)&& s.length()>5){
-                    if(spinner_oprater_dth.getSelectedItem()!=null)
-                    tv_view_offer.setVisibility(View.VISIBLE);
+                if (!TextUtils.isEmpty(s) && s.length() > 5) {
+                    if (spinner_oprater_dth.getSelectedItem() != null)
+                        tv_view_offer.setVisibility(View.VISIBLE);
                     tv_cust_details.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     tv_view_offer.setVisibility(View.GONE);
                     tv_cust_details.setVisibility(View.GONE);
                 }
@@ -127,18 +129,18 @@ public class DthRechargeActivity extends BaseActivity {
         spinner_oprater_dth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position>-1){
+                if (position > -1) {
                     listModel = OperatorList.get(position);
                     opcode = listModel.getOpCode();
                     tv_view_plan.setVisibility(View.VISIBLE);
-                    if(!TextUtils.isEmpty(edit_account_no_dth.getText().toString())&& edit_account_no_dth.getText().toString().length()>5){
-                           tv_view_offer.setVisibility(View.VISIBLE);
+                    if (!TextUtils.isEmpty(edit_account_no_dth.getText().toString()) && edit_account_no_dth.getText().toString().length() > 5) {
+                        tv_view_offer.setVisibility(View.VISIBLE);
                         tv_cust_details.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         tv_view_offer.setVisibility(View.GONE);
                         tv_cust_details.setVisibility(View.GONE);
                     }
-                }else {
+                } else {
                     tv_view_plan.setVisibility(View.GONE);
                     tv_view_offer.setVisibility(View.GONE);
                     tv_cust_details.setVisibility(View.GONE);
@@ -150,51 +152,53 @@ public class DthRechargeActivity extends BaseActivity {
 
             }
         });
-        linear_proceed_dth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isConnectionAvailable()) {
+        linear_proceed_dth.setOnClickListener(view -> {
+            if (isConnectionAvailable()) {
 
-
-                    if (spinner_oprater_dth.getSelectedItem() == null) {
-                        Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(edit_account_no_dth.getText().toString().trim()) && edit_account_no_dth.getText().toString().trim().length() < 5) {
-                        edit_account_no_dth.requestFocus();
-                        Toast.makeText(context, "Enter Account Number !!!", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(edit_amount_dth.getText().toString().trim())) {
-                        edit_amount_dth.requestFocus();
-                        Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        proceedConfirmationDialog();
-                    }
+                if (spinner_oprater_dth.getSelectedItem() == null) {
+                    Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(edit_account_no_dth.getText().toString().trim()) && edit_account_no_dth.getText().toString().trim().length() < 5) {
+                    edit_account_no_dth.requestFocus();
+                    Toast.makeText(context, "Enter Account Number !!!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(edit_amount_dth.getText().toString().trim())) {
+                    edit_amount_dth.requestFocus();
+                    Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
+                    if (!isTxnClick) {
+                        isTxnClick = true;
+                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                    }
                 }
+            } else {
+                Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        tv_view_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PlansActivity.class);
-                intent.putExtra("type","dth");
-                intent.putExtra("operator",listModel.getDisplayName());
-                intent.putExtra("mobile","");
-                startActivityForResult(intent,REQUEST_PLAN);
-            }
+        tv_view_plan.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PlansActivity.class);
+            intent.putExtra("type", "dth");
+            intent.putExtra("operator", listModel.getDisplayName());
+            intent.putExtra("mobile", "");
+            startActivityForResult(intent, REQUEST_PLAN);
         });
-        tv_view_offer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,PlansActivity.class);
-                intent.putExtra("type","dth");
-                intent.putExtra("operator",listModel.getDisplayName());
-                intent.putExtra("mobile",edit_account_no_dth.getText().toString());
-                startActivityForResult(intent,REQUEST_PLAN);
-            }
+        tv_view_offer.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PlansActivity.class);
+            intent.putExtra("type", "dth");
+            intent.putExtra("operator", listModel.getDisplayName());
+            intent.putExtra("mobile", edit_account_no_dth.getText().toString());
+            startActivityForResult(intent, REQUEST_PLAN);
         });
     }
+
+    private void startRechargeProcess() {
+       /* if (latitude.isEmpty() || longitude.isEmpty()) {
+            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
+        } else {*/
+        proceedConfirmationDialog();
+        // }
+    }
+
 
     //===========operatorCodeRequest==============
     private void operatorsCodeRequest() {
@@ -208,7 +212,7 @@ public class DthRechargeActivity extends BaseActivity {
             JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
                     .put("txn_key", txn_key)
-                    .put("service","dth");
+                    .put("service", "dth");
 
             L.m2("url-operators", operator_code_url);
             L.m2("Request--operators", jsonObjectReq.toString());
@@ -245,7 +249,7 @@ public class DthRechargeActivity extends BaseActivity {
 
                                         operatorAdaptor = new CustomOperatorClass(context, OperatorList);
                                         spinner_oprater_dth.setAdapter(operatorAdaptor);
-                                        if (OperatorList.size()==0){
+                                        if (OperatorList.size() == 0) {
                                             Toast.makeText(context, "No Operator Available!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -256,9 +260,7 @@ public class DthRechargeActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }, new Response.ErrorListener()
-
-            {
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pd.dismiss();
@@ -294,24 +296,16 @@ public class DthRechargeActivity extends BaseActivity {
         confirm_operator.setText(listModel.getOperatorName());
         confirm_amount.setText(edit_amount_dth.getText().toString());
 
-        tv_recharge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    dthRechargeRequest();
-                    d.dismiss();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        tv_recharge.setOnClickListener(view -> {
+            try {
+                dthRechargeRequest();
+                d.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
-        tv_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                d.cancel();
-            }
-        });
+        tv_cancel.setOnClickListener(v -> d.cancel());
 
         d.show();
     }
@@ -335,8 +329,8 @@ public class DthRechargeActivity extends BaseActivity {
             jsonObjectReq.put("amount", edit_amount_dth.getText().toString().trim());
             jsonObjectReq.put("request_id", RandomNumber.getTranId_14());
             jsonObjectReq.put("OpCode", opcode);
-            jsonObjectReq.put("latitude", Util.LoadPrefData(context,getString(R.string.latitude)));
-            jsonObjectReq.put("longitude", Util.LoadPrefData(context,getString(R.string.longitude)) );
+            jsonObjectReq.put("latitude", Util.LoadPrefData(context, getString(R.string.latitude)));
+            jsonObjectReq.put("longitude", Util.LoadPrefData(context, getString(R.string.longitude)));
             jsonObjectReq.put("ip", Util.getIpAddress(context));
 
             L.m2("url-dth", dth_url);
@@ -367,9 +361,7 @@ public class DthRechargeActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }, new Response.ErrorListener()
-
-            {
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pd.dismiss();
@@ -383,6 +375,7 @@ public class DthRechargeActivity extends BaseActivity {
             exp.printStackTrace();
         }
     }
+
     private void customerDetailsRequest() {
         pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -394,10 +387,10 @@ public class DthRechargeActivity extends BaseActivity {
             JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
                     .put("txn_key", txn_key)
-                    .put("type","dthinfo")
-                    .put("client",HttpURL.CLIENT)
-                    .put("operator",listModel.getDisplayName())
-                    .put("mobile",edit_account_no_dth.getText().toString().trim());
+                    .put("type", "dthinfo")
+                    .put("client", HttpURL.CLIENT)
+                    .put("operator", listModel.getDisplayName())
+                    .put("mobile", edit_account_no_dth.getText().toString().trim());
 
             L.m2("url-cust", cust_details_url);
             L.m2("Request--cust", jsonObjectReq.toString());
@@ -414,20 +407,20 @@ public class DthRechargeActivity extends BaseActivity {
                                     tv_details.setVisibility(View.VISIBLE);
 
                                     JSONArray array = data.getJSONArray("records");
-                                    for (int i=0;i<array.length();i++){
+                                    for (int i = 0; i < array.length(); i++) {
                                         JSONObject object = array.getJSONObject(i);
-                                        if(object.has("customerName"))
-                                            builder.append("Name : "+object.getString("customerName"));
-                                        if(object.has("status"))
-                                            builder.append(", Status : "+object.getString("status"));
-                                        if(object.has("MonthlyRecharge"))
-                                            builder.append(", Monthly Recharge : "+object.getString("MonthlyRecharge"));
-                                        if(object.has("lastrechargeamount"))
-                                            builder.append(", Last Recharge Amount : "+object.getString("lastrechargeamount"));
-                                        if(object.has("lastrechargedate"))
-                                            builder.append(", Last Recharge Date : "+object.getString("lastrechargedate"));
-                                        if(object.has("planname"))
-                                            builder.append(", Plan Name : "+object.getString("planname"));
+                                        if (object.has("customerName"))
+                                            builder.append("Name : " + object.getString("customerName"));
+                                        if (object.has("status"))
+                                            builder.append(", Status : " + object.getString("status"));
+                                        if (object.has("MonthlyRecharge"))
+                                            builder.append(", Monthly Recharge : " + object.getString("MonthlyRecharge"));
+                                        if (object.has("lastrechargeamount"))
+                                            builder.append(", Last Recharge Amount : " + object.getString("lastrechargeamount"));
+                                        if (object.has("lastrechargedate"))
+                                            builder.append(", Last Recharge Date : " + object.getString("lastrechargedate"));
+                                        if (object.has("planname"))
+                                            builder.append(", Plan Name : " + object.getString("planname"));
                                     }
                                     tv_details.setText(builder.toString());
 
@@ -436,9 +429,7 @@ public class DthRechargeActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }, new Response.ErrorListener()
-
-            {
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pd.dismiss();
@@ -456,15 +447,49 @@ public class DthRechargeActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_PLAN && resultCode == RESULT_OK){
-            if(data!=null){
-                if(data.getStringExtra("price")!=null)
+        if (requestCode == REQUEST_PLAN && resultCode == RESULT_OK) {
+            if (data != null) {
+                if (data.getStringExtra("price") != null)
                     edit_amount_dth.setText(data.getStringExtra("price"));
             }
+        }
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == Activity.RESULT_OK) {
+            gpsTrackerPresenter.onStart();
         }
     }
 
     //====================================
+    //--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
+        if (isTxnClick) {
+            isTxnClick = false;
+            startRechargeProcess();
+        }
+    }
+
+    @Override
+    public void locationError(String msg) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTrackerPresenter.onPause();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

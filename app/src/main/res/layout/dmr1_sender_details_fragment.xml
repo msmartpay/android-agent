@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/personal_details"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/id_mobile_number"
+                        style="@style/et_wallet"
+                        android:layout_alignParentTop="true"
+                        android:hint="Enter Mobile Number"
+                        android:maxLength="10"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:textColor="@color/btncolor"
+                        android:backgroundTint="@color/btncolor"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/id_first_name"
+                        style="@style/et_wallet"
+                        android:layout_below="@+id/id_mobile_number"
+                        android:hint="Enter Name"
+                        android:maxLines="1"
+                        android:textColor="@color/btncolor"
+                        android:backgroundTint="@color/btncolor" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/id_last_name"
+                        style="@style/et_wallet"
+                        android:layout_below="@+id/id_first_name"
+                        android:ems="10"
+                        android:hint="Enter Last Name"
+                        android:maxLines="1"
+                        android:backgroundTint="@color/btncolor"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/sender_limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/id_last_name"
+                    android:text="Customer Limit"
+                    android:textStyle="bold"
+                    android:ems="10"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:padding="5dp"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/limit"
+                        style="@style/et_wallet"
+                        android:layout_below="@+id/sender_limit"
+                        android:ems="10"
+                        android:hint="Limit"
+                        android:enabled="false"
+                        android:maxLines="1"
+                        android:backgroundTint="@color/btncolor"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/used_limit"
+                        style="@style/et_wallet"
+                        android:layout_below="@+id/limit"
+                        android:ems="10"
+                        android:hint="Used Limit"
+                        android:enabled="false"
+                        android:maxLines="1"
+                        android:backgroundTint="@color/btncolor"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/available_limit"
+                        style="@style/et_wallet"
+                        android:layout_below="@+id/used_limit"
+                        android:ems="10"
+                        android:hint="Available Limit"
+                        android:enabled="false"
+                        android:maxLines="1"
+                        android:backgroundTint="@color/btncolor" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/id_update_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:text="Update Sender"
+            android:typeface="sans"
+            android:textAllCaps="false"
+            android:textColor="@color/whitecolor"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+</RelativeLayout>

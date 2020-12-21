@@ -50,7 +50,6 @@ public class GoogleService extends Service implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-
     boolean status;
 
     public static final String TAG = "GoogleService";
@@ -308,7 +307,6 @@ public class GoogleService extends Service implements
             L.m2("data failuer", e.toString());
             e.printStackTrace();
         }
-
     }
 
     @Nullable

@@ -13,9 +13,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -28,9 +25,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -49,8 +48,6 @@ import in.msmartpay.agent.utility.RandomNumber;
 import in.msmartpay.agent.utility.Service;
 
 public class PostpaidMobileActivity extends BaseActivity {
-
-
     private LinearLayout linear_proceed_postpaid;
     private EditText edit_postpaid_mobile, edit_amount_postpaid;
     private Spinner spinner_oprater_postpaid;
@@ -79,83 +76,70 @@ public class PostpaidMobileActivity extends BaseActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = PostpaidMobileActivity.this;
-        sharedPreferences =getSharedPreferences("myPrefs", MODE_PRIVATE);
+
+        sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         txn_key = sharedPreferences.getString("txn-key", null);
         agentID = sharedPreferences.getString("agentonlyid", null);
-        edit_postpaid_mobile =  findViewById(R.id.edit_postpaid_mobile);
-        edit_amount_postpaid =  findViewById(R.id.edit_amount_postpaid);
-        spinner_oprater_postpaid =  findViewById(R.id.spinner_oprater_postpaid);
-        image_contactlist_postpaid = (ImageView) findViewById(R.id.image_contactlist_postpaid);
-        linear_proceed_postpaid = (LinearLayout) findViewById(R.id.linear_proceed_postpaid);
+        edit_postpaid_mobile = findViewById(R.id.edit_postpaid_mobile);
+        edit_amount_postpaid = findViewById(R.id.edit_amount_postpaid);
+        spinner_oprater_postpaid = findViewById(R.id.spinner_oprater_postpaid);
+        image_contactlist_postpaid = findViewById(R.id.image_contactlist_postpaid);
+        linear_proceed_postpaid = findViewById(R.id.linear_proceed_postpaid);
 
         String code = "+91      ";
-       // edit_postpaid_mobile.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code), null, null, null);
+        // edit_postpaid_mobile.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code), null, null, null);
         //edit_postpaid_mobile.setCompoundDrawablePadding(code.length()*10);
 
         String code1 = "\u20B9   ";
-       // edit_amount_postpaid.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code1), null, null, null);
-       // edit_amount_postpaid.setCompoundDrawablePadding(code1.length()*10);
-        image_contactlist_postpaid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                startActivityForResult(intent, REQUEST_CODE_PICK_CONTACTS);
-            }
+        // edit_amount_postpaid.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code1), null, null, null);
+        // edit_amount_postpaid.setCompoundDrawablePadding(code1.length()*10);
+        image_contactlist_postpaid.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, REQUEST_CODE_PICK_CONTACTS);
         });
 
-       // Arrays.sort(OperatorCode.bill_mobile_key);
-       /* ArrayAdapter adapter = new ArrayAdapter(context, R.layout.spinner_textview_layout, OperatorCode.bill_mobile_key);
-        adapter.setDropDownViewResource(R.layout.spinner_textview_layout);
-        spinner_oprater_postpaid.setAdapter(adapter);*/
-
         //For OperatorList
-        try {
-            operatorsCodeRequest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        operatorsCodeRequest();
 
         spinner_oprater_postpaid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position >-1) {
-                    listModel =OperatorList.get(position);
+                if (position > -1) {
+                    listModel = OperatorList.get(position);
                     operator = parent.getItemAtPosition(position).toString();
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-        linear_proceed_postpaid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isConnectionAvailable()) {
-                    mob = edit_postpaid_mobile.getText().toString();
-                    amt = edit_amount_postpaid.getText().toString();
-                    if (TextUtils.isEmpty(edit_postpaid_mobile.getText().toString().trim()) || edit_postpaid_mobile.getText().toString().trim().length() < 10) {
-                        edit_postpaid_mobile.requestFocus();
-                        Toast.makeText(context, "Enter 10 digit mobile no. !!!", Toast.LENGTH_SHORT).show();
-                    } else if (spinner_oprater_postpaid.getSelectedItem() == null) {
-                        Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(edit_amount_postpaid.getText().toString().trim())) {
-                        edit_amount_postpaid.requestFocus();
-                        Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //proceedConfirmationDialog();
-                        Intent intent=new Intent(context,BillPayActivity.class);
-                        intent.putExtra("CN",mob);
-                        intent.putExtra("CN_hint","Mobile Number");
-                        intent.putExtra("Amt",amt);
-                        intent.putExtra("Mob","");
-                        intent.putExtra("Add1","");
-                        intent.putExtra(getString(R.string.pay_operator_model),getGson().toJson(listModel));
-                        startActivity(intent);
-                    }
-                }else{
-                    Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
+        linear_proceed_postpaid.setOnClickListener(view -> {
+            if (isConnectionAvailable()) {
+                mob = edit_postpaid_mobile.getText().toString();
+                amt = edit_amount_postpaid.getText().toString();
+                if (TextUtils.isEmpty(edit_postpaid_mobile.getText().toString().trim()) || edit_postpaid_mobile.getText().toString().trim().length() < 10) {
+                    edit_postpaid_mobile.requestFocus();
+                    Toast.makeText(context, "Enter 10 digit mobile no. !!!", Toast.LENGTH_SHORT).show();
+                } else if (spinner_oprater_postpaid.getSelectedItem() == null) {
+                    Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(edit_amount_postpaid.getText().toString().trim())) {
+                    edit_amount_postpaid.requestFocus();
+                    Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //proceedConfirmationDialog();
+                    Intent intent = new Intent(context, BillPayActivity.class);
+                    intent.putExtra("CN", mob);
+                    intent.putExtra("CN_hint", "Mobile Number");
+                    intent.putExtra("Amt", amt);
+                    intent.putExtra("Mob", "");
+                    intent.putExtra("Add1", "");
+                    intent.putExtra(getString(R.string.pay_operator_model), getGson().toJson(listModel));
+                    startActivity(intent);
                 }
+            } else {
+                Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -177,50 +161,42 @@ public class PostpaidMobileActivity extends BaseActivity {
             L.m2("url-operators", operator_code_url);
             L.m2("Request--operators", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, operator_code_url, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject data) {
-                            pd.dismiss();
-                            L.m2("Response--operators", data.toString());
-                            try {
-                                if (data.getString("response-code") .equalsIgnoreCase("0")) {
-                                    L.m2("Response--operators1", data.toString());
-                                    JSONArray operatorJsonArray = data.getJSONArray("data");
-                                    OperatorList = new ArrayList<>();
+                    data -> {
+                        pd.dismiss();
+                        L.m2("Response--operators", data.toString());
+                        try {
+                            if (data.getString("response-code").equalsIgnoreCase("0")) {
+                                L.m2("Response--operators1", data.toString());
+                                JSONArray operatorJsonArray = data.getJSONArray("data");
+                                OperatorList = new ArrayList<>();
 
 
-                                    //opratorList = new ArrayList();
-                                  //  JSONArray jsonArray = object.getJSONArray("data");
-                                    for (int i = 0; i < operatorJsonArray.length(); i++) {
-                                        JSONObject object1 = operatorJsonArray.getJSONObject(i);
-                                        OperatorListModel model = new OperatorListModel();
-                                        model.setBillFetch(object1.getString("BillFetch"));
-                                        model.setDisplayName(object1.getString("DisplayName"));
-                                        model.setOpCode(object1.getString("OpCode"));
-                                        model.setOperatorName(object1.getString("OperatorName"));
-                                        model.setService(object1.getString("Service"));
-                                        OperatorList.add(model);
-                                    }
-                                    operatorAdaptor = new CustomOperatorClass(context, OperatorList);
-                                    spinner_oprater_postpaid.setAdapter(operatorAdaptor);
-                                    if (OperatorList.size()==0){
-                                        Toast.makeText(context, "No Operator Available!", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(context, data.getString("response-message"), Toast.LENGTH_SHORT).show();
+                                //opratorList = new ArrayList();
+                                //  JSONArray jsonArray = object.getJSONArray("data");
+                                for (int i = 0; i < operatorJsonArray.length(); i++) {
+                                    JSONObject object1 = operatorJsonArray.getJSONObject(i);
+                                    OperatorListModel model = new OperatorListModel();
+                                    model.setBillFetch(object1.getString("BillFetch"));
+                                    model.setDisplayName(object1.getString("DisplayName"));
+                                    model.setOpCode(object1.getString("OpCode"));
+                                    model.setOperatorName(object1.getString("OperatorName"));
+                                    model.setService(object1.getString("Service"));
+                                    OperatorList.add(model);
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                                operatorAdaptor = new CustomOperatorClass(context, OperatorList);
+                                spinner_oprater_postpaid.setAdapter(operatorAdaptor);
+                                if (OperatorList.size() == 0) {
+                                    Toast.makeText(context, "No Operator Available!", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(context, data.getString("response-message"), Toast.LENGTH_SHORT).show();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener()
-
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }, error -> {
+                pd.dismiss();
+                Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             getSocketTimeOut(jsonrequest);
             Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
@@ -252,12 +228,12 @@ public class PostpaidMobileActivity extends BaseActivity {
         tv_recharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               try {
-                   postpaidRechargeRequest();
-                   d.dismiss();
-               }catch (Exception e){
-                   e.printStackTrace();
-               }
+                try {
+                    postpaidRechargeRequest();
+                    d.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -280,7 +256,7 @@ public class PostpaidMobileActivity extends BaseActivity {
         pd.show();
 
         try {
-            JSONObject jsonObjectReq=new JSONObject()
+            JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
                     .put("CIR", "")
                     .put("txn_key", txn_key)
@@ -296,41 +272,33 @@ public class PostpaidMobileActivity extends BaseActivity {
                     .put("request_id", RandomNumber.getTranId_14());
 
             L.m2("url-postpaid", billpay_Url);
-            L.m2("Request--postpaid",jsonObjectReq.toString());
+            L.m2("Request--postpaid", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, billpay_Url, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject data) {
-                            pd.dismiss();
-                            L.m2("Response--postpaid", data.toString());
-                            try {
-                                    if (data.getString("response-code") != null && (data.getString("response-code").equals("0") || data.get("response-code").equals("1"))) {
-                                        Intent in = new Intent(context, SuccessDetailActivity.class);
-                                        in.putExtra("responce", data.get("response-message").toString());
-                                        in.putExtra("mobileno", edit_postpaid_mobile.getText().toString().trim());
-                                        in.putExtra("requesttype", "postpaid-mobile");
-                                        in.putExtra("operator", listModel.getOperatorName());
-                                        in.putExtra("amount", edit_amount_postpaid.getText().toString().trim());
-                                        startActivity(in);
-                                        finish();
-                                } else if (data.get("Status") != null && data.get("Status").equals("2")) {
-                                    Toast.makeText(context, data.getString("response-message"), Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }else {
-                                        Toast.makeText(context, "Unable To Process Your Request. Please try later.", Toast.LENGTH_SHORT).show();
-                                    }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                    data -> {
+                        pd.dismiss();
+                        L.m2("Response--postpaid", data.toString());
+                        try {
+                            if (data.getString("response-code") != null && (data.getString("response-code").equals("0") || data.get("response-code").equals("1"))) {
+                                Intent in = new Intent(context, SuccessDetailActivity.class);
+                                in.putExtra("responce", data.get("response-message").toString());
+                                in.putExtra("mobileno", edit_postpaid_mobile.getText().toString().trim());
+                                in.putExtra("requesttype", "postpaid-mobile");
+                                in.putExtra("operator", listModel.getOperatorName());
+                                in.putExtra("amount", edit_amount_postpaid.getText().toString().trim());
+                                startActivity(in);
+                                finish();
+                            } else if (data.get("Status") != null && data.get("Status").equals("2")) {
+                                Toast.makeText(context, data.getString("response-message"), Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(context, "Unable To Process Your Request. Please try later.", Toast.LENGTH_SHORT).show();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener()
-
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }, error -> {
+                pd.dismiss();
+                Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             getSocketTimeOut(jsonrequest);
             Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
@@ -352,6 +320,7 @@ public class PostpaidMobileActivity extends BaseActivity {
             retrieveContactNumber();
         }
     }
+
     private void retrieveContactNumber() {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
@@ -365,6 +334,7 @@ public class PostpaidMobileActivity extends BaseActivity {
         }
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -379,6 +349,7 @@ public class PostpaidMobileActivity extends BaseActivity {
             }
         }
     }
+
     public void getContact() {
         String contactNumber = null;
         Cursor c = getContentResolver().query(uriContact,

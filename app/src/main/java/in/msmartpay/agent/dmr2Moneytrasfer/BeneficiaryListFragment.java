@@ -123,7 +123,7 @@ public class BeneficiaryListFragment extends Fragment {
         @Override
         public View getView(final int position, View view, ViewGroup parent) {
             LayoutInflater layoutInflater = (LayoutInflater) contextData.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.new_dmr_listview_text, parent, false);
+            view = layoutInflater.inflate(R.layout.dmr1_listview_text, parent, false);
 
             BeneName = (TextView) view.findViewById(R.id.tv_bene_name);
             BeneAccountNumber = (TextView) view.findViewById(R.id.tv_account_no);

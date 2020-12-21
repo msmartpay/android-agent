@@ -1,5 +1,6 @@
 package in.msmartpay.agent;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,9 +23,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
@@ -34,13 +36,15 @@ import java.util.List;
 import in.msmartpay.agent.db.AppDao;
 import in.msmartpay.agent.db.Credentials;
 import in.msmartpay.agent.db.DatabaseClient;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
+import in.msmartpay.agent.utility.Util;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
-
+public class LoginActivity extends BaseActivity implements View.OnClickListener, GPSTrackerPresenter.LocationListener {
     private Context context;
     private Button btn_login;
     private EditText email, password;
@@ -49,7 +53,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String loginDetails = null, loginCredentials = null;
-    private String user_Credential = "user_Credential";
     private String Email, Password;
     private ProgressDialog pd;
     private String agent_id = "agent_id";
@@ -59,8 +62,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String signup_url = HttpURL.NEW_MOBILE_REGISTER;
     private EditText edit_verify_mobile = null;
     private boolean flag = false;
-    public static final int REQ_CODE = 9001;
     private AppDao appDatabase;
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+    private boolean isTxnClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,15 +75,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = LoginActivity.this;
-        sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+
+        sharedPreferences = Util.getMyPref(getApplicationContext());
         editor = sharedPreferences.edit();
 
-        email =  findViewById(R.id.email);
-        password =  findViewById(R.id.password);
-        checkBox = (CheckBox) findViewById(R.id.checkBox);
-        sign_up = (TextView) findViewById(R.id.sign_up);
-        btn_login =  findViewById(R.id.btn_login);
-        tv = (TextView) findViewById(R.id.tv);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        checkBox = findViewById(R.id.checkBox);
+        sign_up = findViewById(R.id.sign_up);
+        btn_login = findViewById(R.id.btn_login);
+        tv = findViewById(R.id.tv);
 
         btn_login.setOnClickListener(this);
         sign_up.setOnClickListener(this);
@@ -106,7 +112,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     if (checkBox.isChecked()) {
                         new SaveCredentialsTask().execute();
                     }
-                    loginRequest();
+                    if (!isTxnClick) {
+                        isTxnClick = true;
+                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                    }
                 }
             } else if (view.getId() == R.id.sign_up) {
                 signUpVerificationDialog();
@@ -126,38 +135,32 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         dialog_status.setContentView(R.layout.signup_mobile_dialog);
         dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        edit_verify_mobile =  dialog_status.findViewById(R.id.edit_verify_mobile);
+        edit_verify_mobile = dialog_status.findViewById(R.id.edit_verify_mobile);
         TextView title = (TextView) dialog_status.findViewById(R.id.title);
-        Button btn_submit =  dialog_status.findViewById(R.id.btn_verify);
-        Button close_mobile =  dialog_status.findViewById(R.id.close_mobile);
+        Button btn_submit = dialog_status.findViewById(R.id.btn_verify);
+        Button close_mobile = dialog_status.findViewById(R.id.close_mobile);
 
         edit_verify_mobile.setText("");
         title.setText("Forget Password");
         btn_submit.setText("Submit");
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(edit_verify_mobile.getText().toString().trim())) {
-                    edit_verify_mobile.requestFocus();
-                    Toast.makeText(context, "Please enter mobile number first !!!", Toast.LENGTH_SHORT).show();
-                } else if (edit_verify_mobile.getText().toString().trim().length() < 9) {
-                    edit_verify_mobile.requestFocus();
-                    Toast.makeText(context, "Mobile number should be 10 digits !!!", Toast.LENGTH_SHORT).show();
-                } else {
-                    forgetPasswordRequest();
-                    //forgetPasswordDialog("",1);
-                    dialog_status.dismiss();
-                }
+        btn_submit.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(edit_verify_mobile.getText().toString().trim())) {
+                edit_verify_mobile.requestFocus();
+                Toast.makeText(context, "Please enter mobile number first !!!", Toast.LENGTH_SHORT).show();
+            } else if (edit_verify_mobile.getText().toString().trim().length() < 9) {
+                edit_verify_mobile.requestFocus();
+                Toast.makeText(context, "Mobile number should be 10 digits !!!", Toast.LENGTH_SHORT).show();
+            } else {
+                forgetPasswordRequest();
+                //forgetPasswordDialog("",1);
+                dialog_status.dismiss();
             }
         });
 
-        close_mobile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog_status.cancel();
-                hideKeyBoard(edit_verify_mobile);
-            }
+        close_mobile.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(edit_verify_mobile);
         });
 
         dialog_status.show();
@@ -175,27 +178,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             L.m2("url-forget", forget_url);
             L.m2("Request--forget", jsonObjectReq.toString());
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, forget_url, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject data) {
-                            try {
-                                pd.dismiss();
-                                L.m2("data-forget", data.toString());
-                                if (data.getString("response-code") != null && data.getString("response-code").equals("0")) {
-                                    forgetPasswordDialog(data.getString("response-message"), Integer.parseInt(data.getString("response-code")));
-                                } else {
-                                    forgetPasswordDialog(data.getString("response-message"), Integer.parseInt(data.getString("response-code")));
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                    data -> {
+                        try {
+                            pd.dismiss();
+                            L.m2("data-forget", data.toString());
+                            if (data.getString("response-code") != null && data.getString("response-code").equals("0")) {
+                                forgetPasswordDialog(data.getString("response-message"), Integer.parseInt(data.getString("response-code")));
+                            } else {
+                                forgetPasswordDialog(data.getString("response-message"), Integer.parseInt(data.getString("response-code")));
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Toast.makeText(context, " " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }, error -> {
+                pd.dismiss();
+                Toast.makeText(context, " " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             getSocketTimeOut(objectRequest);
             Mysingleton.getInstance(context).addToRequsetque(objectRequest);
@@ -213,26 +210,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         ImageView statusImage = (ImageView) dialog_status.findViewById(R.id.statusImage);
         TextView text = (TextView) dialog_status.findViewById(R.id.TextView01);
-        Button trans_status =  dialog_status.findViewById(R.id.trans_status_button);
+        Button trans_status = dialog_status.findViewById(R.id.trans_status_button);
 
         text.setText(msg);
 
         if (i == 0) {
             statusImage.setImageResource(R.drawable.trnsuccess);
-            trans_status.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog_status.dismiss();
-                }
-            });
+            trans_status.setOnClickListener(view ->
+                    dialog_status.dismiss());
         } else {
             statusImage.setImageResource(R.drawable.failed);
-            trans_status.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog_status.dismiss();
-                }
-            });
+            trans_status.setOnClickListener(view ->
+                    dialog_status.dismiss());
         }
         dialog_status.show();
     }
@@ -246,98 +235,94 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             JSONObject jsonObjectReq = new JSONObject()
                     .put("mobileNo", Email)
                     .put("password", Password)
+                    .put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE))
+                    .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE))
+                    .put("ip", Util.getIpAddress(context))
                     .put("version", "7.0");
             L.m2("url-login", login_url);
             L.m2("Request--login", jsonObjectReq.toString());
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, login_url, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject data) {
-                            pd.dismiss();
-                            try {
-                                L.m2("data-login", data.toString());
-                                /* if (data.get("Status") != null && data.get("Status").equals("0")) {*/
-                                if (data.get("response-code") != null && data.get("response-code").equals("0")) {
+                    data -> {
+                        pd.dismiss();
+                        try {
+                            L.m2("data-login", data.toString());
+                            /* if (data.get("Status") != null && data.get("Status").equals("0")) {*/
+                            if (data.get("response-code") != null && data.get("response-code").equals("0")) {
 
-                                    editor.putString(user_Credential, "&agent_Id=" + data.get("agent-id") + "&agent_initial=" + data.get("agent-initial") + "&agent_dst_id=" + data.get("agent-dist-id") + "&txn_key=" + data.get("txn_key"));
-                                    L.m2("check--7>", "&agent_Id=" + data.get("agent-id") + "&agent_initial=" + data.get("agent-initial") + "&agent_dst_id=" + data.get("agent-dist-id") + "&txn_key=" + data.get("txn_key"));
-                                    editor.putString("agent_id_u", data.get("agent-id") + "");
-                                    editor.putString(agent_id, "&agent_id=" + data.get("agent-id"));
-                                    editor.putString(agent_id_full, (String) data.get("agent-initial") + data.get("agent-id"));
-                                    editor.putString("balance", "" + data.get("balance"));
-                                    editor.putString("txn-key", "" + data.get("txn_key"));
-                                    editor.putString("agentonlyid", data.getString("agent-id"));
-                                    editor.putString("statement_download", "true");
-                                    editor.putString("agentName", "" + data.get("agentName"));
-                                    editor.putString("emailId", "" + data.get("emailId"));
-                                    editor.putString("agentMobile", "" + data.get("mobile-number"));
+                                editor.putString(Keys.USER_CREDENTIALS, "&agent_Id=" + data.get("agent-id") + "&agent_initial=" + data.get("agent-initial") + "&agent_dst_id=" + data.get("agent-dist-id") + "&txn_key=" + data.get("txn_key"));
+                                L.m2("check--7>", "&agent_Id=" + data.get("agent-id") + "&agent_initial=" + data.get("agent-initial") + "&agent_dst_id=" + data.get("agent-dist-id") + "&txn_key=" + data.get("txn_key"));
+                                editor.putString("agent_id_u", data.get("agent-id") + "");
+                                editor.putString("agent_id", "&agent_id=" + data.get("agent-id"));
+                                editor.putString(Keys.AGENT_FULL, (String) data.get("agent-initial") + data.get("agent-id"));
+                                editor.putString(Keys.BALANCE, "" + data.get("balance"));
+                                editor.putString(Keys.TXN_KEY, "" + data.get("txn_key"));
+                                editor.putString(Keys.AGENT_ID, data.getString("agent-id"));
+                                editor.putString("statement_download", "true");
+                                editor.putString(Keys.AGENT_NAME, "" + data.get("agentName"));
+                                editor.putString(Keys.AGENT_EMAIL, "" + data.get("emailId"));
+                                editor.putString(Keys.AGENT_MOB, "" + data.get("mobile-number"));
 
-                                    editor.putString("walletStatus", "" + data.get("walletStatus"));
-                                    editor.putString("support1", "" + data.get("support1"));
-                                    editor.putString("support2", "" + data.get("support2"));
-                                    editor.putString("app-text", "" + data.get("app-text"));
-                                    editor.putString("DMR", "" + data.get("DMR"));
-                                    editor.putString("DMRUrl", "" + data.get("DMRUrl"));
-                                    editor.putString("supportEmail", "" + data.get("supportEmail"));
-                                    editor.putString("dmrVendor", "" + data.get("dmrVendor"));
+                                editor.putString(Keys.SUPPORT_1, "" + data.get("support1"));
+                                editor.putString(Keys.SUPPORT_2, "" + data.get("support2"));
+                                editor.putString(Keys.SUPPORT_EMAIL, "" + data.get("supportEmail"));
+                                editor.putString(Keys.APP_TEXT, "" + data.get(Keys.APP_TEXT));
+                                editor.putString(Keys.DMR, "" + data.get("DMR"));
+                                editor.putString(Keys.DMR_URL, "" + data.get("DMRUrl"));
+                                editor.putString(Keys.DMR_VENDOR, "" + data.get("dmrVendor"));
 
-                                    editor.commit();
+                                editor.commit();
 
-                                    if (data.get("app-text") != null) {
-                                        appText = data.get("app-text").toString().trim();
-                                    } else {
-                                        appText = "";
-                                    }
-                                    if (!appText.equalsIgnoreCase("") && appText.length() > 0) {
-
-                                        Log.v("appText", appText);
-
-                                        final Dialog dialog_status = new Dialog(context);
-                                        dialog_status.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                        dialog_status.setContentView(R.layout.alert);
-                                        dialog_status.setCancelable(true);
-                                        ImageView statusImage = (ImageView) dialog_status.findViewById(R.id.statusImage);
-                                        statusImage.setImageResource(R.drawable.about);
-                                        TextView text = (TextView) dialog_status.findViewById(R.id.TextView01);
-                                        text.setText(appText);
-
-                                        final Button trans_status =  dialog_status.findViewById(R.id.trans_status_button);
-                                        trans_status.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                dialog_status.dismiss();
-                                                Intent intent = new Intent();
-                                                intent.setClass(context, MainActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        });
-                                        dialog_status.show();
-                                    } else {
-                                        Intent intent = new Intent();
-                                        intent.setClass(context, MainActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                } else if (data.get("response-code") != null && data.get("response-code").equals("1")) {
-                                    Toast.makeText(context, (String) data.get("response-message"), Toast.LENGTH_SHORT).show();
-                                } else if (data.get("response-code") != null && data.get("response-code").equals("2")) {
-                                    Toast.makeText(context, (String) data.get("response-message"), Toast.LENGTH_SHORT).show();
+                                if (data.get(Keys.APP_TEXT) != null) {
+                                    appText = data.get(Keys.APP_TEXT).toString().trim();
                                 } else {
-                                    Toast.makeText(context, "Wrong UserName or Password! ", Toast.LENGTH_SHORT).show();
+                                    appText = "";
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                L.m2("data failure", e.toString());
+                                if (!appText.equalsIgnoreCase("") && appText.length() > 0) {
+
+                                    Log.v("appText", appText);
+
+                                    final Dialog dialog_status = new Dialog(context);
+                                    dialog_status.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                    dialog_status.setContentView(R.layout.alert);
+                                    dialog_status.setCancelable(true);
+                                    ImageView statusImage = (ImageView) dialog_status.findViewById(R.id.statusImage);
+                                    statusImage.setImageResource(R.drawable.about);
+                                    TextView text = (TextView) dialog_status.findViewById(R.id.TextView01);
+                                    text.setText(appText);
+
+                                    final Button trans_status = dialog_status.findViewById(R.id.trans_status_button);
+                                    trans_status.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialog_status.dismiss();
+                                            Intent intent = new Intent();
+                                            intent.setClass(context, MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                    dialog_status.show();
+                                } else {
+                                    Intent intent = new Intent();
+                                    intent.setClass(context, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } else if (data.get("response-code") != null && data.get("response-code").equals("1")) {
+                                Toast.makeText(context, (String) data.get("response-message"), Toast.LENGTH_SHORT).show();
+                            } else if (data.get("response-code") != null && data.get("response-code").equals("2")) {
+                                Toast.makeText(context, (String) data.get("response-message"), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Wrong UserName or Password! ", Toast.LENGTH_SHORT).show();
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            L.m2("data failure", e.toString());
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Log.e("Volley : ", error.toString());
-                    Toast.makeText(context, "Volley " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }, error -> {
+                pd.dismiss();
+                Log.e("Volley : ", error.toString());
+                Toast.makeText(context, "Volley " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             getSocketTimeOut(objectRequest);
             Mysingleton.getInstance(context).addToRequsetque(objectRequest);
@@ -358,34 +343,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         dialog_status.setContentView(R.layout.signup_mobile_dialog);
         dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        edit_verify_mobile =  dialog_status.findViewById(R.id.edit_verify_mobile);
-        Button btn_verify =  dialog_status.findViewById(R.id.btn_verify);
-        Button close_mobile =  dialog_status.findViewById(R.id.close_mobile);
+        edit_verify_mobile = dialog_status.findViewById(R.id.edit_verify_mobile);
+        Button btn_verify = dialog_status.findViewById(R.id.btn_verify);
+        Button close_mobile = dialog_status.findViewById(R.id.close_mobile);
         edit_verify_mobile.setText("");
 
-        btn_verify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isConnectionAvailable()) {
-                    if (TextUtils.isEmpty(edit_verify_mobile.getText().toString())) {
-                        edit_verify_mobile.requestFocus();
-                        Toast.makeText(context, "Please enter mobile number first !!!", Toast.LENGTH_SHORT).show();
-                    } else if (edit_verify_mobile.getText().toString().length() < 9) {
-                        edit_verify_mobile.requestFocus();
-                        Toast.makeText(context, "Mobile number should be 10 digits !!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        signUpVerifyRequest();
-                    }
+        btn_verify.setOnClickListener(view -> {
+            if (isConnectionAvailable()) {
+                if (TextUtils.isEmpty(edit_verify_mobile.getText().toString())) {
+                    edit_verify_mobile.requestFocus();
+                    Toast.makeText(context, "Please enter mobile number first !!!", Toast.LENGTH_SHORT).show();
+                } else if (edit_verify_mobile.getText().toString().length() < 9) {
+                    edit_verify_mobile.requestFocus();
+                    Toast.makeText(context, "Mobile number should be 10 digits !!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    signUpVerifyRequest();
                 }
             }
         });
 
-        close_mobile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog_status.dismiss();
-                hideKeyBoard(edit_verify_mobile);
-            }
+        close_mobile.setOnClickListener(view -> {
+            dialog_status.dismiss();
+            hideKeyBoard(edit_verify_mobile);
         });
 
         dialog_status.show();
@@ -399,44 +378,38 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         try {
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, signup_url,
                     new JSONObject().put("mobile", edit_verify_mobile.getText().toString())
-                            .put("version", "5.0"), new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject data) {
-                    try {
-                        pd.dismiss();
-                        L.m2("url-->", signup_url);
-                        L.m2("data receive", data.toString());
-                        try {
-                            if (data.get("response-code") != null && data.get("response-code").equals("0")) {
-                                dialog_status.dismiss();
-                                flag = true;
-                                showDiallog(data);
-                            } else if (data.get("response-code") != null && data.get("response-code").equals("2")) {
-                                dialog_status.dismiss();
-                                showDiallog(data);
-                                flag = false;
-                            } else if (data.get("response-code") != null && data.get("response-code").equals("1")) {
-                                showDiallog(data);
-                                dialog_status.dismiss();
-                                flag = false;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } catch (Exception e) {
-                        pd.dismiss();
-                        e.printStackTrace();
-                        Toast.makeText(context, "data failuer " + e.toString(), Toast.LENGTH_SHORT).show();
-                        L.m2("data failuer", e.toString());
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+                            .put("version", "5.0"), data -> {
+                try {
                     pd.dismiss();
-                    Log.e("Volley : ", error.toString());
-                    Toast.makeText(context, "Volley " + error.toString(), Toast.LENGTH_SHORT).show();
+                    L.m2("url-->", signup_url);
+                    L.m2("data receive", data.toString());
+                    try {
+                        if (data.get("response-code") != null && data.get("response-code").equals("0")) {
+                            dialog_status.dismiss();
+                            flag = true;
+                            showDiallog(data);
+                        } else if (data.get("response-code") != null && data.get("response-code").equals("2")) {
+                            dialog_status.dismiss();
+                            showDiallog(data);
+                            flag = false;
+                        } else if (data.get("response-code") != null && data.get("response-code").equals("1")) {
+                            showDiallog(data);
+                            dialog_status.dismiss();
+                            flag = false;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    pd.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(context, "data failuer " + e.toString(), Toast.LENGTH_SHORT).show();
+                    L.m2("data failuer", e.toString());
                 }
+            }, error -> {
+                pd.dismiss();
+                Log.e("Volley : ", error.toString());
+                Toast.makeText(context, "Volley " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             getSocketTimeOut(objectRequest);
             Mysingleton.getInstance(context).addToRequsetque(objectRequest);
@@ -463,24 +436,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        final Button trans_status =  dialog_status.findViewById(R.id.trans_status_button);
-        trans_status.setOnClickListener(new View.OnClickListener() {
+        final Button trans_status = dialog_status.findViewById(R.id.trans_status_button);
+        trans_status.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
-
-                if (flag == false) {
-                    dialog_status.dismiss();
-                } else {
-                    dialog_status.dismiss();
-                    Intent intent = new Intent();
-                    intent.putExtra("mob", edit_verify_mobile.getText().toString());
-                    intent.setClass(context, OTPRegisterActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
+            if (flag == false) {
+                dialog_status.dismiss();
+            } else {
+                dialog_status.dismiss();
+                Intent intent = new Intent();
+                intent.putExtra("mob", edit_verify_mobile.getText().toString());
+                intent.setClass(context, OTPRegisterActivity.class);
+                startActivity(intent);
+                finish();
             }
+
         });
 
         dialog_status.show();
@@ -499,8 +468,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            List<Credentials> credentialsList =  appDatabase.getAll();
-            if(credentialsList!=null && credentialsList.size()>0){
+            List<Credentials> credentialsList = appDatabase.getAll();
+            if (credentialsList != null && credentialsList.size() > 0) {
                 appDatabase.delete();
             }
             //creating a task
@@ -513,23 +482,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    class GetCredentialTask extends AsyncTask<Object,Object,Object>{
-        String user="",pass="";
-        boolean flag =false;
+    class GetCredentialTask extends AsyncTask<Object, Object, Object> {
+        String user = "", pass = "";
+        boolean flag = false;
 
         @Override
         protected Object doInBackground(Object... objects) {
             appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                     .appDBDao();
-            List<Credentials> credentialsList =  appDatabase.getAll();
-            if(credentialsList!=null && credentialsList.size()>0){
+            List<Credentials> credentialsList = appDatabase.getAll();
+            if (credentialsList != null && credentialsList.size() > 0) {
                 user = credentialsList.get(0).getUser();
                 pass = credentialsList.get(0).getPassword();
                 if (sharedPreferences != null) {
-                    String response = sharedPreferences.getString(user_Credential, null);
+                    String response = sharedPreferences.getString(Keys.USER_CREDENTIALS, null);
                     // Toast.makeText(getActivity(), "xml not null", Toast.LENGTH_LONG).show();
                     if (response != null && response.length() > 0) {
-                        flag=true;
+                        flag = true;
                     } else {
                         //  Toast.makeText(getApplicationContext(), "Data is not stored in xml", Toast.LENGTH_LONG);
                     }
@@ -544,12 +513,50 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             email.setText(user);
             password.setText(pass);
 
-            if(flag){
+            if (flag) {
                 Intent loginIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(loginIntent);
                 finish();
             }
 
         }
+    }
+
+    //--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
+        if (isTxnClick) {
+            isTxnClick = false;
+            loginRequest();
+        }
+    }
+
+    @Override
+    public void locationError(String msg) {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == Activity.RESULT_OK) {
+            gpsTrackerPresenter.onStart();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTrackerPresenter.onPause();
     }
 }

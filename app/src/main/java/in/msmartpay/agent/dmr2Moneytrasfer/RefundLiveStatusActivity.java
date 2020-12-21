@@ -157,7 +157,7 @@ public class RefundLiveStatusActivity extends BaseActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_dialog_sender_mobile_dmt);
+        d.setContentView(R.layout.dmr1_dialog_sender_mobile_dmt);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final Button btnSubmit =  d.findViewById(R.id.btn_push_submit);

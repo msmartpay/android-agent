@@ -1,12 +1,13 @@
 package in.msmartpay.agent.rechargeBillPay;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,15 +34,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
 import in.msmartpay.agent.utility.RandomNumber;
 import in.msmartpay.agent.utility.TextDrawable;
+import in.msmartpay.agent.utility.Util;
 
-public class DataCardRechargeActivity extends BaseActivity {
-
+public class DataCardRechargeActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener {
+    public static final int REQ_LOCATION_CODE = 9001;
+    private static final String TAG = DataCardRechargeActivity.class.getSimpleName();
+    private String latitude = "";
+    private String longitude = "";
     private LinearLayout linear_proceed_data;
     private EditText edit_customer_id_data, edit_amount_data;
     private Spinner spinner_oprater_data;
@@ -47,17 +56,15 @@ public class DataCardRechargeActivity extends BaseActivity {
     private ProgressDialog pd;
     private Context context;
     private String datacard_Url = HttpURL.RECHARGE_URL;
-    private SharedPreferences sharedPreferences;
     private String agentID, txn_key = "";
     private String operator_code_url = HttpURL.OPERATOR_CODE_URL;
     private ArrayList<OperatorListModel> OperatorList = null;
     private CustomOperatorClass operatorAdaptor;
     private OperatorListModel listModel = null;
 
-   /* private SharedPreferences sharedPreferencesOpcode;
-    private SharedPreferences.Editor editor;
-    */
-    private String opcode = null;
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+    private boolean isTxnClick = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,41 +74,28 @@ public class DataCardRechargeActivity extends BaseActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = DataCardRechargeActivity.this;
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
 
-        sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        txn_key = sharedPreferences.getString("txn-key", null);
-        agentID = sharedPreferences.getString("agentonlyid", null);
-        edit_customer_id_data =  findViewById(R.id.edit_customer_id_data);
-        edit_amount_data =  findViewById(R.id.edit_amount_data);
-        spinner_oprater_data =  findViewById(R.id.spinner_oprater_data);
-        linear_proceed_data = (LinearLayout) findViewById(R.id.linear_proceed_data);
+        agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
+        txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+
+        edit_customer_id_data = findViewById(R.id.edit_customer_id_data);
+        edit_amount_data = findViewById(R.id.edit_amount_data);
+        spinner_oprater_data = findViewById(R.id.spinner_oprater_data);
+        linear_proceed_data = findViewById(R.id.linear_proceed_data);
 
         String code1 = "\u20B9   ";
         edit_amount_data.setCompoundDrawablesWithIntrinsicBounds(new TextDrawable(code1), null, null, null);
         edit_amount_data.setCompoundDrawablePadding(code1.length() * 10);
 
-
-        // Arrays.sort(OperatorCode.datacard_key);
-       /* ArrayAdapter adapter = new ArrayAdapter(context, R.layout.spinner_textview_layout, OperatorCode.datacard_key);
-        adapter.setDropDownViewResource(R.layout.spinner_textview_layout);
-        spinner_oprater_data.setAdapter(adapter);*/
-
         //For OperatorList
-        try {
-            operatorsCodeRequest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        /*sharedPreferencesOpcode = getSharedPreferences("opcode", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        opcode = sharedPreferencesOpcode.getString("OpCode","");*/
+        operatorsCodeRequest();
 
         spinner_oprater_data.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              if(position>-1)
-                  listModel = OperatorList.get(position);
+                if (position > -1)
+                    listModel = OperatorList.get(position);
             }
 
             @Override
@@ -110,26 +104,34 @@ public class DataCardRechargeActivity extends BaseActivity {
             }
         });
 
-        linear_proceed_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isConnectionAvailable()) {
-                    if (spinner_oprater_data.getSelectedItem() == null) {
-                        Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(edit_customer_id_data.getText().toString().trim()) || edit_customer_id_data.getText().toString().trim().length() < 10) {
-                        edit_customer_id_data.requestFocus();
-                        Toast.makeText(context, "Enter Account Number !!!", Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(edit_amount_data.getText().toString().trim())) {
-                        edit_amount_data.requestFocus();
-                        Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        proceedConfirmationDialog();
-                    }
+        linear_proceed_data.setOnClickListener(view -> {
+            if (isConnectionAvailable()) {
+                if (spinner_oprater_data.getSelectedItem() == null) {
+                    Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(edit_customer_id_data.getText().toString().trim()) || edit_customer_id_data.getText().toString().trim().length() < 10) {
+                    edit_customer_id_data.requestFocus();
+                    Toast.makeText(context, "Enter Account Number !!!", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(edit_amount_data.getText().toString().trim())) {
+                    edit_amount_data.requestFocus();
+                    Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
+                    if (!isTxnClick) {
+                        isTxnClick = true;
+                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                    }
                 }
+            } else {
+                Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void startRechargeProcess() {
+       /* if (latitude.isEmpty() || longitude.isEmpty()) {
+            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
+        } else {*/
+        proceedConfirmationDialog();
+        // }
     }
 
     //===========operatorCodeRequest==============
@@ -144,7 +146,9 @@ public class DataCardRechargeActivity extends BaseActivity {
             JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
                     .put("txn_key", txn_key)
-                    .put("service","datacard");
+                    .put("service", "datacard")
+                    .put("latitude", latitude)
+                    .put("longitude", longitude);
 
             L.m2("url-operators", operator_code_url);
             L.m2("Request--operators", jsonObjectReq.toString());
@@ -180,7 +184,7 @@ public class DataCardRechargeActivity extends BaseActivity {
 
                                     operatorAdaptor = new CustomOperatorClass(context, OperatorList);
                                     spinner_oprater_data.setAdapter(operatorAdaptor);
-                                    if (OperatorList.size()==0){
+                                    if (OperatorList.size() == 0) {
                                         Toast.makeText(context, "No Operator Available!", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
@@ -190,9 +194,7 @@ public class DataCardRechargeActivity extends BaseActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }, new Response.ErrorListener()
-
-            {
+                    }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pd.dismiss();
@@ -228,24 +230,16 @@ public class DataCardRechargeActivity extends BaseActivity {
         confirm_operator.setText(listModel.getOperatorName());
         confirm_amount.setText(edit_amount_data.getText().toString());
 
-        tv_recharge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    DataCardRequest();
-                    d.dismiss();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        tv_recharge.setOnClickListener(view -> {
+            try {
+                DataCardRequest();
+                d.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
-        tv_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                d.cancel();
-            }
-        });
+        tv_cancel.setOnClickListener(v -> d.cancel());
 
         d.show();
     }
@@ -273,39 +267,31 @@ public class DataCardRechargeActivity extends BaseActivity {
             L.m2("url-data", datacard_Url);
             L.m2("Request--data", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, datacard_Url, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject data) {
-                            pd.dismiss();
-                            L.m2("Response--data", data.toString());
-                            try {
-                                if (data.get("response-code") != null && (data.get("response-code").equals("0") || data.get("response-code").equals("1"))) {
-                                    Intent in = new Intent(context, SuccessDetailActivity.class);
-                                    in.putExtra("responce", data.get("response-message").toString());
-                                    in.putExtra("mobileno", edit_customer_id_data.getText().toString().trim());
-                                    in.putExtra("requesttype", "datacard");
-                                    in.putExtra("operator", listModel.getOperatorName());
-                                    in.putExtra("amount", edit_amount_data.getText().toString().trim());
-                                    startActivity(in);
-                                    finish();
-                                } else if (data.get("response-code") != null && data.get("response-code").equals("2")) {
-                                    Toast.makeText(context, data.getString("response-code").toString(), Toast.LENGTH_SHORT).show();
-                                    finish();
-                                } else {
-                                    Toast.makeText(context, "Unable To Process Your Request. Please try later.", Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                    data -> {
+                        pd.dismiss();
+                        L.m2("Response--data", data.toString());
+                        try {
+                            if (data.get("response-code") != null && (data.get("response-code").equals("0") || data.get("response-code").equals("1"))) {
+                                Intent in = new Intent(context, SuccessDetailActivity.class);
+                                in.putExtra("responce", data.get("response-message").toString());
+                                in.putExtra("mobileno", edit_customer_id_data.getText().toString().trim());
+                                in.putExtra("requesttype", "datacard");
+                                in.putExtra("operator", listModel.getOperatorName());
+                                in.putExtra("amount", edit_amount_data.getText().toString().trim());
+                                startActivity(in);
+                                finish();
+                            } else if (data.get("response-code") != null && data.get("response-code").equals("2")) {
+                                Toast.makeText(context, data.getString("response-code").toString(), Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(context, "Unable To Process Your Request. Please try later.", Toast.LENGTH_SHORT).show();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener()
-
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }, error -> {
+                pd.dismiss();
+                Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             getSocketTimeOut(jsonrequest);
             Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
@@ -313,6 +299,45 @@ public class DataCardRechargeActivity extends BaseActivity {
             pd.dismiss();
             exp.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == Activity.RESULT_OK) {
+            gpsTrackerPresenter.onStart();
+        }
+    }
+
+    //--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
+        if (isTxnClick) {
+            isTxnClick = false;
+            startRechargeProcess();
+        }
+    }
+
+    @Override
+    public void locationError(String msg) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTrackerPresenter.onPause();
     }
 
     //====================================

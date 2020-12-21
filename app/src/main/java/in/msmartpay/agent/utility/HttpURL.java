@@ -92,6 +92,7 @@ public interface HttpURL {
     //public static final String CONFIRM_REFUND_TRANSACTION        = BASE_URL + "DMR/RefundDMRConfirm";
     //public static final String SENDER_HISTORY                    = BASE_URL + "DMR/SenderHistory";
 
+    //---------------------dmr1--------------------------
     String FIND_SENDER      = BASE_URL + "SKDMR/FindSender";
     String SENDER_RESISTRATION = BASE_URL + "SKDMR/RegisterSender";
     String CONFIRMATION_SENDER_RESISTRATION = BASE_URL + "SKDMR/VerifySender";
@@ -107,9 +108,7 @@ public interface HttpURL {
     String IMPS_NEFT_TRANSACTION = BASE_URL + "SKDMR/InitiateTransaction";
     String BankDetails = BASE_URL + "SKDMR/BankDetails";
 
-
-  //---------------------dmr2--------------------------
-
+  //---------------------dmr2-------------------------
   String FIND_SENDER_Dmr2      = BASE_URL + "AEDMR/EFindSender";
   String SENDER_RESEND_OTP_Dmr2 = BASE_URL + "AEDMR/EReSendOTPRegisterSender";
   String GET_BANK_LIST_Dmr2 = BASE_URL + "AEDMR/EGetBankList";

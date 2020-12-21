@@ -4,13 +4,15 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,14 +22,20 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
 import in.msmartpay.agent.utility.RandomNumber;
+import in.msmartpay.agent.utility.Util;
 
-public class BillPayActivity extends BaseActivity {
+public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener {
+    private static final String TAG = BillPayActivity.class.getSimpleName();
 
     private TextView tv_cn_hint, tv_cn, amtt, tv_amunt_hint, tv_oprator_hint, tv_oprator, tv_dueDate, tv_customerName, tv_dueAmount, tv_service;
     private LinearLayout ll_customer, ll_dueAmount, ll_dueDate;
@@ -35,7 +43,7 @@ public class BillPayActivity extends BaseActivity {
     private Context context;
     private ProgressDialog pd;
     private String mob = "", agentID, txn_key;
-    private String AD1 = "", AD2 = "", AD3 = "", AD4 = "", CN = "", OP = "", operator, op,referenceId="";
+    private String AD1 = "", AD2 = "", AD3 = "", AD4 = "", CN = "", OP = "", operator, op, referenceId = "";
     private String billpay_Url = HttpURL.BILL_PAY;
     //private String gTPin_Url = HttpURL.GetTPinVerified;
     private Dialog d;
@@ -46,18 +54,19 @@ public class BillPayActivity extends BaseActivity {
     private int dueAmt = 0;
     private String dueAmt_Req;
 
-
-    private SharedPreferences sharedPreferences;
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+    private boolean isTxnClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bill_pay_activity);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setTitle("Confirm Payment");
 
         context = BillPayActivity.this;
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Confirm Payment");
 
         tv_amunt_hint = findViewById(R.id.tv_amunt_hint);
         tv_service = findViewById(R.id.tv_service);
@@ -75,9 +84,8 @@ public class BillPayActivity extends BaseActivity {
         ll_dueAmount = findViewById(R.id.ll_dueAmount);
         ll_dueDate = findViewById(R.id.ll_dueDate);
 
-        sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        agentID = sharedPreferences.getString("agentonlyid", null);
-        txn_key = sharedPreferences.getString("txn-key", null);
+        agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
+        txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
 
         ll_customer.setVisibility(View.GONE);
         ll_dueDate.setVisibility(View.GONE);
@@ -100,24 +108,32 @@ public class BillPayActivity extends BaseActivity {
         if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes")) {
             btn_proceed.setText("Get Bill Details");
         }
-        btn_proceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes") && value == 0) {
-                    submitPayment("ViewBill");
-                } else {
-                    if (value == 1) {
-                        if (dueAmt > 0)
-                            submitPayment("Pay");
-                        else
-                            Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
-
-                    } else {
-                        submitPayment("Pay");
-                    }
-                }
+        btn_proceed.setOnClickListener(v -> {
+            if (!isTxnClick) {
+                isTxnClick = true;
+                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
             }
         });
+    }
+
+    private void startPaymentProcess() {
+        /*if (latitude.isEmpty() || longitude.isEmpty()) {
+            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
+        } else {*/
+        if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes") && value == 0) {
+            submitPayment("ViewBill");
+        } else {
+            if (value == 1) {
+                if (dueAmt > 0)
+                    submitPayment("Pay");
+                else
+                    Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
+
+            } else {
+                submitPayment("Pay");
+            }
+        }
+        //}
     }
 
     private void submitPayment(final String reqType) {
@@ -146,12 +162,13 @@ public class BillPayActivity extends BaseActivity {
             jsonRequest.put("AD4", mob);
             jsonRequest.put("REQUEST_ID", requesdID);
             jsonRequest.put("reference_id", referenceId);
-
             if (dueAmt > 0) {
                 jsonRequest.put("AMT", dueAmt_Req);
             } else {
                 jsonRequest.put("AMT", amountString);
             }
+            jsonRequest.put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE));
+            jsonRequest.put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE));
             L.m2("called url", billpay_Url);
             L.m2("request", jsonRequest.toString());
 
@@ -177,7 +194,7 @@ public class BillPayActivity extends BaseActivity {
                                 btn_proceed.setText("Proceed to pay");
                                 ll_customer.setVisibility(View.VISIBLE);
                                 ll_dueDate.setVisibility(View.VISIBLE);
-                                referenceId=data.getString("reference_id");
+                                referenceId = data.getString("reference_id");
                                 // ll_dueAmount.setVisibility(View.VISIBLE);
                             } else {
 
@@ -219,8 +236,48 @@ public class BillPayActivity extends BaseActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == RESULT_OK) {
+            gpsTrackerPresenter.onStart();
+        }
+    }
+    //--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
+        if (isTxnClick) {
+            isTxnClick = false;
+            startPaymentProcess();
+        }
+    }
+
+    @Override
+    public void locationError(String msg) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTrackerPresenter.onPause();
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+
 }

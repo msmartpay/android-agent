@@ -3,18 +3,20 @@ package in.msmartpay.agent.dmr2Moneytrasfer;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 import java.util.Stack;
 
 import in.msmartpay.agent.MainActivity;
@@ -28,8 +30,6 @@ import in.msmartpay.agent.utility.BaseActivity;
 public class MoneyTransferActivity extends BaseActivity {
 
     private ViewPager viewPager;
-    private SharedPreferences sharedPreferences;
-    private String agentID, txn_key, sessionID;
     private TabLayout tabLayout;
     private Stack<Integer> stackkk = new Stack<>(); // Edited
     private int tabPosition = 0, tabPositionUnselected;
@@ -39,13 +39,8 @@ public class MoneyTransferActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dmr2_money_transfer);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setTitle("Transfer Money");
-
-        sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        //agentID = sharedPreferences.getString("agentonlyid", null);
-        //txn_key = sharedPreferences.getString("txn-key", null);
-        //sessionID = sharedPreferences.getString("SessionID", null);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));    // Set up the ViewPager with the sections adapter.
@@ -156,19 +151,19 @@ public class MoneyTransferActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-            new AlertDialog.Builder(MoneyTransferActivity.this)
-                    .setIcon(R.drawable.warning_message_red)
-                    .setTitle("Closing Application")
-                    .setMessage("Are you sure you want to Exit ?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(MoneyTransferActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
+        new AlertDialog.Builder(MoneyTransferActivity.this)
+                .setIcon(R.drawable.warning_message_red)
+                .setTitle("Closing Application")
+                .setMessage("Are you sure you want to Exit ?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MoneyTransferActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

@@ -1,6 +1,6 @@
 package in.msmartpay.agent;
 
-import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -10,11 +10,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
+import android.location.Location;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -35,27 +33,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.google.android.play.core.appupdate.AppUpdateManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
-import java.util.List;
-
 import in.msmartpay.agent.aeps.AEPSActivity;
 import in.msmartpay.agent.aeps.ActivateServiceActivity;
 import in.msmartpay.agent.busBooking.BusBookingSearchActivity_H;
+import in.msmartpay.agent.dmr1MoneyTransfer.MoneyTransferActivity;
+import in.msmartpay.agent.dmr1MoneyTransfer.SenderHistoryActivity;
+import in.msmartpay.agent.dmr1MoneyTransfer.SenderVerifyRegisterActivity;
 import in.msmartpay.agent.helpAndSupport.HelpSupportActivity;
-import in.msmartpay.agent.location.LocationJobIntent;
-import in.msmartpay.agent.location.LocationMonitoringService;
-import in.msmartpay.agent.moneyTransferNew.MoneyTransferActivity;
-import in.msmartpay.agent.moneyTransferNew.SenderHistoryActivity;
-import in.msmartpay.agent.moneyTransferNew.SenderVerifyRegisterActivity;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.rechargeBillPay.DataCardRechargeActivity;
 import in.msmartpay.agent.rechargeBillPay.DthRechargeActivity;
 import in.msmartpay.agent.rechargeBillPay.ElectricityPayActivity;
@@ -68,11 +58,13 @@ import in.msmartpay.agent.rechargeBillPay.WaterPayActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
 import in.msmartpay.agent.utility.L;
+import in.msmartpay.agent.utility.MyAppUpdateManager;
 import in.msmartpay.agent.utility.Mysingleton;
-import in.msmartpay.agent.utility.Util;
 
-public class MainActivity extends DrawerActivity {
+public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.LocationListener {
 
+    private static final int HIGH_PRIORITY_UPDATE = 5;
+    private static final int APP_UPDATE_REQUEST_CODE = 10101;
     private ImageView img;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -92,8 +84,11 @@ public class MainActivity extends DrawerActivity {
     private String SessionID;
     private String MobileNo, dmrVendor;
     private FloatingActionButton floatingButtonCall;
-    private LocationManager locationManager=null;
-    private boolean mAlreadyStartedService = false;
+
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+
+    // Declare the UpdateManager
+   private MyAppUpdateManager mUpdateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +100,7 @@ public class MainActivity extends DrawerActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = MainActivity.this;
-
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
         jsonObjectStatic = null;
         sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -131,7 +126,7 @@ public class MainActivity extends DrawerActivity {
         } else if (dmrVendor.equalsIgnoreCase("DMR2")) {
             id_money_transfer.setVisibility(View.GONE);
             id_money_transfer2.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             id_money_transfer2.setVisibility(View.GONE);
             id_money_transfer.setVisibility(View.GONE);
         }
@@ -147,7 +142,7 @@ public class MainActivity extends DrawerActivity {
             Intent intent = new Intent(context, HelpSupportActivity.class);
             startActivity(intent);
         });
-
+        initializeAppUpdateManager();
     }
 
     public void click(View view) {
@@ -227,7 +222,7 @@ public class MainActivity extends DrawerActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_dialog_sender_mobile_dmt);
+        d.setContentView(R.layout.dmr1_dialog_sender_mobile_dmt);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final Button btnSubmit = d.findViewById(R.id.btn_push_submit);
@@ -283,60 +278,54 @@ public class MainActivity extends DrawerActivity {
             L.m2("Req-findSender", jsonObjectReq.toString());
             L.m2("Url-findSender", url_find_sender_2);
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_find_sender_2, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject object) {
+                    object -> {
+                        pd.dismiss();
+                        jsonObjectStatic = object;
+                        System.out.println("Object--findSender" + object.toString());
+                        try {
                             pd.dismiss();
-                            jsonObjectStatic = object;
-                            System.out.println("Object--findSender" + object.toString());
-                            try {
+
+                            if (object.getString("Status").equalsIgnoreCase("0")) {
+                                L.m2("url-called", url_find_sender_2);
+                                L.m2("resp-findSender", object.toString());
+
+                                JSONObject senderDetailsObject = object.getJSONObject("SenderDetails");
+                                editor.putString("SenderId", senderDetailsObject.getString("SenderId"));
+                                editor.putString("SenderName", senderDetailsObject.getString("Name"));
+                                editor.putString("ResisteredMobileNo", MobileNo);
+                                editor.commit();
+                                Intent intent = new Intent(MainActivity.this, in.msmartpay.agent.dmr2Moneytrasfer.MoneyTransferActivity.class);
+                                intent.putExtra("SenderLimit_Detail_BeniList", object.toString());
+                                startActivity(intent);
+                                finish();
+                            } else if (object.getString("Status").equalsIgnoreCase("2")) {
+                                JSONObject senderDetailsObject = object.getJSONObject("SenderDetails");
+                                editor.putString("SenderId", senderDetailsObject.getString("SenderId"));
+                                editor.putString("SenderName", senderDetailsObject.getString("Name"));
+                                editor.putString("ResisteredMobileNo", MobileNo);
+                                editor.commit();
+
+                                reSendOtpRequest2(senderDetailsObject.getString("Name"));
+                                //resisterSenderDialog(object.getString("Status"), object.getString("message"));
+                            } else if (object.getString("Status").equalsIgnoreCase("3")) {
+                                editor.putString("ResisteredMobileNo", MobileNo);
+                                editor.commit();
+
+                                resisterSenderDialog(object.getString("message"));
+                            } else if (object.getString("Status").equalsIgnoreCase("5")) {
+
+                                activateServiceDialogBox("Please activate your DMR Service...");
+                            } else {
                                 pd.dismiss();
-
-                                if (object.getString("Status").equalsIgnoreCase("0")) {
-                                    L.m2("url-called", url_find_sender_2);
-                                    L.m2("resp-findSender", object.toString());
-
-                                    JSONObject senderDetailsObject = object.getJSONObject("SenderDetails");
-                                    editor.putString("SenderId", senderDetailsObject.getString("SenderId"));
-                                    editor.putString("SenderName", senderDetailsObject.getString("Name"));
-                                    editor.putString("ResisteredMobileNo", MobileNo);
-                                    editor.commit();
-                                    Intent intent = new Intent(MainActivity.this, in.msmartpay.agent.dmr2Moneytrasfer.MoneyTransferActivity.class);
-                                    intent.putExtra("SenderLimit_Detail_BeniList", object.toString());
-                                    startActivity(intent);
-                                    finish();
-                                } else if (object.getString("Status").equalsIgnoreCase("2")) {
-                                    JSONObject senderDetailsObject = object.getJSONObject("SenderDetails");
-                                    editor.putString("SenderId", senderDetailsObject.getString("SenderId"));
-                                    editor.putString("SenderName", senderDetailsObject.getString("Name"));
-                                    editor.putString("ResisteredMobileNo", MobileNo);
-                                    editor.commit();
-
-                                    reSendOtpRequest2(senderDetailsObject.getString("Name"));
-                                    //resisterSenderDialog(object.getString("Status"), object.getString("message"));
-                                } else if (object.getString("Status").equalsIgnoreCase("3")) {
-                                    editor.putString("ResisteredMobileNo", MobileNo);
-                                    editor.commit();
-
-                                    resisterSenderDialog(object.getString("message"));
-                                } else if (object.getString("Status").equalsIgnoreCase("5")) {
-
-                                    activateServiceDialogBox("Please activate your DMR Service...");
-                                } else {
-                                    pd.dismiss();
-                                    Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                pd.dismiss();
-                                e.printStackTrace();
+                                Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
                             }
+                        } catch (JSONException e) {
+                            pd.dismiss();
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Toast.makeText(getApplicationContext(), "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
+                    }, error -> {
+                pd.dismiss();
+                Toast.makeText(getApplicationContext(), "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
             });
             BaseActivity.getSocketTimeOut(jsonrequest);
             Mysingleton.getInstance(getApplicationContext()).addToRequsetque(jsonrequest);
@@ -352,7 +341,9 @@ public class MainActivity extends DrawerActivity {
     protected void onResume() {
         super.onResume();
         getBanlance();
-        requestMyPermissions();
+
+        //Background
+        //requestMyPermissions();
     }
 
     private void getBanlance() {
@@ -379,14 +370,14 @@ public class MainActivity extends DrawerActivity {
                                     editor.putString("balance", "" + data.getString("updBal"));
                                     editor.commit();
                                     balanceview.setText("\u20B9 " + data.getString("updBal"));
-                                    dmrVendor=data.getString("dmr_vendor");
+                                    dmrVendor = data.getString("dmr_vendor");
                                     if (dmrVendor.equalsIgnoreCase("DMR1")) {
                                         id_money_transfer2.setVisibility(View.GONE);
                                         id_money_transfer.setVisibility(View.VISIBLE);
                                     } else if (dmrVendor.equalsIgnoreCase("DMR2")) {
                                         id_money_transfer.setVisibility(View.GONE);
                                         id_money_transfer2.setVisibility(View.VISIBLE);
-                                    }else{
+                                    } else {
                                         id_money_transfer2.setVisibility(View.GONE);
                                         id_money_transfer.setVisibility(View.GONE);
                                     }
@@ -416,7 +407,7 @@ public class MainActivity extends DrawerActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_dialog_sender_mobile_dmt);
+        d.setContentView(R.layout.dmr1_dialog_sender_mobile_dmt);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final Button btnSubmit = d.findViewById(R.id.btn_push_submit);
@@ -692,252 +683,6 @@ public class MainActivity extends DrawerActivity {
             e.printStackTrace();
         }
     }
-    /*//Json request for get Session
-    private void getDMRSessionRequest() {
-        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        pd.setIndeterminate(true);
-        pd.setCancelable(false);
-        pd.show();
-        try {
-            JSONObject jsonObjectReq=new JSONObject()
-                    .put("agent_id", agentID)
-                    .put("txn_key", txn_key);
-            Log.e("Request",jsonObjectReq.toString());
-            JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_get_session, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject object) {
-                            pd.dismiss();
-                            System.out.println("Object----session>"+object.toString());
-                            try {
-                                pd.dismiss();
-                                if (object.getString("Status").equalsIgnoreCase("0")) {
-                                    pd.dismiss();
-                                    L.m2("url-called", url_get_session);
-                                    L.m2("url data", object.toString());
-                                    editor.putString("SessionID", object.getString("SessionId"));
-                                    editor.commit();
-                                    SessionID = object.getString("SessionId");
-                                    showMoneyTransferDMTDialog();
-                                }
-                                else {
-                                    pd.dismiss();
-                                    Toast.makeText(context, object.getString("message").toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                pd.dismiss();
-                                e.printStackTrace();
-                            }
-                        }
-                    },new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse (VolleyError error){
-                    pd.dismiss();
-                    Toast.makeText(context, "Server Error : "+error.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            getSocketTimeOut(jsonrequest);
-            Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
-        } catch (JSONException e) {
-            pd.dismiss();
-            e.printStackTrace();
-        }
-    }
-
-    public void showMoneyTransferDMTDialog() {
-        // TODO Auto-generated method stub
-        final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
-        d.setCancelable(false);
-        d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.dialog_sender_mobile_dmt);
-        d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        Button btnSubmit =  d.findViewById(R.id.btn_push_submit);
-        Button btnClosed =  d.findViewById(R.id.close_push_button);
-        final EditText editMobileNo =  d.findViewById(R.id.edit_push_balance);
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(editMobileNo.getText().toString().trim())) {
-                    Toast.makeText(context, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
-                } else {
-                    MobileNo = editMobileNo.getText().toString().trim();
-                    findSenderRequest();
-                    d.dismiss();
-                }
-            }
-        });
-
-        btnClosed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                d.cancel();
-            }
-        });
-
-        d.show();
-    }
-
-    //Json request for resistration
-    private void findSenderRequest() {
-        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        pd.setIndeterminate(true);
-        pd.setCancelable(false);
-        pd.show();
-        try {
-            JSONObject jsonObjectReq=new JSONObject()
-                    .put("agent_id", agentID)
-                    .put("txn_key", txn_key)
-                    .put("SessionId", SessionID)
-                    .put("SenderId", MobileNo);
-            Log.e("Request",jsonObjectReq.toString());
-            JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_find_sender, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject object) {
-                            pd.dismiss();
-                            jsonObjectStatic=object;
-                            System.out.println("Object----findSender>"+object.toString());
-                            try {
-                                pd.dismiss();
-                                if (object.getString("Status").equalsIgnoreCase("0")) {
-                                    pd.dismiss();
-                                    L.m2("url-called", url_find_sender);
-                                    L.m2("url data", object.toString());
-                                    editor.putString("ResisteredMobileNo", MobileNo.toString());
-                                    editor.commit();
-                                    Intent intent = new Intent(context, MoneyTransferActivity1.class);
-                                    intent.putExtra("SenderLimit_Detail_BeniList", object.toString());
-                                    startActivity(intent);
-                                }
-                                else {
-                                    pd.dismiss();
-                                    Toast.makeText(context, object.getString("message").toString(), Toast.LENGTH_SHORT).show();
-                                    resisterSenderDialog(object.getString("message").toString());
-                                }
-                            } catch (JSONException e) {
-                                pd.dismiss();
-                                e.printStackTrace();
-                            }
-                        }
-                    },new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse (VolleyError error){
-                    pd.dismiss();
-                    Toast.makeText(getApplicationContext(), "Server Error : "+error.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            getSocketTimeOut(jsonrequest);
-            Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
-        } catch (JSONException e) {
-            pd.dismiss();
-            e.printStackTrace();
-        }
-    }
-
-    //================For Resistration===============
-    public void resisterSenderDialog(String msg) {
-        // TODO Auto-generated method stub
-        final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
-
-        d.setCancelable(false);
-
-        d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
-        d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-
-        d.setContentView(R.layout.dmr_sender_resister_dialog);
-
-        d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        final Button btnOK =  d.findViewById(R.id.btn_resister_ok);
-        final TextView tvMessage = (TextView) d.findViewById(R.id.tv_confirmation_dialog);
-        final Button btnClosed =  d.findViewById(R.id.close_push_button);
-
-        tvMessage.setText(msg);
-
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                senderResistrationRequest();
-                d.dismiss();
-            }
-        });
-
-        btnClosed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                d.cancel();
-            }
-        });
-        d.show();
-    }
-
-    //Json request for find Sender
-    private void senderResistrationRequest() {
-        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        pd.setIndeterminate(true);
-        pd.setCancelable(false);
-        pd.show();
-        try {
-            JSONObject jsonObjectReq=new JSONObject()
-                    .put("agent_id", agentID)
-                    .put("txn_key", txn_key)
-                    .put("SessionId", SessionID)
-                    .put("SenderId", MobileNo);
-            Log.e("Request",jsonObjectReq.toString());
-            JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_sender_resistration, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject object) {
-                            pd.dismiss();
-                            jsonObjectStatic=object;
-                            System.out.println("Object----senderResistration>"+object.toString());
-                            try {
-                                pd.dismiss();
-                                if (object.getString("Status").equalsIgnoreCase("0")) {
-                                    pd.dismiss();
-                                    L.m2("url-called", url_sender_resistration);
-                                    L.m2("url data", object.toString());
-
-                                    Intent intent = new Intent(context, SenderResistrationActivity.class);
-                                    intent.putExtra("MobileNo", MobileNo);
-                                    startActivity(intent);
-                                }
-                                else {
-                                    pd.dismiss();
-                                    Toast.makeText(context, object.getString("message").toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                pd.dismiss();
-                                e.printStackTrace();
-                            }
-                        }
-                    },new Response.ErrorListener()
-            {
-                @Override
-                public void onErrorResponse (VolleyError error){
-                    pd.dismiss();
-                    Toast.makeText(getApplicationContext(), "Server Error : "+error.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            getSocketTimeOut(jsonrequest);
-            Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
-        } catch (JSONException e) {
-            pd.dismiss();
-            e.printStackTrace();
-        }
-    }*/
 
     @Override
     public void onBackPressed() {
@@ -968,7 +713,7 @@ public class MainActivity extends DrawerActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_sender_resister_dialog);
+        d.setContentView(R.layout.dmr1_sender_resister_dialog);
 
         final Button btnOK = d.findViewById(R.id.btn_resister_ok);
         final Button btnNO = d.findViewById(R.id.btn_resister_no);
@@ -987,182 +732,81 @@ public class MainActivity extends DrawerActivity {
 
         d.show();
     }
+    //--------------------------------------------In-APP-Update-------------------------------------------------------------
+    private void initializeAppUpdateManager(){
+        // Initialize the Update Manager with the Activity and the Update Mode
+        mUpdateManager = MyAppUpdateManager.Builder(this);
 
+        // Callback from UpdateInfoListener
+        // You can get the available version code of the apk in Google Play
+        // Number of days passed since the user was notified of an update through the Google Play
+        mUpdateManager.addUpdateInfoListener(new MyAppUpdateManager.UpdateInfoListener() {
+            @Override
+            public void onReceiveVersionCode(final int code) {
+                L.m2("onReceiveVersionCode",String.valueOf(code));
+                //txtAvailableVersion.setText(String.valueOf(code));
+            }
 
-    /**
-     * Requesting multiple permissions (storage and location) at once
-     * This uses multiple permission model from dexter
-     * On permanent denial opens settings dialog
-     */
-    private void requestMyPermissions() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            Dexter.withActivity(this)
-                    .withPermissions(Arrays.asList(
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                            , Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                    ))
-                    .withListener(new MultiplePermissionsListener() {
-                        @Override
-                        public void onPermissionsChecked(MultiplePermissionsReport report) {
-
-                            if (report.areAllPermissionsGranted()) {
-                                 locationManager=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                                //Check gps is enable or not
-                                assert locationManager != null;
-                                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                                    //Write Function To enable gps
-                                    Util.onGPS(context);
-                                } else {
-                                    //GPS is already On then
-                                    startWorkerManager();
-                                }
-
-
-                                 /* //Worker
-                                try {
-                                    if (!Util.isWorkScheduled(MyLocationWorker.getWorkInfoList(getApplicationContext()))) {
-                                        L.m2("isWorkScheduled","false");
-                                        MyLocationWorker.startLocationWorker(getApplicationContext());
-                                    }else {
-                                        L.m2("isWorkScheduled","true");
-                                    }
-                                }catch (Exception e){
-                                    L.m2("isWorkScheduled","error - "+e.getLocalizedMessage());
-                                }
-                                //Service
-
-                                // foregroundOnlyLocationService.subscribeToLocationUpdates();
-*/
-                            }
-                            // check for permanent denial of any permission
-                            if (report.isAnyPermissionPermanentlyDenied()) {
-                                // show alert dialog navigating to Settings
-                                showSettingsDialog();
-                            }
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                            token.continuePermissionRequest();
-                        }
-                    }).check();
-        } else {
-            Dexter.withActivity(this)
-                    .withPermissions(Arrays.asList(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                    ))
-                    .withListener(new MultiplePermissionsListener() {
-                        @Override
-                        public void onPermissionsChecked(MultiplePermissionsReport report) {
-                            if (report.areAllPermissionsGranted()) {
-                                startWorkerManager();
-
-                               /* //Worker
-                                try {
-                                    if (!Util.isWorkScheduled(MyLocationWorker.getWorkInfoList(getApplicationContext()))) {
-                                        L.m2("isWorkScheduled","false");
-                                        MyLocationWorker.startLocationWorker(getApplicationContext());
-                                    }else {
-                                        L.m2("isWorkScheduled","true");
-                                    }
-                                }catch (Exception e){
-                                    L.m2("isWorkScheduled","error - "+e.getLocalizedMessage());
-                                }
-                                //Service
-
-                                // foregroundOnlyLocationService.subscribeToLocationUpdates();
-*/
-                            }
-                            // check for permanent denial of any permission
-                            if (report.isAnyPermissionPermanentlyDenied()) {
-                                // show alert dialog navigating to Settings
-                                showSettingsDialog();
-                            }
-                        }
-
-                        @Override
-                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                            token.continuePermissionRequest();
-                        }
-                    }).check();
-        }
-    }
-
-    private void startWorkerManager() {
-          LocationJobIntent.start(MainActivity.this);
-          startStep1();
-    }
-
-    /**
-     * Showing Alert Dialog with Settings option
-     * Navigates user to app settings
-     * NOTE: Keep proper title and message depending on your app
-     */
-    private void showSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Location Permission");
-        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
-        builder.setPositiveButton("GOTO SETTINGS", (dialog, which) -> {
-            dialog.cancel();
-            openSettings();
+            @Override
+            public void onReceiveStalenessDays(final int days) {
+                L.m2("onReceiveStalenessDays",String.valueOf(days));
+                //txtStalenessDays.setText(String.valueOf(days));
+            }
         });
-        //builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-        builder.show();
 
+        // Callback from Flexible Update Progress
+        // This is only available for Flexible mode
+        // Find more from https://developer.android.com/guide/playcore/in-app-updates#monitor_flexible
+        mUpdateManager.addFlexibleUpdateDownloadListener((bytesDownloaded, totalBytes) -> {
+            L.m2("addFlexibleUpdateDownload","Downloading: " + bytesDownloaded + " / " + totalBytes);
+        });
+        callImmediateUpdate(balanceview);
+        //callFlexibleUpdate(balanceview);
+    }
+    public void callFlexibleUpdate(View view) {
+        // Start a Flexible Update
+        mUpdateManager.mode(MyAppUpdateManager.FLEXIBLE).start();
+        //txtFlexibleUpdateProgress.setVisibility(View.VISIBLE);
     }
 
-    // navigating user to app settings
-    private void openSettings() {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", getPackageName(), null);
-        intent.setData(uri);
-        startActivityForResult(intent, 101);
+    public void callImmediateUpdate(View view) {
+        // Start a Immediate Update
+        mUpdateManager.mode(MyAppUpdateManager.IMMEDIATE).start();
+    }
+//--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
     }
 
-    private void startStep1() {
-        //Check whether this user has installed Google play service which is being used by Location updates.
-        if (Util.isGooglePlayServicesAvailable(this)) {
-
-            //Passing null to indicate that it is executing for the first time.
-            startStep3();
-
-        } else {
-            Toast.makeText(getApplicationContext(), "Google Play Service is not available.", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
-    private void startStep3() {
-        //And it will be keep running until you close the entire application from task manager.
-        //This method will executed only once.
-
-        if (!mAlreadyStartedService) {
-            L.m2("Location", "Service Started");
-            //mMsgView.setText(R.string.msg_location_service_started);
-
-            //Start location sharing service to app server.........
-            Intent intent = new Intent(this, LocationMonitoringService.class);
-            startService(intent);
-
-            mAlreadyStartedService = true;
-            //Ends................................................
-        }
+    @Override
+    public void locationError(String msg) {
 
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == Activity.RESULT_OK) {
+            gpsTrackerPresenter.onStart();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+    @Override
     public void onDestroy() {
-
-
-        //Stop location sharing service to app server.........
-        //startWorkerManager();
-        stopService(new Intent(this, LocationMonitoringService.class));
-        mAlreadyStartedService = true;
         //Ends................................................
-
+        gpsTrackerPresenter.onPause();
         super.onDestroy();
     }
+
+
 }

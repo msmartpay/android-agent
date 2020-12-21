@@ -228,7 +228,7 @@ public class SenderVerifyRegisterActivity extends BaseActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_confirmation_dialog);
+        d.setContentView(R.layout.dmr1_confirmation_dialog);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final Button btnSubmit =  d.findViewById(R.id.btn_push_submit);

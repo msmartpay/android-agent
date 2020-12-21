@@ -30,10 +30,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import in.msmartpay.agent.helpAndSupport.HelpSupportActivity;
-import in.msmartpay.agent.moneyTransferNew.MoneyTransferActivity;
-import in.msmartpay.agent.moneyTransferNew.SenderHistoryActivity;
-import in.msmartpay.agent.moneyTransferNew.SenderRegistrationActivity;
-import in.msmartpay.agent.moneyTransferNew.SenderVerifyRegisterActivity;
+import in.msmartpay.agent.dmr1MoneyTransfer.MoneyTransferActivity;
+import in.msmartpay.agent.dmr1MoneyTransfer.SenderHistoryActivity;
+import in.msmartpay.agent.dmr1MoneyTransfer.SenderRegistrationActivity;
+import in.msmartpay.agent.dmr1MoneyTransfer.SenderVerifyRegisterActivity;
 import in.msmartpay.agent.myWallet.BalanceRequestActivity;
 import in.msmartpay.agent.myWallet.MyEarningActivity;
 import in.msmartpay.agent.myWallet.QuickPayActivity;
@@ -341,7 +341,7 @@ public class DrawerActivity extends BaseActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_dialog_sender_mobile_dmt);
+        d.setContentView(R.layout.dmr1_dialog_sender_mobile_dmt);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final Button btnSubmit =  d.findViewById(R.id.btn_push_submit);

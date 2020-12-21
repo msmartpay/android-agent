@@ -1,5 +1,6 @@
 package in.msmartpay.agent.dmr2Moneytrasfer;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,26 +26,39 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
+import in.msmartpay.agent.utility.Util;
 
 /**
  * Created by Smartkinda on 6/19/2017.
  */
 
-public class ImpsNeftActivity extends BaseActivity {
-
+public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener{
+    public static final String TAG = ImpsNeftActivity.class.getSimpleName();
     private Button btnProceed;
     private EditText editAmount, editRemark;
     private ProgressDialog pd;
@@ -58,6 +74,9 @@ public class ImpsNeftActivity extends BaseActivity {
     private String transactionAmount, Remark;
     private String SenderId, SenderName;
     private Context context;
+    private GPSTrackerPresenter gpsTrackerPresenter = null;
+    private boolean isTxnClick = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +99,9 @@ public class ImpsNeftActivity extends BaseActivity {
         });
 
         context = ImpsNeftActivity.this;
+        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+
+
         sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
 
         agentID = sharedPreferences.getString("agentonlyid", null);
@@ -102,9 +124,9 @@ public class ImpsNeftActivity extends BaseActivity {
         tvBeneName = (TextView) findViewById(R.id.tv_payee_name);
         tvBeneAccountNumber = (TextView) findViewById(R.id.tv_payee_acc_no);
         tvIFSCcode = (TextView) findViewById(R.id.tv_payee_ifsc);
-        editAmount =  findViewById(R.id.edit_amount);
-        editRemark =  findViewById(R.id.edit_remark);
-        btnProceed =  findViewById(R.id.txtsubmit);
+        editAmount = findViewById(R.id.edit_amount);
+        editRemark = findViewById(R.id.edit_remark);
+        btnProceed = findViewById(R.id.txtsubmit);
         radioPayGroup = (RadioGroup) findViewById(R.id.radioGroup);
         editAmount.requestFocus();
 
@@ -112,37 +134,46 @@ public class ImpsNeftActivity extends BaseActivity {
         tvBeneAccountNumber.setText(BeneAccountNumber);
         tvIFSCcode.setText(IFSCcode);
 
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnProceed.setOnClickListener((View.OnClickListener) v -> {
 
-                int selectedId = radioPayGroup.getCheckedRadioButtonId();
-                radioPayButton = (RadioButton) findViewById(selectedId);
-                if (radioPayGroup.getCheckedRadioButtonId() != -1) {
-                    radioButtonValue = radioPayButton.getText().toString();
-                    if (radioButtonValue.equalsIgnoreCase("NEFT")) {
-                        radioButtonValue = "1";
-                    } else if (radioButtonValue.equalsIgnoreCase("IMPS")) {
-                        radioButtonValue = "2";
-                    }
+            int selectedId = radioPayGroup.getCheckedRadioButtonId();
+            radioPayButton = (RadioButton) findViewById(selectedId);
+            if (radioPayGroup.getCheckedRadioButtonId() != -1) {
+                radioButtonValue = radioPayButton.getText().toString();
+                if (radioButtonValue.equalsIgnoreCase("NEFT")) {
+                    radioButtonValue = "1";
+                } else if (radioButtonValue.equalsIgnoreCase("IMPS")) {
+                    radioButtonValue = "2";
                 }
+            }
 
-                if (TextUtils.isEmpty(editAmount.getText().toString().trim())) {
-                    Toast.makeText(context, "Please enter correct amount!", Toast.LENGTH_SHORT).show();
-                    editAmount.requestFocus();
-                } else if(Integer.parseInt(editAmount.getText().toString()) < 100){
-                    Toast.makeText(context, "Please enter amount equal to or more than \u20B9 100!", Toast.LENGTH_SHORT).show();
-                    editAmount.requestFocus();
-                }else if (radioPayGroup.getCheckedRadioButtonId() == -1) {
-                    Toast.makeText(context, "Please Select Pay Option", Toast.LENGTH_SHORT).show();
-                } else {
-                    transactionAmount = editAmount.getText().toString().trim();
-                    Remark = editRemark.getText().toString().trim();
-                    PaymentConfirmDialog();
+            if (TextUtils.isEmpty(editAmount.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter correct amount!", Toast.LENGTH_SHORT).show();
+                editAmount.requestFocus();
+            } else if (Integer.parseInt(editAmount.getText().toString()) < 100) {
+                Toast.makeText(context, "Please enter amount equal to or more than \u20B9 100!", Toast.LENGTH_SHORT).show();
+                editAmount.requestFocus();
+            } else if (radioPayGroup.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(context, "Please Select Pay Option", Toast.LENGTH_SHORT).show();
+            } else {
+                transactionAmount = editAmount.getText().toString().trim();
+                Remark = editRemark.getText().toString().trim();
+                if (!isTxnClick) {
+                    isTxnClick = true;
+                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
                 }
             }
         });
     }
+
+    private void startPaymentProcess() {
+        /*if (latitude.isEmpty() || longitude.isEmpty()) {
+            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
+        } else {*/
+        PaymentConfirmDialog();
+        // }
+    }
+
 
     //================For Delete Bene===============
     public void PaymentConfirmDialog() {
@@ -154,36 +185,25 @@ public class ImpsNeftActivity extends BaseActivity {
         d.setContentView(R.layout.sender_resister_dialog);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        final Button btnOK =  d.findViewById(R.id.btn_resister_ok);
-        final Button btnNO =  d.findViewById(R.id.btn_resister_no);
+        final Button btnOK = d.findViewById(R.id.btn_resister_ok);
+        final Button btnNO = d.findViewById(R.id.btn_resister_no);
         final TextView tvMessage = (TextView) d.findViewById(R.id.tv_confirmation_dialog);
         final TextView title = (TextView) d.findViewById(R.id.title);
-        final Button btnClosed =  d.findViewById(R.id.close_push_button);
+        final Button btnClosed = d.findViewById(R.id.close_push_button);
 
         title.setText("Payment Confirmation");
         tvMessage.setText("Are you sure, you want to pay \u20B9 " + transactionAmount + " to " + BeneName);
 
-        btnNO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                d.dismiss();
-            }
+        btnNO.setOnClickListener(v -> d.dismiss());
+
+        btnOK.setOnClickListener(v -> {
+            ImpsNeftTransactionRequest();
+            d.dismiss();
         });
 
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImpsNeftTransactionRequest();
-                d.dismiss();
-            }
-        });
-
-        btnClosed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                d.cancel();
-            }
+        btnClosed.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            d.cancel();
         });
         d.show();
     }
@@ -210,7 +230,9 @@ public class ImpsNeftActivity extends BaseActivity {
                     .put("BankName", BeneBankName)
                     .put("TxnAmount", editAmount.getText().toString())
                     .put("REQUEST_ID", String.valueOf((long) Math.floor(Math.random() * 90000000000000L) + 10000000000000L))
-                    .put("Remark", Remark == null ? "" : Remark);
+                    .put("Remark", Remark == null ? "" : Remark)
+                    .put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE))
+                    .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE));;
             Log.e("Request--transaction", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_imps_neft_transaction, jsonObjectReq,
                     new Response.Listener<JSONObject>() {
@@ -266,6 +288,43 @@ public class ImpsNeftActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == RESULT_OK) {
+            gpsTrackerPresenter.onStart();
+        }
+    }
+    //--------------------------------------------GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onLocationFound(Location location) {
+        gpsTrackerPresenter.stopLocationUpdates();
+        if (isTxnClick) {
+            isTxnClick = false;
+            startPaymentProcess();
+        }
+    }
+
+    @Override
+    public void locationError(String msg) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        gpsTrackerPresenter.onStart();
+    }
+
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTrackerPresenter.onPause();
+    }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

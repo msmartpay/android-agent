@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.msmartpay.agent">
 
-    <permission android:name="android.permission.ACCESS_FINE_LOCATION" android:protectionLevel="dangerous"/>
-    <permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:protectionLevel="dangerous"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,11 +10,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <!-- TODO: Step 1.0, Review Permissions: Specify permissions you are using. -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" android:protectionLevel="dangerous"/>
+    <permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:protectionLevel="dangerous"/>
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
     <application
@@ -210,45 +205,45 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.SenderVerifyRegisterActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.SenderVerifyRegisterActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.ImpsNeftTxnRecieptActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.ImpsNeftTxnRecieptActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.MoneyTransferActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.MoneyTransferActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.ImpsNeftActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.ImpsNeftActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.TransactionReceiptActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.TransactionReceiptActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.SenderFullHistoryActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.SenderFullHistoryActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.AddBeneficiaryActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.AddBeneficiaryActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.Bank_name_search"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.Bank_name_search"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.SenderRegistrationActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.SenderRegistrationActivity"
             android:parentActivityName="in.msmartpay.agent.MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="in.msmartpay.agent.moneyTransferNew.SenderHistoryActivity"
+            android:name="in.msmartpay.agent.dmr1MoneyTransfer.SenderHistoryActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="in.msmartpay.agent.moneyTransferNew.RefundLiveStatusActivity" />
+        <activity android:name="in.msmartpay.agent.dmr1MoneyTransfer.RefundLiveStatusActivity" />
         <activity
             android:name="in.msmartpay.agent.flight.FlightActivity"
             android:configChanges="orientation|screenSize"
@@ -334,15 +329,22 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
+        <activity android:name=".location.LocationResultActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".location.test.LocationTestActivity"
+            android:configChanges="orientation|screenSize"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service android:name="in.msmartpay.agent.location.GoogleService" />
-        <service android:name="in.msmartpay.agent.location.LocationJobIntent"
+        <!-- Foreground services in Android 10+ require type. -->
+        <!-- TODO: 2.2, Add foreground service type. -->
+        <service
+            android:name=".location.ForegroundOnlyLocationService"
+            android:enabled="true"
             android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
-        <service android:name="in.msmartpay.agent.location.LocationMonitoringService"/>
+            android:foregroundServiceType="location" />
     </application>
 
 </manifest>

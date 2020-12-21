@@ -55,7 +55,7 @@ public class VerifyAccountFragment extends Fragment {
     private ArrayList<BankListModel> BankListArray = null;
     private CustomAdaptorClass bankListAdaptor;
     private String url_bank_list = HttpURL.GET_BANK_LIST_Dmr2;
-    private String bank_details = HttpURL.BankDetails_Dmr2;
+    private String url_bank_details = HttpURL.BankDetails_Dmr2;
     private String url_add_bene_by_ifsc = HttpURL.ADD_BENEFICIARY_IFSC_CODE_Dmr2;
     private String isverificationavailable, available_channels, ifsc_status;
 
@@ -226,7 +226,7 @@ public class VerifyAccountFragment extends Fragment {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_confirmation_dialog);
+        d.setContentView(R.layout.dmr1_confirmation_dialog);
 
         final Button btnSubmit =  d.findViewById(R.id.btn_push_submit);
         final Button btn_no =  d.findViewById(R.id.close_push_button);
@@ -356,8 +356,8 @@ public class VerifyAccountFragment extends Fragment {
                     .put("SenderId", mobileNumber)
                     .put("BankCode", Bankcode);
             L.m2("Request--byIfsc", jsonObjectReq.toString());
-            L.m2("url", bank_details);
-            JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, bank_details, jsonObjectReq,
+            L.m2("url", url_bank_details);
+            JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_bank_details, jsonObjectReq,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject object) {

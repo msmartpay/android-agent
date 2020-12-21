@@ -148,7 +148,7 @@ public class AEPSActivity extends BaseActivity {
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.new_dmr_sender_resister_dialog);
+        d.setContentView(R.layout.dmr1_sender_resister_dialog);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final Button btnOK =  d.findViewById(R.id.btn_resister_ok);

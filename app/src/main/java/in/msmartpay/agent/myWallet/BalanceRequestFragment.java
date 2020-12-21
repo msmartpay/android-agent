@@ -155,28 +155,25 @@ public class BalanceRequestFragment extends BaseFragment {
             }
         });
 
-        brequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isConnectionAvailable()){
-                    if(bankModel == null){
-                        Toast.makeText(context, "Select Bank Name !!!", Toast.LENGTH_SHORT).show();
-                    }else if(selectedType == null){
-                        Toast.makeText(context, "Select Payment Type !!!", Toast.LENGTH_SHORT).show();
-                    }else if(TextUtils.isEmpty(damount.getText().toString().trim())){
-                        damount.requestFocus();
-                        Toast.makeText(context, "Enter Deposite Amount !!!", Toast.LENGTH_SHORT).show();
-                    }else if (!selectedType.equalsIgnoreCase("cash") && (b_refid.getText().toString() != null && b_refid.getText().toString().length() <= 0)) {
-                        b_refid.requestFocus();
-                        Toast.makeText(context, "Enter Transaction Reference Id", Toast.LENGTH_LONG).show();
-                    }else if (fromDateEtxt.getText().toString().trim().length() <= 0) {
-                        Toast.makeText(context, "Select Deposit Date. ", Toast.LENGTH_SHORT).show();
-                    }else{
-                        balanceReqFragmentRequest();
-                    }
+        brequest.setOnClickListener(view1 -> {
+            if (isConnectionAvailable()){
+                if(bankModel == null){
+                    Toast.makeText(context, "Select Bank Name !!!", Toast.LENGTH_SHORT).show();
+                }else if(selectedType == null){
+                    Toast.makeText(context, "Select Payment Type !!!", Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(damount.getText().toString().trim())){
+                    damount.requestFocus();
+                    Toast.makeText(context, "Enter Deposite Amount !!!", Toast.LENGTH_SHORT).show();
+                }else if (!selectedType.equalsIgnoreCase("cash") && (b_refid.getText().toString() != null && b_refid.getText().toString().length() <= 0)) {
+                    b_refid.requestFocus();
+                    Toast.makeText(context, "Enter Transaction Reference Id", Toast.LENGTH_LONG).show();
+                }else if (fromDateEtxt.getText().toString().trim().length() <= 0) {
+                    Toast.makeText(context, "Select Deposit Date. ", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
+                    balanceReqFragmentRequest();
                 }
+            }else{
+                Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
             }
         });
     return view;
@@ -255,14 +252,10 @@ public class BalanceRequestFragment extends BaseFragment {
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();
-        fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
-            }
-
+        fromDatePickerDialog = new DatePickerDialog(context, (view, year, monthOfYear, dayOfMonth) -> {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         fromDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
         fromDatePickerDialog.show();
@@ -289,55 +282,46 @@ public class BalanceRequestFragment extends BaseFragment {
             L.m2("summary_Request--1>", jsonObjectReq.toString());
 
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, HttpURL.CollectBankDetails, jsonObjectReq,
+                    object -> {
+                        pd.dismiss();
+                        try {
+                            L.m2("summary_Request--1>", object.toString());
+                            if (object.get("response-code") != null && object.get("response-code").equals("0")) {
+                                final JSONArray parentArray = (JSONArray) object.get("data");
+                                if (bankList == null)
+                                    bankList = new ArrayList<>();
+                                else
+                                    bankList.clear();
 
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject object) {
-                            pd.dismiss();
-                            try {
-                                L.m2("summary_Request--1>", object.toString());
-                                if (object.get("response-code") != null && object.get("response-code").equals("0")) {
-                                    final JSONArray parentArray = (JSONArray) object.get("data");
-                                    if (bankList == null)
-                                        bankList = new ArrayList<>();
-                                    else
-                                        bankList.clear();
+                                if (parentArray.length() > 0) {
+                                    for (int i = 0; i < parentArray.length(); i++) {
+                                        JSONObject obj = (JSONObject) parentArray.get(i);
 
-                                    if (parentArray.length() > 0) {
-                                        for (int i = 0; i < parentArray.length(); i++) {
-                                            JSONObject obj = (JSONObject) parentArray.get(i);
+                                        CollectBankModel bankDetailsItem = new CollectBankModel();
 
-                                            CollectBankModel bankDetailsItem = new CollectBankModel();
+                                        bankDetailsItem.setBank_name(obj.get("bank_name")+"" + obj.get("bank_account") + obj.get("bnk_ifsc") );
+                                        bankDetailsItem.setActual_bank_name(obj.get("bank_name") + "");
+                                        bankDetailsItem.setBank_account(obj.get("bank_account") + "");
+                                        bankDetailsItem.setBank_account_name(obj.get("bank_account_name") + "");
+                                        bankDetailsItem.setBnk_ifsc(obj.get("bnk_ifsc") + "");
 
-                                            bankDetailsItem.setBank_name(obj.get("bank_name")+"" + obj.get("bank_account") + obj.get("bnk_ifsc") );
-                                            bankDetailsItem.setActual_bank_name(obj.get("bank_name") + "");
-                                            bankDetailsItem.setBank_account(obj.get("bank_account") + "");
-                                            bankDetailsItem.setBank_account_name(obj.get("bank_account_name") + "");
-                                            bankDetailsItem.setBnk_ifsc(obj.get("bnk_ifsc") + "");
-
-                                            bankList.add(bankDetailsItem);
-
-                                        }
-                                        ArrayAdapter<CollectBankModel> adapter = new ArrayAdapter<CollectBankModel>(context, R.layout.spinner_textview_layout, bankList);
-                                        adapter.setDropDownViewResource(R.layout.spinner_textview_layout);
-                                        bank_details.setAdapter(adapter);
-
+                                        bankList.add(bankDetailsItem);
 
                                     }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener()
+                                    ArrayAdapter<CollectBankModel> adapter = new ArrayAdapter<CollectBankModel>(context, R.layout.spinner_textview_layout, bankList);
+                                    adapter.setDropDownViewResource(R.layout.spinner_textview_layout);
+                                    bank_details.setAdapter(adapter);
 
-            {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    pd.dismiss();
-                    Toast.makeText(getActivity(), "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
+
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }, error -> {
+                        pd.dismiss();
+                        Toast.makeText(getActivity(), "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
+                    });
             BaseActivity.getSocketTimeOut(jsonrequest);
             Mysingleton.getInstance(getActivity()).addToRequsetque(jsonrequest);
         } catch (Exception exp) {
