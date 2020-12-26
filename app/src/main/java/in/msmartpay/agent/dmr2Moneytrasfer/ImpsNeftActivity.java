@@ -1,6 +1,5 @@
 package in.msmartpay.agent.dmr2Moneytrasfer;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,17 +30,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import in.msmartpay.agent.R;
 import in.msmartpay.agent.location.GPSTrackerPresenter;
@@ -57,7 +47,7 @@ import in.msmartpay.agent.utility.Util;
  * Created by Smartkinda on 6/19/2017.
  */
 
-public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener{
+public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresenter.LocationListener {
     public static final String TAG = ImpsNeftActivity.class.getSimpleName();
     private Button btnProceed;
     private EditText editAmount, editRemark;
@@ -76,6 +66,7 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
     private Context context;
     private GPSTrackerPresenter gpsTrackerPresenter = null;
     private boolean isTxnClick = false;
+    private boolean isLocationGet = false;
 
 
     @Override
@@ -158,25 +149,26 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
             } else {
                 transactionAmount = editAmount.getText().toString().trim();
                 Remark = editRemark.getText().toString().trim();
-                if (!isTxnClick) {
-                    isTxnClick = true;
-                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
-                }
+                startPaymentProcess();
+
             }
         });
     }
 
     private void startPaymentProcess() {
-        /*if (latitude.isEmpty() || longitude.isEmpty()) {
-            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
-        } else {*/
-        PaymentConfirmDialog();
-        // }
+        if (isLocationGet) {
+            paymentConfirmDialog();
+        } else {
+            if (!isTxnClick) {
+                isTxnClick = true;
+                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+            }
+        }
     }
 
 
     //================For Delete Bene===============
-    public void PaymentConfirmDialog() {
+    public void paymentConfirmDialog() {
         // TODO Auto-generated method stub
         final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
         d.setCancelable(false);
@@ -232,7 +224,8 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
                     .put("REQUEST_ID", String.valueOf((long) Math.floor(Math.random() * 90000000000000L) + 10000000000000L))
                     .put("Remark", Remark == null ? "" : Remark)
                     .put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE))
-                    .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE));;
+                    .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE));
+            ;
             Log.e("Request--transaction", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_imps_neft_transaction, jsonObjectReq,
                     new Response.Listener<JSONObject>() {
@@ -299,6 +292,7 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
 
     @Override
     public void onLocationFound(Location location) {
+        isLocationGet = true;
         gpsTrackerPresenter.stopLocationUpdates();
         if (isTxnClick) {
             isTxnClick = false;
@@ -325,6 +319,7 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
         super.onDestroy();
         gpsTrackerPresenter.onPause();
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

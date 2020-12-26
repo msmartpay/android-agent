@@ -14,7 +14,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import in.msmartpay.agent.location.test.LocationTestActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 
 public class SplashScreenActivity extends BaseActivity {
@@ -54,7 +53,6 @@ public class SplashScreenActivity extends BaseActivity {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-            //startActivity(new Intent(SplashScreenActivity.this, LocationTestActivity.class));
             finish();
 
         }, 3000);

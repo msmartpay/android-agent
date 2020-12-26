@@ -67,6 +67,7 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
 
     private GPSTrackerPresenter gpsTrackerPresenter = null;
     private boolean isTxnClick = false;
+    private boolean isLocationGet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,10 +165,8 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
                     edit_amount_dth.requestFocus();
                     Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (!isTxnClick) {
-                        isTxnClick = true;
-                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
-                    }
+                    startRechargeProcess();
+
                 }
             } else {
                 Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
@@ -192,11 +191,14 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
     }
 
     private void startRechargeProcess() {
-       /* if (latitude.isEmpty() || longitude.isEmpty()) {
-            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
-        } else {*/
-        proceedConfirmationDialog();
-        // }
+        if (isLocationGet) {
+            proceedConfirmationDialog();
+        } else {
+            if (!isTxnClick) {
+                isTxnClick = true;
+                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+            }
+        }
     }
 
 
@@ -463,6 +465,7 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
 
     @Override
     public void onLocationFound(Location location) {
+        isLocationGet = true;
         gpsTrackerPresenter.stopLocationUpdates();
         if (isTxnClick) {
             isTxnClick = false;

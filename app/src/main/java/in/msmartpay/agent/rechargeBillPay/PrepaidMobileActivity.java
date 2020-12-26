@@ -79,6 +79,7 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
 
     private GPSTrackerPresenter gpsTrackerPresenter = null;
     private boolean isTxnClick = false;
+    private boolean isLocationGet = false;
 
 
     @Override
@@ -171,10 +172,7 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
                     edit_amount.requestFocus();
                     Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (!isTxnClick) {
-                        isTxnClick = true;
-                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
-                    }
+                    startRechargeProcess();
                 }
             } else {
                 Toast.makeText(context, "No Internet Connection !!!", Toast.LENGTH_SHORT).show();
@@ -198,11 +196,14 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
     }
 
     private void startRechargeProcess() {
-       /* if (latitude.isEmpty() || longitude.isEmpty()) {
-            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
-        } else {*/
-        proceedConfirmationDialog();
-        // }
+        if (isLocationGet) {
+            proceedConfirmationDialog();
+        } else {
+            if (!isTxnClick) {
+                isTxnClick = true;
+                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+            }
+        }
     }
 
 

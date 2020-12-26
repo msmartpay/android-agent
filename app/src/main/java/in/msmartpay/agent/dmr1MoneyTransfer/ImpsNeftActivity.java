@@ -66,6 +66,7 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
     private Context context;
     private GPSTrackerPresenter gpsTrackerPresenter = null;
     private boolean isTxnClick = false;
+    private boolean isLocationGet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,24 +143,24 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
             } else {
                 transactionAmount = editAmount.getText().toString().trim();
                 Remark = editRemark.getText().toString().trim();
-                if (!isTxnClick) {
-                    isTxnClick = true;
-                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
-                }
+                startPaymentProcess();
             }
         });
     }
 
     private void startPaymentProcess() {
-        /*if (latitude.isEmpty() || longitude.isEmpty()) {
-            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
-        } else {*/
-        PaymentConfirmDialog();
-        // }
+        if (isLocationGet) {
+            paymentConfirmDialog();
+        } else {
+            if (!isTxnClick) {
+                isTxnClick = true;
+                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+            }
+        }
     }
 
     //================For Delete Bene===============
-    public void PaymentConfirmDialog() {
+    public void paymentConfirmDialog() {
         // TODO Auto-generated method stub
         final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
         d.setCancelable(false);
@@ -277,6 +278,7 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
 
     @Override
     public void onLocationFound(Location location) {
+        isLocationGet = true;
         gpsTrackerPresenter.stopLocationUpdates();
         if (isTxnClick) {
             isTxnClick = false;

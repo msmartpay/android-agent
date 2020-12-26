@@ -65,6 +65,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private AppDao appDatabase;
     private GPSTrackerPresenter gpsTrackerPresenter = null;
     private boolean isTxnClick = false;
+    private boolean isLocationGet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +113,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     if (checkBox.isChecked()) {
                         new SaveCredentialsTask().execute();
                     }
-                    if (!isTxnClick) {
-                        isTxnClick = true;
-                        gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                    if(isLocationGet){
+                        loginRequest();
+                    }else {
+                        if (!isTxnClick) {
+                            isTxnClick = true;
+                            gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                        }
                     }
                 }
             } else if (view.getId() == R.id.sign_up) {
@@ -526,6 +531,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onLocationFound(Location location) {
+        isLocationGet = true;
         gpsTrackerPresenter.stopLocationUpdates();
         if (isTxnClick) {
             isTxnClick = false;

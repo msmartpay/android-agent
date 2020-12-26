@@ -56,6 +56,7 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
 
     private GPSTrackerPresenter gpsTrackerPresenter = null;
     private boolean isTxnClick = false;
+    private boolean isLocationGet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,31 +110,31 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
             btn_proceed.setText("Get Bill Details");
         }
         btn_proceed.setOnClickListener(v -> {
-            if (!isTxnClick) {
-                isTxnClick = true;
-                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
-            }
+            startPaymentProcess();
         });
     }
 
     private void startPaymentProcess() {
-        /*if (latitude.isEmpty() || longitude.isEmpty()) {
-            startActivityForResult(new Intent(getApplicationContext(), LocationResultActivity.class), REQ_LOCATION_CODE);
-        } else {*/
-        if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes") && value == 0) {
-            submitPayment("ViewBill");
-        } else {
-            if (value == 1) {
-                if (dueAmt > 0)
-                    submitPayment("Pay");
-                else
-                    Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
-
+        if (isLocationGet) {
+            if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes") && value == 0) {
+                submitPayment("ViewBill");
             } else {
-                submitPayment("Pay");
+                if (value == 1) {
+                    if (dueAmt > 0)
+                        submitPayment("Pay");
+                    else
+                        Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
+
+                } else {
+                    submitPayment("Pay");
+                }
+            }
+        } else {
+            if (!isTxnClick) {
+                isTxnClick = true;
+                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
             }
         }
-        //}
     }
 
     private void submitPayment(final String reqType) {
@@ -246,6 +247,7 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
 
     @Override
     public void onLocationFound(Location location) {
+
         gpsTrackerPresenter.stopLocationUpdates();
         if (isTxnClick) {
             isTxnClick = false;

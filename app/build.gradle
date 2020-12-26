@@ -7,8 +7,8 @@ android {
         applicationId "in.msmartpay.agent"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 24
-        versionName "8.1"
+        versionCode 25
+        versionName "8.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -26,7 +26,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 dependencies {
@@ -53,10 +52,10 @@ dependencies {
 
     implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     //Retrofit Network Lib.
-   /* implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
-*/
+    /* implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+     implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
+ */
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
