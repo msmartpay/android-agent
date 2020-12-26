@@ -123,7 +123,7 @@
 
                     <TextView
                         style="@style/tv_drawer"
-                        android:layout_toRightOf="@+id/prepaid"
+                        android:layout_toEndOf="@+id/prepaid"
                         android:text="Recharge"
                         android:paddingTop="2dp"/>
 
@@ -131,12 +131,13 @@
                         android:id="@+id/iv_recharge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_alignParentEnd="true"
                         android:onClick="start"
                         android:src="@drawable/open_add" />
                 </RelativeLayout>
-
 
                 <!--==============================================================-->
                 <LinearLayout
@@ -247,7 +248,7 @@
 
                     <TextView
                         style="@style/tv_drawer"
-                        android:layout_toRightOf="@+id/iv_post"
+                        android:layout_toEndOf="@+id/iv_post"
                         android:paddingBottom="10dp"
                         android:text="Bill Payments"
                         android:paddingTop="2dp" />
@@ -256,8 +257,10 @@
                         android:id="@+id/iv_billpayment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_alignParentEnd="true"
                         android:onClick="start"
                         android:src="@drawable/open_add" />
                 </RelativeLayout>
@@ -462,7 +465,7 @@
 
                     <TextView
                         style="@style/tv_drawer"
-                        android:layout_toRightOf="@+id/iv_finance1"
+                        android:layout_toEndOf="@+id/iv_finance1"
                         android:paddingBottom="10dp"
                         android:text="Finance"
                         android:paddingTop="2dp" />
@@ -471,8 +474,10 @@
                         android:id="@+id/iv_finance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_alignParentEnd="true"
                         android:onClick="start"
                         android:src="@drawable/open_add" />
        //         </RelativeLayout>
@@ -586,7 +591,7 @@
 
                     <TextView
                         style="@style/tv_drawer"
-                        android:layout_toRightOf="@+id/iv_wallet1"
+                        android:layout_toEndOf="@+id/iv_wallet1"
                         android:paddingBottom="10dp"
                         android:text="My Wallet"
                         android:paddingTop="2dp" />
@@ -595,8 +600,10 @@
                         android:id="@+id/iv_wallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_alignParentEnd="true"
                         android:onClick="start"
                         android:src="@drawable/open_add" />
                 </RelativeLayout>

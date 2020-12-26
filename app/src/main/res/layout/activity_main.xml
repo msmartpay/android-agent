@@ -195,7 +195,7 @@
 
                                         <TextView
                                             style="@style/tv_main"
-                                            android:text="Mobile\n prepaid " />
+                                            android:text="Mobile\n Prepaid " />
 
                                     </LinearLayout>
 
@@ -226,7 +226,7 @@
 
                                         <TextView
                                             style="@style/tv_main"
-                                            android:text="Dth" />
+                                            android:text="DTH" />
 
 
                                     </LinearLayout>
@@ -384,7 +384,7 @@
 
                                         <TextView
                                             style="@style/tv_main"
-                                            android:text="Mobile\npostpaid" />
+                                            android:text="Mobile\nPostpaid" />
 
 
                                     </LinearLayout>
@@ -533,7 +533,7 @@
 
                                         <TextView
                                             style="@style/tv_main"
-                                            android:text="Insurence" />
+                                            android:text="Insurance" />
 
                                     </LinearLayout>
 

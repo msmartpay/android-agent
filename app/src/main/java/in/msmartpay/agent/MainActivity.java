@@ -382,6 +382,13 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                         id_money_transfer.setVisibility(View.GONE);
                                     }
                                 }
+                                if (data.has("response-message")){
+                                    if (data.getString("response-message").equalsIgnoreCase("Invalid request!")) {
+                                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                    }
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -807,6 +814,4 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
         gpsTrackerPresenter.onPause();
         super.onDestroy();
     }
-
-
 }
