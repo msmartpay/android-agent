@@ -60,25 +60,7 @@ public class GPSTrackerPresenter {
         checkGpsOnOrNot(requestCode);
         try {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mActivity);
-            if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(mActivity, location -> {
-                // Got last known location. In some rare situations this can be null.
-                if (location != null) {
-                    Util.SavePrefData(mActivity, Keys.LATITUDE, location.getLatitude() + "");
-                    Util.SavePrefData(mActivity, Keys.LONGITUDE, location.getLongitude() + "");
-                    mListener.onLocationFound(location);
-                }
-            });
+            getLastLocationSuccess();
             createLocationRequest();
             mLocationCallback = new LocationCallback() {
                 @Override
@@ -107,7 +89,7 @@ public class GPSTrackerPresenter {
 
     //In the start method, we chacking permissions. It'will invoke a permision required pop if required permission not given
     public void onStart() {
-        if (!checkRequiredLocationPermission()) {
+        if (!checkRequiredLocationPermission(true)) {
             getLastLocation();
         } else {
             startLocationUpdates();
@@ -138,11 +120,13 @@ public class GPSTrackerPresenter {
         stopLocationUpdates();
     }
 
-    private Boolean checkRequiredLocationPermission() {
+    private Boolean checkRequiredLocationPermission(boolean isRequestPermissions) {
         if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // mListener.checkRequiredLocationPermission();
-            checkPermissions();
+            if (isRequestPermissions) {
+                // mListener.checkRequiredLocationPermission();
+                checkPermissions();
+            }
             return false;
         } else {
             return true;
@@ -198,21 +182,30 @@ public class GPSTrackerPresenter {
         alertDialog.show();
     }
 
+    private void getLastLocationSuccess() {
+        if (checkRequiredLocationPermission(false))
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(mActivity, location -> {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    Util.SavePrefData(mActivity, Keys.LATITUDE, location.getLatitude() + "");
+                    Util.SavePrefData(mActivity, Keys.LONGITUDE, location.getLongitude() + "");
+                    mListener.onLocationFound(location);
+                }
+            });
+    }
+
     private void getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(mActivity,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mFusedLocationClient.getLastLocation().addOnCompleteListener(mActivity, task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                Util.SavePrefData(mActivity, Keys.LATITUDE, task.getResult().getLatitude() + "");
-                Util.SavePrefData(mActivity, Keys.LONGITUDE, task.getResult().getLongitude() + "");
-                mListener.onLocationFound(task.getResult());
-            } else {
-                mListener.locationError("No Location Detected : " + task.getException());
-                Log.e("", "no_location_detected", task.getException());
-            }
-        });
+        if (checkRequiredLocationPermission(false))
+            mFusedLocationClient.getLastLocation().addOnCompleteListener(mActivity, task -> {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    Util.SavePrefData(mActivity, Keys.LATITUDE, task.getResult().getLatitude() + "");
+                    Util.SavePrefData(mActivity, Keys.LONGITUDE, task.getResult().getLongitude() + "");
+                    mListener.onLocationFound(task.getResult());
+                } else {
+                    mListener.locationError("No Location Detected : " + task.getException());
+                    Log.e("", "no_location_detected", task.getException());
+                }
+            });
     }
 
     private void startLocationUpdates() {
