@@ -56,8 +56,21 @@ public class GPSTrackerPresenter {
         this.mActivity = mActivity;
         this.mListener = mListener;
         this.requestCode = requestCode;
+        locationManager = (LocationManager) mActivity.getSystemService(Context.LOCATION_SERVICE);
+        checkGpsOnOrNot(requestCode);
         try {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mActivity);
+            if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             mFusedLocationClient.getLastLocation().addOnSuccessListener(mActivity, location -> {
                 // Got last known location. In some rare situations this can be null.
                 if (location != null) {
@@ -81,8 +94,6 @@ public class GPSTrackerPresenter {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        locationManager = (LocationManager) mActivity.getSystemService(Context.LOCATION_SERVICE);
-        checkGpsOnOrNot(requestCode);
     }
 
     //Here, we assigned required minimum and maximum duration that explained above
