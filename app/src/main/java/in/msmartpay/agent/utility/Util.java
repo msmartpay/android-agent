@@ -104,10 +104,12 @@ public class Util {
     }
 
     public static void showView(View v) {
+        if (v!=null)
         v.setVisibility(View.VISIBLE);
     }
 
     public static void hideView(View v) {
+        if (v!=null)
         v.setVisibility(View.GONE);
     }
 
