@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -50,7 +51,7 @@ public class VerifyAccountFragment extends Fragment {
     private ProgressDialog pd;
     private Context context;
     private SharedPreferences sharedPreferences;
-    private String agentID, txnKey, mobileNumber, spinnerSelectedBank,ifsc="";
+    private String agentID, txnKey, mobileNumber, spinnerSelectedBank, ifsc = "";
     private BankListModel listModel = null;
     private ArrayList<BankListModel> BankListArray = null;
     private CustomAdaptorClass bankListAdaptor;
@@ -59,8 +60,8 @@ public class VerifyAccountFragment extends Fragment {
     private String url_add_bene_by_ifsc = HttpURL.ADD_BENEFICIARY_IFSC_CODE_Dmr2;
     private String isverificationavailable, available_channels, ifsc_status;
 
-    private ArrayList<String> BanknameList=null;
-    private ArrayList<String> BankcodeList=null;
+    private ArrayList<String> BanknameList = null;
+    private ArrayList<String> BankcodeList = null;
 
     private String Bankname, Bankcode;
 
@@ -79,15 +80,15 @@ public class VerifyAccountFragment extends Fragment {
         agentID = sharedPreferences.getString("agentonlyid", null);
         txnKey = sharedPreferences.getString("txn-key", null);
 
-        edit_sender_mobile =  view.findViewById(R.id.edit_sender_mobile);
-        edit_bank_ifsc =  view.findViewById(R.id.edit_bank_ifsc);
-        edit_account_number =  view.findViewById(R.id.edit_account_number);
-       /* spinner_bank_name =  view.findViewById(R.id.spinner_bank_name);*/
-        btnVerifyAcc =  view.findViewById(R.id.btn_verify_account);
+        edit_sender_mobile = view.findViewById(R.id.edit_sender_mobile);
+        edit_bank_ifsc = view.findViewById(R.id.edit_bank_ifsc);
+        edit_account_number = view.findViewById(R.id.edit_account_number);
+        /* spinner_bank_name =  view.findViewById(R.id.spinner_bank_name);*/
+        btnVerifyAcc = view.findViewById(R.id.btn_verify_account);
         edit_sender_mobile.setText(mobileNumber);
-       // edit_bank_ifsc.setEnabled(false);
+        // edit_bank_ifsc.setEnabled(false);
 
-        et_searchbank =  view.findViewById(R.id.et_searchbank);
+        et_searchbank = view.findViewById(R.id.et_searchbank);
 
         et_searchbank.setOnClickListener(v -> {
 
@@ -104,7 +105,7 @@ public class VerifyAccountFragment extends Fragment {
             }
         });
 
-         /*BankList Request*/
+        /*BankList Request*/
         try {
             getBankListRequest();
         } catch (JSONException e) {
@@ -118,7 +119,7 @@ public class VerifyAccountFragment extends Fragment {
                 Toast.makeText(context, "Please Enter Beneficiary Name!", Toast.LENGTH_SHORT).show();
             }/* else if (spinnerSelectedBank == null) {
                 Toast.makeText(context, "Please Select Bank List!", Toast.LENGTH_LONG).show();
-            } */else if (TextUtils.isEmpty(edit_account_number.getText().toString().trim())) {
+            } */ else if (TextUtils.isEmpty(edit_account_number.getText().toString().trim())) {
                 edit_account_number.requestFocus();
                 Toast.makeText(context, "Please Enter Account Number!", Toast.LENGTH_SHORT).show();
             } else {
@@ -156,8 +157,8 @@ public class VerifyAccountFragment extends Fragment {
                                 L.m2("Resp--banklist>", object.toString());
                                 JSONArray stateJsonArray = object.getJSONArray("BankList");
 
-                                BanknameList= new ArrayList<>();
-                                BankcodeList= new ArrayList<>();
+                                BanknameList = new ArrayList<>();
+                                BankcodeList = new ArrayList<>();
                                 for (int i = 0; i < stateJsonArray.length(); i++) {
 
                                     JSONObject obj = stateJsonArray.getJSONObject(i);
@@ -176,9 +177,7 @@ public class VerifyAccountFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
-                }, new Response.ErrorListener()
-
-        {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 pd.dismiss();
@@ -199,8 +198,8 @@ public class VerifyAccountFragment extends Fragment {
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         d.setContentView(R.layout.dmr1_confirmation_dialog);
 
-        final Button btnSubmit =  d.findViewById(R.id.btn_push_submit);
-        final Button btn_no =  d.findViewById(R.id.close_push_button);
+        final Button btnSubmit = d.findViewById(R.id.btn_push_submit);
+        final Button btn_no = d.findViewById(R.id.close_push_button);
         final TextView tvConfirmation = (TextView) d.findViewById(R.id.tv_confirmation_dialog);
 
         if (i == 1) {
@@ -225,12 +224,7 @@ public class VerifyAccountFragment extends Fragment {
             }
         });
 
-        btn_no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                d.dismiss();
-            }
-        });
+        btn_no.setOnClickListener(view -> d.dismiss());
 
         d.show();
     }
@@ -250,7 +244,7 @@ public class VerifyAccountFragment extends Fragment {
                     .put("IFSC", edit_bank_ifsc.getText().toString())
                     .put("BankAccount", edit_account_number.getText().toString().trim())
                     .put("BankCode", Bankcode/*listModel.getBankCode()*/)
-                    .put("BankName",Bankname/* spinnerSelectedBank*/)
+                    .put("BankName", Bankname/* spinnerSelectedBank*/)
                     .put("REQUEST_ID", String.valueOf((long) Math.floor(Math.random() * 90000000000000L) + 10000000000000L));
 
             L.m2("Request--byIfsc", jsonObjectReq.toString());
@@ -295,21 +289,19 @@ public class VerifyAccountFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        try
-        {
+        try {
             super.onActivityResult(requestCode, resultCode, data);
             Bankname = data.getStringExtra("Bankname");
             position = BanknameList.indexOf(Bankname);
             Bankcode = BankcodeList.get(position);
             et_searchbank.setText(Bankname);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             Toast.makeText(context, "Please select your bank...", Toast.LENGTH_SHORT).show();
         }
 
 
     }
+
     //Json request for add Beneficiary
     private void getBankDetails() {
         pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
@@ -335,27 +327,27 @@ public class VerifyAccountFragment extends Fragment {
                                 pd.dismiss();
                                 if (object.getString("Status").equalsIgnoreCase("0")) {
 
-                                    isverificationavailable=object.getString("isverificationavailable");
-                                    available_channels=object.getString("available_channels");
-                                    ifsc_status=object.getString("ifsc_status");
-                                        if("1".equalsIgnoreCase(isverificationavailable) && "4".equalsIgnoreCase(ifsc_status)) {
-                                            //  respMsg="IFSCRequired";
-                                            if(TextUtils.isEmpty(edit_bank_ifsc.getText().toString())){
-                                                Toast.makeText(context, "Enter IFSC Code", Toast.LENGTH_SHORT).show();
-                                            }else {
-                                                showConfirmationDialog(1, "");
-                                            }
-                                        }else if("1".equalsIgnoreCase(isverificationavailable) && !"4".equalsIgnoreCase(ifsc_status)) {
-                                            // respMsg="Available";
-                                           // Toast.makeText(context, "Available", Toast.LENGTH_SHORT).show();
+                                    isverificationavailable = object.getString("isverificationavailable");
+                                    available_channels = object.getString("available_channels");
+                                    ifsc_status = object.getString("ifsc_status");
+                                    if ("1".equalsIgnoreCase(isverificationavailable) && "4".equalsIgnoreCase(ifsc_status)) {
+                                        //  respMsg="IFSCRequired";
+                                        if (TextUtils.isEmpty(edit_bank_ifsc.getText().toString())) {
+                                            Toast.makeText(context, "Enter IFSC Code", Toast.LENGTH_SHORT).show();
+                                        } else {
                                             showConfirmationDialog(1, "");
-                                    }else {
-                                            Toast.makeText(context, "Bank not available for Account Verification.", Toast.LENGTH_SHORT).show();
-                                            //  respMsg="Bank not available for Account Verification.";
                                         }
+                                    } else if ("1".equalsIgnoreCase(isverificationavailable) && !"4".equalsIgnoreCase(ifsc_status)) {
+                                        // respMsg="Available";
+                                        // Toast.makeText(context, "Available", Toast.LENGTH_SHORT).show();
+                                        showConfirmationDialog(1, "");
+                                    } else {
+                                        Toast.makeText(context, "Bank not available for Account Verification.", Toast.LENGTH_SHORT).show();
+                                        //  respMsg="Bank not available for Account Verification.";
+                                    }
                                     //Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                                 } else {
-                               //  respMsg="Bank status not Available.";
+                                    //  respMsg="Bank status not Available.";
                                     Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {

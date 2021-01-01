@@ -121,16 +121,26 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/whitecolor"
                 android:layout_marginBottom="30dp"
+                android:background="@color/whitecolor"
                 android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_app_update"
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="3dp"
+                        card_view:cardElevation="2dp"
+                        card_view:cardUseCompatPadding="true">
+                        <include layout="@layout/in_app_update_layout"/>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         card_view:cardCornerRadius="3dp"
@@ -146,8 +156,8 @@
 
                             <TextView
                                 style="@style/tv_main_heading"
-                                android:paddingBottom="5dp"
                                 android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
                                 android:text="@string/recharged"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="15dp" />
@@ -316,10 +326,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
-                        android:visibility="visible"
-                        android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:padding="2dp"
+                        android:visibility="visible"
                         app:cardCornerRadius="3dp"
                         app:cardElevation="2dp"
                         card_view:cardUseCompatPadding="true">
@@ -335,8 +345,8 @@
                                 style="@style/tv_main_heading"
 
 
-                                android:paddingBottom="5dp"
                                 android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
 
                                 android:text="@string/billpayment"
                                 android:textColor="@color/colorPrimary"
@@ -388,8 +398,6 @@
 
 
                                     </LinearLayout>
-
-
 
 
                                     <LinearLayout
@@ -584,8 +592,8 @@
 
                             <TextView
                                 style="@style/tv_main_heading"
-                                android:paddingBottom="5dp"
                                 android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
                                 android:text="@string/finance"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="15dp" />
@@ -601,9 +609,9 @@
                                     android:id="@+id/finanance_anim"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:orientation="horizontal"
                                     android:layout_gravity="center"
                                     android:gravity="center"
+                                    android:orientation="horizontal"
                                     android:padding="10dp">
 
                                     <LinearLayout
@@ -726,11 +734,6 @@
                                     </LinearLayout>
 
 
-
-
-
-
-
                                 </LinearLayout>
                             </HorizontalScrollView>
 
@@ -758,8 +761,8 @@
                             <TextView
                                 style="@style/tv_main_heading"
 
-                                android:paddingBottom="5dp"
                                 android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
 
                                 android:text="@string/travelling"
                                 android:textColor="@color/colorPrimary"

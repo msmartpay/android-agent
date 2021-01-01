@@ -1,16 +1,17 @@
 package in.msmartpay.agent;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -33,10 +35,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.play.core.appupdate.AppUpdateManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import in.msmartpay.agent.aeps.AEPSActivity;
 import in.msmartpay.agent.aeps.ActivateServiceActivity;
@@ -60,15 +65,13 @@ import in.msmartpay.agent.utility.HttpURL;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.MyAppUpdateManager;
 import in.msmartpay.agent.utility.Mysingleton;
+import in.msmartpay.agent.utility.Util;
 
 public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.LocationListener {
-
-    private static final int HIGH_PRIORITY_UPDATE = 5;
-    private static final int APP_UPDATE_REQUEST_CODE = 10101;
     private ImageView img;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String agentID, txn_key = "", balance;
+    private String agentID = "", txn_key = "", balance = "0.0";
     private TextView balanceview;
     private String wallet_url = HttpURL.WALLET_BALANCE;
     private Context context;
@@ -89,60 +92,68 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
     // Declare the UpdateManager
     private MyAppUpdateManager mUpdateManager;
+    private CardView cv_app_update;
+    private Button btnLater;
+    private Button btnDownloadInstall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_main, null, false);
-        getSupportActionBar().hide();
-        mDrawer.addView(contentView, 0);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        try {
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View contentView = inflater.inflate(R.layout.activity_main, null, false);
+            getSupportActionBar().hide();
+            mDrawer.addView(contentView, 0);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-        context = MainActivity.this;
-        gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
-        jsonObjectStatic = null;
-        sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        agentID = sharedPreferences.getString("agentonlyid", null);
-        txn_key = sharedPreferences.getString("txn-key", null);
-        balance = sharedPreferences.getString("balance", null);
-        dmrVendor = sharedPreferences.getString("dmrVendor", "");
-        L.m2("sharedPreferences->", " : Agent Id : " + agentID + " : Txn : " + txn_key + " : Bal : " + balance);
+            context = MainActivity.this;
+            gpsTrackerPresenter = new GPSTrackerPresenter(this, this, GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+            jsonObjectStatic = null;
+            sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            agentID = sharedPreferences.getString("agentonlyid", "");
+            txn_key = sharedPreferences.getString("txn-key", "");
+            balance = sharedPreferences.getString("balance", "0.0");
+            dmrVendor = sharedPreferences.getString("dmrVendor", "");
+            L.m2("sharedPreferences->", " : Agent Id : " + agentID + " : Txn : " + txn_key + " : Bal : " + balance);
 
-        balanceview = (TextView) findViewById(R.id.tv_bal);
-        img = (ImageView) findViewById(R.id.id_drawer_icon);
-        my_profile = (LinearLayout) findViewById(R.id.my_profile);
-        floatingButtonCall = (FloatingActionButton) findViewById(R.id.fab);
+            balanceview = findViewById(R.id.tv_bal);
+            img = findViewById(R.id.id_drawer_icon);
+            my_profile = findViewById(R.id.my_profile);
+            floatingButtonCall = findViewById(R.id.fab);
 
-        id_money_transfer = findViewById(R.id.id_money_transfer);
-        id_money_transfer2 = findViewById(R.id.id_money_transfer2);
+            id_money_transfer = findViewById(R.id.id_money_transfer);
+            id_money_transfer2 = findViewById(R.id.id_money_transfer2);
 
-        balanceview.setText("\u20B9 " + balance);
+            balanceview.setText("\u20B9 " + balance);
 
-        if (dmrVendor.equalsIgnoreCase("DMR1")) {
-            id_money_transfer2.setVisibility(View.GONE);
-            id_money_transfer.setVisibility(View.VISIBLE);
-        } else if (dmrVendor.equalsIgnoreCase("DMR2")) {
-            id_money_transfer.setVisibility(View.GONE);
-            id_money_transfer2.setVisibility(View.VISIBLE);
-        } else {
-            id_money_transfer2.setVisibility(View.GONE);
-            id_money_transfer.setVisibility(View.GONE);
+            if (dmrVendor.equalsIgnoreCase("DMR1")) {
+                id_money_transfer2.setVisibility(View.GONE);
+                id_money_transfer.setVisibility(View.VISIBLE);
+            } else if (dmrVendor.equalsIgnoreCase("DMR2")) {
+                id_money_transfer.setVisibility(View.GONE);
+                id_money_transfer2.setVisibility(View.VISIBLE);
+            } else {
+                id_money_transfer2.setVisibility(View.GONE);
+                id_money_transfer.setVisibility(View.GONE);
+            }
+
+            img.setOnClickListener(v -> mDrawer.openDrawer(drawerpane));
+
+            my_profile.setOnClickListener(view -> {
+                Intent intent = new Intent(context, MyProfile.class);
+                startActivity(intent);
+            });
+
+            floatingButtonCall.setOnClickListener(view -> {
+                Intent intent = new Intent(context, HelpSupportActivity.class);
+                startActivity(intent);
+            });
+            initializeAppUpdateManager();
+        } catch (Exception e) {
+            L.m2("Error", "OnCreate" + e.getLocalizedMessage());
+            L.s(getApplicationContext(), "OnCreate = " + e.getLocalizedMessage());
         }
-
-        img.setOnClickListener(v -> mDrawer.openDrawer(drawerpane));
-
-        my_profile.setOnClickListener(view -> {
-            Intent intent = new Intent(context, MyProfile.class);
-            startActivity(intent);
-        });
-
-        floatingButtonCall.setOnClickListener(view -> {
-            Intent intent = new Intent(context, HelpSupportActivity.class);
-            startActivity(intent);
-        });
-        //initializeAppUpdateManager();
     }
 
     public void click(View view) {
@@ -218,7 +229,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
     public void showMoneyTransferDMTDialog2(final int i) {
         // TODO Auto-generated method stub
-        final Dialog d = new Dialog(MainActivity.this, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
+        final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
@@ -262,7 +273,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
     }
 
     private void findSenderRequest2() {
-        pd = ProgressDialog.show(MainActivity.this, "", "Loading. Please wait...", true);
+        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setIndeterminate(true);
         pd.setCancelable(false);
@@ -292,7 +303,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                 editor.putString("SenderName", senderDetailsObject.getString("Name"));
                                 editor.putString("ResisteredMobileNo", MobileNo);
                                 editor.commit();
-                                Intent intent = new Intent(MainActivity.this, in.msmartpay.agent.dmr2Moneytrasfer.MoneyTransferActivity.class);
+                                Intent intent = new Intent(context, in.msmartpay.agent.dmr2Moneytrasfer.MoneyTransferActivity.class);
                                 intent.putExtra("SenderLimit_Detail_BeniList", object.toString());
                                 startActivity(intent);
                                 finish();
@@ -315,7 +326,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                 activateServiceDialogBox("Please activate your DMR Service...");
                             } else {
                                 pd.dismiss();
-                                Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             pd.dismiss();
@@ -330,7 +341,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
         } catch (JSONException e) {
             pd.dismiss();
-            e.printStackTrace();
+            L.m2("Error", "parser res- " + e.getMessage());
         }
     }
 
@@ -339,16 +350,9 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
     protected void onResume() {
         super.onResume();
         getBanlance();
-
-        //Background
-        //requestMyPermissions();
     }
 
     private void getBanlance() {
-        /*pd = new ProgressDialog(MainActivity.this);
-        pd = ProgressDialog.show(MainActivity.this, "", "Loading. Please wait...", true);
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        pd.setCanceledOnTouchOutside(true);*/
         try {
             JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
@@ -360,7 +364,6 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                         @Override
                         public void onResponse(JSONObject data) {
                             try {
-                                // pd.dismiss();
                                 L.m2("wallet-url", wallet_url);
                                 L.m2("data-wallet", data.toString());
 
@@ -380,35 +383,34 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                         id_money_transfer.setVisibility(View.GONE);
                                     }
                                 }
-                                if (data.has("response-message")){
+                                if (data.has("response-message")) {
                                     if (data.getString("response-message").equalsIgnoreCase("Invalid request!")) {
-                                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
                                     }
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                L.m2("Error", "" + e.getLocalizedMessage());
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    // pd.dismiss();
-                    Toast.makeText(MainActivity.this, " " + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, " " + error.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
             getSocketTimeOut(objectRequest);
             Mysingleton.getInstance(context).addToRequsetque(objectRequest);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            L.m2("Error", "" + e.getLocalizedMessage());
         }
     }
 
     public void showMoneyTransferDMTDialog(final int i) {
         // TODO Auto-generated method stub
-        final Dialog d = new Dialog(MainActivity.this, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
+        final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
@@ -455,7 +457,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
     //Json request for FindRegister
     private void findSenderRequest() {
-        pd = ProgressDialog.show(MainActivity.this, "", "Loading. Please wait...", true);
+        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setIndeterminate(true);
         pd.setCancelable(false);
@@ -487,7 +489,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                     editor.putString("SenderName", senderDetailsObject.getString("Name"));
                                     editor.putString("ResisteredMobileNo", MobileNo);
                                     editor.commit();
-                                    Intent intent = new Intent(MainActivity.this, MoneyTransferActivity.class);
+                                    Intent intent = new Intent(context, MoneyTransferActivity.class);
                                     intent.putExtra("SenderLimit_Detail_BeniList", object.toString());
                                     startActivity(intent);
                                     finish();
@@ -507,7 +509,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                     resisterSenderDialog(object.getString("message"));
                                 } else {
                                     pd.dismiss();
-                                    Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 pd.dismiss();
@@ -526,14 +528,14 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
         } catch (JSONException e) {
             pd.dismiss();
-            e.printStackTrace();
+            L.m2("Error", "parser res- " + e.getMessage());
         }
     }
 
     //================For Resistration===============
     public void resisterSenderDialog(String msg) {
         // TODO Auto-generated method stub
-        final Dialog d = new Dialog(MainActivity.this, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
+        final Dialog d = new Dialog(context, R.style.Base_Theme_AppCompat_Light_Dialog_Alert);
         d.setCancelable(false);
         d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
@@ -546,35 +548,24 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
         final Button btnClosed = d.findViewById(R.id.close_push_button);
 
         tvMessage.setText(msg);
-        btnNO.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                d.dismiss();
-            }
+        btnNO.setOnClickListener(v -> d.dismiss());
+
+        btnOK.setOnClickListener(v -> {
+            Intent intent = new Intent(context, in.msmartpay.agent.dmr2Moneytrasfer.SenderRegistrationActivity.class);
+            startActivity(intent);
+            d.dismiss();
         });
 
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, in.msmartpay.agent.dmr2Moneytrasfer.SenderRegistrationActivity.class);
-                startActivity(intent);
-                d.dismiss();
-            }
-        });
-
-        btnClosed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                d.cancel();
-            }
+        btnClosed.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            d.cancel();
         });
         d.show();
     }
 
     //Json request for find Sender
     private void reSendOtpRequest(final String SenderName) {
-        pd = ProgressDialog.show(MainActivity.this, "", "Loading. Please wait...", true);
+        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setIndeterminate(true);
         pd.setCancelable(false);
@@ -599,8 +590,8 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                 if (object.getString("Status").equalsIgnoreCase("0")) {
                                     L.m2("resp-senderResend", object.toString());
 
-                                    Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity.this, SenderVerifyRegisterActivity.class);
+                                    Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(context, SenderVerifyRegisterActivity.class);
                                     intent.putExtra("MobileNo", MobileNo);
                                     intent.putExtra("SenderName", SenderName);
                                     intent.putExtra("Address", "");
@@ -608,7 +599,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                     startActivity(intent);
                                 } else {
                                     pd.dismiss();
-                                    Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 pd.dismiss();
@@ -627,12 +618,12 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
         } catch (JSONException e) {
             pd.dismiss();
-            e.printStackTrace();
+            L.m2("Error", "parser res- " + e.getMessage());
         }
     }
 
     private void reSendOtpRequest2(final String SenderName) {
-        pd = ProgressDialog.show(MainActivity.this, "", "Loading. Please wait...", true);
+        pd = ProgressDialog.show(context, "", "Loading. Please wait...", true);
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pd.setIndeterminate(true);
         pd.setCancelable(false);
@@ -657,8 +648,8 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                 if (object.getString("Status").equalsIgnoreCase("0")) {
                                     L.m2("resp-senderResend", object.toString());
 
-                                    Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity.this, in.msmartpay.agent.dmr2Moneytrasfer.SenderVerifyRegisterActivity.class);
+                                    Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(context, in.msmartpay.agent.dmr2Moneytrasfer.SenderVerifyRegisterActivity.class);
                                     intent.putExtra("MobileNo", MobileNo);
                                     intent.putExtra("SenderName", SenderName);
                                     intent.putExtra("Address", "");
@@ -666,7 +657,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                     startActivity(intent);
                                 } else {
                                     pd.dismiss();
-                                    Toast.makeText(MainActivity.this, object.getString("message"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 pd.dismiss();
@@ -685,31 +676,10 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
         } catch (JSONException e) {
             pd.dismiss();
-            e.printStackTrace();
+            L.m2("Error", "Parser res- " + e.getMessage());
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            new AlertDialog.Builder(context)
-                    .setIcon(R.drawable.warning_message_red)
-                    .setTitle("Closing Application")
-                    .setMessage("Are you sure you want to Exit ?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finishAffinity();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
-        }
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
 
     //================For Resistration===============
     public void activateServiceDialogBox(String msg) {
@@ -737,9 +707,19 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
         d.show();
     }
+
     //--------------------------------------------In-APP-Update-------------------------------------------------------------
-    private void initializeAppUpdateManager(){
-        // Initialize the Update Manager with the Activity and the Update Mode
+    private void initializeAppUpdateManager() {
+
+        cv_app_update = findViewById(R.id.cv_app_update);
+        btnLater = findViewById(R.id.btnLater);
+        btnDownloadInstall = findViewById(R.id.btnDownloadInstall);
+        btnLater.setOnClickListener(v -> Util.hideView(cv_app_update));
+        btnDownloadInstall.setOnClickListener(v -> Util.openPlayStoreApp(context));
+
+        Util.hideView(cv_app_update);
+        new CheckVersion().execute();
+       /* // Initialize the Update Manager with the Activity and the Update Mode
         mUpdateManager = MyAppUpdateManager.Builder(this);
 
         // Callback from UpdateInfoListener
@@ -748,13 +728,13 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
         mUpdateManager.addUpdateInfoListener(new MyAppUpdateManager.UpdateInfoListener() {
             @Override
             public void onReceiveVersionCode(final int code) {
-                L.m2("onReceiveVersionCode",String.valueOf(code));
+                L.m2("onReceiveVersionCode", String.valueOf(code));
                 //txtAvailableVersion.setText(String.valueOf(code));
             }
 
             @Override
             public void onReceiveStalenessDays(final int days) {
-                L.m2("onReceiveStalenessDays",String.valueOf(days));
+                L.m2("onReceiveStalenessDays", String.valueOf(days));
                 //txtStalenessDays.setText(String.valueOf(days));
             }
         });
@@ -763,11 +743,14 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
         // This is only available for Flexible mode
         // Find more from https://developer.android.com/guide/playcore/in-app-updates#monitor_flexible
         mUpdateManager.addFlexibleUpdateDownloadListener((bytesDownloaded, totalBytes) -> {
-            L.m2("addFlexibleUpdateDownload","Downloading: " + bytesDownloaded + " / " + totalBytes);
+            L.m2("addFlexibleUpdateDownload", "Downloading: " + bytesDownloaded + " / " + totalBytes);
         });
         callImmediateUpdate(balanceview);
         //callFlexibleUpdate(balanceview);
+
+        */
     }
+
     public void callFlexibleUpdate(View view) {
         // Start a Flexible Update
         mUpdateManager.mode(MyAppUpdateManager.FLEXIBLE).start();
@@ -777,6 +760,53 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
     public void callImmediateUpdate(View view) {
         // Start a Immediate Update
         mUpdateManager.mode(MyAppUpdateManager.IMMEDIATE).start();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class CheckVersion extends AsyncTask<Void, Void, Void> {
+        String versionName = null;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Document document = Jsoup.connect("https://play.google.com/store/apps/details?id=" + "in.msmartpay.agent" /*+ "&hl=en"*/)
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get();
+                if (document != null) {
+                    Elements elements = document.getElementsContainingOwnText("Current Version");
+                    for (Element ele : elements) {
+                        if (ele.siblingElements() != null) {
+                            Elements sibElemets = ele.siblingElements();
+                            for (Element sibElement : sibElemets) {
+                                versionName = sibElement.text();
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                L.m2("Error", "Async Do- " + e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            try {
+                if (versionName != null)
+                    L.m2("AppVersion", "In Play Store : " + versionName);
+                L.m2("AppVersion", "In App : " + Util.getAppVersionName(getApplicationContext()));
+                if (!versionName.equals(Util.getAppVersionName(getApplicationContext()))) {
+                    Util.showView(cv_app_update);
+                } else {
+                    Util.hideView(cv_app_update);
+                }
+            } catch (Exception e) {
+                L.m2("Error", "Async Post- " + e.getMessage());
+            }
+        }
     }
 //--------------------------------------------GPS Tracker--------------------------------------------------------------
 
@@ -794,22 +824,42 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE && resultCode == Activity.RESULT_OK) {
-            gpsTrackerPresenter.onStart();
+            if (gpsTrackerPresenter != null)
+                gpsTrackerPresenter.onStart();
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        gpsTrackerPresenter.onStart();
+        if (gpsTrackerPresenter != null)
+            gpsTrackerPresenter.onStart();
     }
-
-//--------------------------------------------End GPS Tracker--------------------------------------------------------------
 
     @Override
     public void onDestroy() {
         //Ends................................................
-        gpsTrackerPresenter.onPause();
+        if (gpsTrackerPresenter != null)
+            gpsTrackerPresenter.onPause();
         super.onDestroy();
     }
+//--------------------------------------------End GPS Tracker--------------------------------------------------------------
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            new AlertDialog.Builder(context)
+                    .setIcon(R.drawable.warning_message_red)
+                    .setTitle("Closing Application")
+                    .setMessage("Are you sure you want to Exit ?")
+                    .setPositiveButton("Yes", (dialog, which) -> finishAffinity())
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
 }

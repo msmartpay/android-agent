@@ -1,10 +1,11 @@
 package in.msmartpay.agent.utility;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
@@ -12,6 +13,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.view.View;
@@ -197,30 +199,58 @@ public class Util {
         return true;
     }
 
-    public static void onGPS(Activity context,int requestCode) {
+    public static void onGPS(Activity context, int requestCode) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Enable GPS").setCancelable(false)
                 .setPositiveButton("YES", (dialog, which) -> {
-                    context.startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),requestCode);
+                    context.startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), requestCode);
                     dialog.dismiss();
                 });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-    public static void openSettingsDialog(Activity context,int requestCode) {
+
+    public static void openSettingsDialog(Activity context, int requestCode) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Location Permission")
                 .setMessage("This app needs permission to use this feature. You can grant them in app settings.")
                 .setCancelable(false)
                 .setPositiveButton("GOTO SETTINGS", (dialog, which) -> {
-                    Intent intent =new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    Uri uri = Uri.fromParts("package",context.getPackageName(), null);
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", context.getPackageName(), null);
                     intent.setData(uri);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivityForResult(intent,requestCode);
+                    context.startActivityForResult(intent, requestCode);
                     dialog.dismiss();
                 });
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public static String getAppVersionName(Context context) {
+        String versionStr = "0.0";
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            versionStr = pInfo.versionName;
+        } catch (Exception e) {
+        }
+        return versionStr;
+    }
+
+    public static void openPlayStoreApp(Context context) {
+        Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+        Intent goToMarketIntent = new Intent(Intent.ACTION_VIEW, uri);
+        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+        if (Build.VERSION.SDK_INT >= 21) {
+            goToMarketIntent.addFlags(flags | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        } else {
+            goToMarketIntent.addFlags(flags | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        try {
+            context.startActivity(goToMarketIntent, null);
+        } catch (ActivityNotFoundException e) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName()));
+            context.startActivity(intent, null);
+        }
     }
 }

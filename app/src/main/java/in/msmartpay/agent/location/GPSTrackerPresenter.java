@@ -65,11 +65,12 @@ public class GPSTrackerPresenter {
                 @Override
                 public void onLocationResult(LocationResult locationResult) {
                     super.onLocationResult(locationResult);
-                    for (Location location : locationResult.getLocations()) {
-                        Util.SavePrefData(mActivity, Keys.LATITUDE, location.getLatitude() + "");
-                        Util.SavePrefData(mActivity, Keys.LONGITUDE, location.getLongitude() + "");
-                        mListener.onLocationFound(location);
-                    }
+                    if (locationResult != null && locationResult.getLocations() != null)
+                        for (Location location : locationResult.getLocations()) {
+                            Util.SavePrefData(mActivity, Keys.LATITUDE, location.getLatitude() + "");
+                            Util.SavePrefData(mActivity, Keys.LONGITUDE, location.getLongitude() + "");
+                            mListener.onLocationFound(location);
+                        }
                 }
             };
             locationManager = (LocationManager) mActivity.getSystemService(Context.LOCATION_SERVICE);

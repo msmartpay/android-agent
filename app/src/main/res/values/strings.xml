@@ -11,6 +11,13 @@
     <string name="adult">support@smartkinda.com</string>
     <string name="child"><u>www.smartkinda.com</u></string>
     <string name="infant">Infant\n 2 Years</string>
+    <string name="update">Update</string>
+    <string name="later">Later</string>
+    <string name="install">Install</string>
+    <string name="app_update_available">App Update Available</string>
+    <string name="app_update_downloaded">App Update Downloaded</string>
+    <string name="app_update_available_message">We have fixed some issues and added some cool feature in this update</string>
+
 
     <string-array name="bank_type">
         <item>NEFT</item>
@@ -116,4 +123,5 @@
     <string name="title_activity_aeps">AEPSActivity</string>
     <string name="launch_activity">Launch Activity</string>
     <string name="stop_location_updates_button_text">stop location updates</string>
+    <string name="downloading">Downloading...</string>
 </resources>

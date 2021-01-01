@@ -297,24 +297,16 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
         confirm_operator.setText(listModel.getDisplayName());
         confirm_amount.setText(edit_amount.getText().toString());
 
-        tv_recharge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    prepaidRechargeRequest();
-                    d.dismiss();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        tv_recharge.setOnClickListener(view -> {
+            try {
+                prepaidRechargeRequest();
+                d.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
-        tv_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                d.cancel();
-            }
-        });
+        tv_cancel.setOnClickListener(v -> d.cancel());
 
         d.show();
     }
