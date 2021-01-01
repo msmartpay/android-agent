@@ -89,25 +89,20 @@ public class VerifyAccountFragment extends Fragment {
 
         et_searchbank =  view.findViewById(R.id.et_searchbank);
 
-        et_searchbank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        et_searchbank.setOnClickListener(v -> {
 
-                if (BanknameList != null) {
-                    if (BanknameList.size() != 0) {
-                        Intent intent = new Intent(context, Bank_name_search.class);
-                        intent.putExtra("Bankname", BanknameList);
-                        startActivityForResult(intent, 0);
-                    } else {
-                        Toast.makeText(context, "Bank List Not Available !!!", Toast.LENGTH_SHORT).show();
-                    }
+            if (BanknameList != null) {
+                if (BanknameList.size() != 0) {
+                    Intent intent = new Intent(context, Bank_name_search.class);
+                    intent.putExtra("Bankname", BanknameList);
+                    startActivityForResult(intent, 0);
                 } else {
                     Toast.makeText(context, "Bank List Not Available !!!", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(context, "Bank List Not Available !!!", Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
          /*BankList Request*/
         try {
@@ -116,43 +111,19 @@ public class VerifyAccountFragment extends Fragment {
             e.printStackTrace();
         }
 
+        btnVerifyAcc.setOnClickListener(v -> {
 
-        //Validation start from here.
-        /*spinner_bank_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listModel = new BankListModel();
-                listModel = (BankListModel) spinner_bank_name.getSelectedItem();
-
-                spinnerSelectedBank = parent.getItemAtPosition(position).toString();
-                edit_bank_ifsc.setText(listModel.getBankCode());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-*/
-        btnVerifyAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               /* listModel = new BankListModel();
-                listModel = (BankListModel) spinner_bank_name.getSelectedItem();
-                spinnerSelectedBank = listModel.getBankName();
-*/
-                if (TextUtils.isEmpty(edit_sender_mobile.getText().toString().trim())) {
-                    edit_sender_mobile.requestFocus();
-                    Toast.makeText(context, "Please Enter Beneficiary Name!", Toast.LENGTH_SHORT).show();
-                }/* else if (spinnerSelectedBank == null) {
-                    Toast.makeText(context, "Please Select Bank List!", Toast.LENGTH_LONG).show();
-                } */else if (TextUtils.isEmpty(edit_account_number.getText().toString().trim())) {
-                    edit_account_number.requestFocus();
-                    Toast.makeText(context, "Please Enter Account Number!", Toast.LENGTH_SHORT).show();
-                } else {
-                    getBankDetails();
-                    //VerifyAccountRequest();
-                }
+            if (TextUtils.isEmpty(edit_sender_mobile.getText().toString().trim())) {
+                edit_sender_mobile.requestFocus();
+                Toast.makeText(context, "Please Enter Beneficiary Name!", Toast.LENGTH_SHORT).show();
+            }/* else if (spinnerSelectedBank == null) {
+                Toast.makeText(context, "Please Select Bank List!", Toast.LENGTH_LONG).show();
+            } */else if (TextUtils.isEmpty(edit_account_number.getText().toString().trim())) {
+                edit_account_number.requestFocus();
+                Toast.makeText(context, "Please Enter Account Number!", Toast.LENGTH_SHORT).show();
+            } else {
+                getBankDetails();
+                //VerifyAccountRequest();
             }
         });
 
@@ -238,21 +209,18 @@ public class VerifyAccountFragment extends Fragment {
         if (i == 2) {
             tvConfirmation.setText(msg);
         }
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                d.dismiss();
-                if (i == 1) {
-                    VerifyAccountRequest();
-                }
+        btnSubmit.setOnClickListener(v -> {
+            d.dismiss();
+            if (i == 1) {
+                VerifyAccountRequest();
+            }
 
-                if (i == 2) {
-                    try {
-                        getBankListRequest();
-                        edit_account_number.setText("");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+            if (i == 2) {
+                try {
+                    getBankListRequest();
+                    edit_account_number.setText("");
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });

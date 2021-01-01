@@ -468,6 +468,7 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
     @Override
     public void onLocationFound(Location location) {
         gpsTrackerPresenter.stopLocationUpdates();
+        isLocationGet = true;
         if (isTxnClick) {
             isTxnClick = false;
             startRechargeProcess();

@@ -88,7 +88,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
     private GPSTrackerPresenter gpsTrackerPresenter = null;
 
     // Declare the UpdateManager
-   private MyAppUpdateManager mUpdateManager;
+    private MyAppUpdateManager mUpdateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,10 +256,8 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
 
         btnClosed.setOnClickListener(v -> {
             // TODO Auto-generated method stub
-
             d.cancel();
         });
-
         d.show();
     }
 

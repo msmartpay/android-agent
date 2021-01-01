@@ -315,6 +315,7 @@ public class DataCardRechargeActivity extends BaseActivity implements GPSTracker
     @Override
     public void onLocationFound(Location location) {
         gpsTrackerPresenter.stopLocationUpdates();
+        isLocationGet = true;
         if (isTxnClick) {
             isTxnClick = false;
             startRechargeProcess();

@@ -247,7 +247,7 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
 
     @Override
     public void onLocationFound(Location location) {
-
+        isLocationGet = true;
         gpsTrackerPresenter.stopLocationUpdates();
         if (isTxnClick) {
             isTxnClick = false;
