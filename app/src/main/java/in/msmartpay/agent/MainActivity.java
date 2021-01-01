@@ -62,6 +62,7 @@ import in.msmartpay.agent.rechargeBillPay.PrepaidMobileActivity;
 import in.msmartpay.agent.rechargeBillPay.WaterPayActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.MyAppUpdateManager;
 import in.msmartpay.agent.utility.Mysingleton;
@@ -385,6 +386,9 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
                                 }
                                 if (data.has("response-message")) {
                                     if (data.getString("response-message").equalsIgnoreCase("Invalid request!")) {
+                                        editor.putString(Keys.USER_CREDENTIALS, null);
+                                        editor.clear();
+                                        editor.commit();
                                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);

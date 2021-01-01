@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
 import in.msmartpay.agent.utility.Service;
@@ -185,20 +186,16 @@ public class RegisterComplete extends BaseActivity {
         }
 
         final Button trans_status =  dialog_status.findViewById(R.id.trans_status_button);
-        trans_status.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if(flag==false){
-                    dialog_status.dismiss();
-                }else{
-                    dialog_status.dismiss();
-                    Intent intent = new Intent();
-                    intent.setClass(RegisterComplete.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
+        trans_status.setOnClickListener(v -> {
+            if(flag==false){
+                dialog_status.dismiss();
+            }else{
+                dialog_status.dismiss();
+                Intent intent = new Intent();
+                intent.setClass(RegisterComplete.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
             }
         });
 

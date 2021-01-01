@@ -258,26 +258,25 @@ public class VerifyAccountFragment extends Fragment {
             L.m2("Request--byIfsc", jsonObjectReq.toString());
             L.m2("url", url_add_bene_by_ifsc);
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_add_bene_by_ifsc, jsonObjectReq,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject object) {
+                    object -> {
+                        pd.dismiss();
+                        System.out.println("addBeneByIfsc-->" + object.toString());
+                        try {
                             pd.dismiss();
-                            System.out.println("addBeneByIfsc-->" + object.toString());
-                            try {
+                            if (object.getString("Status").equalsIgnoreCase("0")) {
                                 pd.dismiss();
-                                if (object.getString("Status").equalsIgnoreCase("0")) {
-                                    pd.dismiss();
-                                    L.m2("url data--byIfsc", object.toString());
-
-                                    showConfirmationDialog(2, object.getString("message"));
-                                } else {
-                                    pd.dismiss();
-                                    Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
+                                L.m2("url data--byIfsc", object.toString());
+                                String name = "";
+                                if (object.has("BeneName"))
+                                    name="\n"+"Name :" + object.getString("BeneName");
+                                showConfirmationDialog(2, object.getString("message")+name);
+                            } else {
                                 pd.dismiss();
-                                e.printStackTrace();
+                                Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                             }
+                        } catch (JSONException e) {
+                            pd.dismiss();
+                            e.printStackTrace();
                         }
                     }, new Response.ErrorListener() {
                 @Override

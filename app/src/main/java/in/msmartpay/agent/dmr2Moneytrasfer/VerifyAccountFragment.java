@@ -147,43 +147,37 @@ public class VerifyAccountFragment extends Fragment {
         L.m2("Request--banklist>", jsonObjectReq.toString());
         JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_bank_list,
                 jsonObjectReq,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject object) {
-                        pd.dismiss();
-                        System.out.println("object--banklist>" + object.toString());
-                        try {
-                            if (object.getString("Status").equalsIgnoreCase("0")) {
-                                L.m2("Resp--banklist>", object.toString());
-                                JSONArray stateJsonArray = object.getJSONArray("BankList");
+                object -> {
+                    pd.dismiss();
+                    System.out.println("object--banklist>" + object.toString());
+                    try {
+                        if (object.getString("Status").equalsIgnoreCase("0")) {
+                            L.m2("Resp--banklist>", object.toString());
+                            JSONArray stateJsonArray = object.getJSONArray("BankList");
 
-                                BanknameList = new ArrayList<>();
-                                BankcodeList = new ArrayList<>();
-                                for (int i = 0; i < stateJsonArray.length(); i++) {
+                            BanknameList = new ArrayList<>();
+                            BankcodeList = new ArrayList<>();
+                            for (int i = 0; i < stateJsonArray.length(); i++) {
 
-                                    JSONObject obj = stateJsonArray.getJSONObject(i);
+                                JSONObject obj = stateJsonArray.getJSONObject(i);
 
-                                    BanknameList.add(obj.getString("bname"));
-                                    BankcodeList.add(obj.getString("bcode"));
+                                BanknameList.add(obj.getString("bname"));
+                                BankcodeList.add(obj.getString("bcode"));
 
-                                }
-
-                            } else {
-                                pd.dismiss();
-                                //Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e) {
+
+                        } else {
                             pd.dismiss();
-                            e.printStackTrace();
+                            //Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
                         }
+                    } catch (JSONException e) {
+                        pd.dismiss();
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                pd.dismiss();
-                Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                }, error -> {
+                    pd.dismiss();
+                    Toast.makeText(context, "Server Error : " + error.toString(), Toast.LENGTH_SHORT).show();
+                });
         BaseActivity.getSocketTimeOut(jsonrequest);
         Mysingleton.getInstance(context).addToRequsetque(jsonrequest);
 
@@ -260,8 +254,10 @@ public class VerifyAccountFragment extends Fragment {
                                 if (object.getString("Status").equalsIgnoreCase("0")) {
                                     pd.dismiss();
                                     L.m2("url data--byIfsc", object.toString());
-
-                                    showConfirmationDialog(2, object.getString("message"));
+                                    String name = "";
+                                    if (object.has("BeneName"))
+                                        name="\n"+"Name :" + object.getString("BeneName");
+                                    showConfirmationDialog(2, object.getString("message")+name);
                                 } else {
                                     pd.dismiss();
                                     //Toast.makeText(context, object.getString("message"), Toast.LENGTH_SHORT).show();
