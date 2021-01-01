@@ -1,19 +1,17 @@
 {
-  "version": 1,
+  "version": 2,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
   },
   "applicationId": "in.msmartpay.agent",
-  "variantName": "release",
+  "variantName": "processReleaseResources",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "properties": [],
-      "versionCode": 22,
-      "versionName": "8.0",
-      "enabled": true,
+      "versionCode": 26,
+      "versionName": "8.3",
       "outputFile": "app-release.apk"
     }
   ]

@@ -74,17 +74,14 @@ public class MyAppUpdateManager implements LifecycleObserver {
     private void checkUpdate() {
         // Checks that the platform will allow the specified type of update.
         Log.d(TAG, "Checking for updates");
-        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
-            @Override
-            public void onSuccess(AppUpdateInfo appUpdateInfo) {
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                        && appUpdateInfo.isUpdateTypeAllowed(mode)) {
-                    // Request the update.
-                    Log.d(TAG, "Update available");
-                    startUpdate(appUpdateInfo);
-                } else {
-                    Log.d(TAG, "No Update available");
-                }
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(mode)) {
+                // Request the update.
+                Log.d(TAG, "Update available");
+                startUpdate(appUpdateInfo);
+            } else {
+                Log.d(TAG, "No Update available");
             }
         });
     }

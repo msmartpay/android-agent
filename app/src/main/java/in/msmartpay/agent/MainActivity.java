@@ -142,7 +142,7 @@ public class MainActivity extends DrawerActivity implements GPSTrackerPresenter.
             Intent intent = new Intent(context, HelpSupportActivity.class);
             startActivity(intent);
         });
-        initializeAppUpdateManager();
+        //initializeAppUpdateManager();
     }
 
     public void click(View view) {
