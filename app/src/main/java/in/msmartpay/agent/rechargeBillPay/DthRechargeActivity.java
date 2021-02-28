@@ -39,6 +39,7 @@ import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.rechargeBillPay.plans.PlansActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
 import in.msmartpay.agent.utility.RandomNumber;
@@ -191,14 +192,18 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
     }
 
     private void startRechargeProcess() {
-        if (isLocationGet) {
+       /* if (Util.isPowerSaveMode(context)) {
             proceedConfirmationDialog();
-        } else {
-            if (!isTxnClick) {
-                isTxnClick = true;
-                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+        } else {*/
+            if (isLocationGet) {
+                proceedConfirmationDialog();
+            } else {
+                if (!isTxnClick) {
+                    isTxnClick = true;
+                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                }
             }
-        }
+        //}
     }
 
 
@@ -209,7 +214,6 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
         pd.setIndeterminate(true);
         pd.setCancelable(false);
         pd.show();
-
         try {
             JSONObject jsonObjectReq = new JSONObject()
                     .put("agent_id", agentID)
@@ -334,6 +338,7 @@ public class DthRechargeActivity extends BaseActivity implements GPSTrackerPrese
             jsonObjectReq.put("latitude", Util.LoadPrefData(context, getString(R.string.latitude)));
             jsonObjectReq.put("longitude", Util.LoadPrefData(context, getString(R.string.longitude)));
             jsonObjectReq.put("ip", Util.getIpAddress(context));
+            jsonObjectReq.put("power_mode", Util.LoadPrefBoolean(context, Keys.POWER_MODE));
 
             L.m2("url-dth", dth_url);
             L.m2("Request--dth", jsonObjectReq.toString());

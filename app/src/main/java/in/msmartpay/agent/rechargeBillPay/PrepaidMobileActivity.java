@@ -46,6 +46,7 @@ import in.msmartpay.agent.location.GPSTrackerPresenter;
 import in.msmartpay.agent.rechargeBillPay.plans.PlansActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.HttpURL;
+import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Mysingleton;
 import in.msmartpay.agent.utility.RandomNumber;
@@ -196,14 +197,18 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
     }
 
     private void startRechargeProcess() {
-        if (isLocationGet) {
+        /*if (Util.isPowerSaveMode(context)) {
             proceedConfirmationDialog();
-        } else {
-            if (!isTxnClick) {
-                isTxnClick = true;
-                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+        } else {*/
+            if (isLocationGet) {
+                proceedConfirmationDialog();
+            } else {
+                if (!isTxnClick) {
+                    isTxnClick = true;
+                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                }
             }
-        }
+        //}
     }
 
 
@@ -329,9 +334,11 @@ public class PrepaidMobileActivity extends BaseActivity implements GPSTrackerPre
             jsonObjectReq.put("amount", edit_amount.getText().toString().trim());
             jsonObjectReq.put("request_id", RandomNumber.getTranId_14());
             jsonObjectReq.put("OpCode", opcode);
+            jsonObjectReq.put("power_mode", Util.LoadPrefBoolean(context, Keys.POWER_MODE));
             jsonObjectReq.put("latitude", Util.LoadPrefData(context, getString(R.string.latitude)));
             jsonObjectReq.put("longitude", Util.LoadPrefData(context, getString(R.string.longitude)));
             jsonObjectReq.put("ip", Util.getIpAddress(context));
+
 
             L.m2("url-prepaid", recharge_Url);
             L.m2("Request--prepaid", jsonObjectReq.toString());

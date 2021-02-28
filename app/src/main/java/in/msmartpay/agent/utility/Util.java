@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.view.View;
@@ -254,5 +255,18 @@ public class Util {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName()));
             context.startActivity(intent, null);
         }
+    }
+
+    public static boolean isPowerSaveMode(Context context){
+        boolean isSaveMode = false;
+        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && powerManager.isPowerSaveMode()) {
+            isSaveMode = true;
+            // Animations are disabled in power save mode, so just show a toast instead.
+        }
+        L.m2("PowerSaveMode","isPowerSaveMode "+isSaveMode);
+        SavePrefBoolean(context,Keys.POWER_MODE,isSaveMode);
+        return isSaveMode;
     }
 }

@@ -115,24 +115,32 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
     }
 
     private void startPaymentProcess() {
-        if (isLocationGet) {
-            if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes") && value == 0) {
-                submitPayment("ViewBill");
+        /*if (Util.isPowerSaveMode(context)) {
+            startPayment();
+        } else {*/
+            if (isLocationGet) {
+                startPayment();
             } else {
-                if (value == 1) {
-                    if (dueAmt > 0)
-                        submitPayment("Pay");
-                    else
-                        Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
-
-                } else {
-                    submitPayment("Pay");
+                if (!isTxnClick) {
+                    isTxnClick = true;
+                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
                 }
             }
+        //}
+    }
+
+    private void startPayment() {
+        if (operatorCodeModel.getBillFetch().equalsIgnoreCase("Yes") && value == 0) {
+            submitPayment("ViewBill");
         } else {
-            if (!isTxnClick) {
-                isTxnClick = true;
-                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+            if (value == 1) {
+                if (dueAmt > 0)
+                    submitPayment("Pay");
+                else
+                    Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
+
+            } else {
+                submitPayment("Pay");
             }
         }
     }
@@ -170,6 +178,8 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
             }
             jsonRequest.put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE));
             jsonRequest.put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE));
+            jsonRequest.put("power_mode", Util.LoadPrefBoolean(context, Keys.POWER_MODE));
+            jsonRequest.put("ip", Util.getIpAddress(context));
             L.m2("called url", billpay_Url);
             L.m2("request", jsonRequest.toString());
 

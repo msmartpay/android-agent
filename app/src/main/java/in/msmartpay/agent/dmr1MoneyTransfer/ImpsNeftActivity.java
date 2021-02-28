@@ -149,14 +149,18 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
     }
 
     private void startPaymentProcess() {
-        if (isLocationGet) {
+        /*if (Util.isPowerSaveMode(context)) {
             paymentConfirmDialog();
-        } else {
-            if (!isTxnClick) {
-                isTxnClick = true;
-                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+        } else {*/
+            if (isLocationGet) {
+                paymentConfirmDialog();
+            } else {
+                if (!isTxnClick) {
+                    isTxnClick = true;
+                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                }
             }
-        }
+        //}
     }
 
     //================For Delete Bene===============
@@ -217,7 +221,9 @@ public class ImpsNeftActivity extends BaseActivity implements GPSTrackerPresente
                     .put("REQUEST_ID", String.valueOf((long) Math.floor(Math.random() * 90000000000000L) + 10000000000000L))
                     .put("Remark", Remark == null ? "" : Remark)
                     .put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE))
-                    .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE));
+                    .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE))
+                    .put("ip", Util.getIpAddress(context))
+                    .put("power_mode", Util.LoadPrefBoolean(context, Keys.POWER_MODE));
             Log.e("Request--transaction", jsonObjectReq.toString());
             JsonObjectRequest jsonrequest = new JsonObjectRequest(Request.Method.POST, url_imps_neft_transaction, jsonObjectReq,
                     object -> {

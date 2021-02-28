@@ -125,14 +125,18 @@ public class DataCardRechargeActivity extends BaseActivity implements GPSTracker
     }
 
     private void startRechargeProcess() {
-        if (isLocationGet) {
+        /*if (Util.isPowerSaveMode(context)) {
             proceedConfirmationDialog();
-        } else {
-            if (!isTxnClick) {
-                isTxnClick = true;
-                gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+        } else {*/
+            if (isLocationGet) {
+                proceedConfirmationDialog();
+            } else {
+                if (!isTxnClick) {
+                    isTxnClick = true;
+                    gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
+                }
             }
-        }
+        //}
     }
 
     //===========operatorCodeRequest==============
@@ -255,15 +259,19 @@ public class DataCardRechargeActivity extends BaseActivity implements GPSTracker
         pd.show();
 
         try {
-            JSONObject jsonObjectReq = new JSONObject()
-                    .put("agent_id", agentID)
-                    .put("txn_key", txn_key)
-                    .put("service", "datacard")
-                    .put("operator", listModel.getCode())
-                    .put("mobile_no", edit_customer_id_data.getText().toString().trim())
-                    .put("amount", edit_amount_data.getText().toString().trim())
-                    .put("request_id", RandomNumber.getTranId_14())
-                    .put("operator", listModel.getOpCode());
+            JSONObject jsonObjectReq = new JSONObject();
+            jsonObjectReq.put("agent_id", agentID);
+            jsonObjectReq.put("txn_key", txn_key);
+            jsonObjectReq.put("service", "datacard");
+            jsonObjectReq.put("operator", listModel.getCode());
+            jsonObjectReq.put("mobile_no", edit_customer_id_data.getText().toString().trim());
+            jsonObjectReq.put("amount", edit_amount_data.getText().toString().trim());
+            jsonObjectReq.put("request_id", RandomNumber.getTranId_14());
+            jsonObjectReq.put("operator", listModel.getOpCode());
+            jsonObjectReq.put("power_mode", Util.LoadPrefBoolean(context, Keys.POWER_MODE));
+            jsonObjectReq.put("latitude", Util.LoadPrefData(context, getString(R.string.latitude)));
+            jsonObjectReq.put("longitude", Util.LoadPrefData(context, getString(R.string.longitude)));
+            jsonObjectReq.put("ip", Util.getIpAddress(context));
 
             L.m2("url-data", datacard_Url);
             L.m2("Request--data", jsonObjectReq.toString());

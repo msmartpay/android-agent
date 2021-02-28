@@ -113,14 +113,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     if (checkBox.isChecked()) {
                         new SaveCredentialsTask().execute();
                     }
-                    if(isLocationGet){
+                    /*if (Util.isPowerSaveMode(context)){
                         loginRequest();
-                    }else {
+                    }else {*/
+                    if (isLocationGet) {
+                        loginRequest();
+                    } else {
                         if (!isTxnClick) {
                             isTxnClick = true;
                             gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);
                         }
                     }
+                    //}
                 }
             } else if (view.getId() == R.id.sign_up) {
                 signUpVerificationDialog();
@@ -243,6 +247,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     .put("latitude", Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE))
                     .put("longitude", Util.LoadPrefData(getApplicationContext(), Keys.LONGITUDE))
                     .put("ip", Util.getIpAddress(context))
+                    .put("power_mode", Util.LoadPrefBoolean(context, Keys.POWER_MODE))
                     .put("version", "7.0");
             L.m2("url-login", login_url);
             L.m2("Request--login", jsonObjectReq.toString());
