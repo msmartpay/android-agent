@@ -9,7 +9,8 @@ public interface HttpURL {
     int MY_SOCKET_TIMEOUT_MS             = 60 * 1000;
     String DSID                          = "DSUP33273001";
     String CLIENT = "MSMARTPAY";
-    String BASE_URL                      = "https://msmartpay.in/MRA1.0/resources/";
+    //
+    String BASE_URL                      = "https://android.msmartpay.in/MRA1.0/resources/";
     String FORGET_PASSWORD               = BASE_URL + "SKLogin/ForgetPass";
     String LOGIN_URL                     = BASE_URL + "SKLogin/Login";
     String CHANGE_PASSWORD               = BASE_URL + "SKLogin/ChangePass";

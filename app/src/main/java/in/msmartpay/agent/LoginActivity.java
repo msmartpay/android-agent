@@ -117,8 +117,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         loginRequest();
                     }else {*/
                     if (isLocationGet) {
+                        Log.e("Location","Y Location");
                         loginRequest();
                     } else {
+                        Log.e("Location","N Location");
                         if (!isTxnClick) {
                             isTxnClick = true;
                             gpsTrackerPresenter.checkGpsOnOrNot(GPSTrackerPresenter.GPS_IS_ON__OR_OFF_CODE);

@@ -126,7 +126,6 @@ public class GPSTrackerPresenter {
         if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (isRequestPermissions) {
-                // mListener.checkRequiredLocationPermission();
                 checkPermissions();
             }
             return false;
