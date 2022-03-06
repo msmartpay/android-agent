@@ -51,7 +51,7 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
     private String requesdID;
     private Button btn_proceed;
     private int value = 0;
-    private int dueAmt = 0;
+    private double dueAmt = 0;
     private String dueAmt_Req;
 
     private GPSTrackerPresenter gpsTrackerPresenter = null;
@@ -200,7 +200,7 @@ public class BillPayActivity extends BaseActivity implements GPSTrackerPresenter
                                 tv_dueAmount.setText(data.getString("dueamount"));
                                 amtt.setText(data.getString("dueamount"));
                                 tv_amunt_hint.setText("Due Amount");
-                                dueAmt = Integer.parseInt(data.getString("dueamount"));
+                                dueAmt = data.getDouble("dueamount");
                                 dueAmt_Req = data.getString("dueamount");
                                 btn_proceed.setText("Proceed to pay");
                                 ll_customer.setVisibility(View.VISIBLE);
