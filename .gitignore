@@ -9,3 +9,5 @@
 .externalNativeBuild
 /app/build
 *.apk
+/.idea
+
