@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@color/whitecolor">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/cardview_shadow_end_color">
+        <TextView
+            android:id="@+id/tv_id_txt"
+            style="@style/tv_kyc_item"
+            android:text="Audit Id : "
+            android:textColor="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tv_id"
+            style="@style/tv_kyc_item"
+            android:layout_toEndOf="@+id/tv_id_txt"
+            android:text="xxxx"/>
+        <TextView
+            android:id="@+id/tv_view"
+            style="@style/Browse"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/_16ssp"
+            android:text="View"/>
+        <TextView
+            android:id="@+id/tv_date_txt"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_id_txt"
+            android:text="Date : "
+            android:textColor="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tv_date"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_id_txt"
+            android:layout_toEndOf="@+id/tv_id_txt"
+            android:text="xx:xx:xxxx"/>
+        <TextView
+            android:id="@+id/tv_approve_date_txt"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_date_txt"
+            android:text="Approved Date : "
+            android:textColor="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tv_approve_date"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_date_txt"
+            android:layout_toEndOf="@+id/tv_approve_date_txt"
+            android:text="xx:xx:xxxx"/>
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_date_txt"
+            android:layout_alignParentEnd="true"
+            android:text="status"/>
+        <TextView
+            android:id="@+id/tv_remark_txt"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_approve_date"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/colorPrimary"
+            android:text="Remark: "/>
+
+        <TextView
+            android:id="@+id/tv_remark"
+            style="@style/tv_kyc_item"
+            android:layout_below="@+id/tv_approve_date"
+            android:layout_toEndOf="@+id/tv_remark_txt"
+            android:text=""/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/offWhite"
+    android:layout_marginBottom="5.0dip">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/border_square_primary_color"
+        android:padding="3.0dip"
+        android:weightSum="2.0">
+
+        <LinearLayout
+            android:id="@+id/ll_cashout_bank"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.8"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="@dimen/_16sdp"
+                android:typeface="sans"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="Bank Name"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:padding="5dp"
+                android:typeface="sans"
+                android:text="Account Holder"/>
+
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:padding="5dp"
+                android:typeface="sans"
+                android:text="Account Number"/>
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:padding="5dp"
+                android:textAllCaps="true"
+                android:typeface="sans"
+                android:text="IFSC"/>
+
+            <TextView
+                android:id="@+id/tv_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:padding="5dp"
+                android:typeface="sans"
+                android:textColor="@color/colorPrimary"
+                android:text="Status"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_select_bank"
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/blue"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_navigate_next_white_24dp"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

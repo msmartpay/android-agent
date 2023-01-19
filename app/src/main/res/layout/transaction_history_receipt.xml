@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_transaction_history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_print_receipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:weightSum="2.0">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1.2">
+                        <TextView
+                            android:id="@+id/label1"
+                            style="@style/tv_history"
+                            android:layout_width="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:text="Billed To"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/label1"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="Name"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/name"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="abc@xyz.com"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                        android:id="@+id/mobileno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/email"
+                        android:layout_marginTop="5.0dip"
+                        android:hint="xxxxxx9857"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.8"
+                        android:src="@drawable/srk_money_flate" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_marginBottom="10.0dip"
+                    android:background="@drawable/custom_menu_header" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/tran_timing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/label2"
+                        style="@style/tv_history"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="5.0dip"
+                        android:text="Invoice Detail"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16.0sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/txn_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/transaction_id_text"
+                            style="@style/tv_history"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Transaction ID" />
+
+                        <TextView
+                            android:id="@+id/transaction_id_value"
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="XXXXXXXXXX" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/operator_txn_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/operator_id_text"
+                            style="@style/tv_history"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Operator Id" />
+
+                        <TextView
+                            android:id="@+id/operator_id_value"
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="XXXXXX" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/txn_detail_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10.0dip">
+
+                        <TextView
+                            android:id="@+id/date_text"
+                            style="@style/tv_history"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Date" />
+
+                        <TextView
+                            android:id="@+id/date_value"
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="N/A" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/product_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/ser_textview"
+                            style="@style/tv_history"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Product Detail"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Txn Amount"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/product_detail_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10.0dip">
+
+                        <TextView
+                            android:id="@+id/ser_value"
+                            style="@style/tv_history"
+                            android:layout_width="170.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1.0"
+                            android:text="Mobile (xxxxxx9857) Vodafone" />
+
+                        <TextView
+                            android:id="@+id/amt_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="right"
+                            android:hint="00.00"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/Bene_Name_detail_value1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/Bene_name"
+                            style="@style/tv_history"
+                            android:layout_width="170dp"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1"
+                            android:textStyle="normal"
+                            android:text="Bene Name" />
+
+                        <TextView
+                            android:id="@+id/id_bene_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="00.00"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/Bene_ac_detail_value2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/Bene_ac"
+                            style="@style/tv_history"
+                            android:layout_width="170dp"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1"
+                            android:textStyle="normal"
+                            android:text="Bene Account" />
+
+                        <TextView
+                            android:id="@+id/id_bene_ac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="00.00"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/Bank_Name_detail_value3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/Bank_Name"
+                            style="@style/tv_history"
+                            android:layout_width="170dp"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1"
+                            android:textStyle="normal"
+                            android:text="Bank Name" />
+
+                        <TextView
+                            android:id="@+id/id_bank_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="00.00"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/Bank_IFSC_detail_value4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/Bank_IFSC"
+                            style="@style/tv_history"
+                            android:layout_width="170dp"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1"
+                            android:textStyle="normal"
+                            android:text="Bank IFSC" />
+
+                        <TextView
+                            android:id="@+id/id_bank_ifsc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="00.00"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <RelativeLayout
+                        android:id="@+id/tran_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tran_textview"
+                            style="@style/tv_history"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Transaction Detail"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Amount"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/tran_detail_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5.0dip">
+
+                        <TextView
+                            android:id="@+id/tran_amt_text"
+                            style="@style/tv_history"
+                            android:layout_width="170.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1.0"
+                            android:text="Transaction Amount" />
+
+                        <TextView
+                            android:id="@+id/tran_amt_value"
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1.0"
+                            android:gravity="right"
+                            android:hint="00.00" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/comm_detail_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/comm_amt_text"
+                            style="@style/tv_history"
+                            android:layout_width="170.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1.0"
+                            android:text="Service Charge" />
+
+                        <TextView
+                            android:id="@+id/comm_amt_value"
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1.0"
+                            android:gravity="right"
+                            android:hint="0.30" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1.0dip"
+                        android:layout_marginTop="10.0dip"
+                        android:layout_marginBottom="10.0dip"
+                        android:background="@drawable/custom_menu_header" />
+
+                    <RelativeLayout
+                        android:id="@+id/gross_detail_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="30.0dip">
+
+                        <TextView
+                            android:id="@+id/tot_amt_text"
+                            style="@style/tv_history"
+                            android:layout_width="170.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:text="Total Amount Paid"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tot_amt_value"
+                            style="@style/tv_history"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:hint="0.00"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1.0dip"
+                        android:layout_marginTop="10.0dip"
+                        android:layout_marginBottom="10.0dip"
+                        android:background="@drawable/custom_menu_header" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/comp_detail_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10.0dip"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/com_text"
+                            style="@style/tv_history"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5.0dip"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:id="@+id/tv_site"
+                            style="@style/tv_history"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@string/website"
+                            android:visibility="gone"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:orientation="horizontal"
+                android:gravity="center"                    >
+
+                <Button
+                    android:id="@+id/btn_share_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_border"
+                    android:text="SHARE"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"/>
+
+                <Button
+                    android:id="@+id/btn_print_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_border"
+                    android:text="PRINT"
+                    android:layout_marginStart="10.0dip"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tiket"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button1"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:text="Complaint"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/whitecolor"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+</RelativeLayout>

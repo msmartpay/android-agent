@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">SSZ AEPS SDK</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="tab_cashout">Aadhaar ATM</string>
+    <string name="tab_device">Manage Device</string>
+    <string name="tab_biometric_kyc">Biometric KYC</string>
+
+    <string name="enter_aadhaar_number">Please Enter Aadhaar Number</string>
+    <string name="enter_adhar">Please enter aadhaar number.</string>
+    <string name="enter_amount">Please Enter Amount</string>
+    <string name="enter_customer_mobile">Please Enter Customer Mobile Number.</string>
+    <string name="enter_less_amount">Maximum transaction amount allowed is </string>
+    <string name="enter_more_amount">Minimum transaction amount should be </string>
+    <string name="enter_valid_adhar">Please Enter Valid Aadhaar Number</string>
+    <string name="enter_valid_amount">Please Enter Valid Amount</string>
+    <string name="error_aeps_agent_tnc">Please Select Agent Terms</string>
+    <string name="error_aeps_customer_tnc">Please Select Customer Terms</string>
+    <string name="error_api_details">Api Details Not Found!</string>
+    <string name="twenter_adhar">Please Enter 12 Digit Aadhaar Number</string>
+    <string name="select_bank_option">Please Select Bank</string>
+    <string name="select_bank_text">Select Bank</string>
+    <string name="select_device_provider">Please Select Device Provider</string>
+    <string name="select_provider_bank">Select The Bank Before you proceed further</string>
+    <string name="share">Share</string>
+    <string name="str_send">Send</string>
+    <string name="submit">Submit</string>
+    <string name="ten_digit_mobile">Please Enter 10 Digit Customer Mobile Number</string>
+    <string name="payment_sdus_bank">Please Select Bank</string>
+    <string name="payment_sdus_device">Select Device Type</string>
+
+    <string name="note_1">Only E - aadhar will be accepted.</string>
+    <string-array name="notes">
+        <item>Only E - aadhar will be accepted.</item>
+        <item>Mobile Number in Aadhaar &amp; Portal must be the same.</item>
+        <item>It must have a download date of not older than 3 days.</item>
+        <item>The aadhar\'s first 8 digits must be masked.(i.e only the last 4 digits should be visible for KYC.</item>
+        <item>Download MASKED E-Aadhaar from https://eaadhaar.uidai.gov.in (not older than 3 days).</item>
+        <item>Take a print and self-attest the copy of E-Aadhaar.</item>
+        <item>Scan and upload the self-attested copy here (only JPG / JPEG / PNG / PDF formats)</item>
+    </string-array>
+
+    <string-array name="ssz_model_type">
+        <item>Morpho</item>
+        <item>Mantra</item>
+        <item>Startek</item>
+        <item>TMF20</item>
+    </string-array>
+</resources>

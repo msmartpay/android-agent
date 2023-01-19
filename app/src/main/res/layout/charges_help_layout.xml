@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6.0dip"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginRight="6.0dip"
+        android:background="@drawable/round_layout_strok"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="20.0dip">
+
+        <ScrollView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20.0dip">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5.0dip"
+                    android:text="1) Minimum Amount Rs. 100\n2) Use IMPS for amount below Rs. 2,00,000\n3) Charges"
+                    android:textColor="@color/lightDarkGreen"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5.0dip"
+                    android:text="a) Rs. 5 for (100 - 25,000)\nb) Rs. 10 for (25001 - 2,00,000)"
+                    android:textColor="@color/green"
+                    android:textSize="15.0sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5.0dip"
+                    android:text="Examples:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16.0sp"
+                    android:textStyle="bold" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="5.0dip"
+                    android:text="1. If you have Rs. 300 in your wallet, you can settle  Maximum Rs. 295\n\n2. If you have Rs. 37,500 in your wallet, you can settle Rs. 37,490."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/close_cashout_charge_dialog"
+        android:layout_width="40.0dip"
+        android:layout_height="40.0dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bt_dialog_close"
+        android:text="×"
+        android:textColor="@color/whitecolor"
+        android:visibility="visible" />
+</RelativeLayout>

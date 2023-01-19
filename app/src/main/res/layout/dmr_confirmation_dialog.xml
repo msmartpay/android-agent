@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="16.0dip"
+        android:layout_marginRight="6.0dip"
+        android:background="@drawable/round_layout_strok"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip"
+            android:text="Alert!"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18.0sp"
+            android:typeface="sans" />
+
+        <ScrollView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20.0dip">
+
+                <TextView
+                    android:id="@+id/tv_confirmation_dialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10.0dip"
+                    android:text=""
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_otp1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip">
+
+                    <EditText
+                        android:id="@+id/edit_otp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:hint="Enter OTP"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="10.0dip"
+                        android:textColor="@color/btncolor"
+                        android:visibility="gone" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:weightSum="2.0">
+
+                    <Button
+                        android:id="@+id/btn_push_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:layout_marginLeft="5.0dip"
+                        android:background="@drawable/rounded_btn_login"
+                        android:text="CONFIRM"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="14.0sp"
+                        android:typeface="sans" />
+
+                    <Button
+                        android:id="@+id/btn_resend_otp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40.0dip"
+                        android:layout_marginLeft="5.0dip"
+                        android:layout_marginTop="20.0dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/round_border"
+                        android:text="Re-send OTP"
+                        android:textColor="@android:color/white"
+                        android:textStyle="normal"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/close_push_button"
+        android:layout_width="40.0dip"
+        android:layout_height="40.0dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/bt_dialog_close"
+        android:text="×"
+        android:textColor="@color/whitecolor"
+        android:visibility="visible" />
+</RelativeLayout>

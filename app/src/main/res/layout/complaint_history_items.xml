@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorLightPrimary"
+    android:paddingBottom="5.0dip">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/whitecolor"
+        android:weightSum="2.0">
+
+        <LinearLayout
+            android:id="@+id/ll_txn_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.15">
+
+            <in.msmartpay.agent.utility.VerticalTextView
+                android:id="@+id/tx_c_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:rotation="180"
+                android:text="Success"
+                android:inputType="textCapCharacters"
+                android:textColor="@color/whitecolor"
+                android:background="@color/colorPrimary"
+                android:textSize="18dp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.85"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Ticket Id: "
+                    android:layout_weight="0.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_complaint_id"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="XXXXXXXXXXXXXXXXX"
+                    android:layout_weight="1.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="TID Id: "
+                    android:layout_weight="0.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_txn_id"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="XXXXXXXXXXXXXXXXX"
+                    android:layout_weight="1.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:id="@+id/tv_c_service"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="Service"
+                    android:layout_weight="1.0"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="16.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_c_amt"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="1000"
+                    android:layout_weight="1.0"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="16.0sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:id="@+id/tx_c_openDate"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Open Date"
+                    android:layout_weight="1.0"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+                <TextView
+                    android:id="@+id/tv_c_txnDate"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Txn Date"
+                    android:layout_weight="1.0"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Query:"
+                    android:layout_weight="0.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_c_query"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXX"
+                    android:layout_weight="1.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Solution:"
+                    android:layout_weight="0.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_c_solution"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXX"
+                    android:layout_weight="1.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

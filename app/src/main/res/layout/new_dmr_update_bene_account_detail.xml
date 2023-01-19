@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:padding="2.0dip">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/linear"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10.0dip"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/edit_ifsc_code"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_marginRight="10.0dip"
+                            android:hint="Enter IFSC Code"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/btncolor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip">
+
+                        <EditText
+                            android:id="@+id/edit_account_no"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_marginRight="10.0dip"
+                            android:hint="Enter Account Number"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/btncolor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip">
+
+                        <EditText
+                            android:id="@+id/edit_confirm_account_no"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_marginRight="10.0dip"
+                            android:hint="Enter Confirm Account Number"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/btncolor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip">
+
+                        <EditText
+                            android:id="@+id/edit_beneficiary_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_marginRight="10.0dip"
+                            android:hint="Enter Beneficiary Name"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/btncolor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip">
+
+                        <EditText
+                            android:id="@+id/edit_beneficiary_mobile"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_marginRight="10.0dip"
+                            android:hint="Enter Beneficiary Mobile No."
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/btncolor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_beneficiary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Add Beneficiary"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18.0sp"
+        android:typeface="sans" />
+</LinearLayout>

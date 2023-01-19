@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sszAePSColorPrimary">#4F5EA3</color>
+    <color name="sszAePSColorPrimaryDark">#364987</color>
+    <color name="sszAePSColorAccent">@color/sszAePSColorPrimary</color>
+    <color name="sszAePS_colorWhite">#ffffff</color>
+    <color name="sszAePS_colorOffWhite">#FBF8F8</color>
+    <color name="sszAePS_br_color">@color/sszAePS_colorWhite</color>
+
+    <color name="sszAePS_cactive_tab">#999999</color>
+    <color name="sszAePS_inactive_tab">#CCCCCC</color>
+    <color name="sszAePS_hint_tr">#D5F3F3F3</color>
+    <color name="sszAePS_textColor">#848383</color>
+    <color name="sszAePS_editHintColor">#bbb</color>
+    <color name="sszAePS_blackcolor">#000000</color>
+    <color name="sszAePS_textblack">#f000</color>
+    <color name="sszAePS_transparent">#00000000</color>
+    <color name="sszAePS_transparent_2">#3d000000</color>
+    <color name="sszAePS_red">#FA5F5F</color>
+    <color name="sszAePS_green">#4CAF50</color>
+
+    <color name="sszAePS_sp_itemListSelectedColor">#37b748</color>
+    <color name="sszAePS_sp_underlineColor">#999999</color>
+    <color name="sszAePS_sp_itemListHintBackgroundColor">#FFFFFF</color>
+    <color name="sszAePS_sp_itemListHintColor">@color/sszAePS_editHintColor</color>
+    <color name="sszAePS_sp_itemListColor">@color/sszAePSColorPrimary</color>
+    <color name="sszAePS_sp_itemColor">@color/sszAePSColorPrimary</color>
+    <color name="sszAePS_sp_floatingLabelColor">#1976D2</color>
+    <color name="sszAePS_sp_hintColor">@color/sszAePS_editHintColor</color>
+</resources>

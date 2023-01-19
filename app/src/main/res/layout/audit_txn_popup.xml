@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_30sdp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_print"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_2sdp">
+
+            <TextView
+                style="@style/tv_done"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Request Transactions"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_txn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_btn_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_print"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_close"
+                style="@style/Browse"
+                android:textSize="@dimen/_10sdp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_margin="@dimen/_3sdp"
+                android:text="Close" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_print"
+                style="@style/Browse"
+                android:textSize="@dimen/_10sdp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_below="@+id/btn_print"
+                android:layout_margin="@dimen/_3sdp"
+                android:text="Print" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_below="@+id/ll_btn_print"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/default_photo" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_img"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_select_file"
+                style="@style/btn_main2"
+                android:textSize="@dimen/_10sdp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="Select File"
+                android:layout_marginEnd="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit"
+                style="@style/btn_main2"
+                android:textSize="@dimen/_10sdp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="Submit Audit"
+                android:layout_marginStart="10dp"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
+

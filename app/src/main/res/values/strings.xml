@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">MSmartPay</string>
+    <string name="rupee_symbol">₹</string>
+    <string name="report"> If you have encountered any issue or have any feedback, please click on Call Button.</string>
+    <string name="support">support@smartkinda.in</string>
+    <string name="app_name_sapce">Smart Kinda</string>
+    <string name="email_id">support@smartkinda.com</string>
+    <string name="website"><u>www.msmartpay.in</u></string>
+    <string name="url">http://msmartpay.in</string>
+    <string name="app_name_year"> © 2018 Instaload</string>
+    <string name="powerd_by">Powered By\nInstaload</string>
+    <string name="adult">support@smartkinda.com</string>
+    <string name="child"><u>www.smartkinda.com</u></string>
+    <string name="infant">Infant\n 2 Years</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="need_all_permission">You need to allow all Permissions</string>
+    <string name="all_permission_granted">All permissions granted!</string>
+    <string name="flight_prompt">Choose a Class</string>
+    <string name="facebook_id">#</string>
+    <string name="recharged"><u>Recharges</u></string>
+    <string name="wallet"><u>My Wallet</u></string>
+    <string name="billpayment"><u>Bill Payment</u></string>
+    <string name="travelling">Travel</string>
+    <!-- <string name="finance">Finance</string>-->
+    <string name="bus">Bus</string>
+    <string name="airplane">Flight</string>
+    <string name="hotel">Hotel</string>
+    <string name="settlement">Fund Settlement</string>
+    <string name="finance"><u>Banking Services</u></string>
+    <string name="Aeps">Aeps</string>
+    <string name="pay_operator_data">OpModelDataJson</string>
+    <string name="pay_operator_model">OpModelJson</string>
+    <string name="operator">Select Operator</string>
+
+    <string name="merch_id">MERCHANT ID</string>
+    <string name="merch_pin">PASSWORD</string>
+    <string name="mobile_number">MOBILE NUMBER</string>
+    <string name="launch">LAUNCH MATM</string>
+    <string name="kyc_tc">Terms and Conditions</string>
+    <string name="user_credential">user_Credential</string>
+    <string name="view_plan"><u>View Plan</u></string>
+    <string name="offers"><u>Offer</u></string>
+    <string name="view_customer_details"><u>View Customer Details</u></string>
+    <string-array name="flight_class">
+        <item>ECONOMY</item>
+        <item>BUSINESS</item>
+        <item>FIRSTCLASS</item>
+        <item>PREMIUMECONOMY</item>
+    </string-array>
+    <string-array name="plan_circle">
+        <item>Andhra Pradesh Telangana</item>
+        <item>Assam</item>
+        <item>Bihar  Jharkhand</item>
+        <item>Chennai </item>
+        <item>Chhattisgarh</item>
+        <item>Delhi NCR</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu Kashmir</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Kolkata</item>
+        <item>Madhya Pradesh Chhattisgarh</item>
+        <item>Maharashtra Goa</item>
+        <item>Mumbai</item>
+        <item>North East</item>
+        <item>Orissa</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Tamil Nadu</item>
+        <item>UP East</item>
+        <item>UP West</item>
+        <item>West Bengal</item>
+    </string-array>
+    <string-array name="states">
+        <item>--- Select State ---</item>
+        <item>Andaman And Nicobar</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadar And Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim </item>
+        <item>Tamil Nadu</item>
+        <item>Tripura</item>
+        <item>Uttarakhand</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string-array name="plan_type">
+        <item>Mobile</item>
+        <item>Dth</item>
+    </string-array>
+
+    <string-array name="payment_type">
+        <item>NEFT</item>
+        <item>IMPS</item>
+        <item>RTGS</item>
+        <item>CASH</item>
+    </string-array>
+
+    <string-array name="outlet_type">
+        <item>Non-Registered Entity</item>
+        <item>Proprietorship</item>
+        <item>Partnership</item>
+        <item>Private Limited</item>
+        <item>Limited</item>
+        <item>Society</item>
+        <item>NGO</item>
+        <item>Trust</item>
+    </string-array>
+    <string-array name="model_type">
+        <item>Morpho</item>
+        <item>Mantra</item>
+        <item>Startek</item>
+        <item>TMF20</item>
+    </string-array>
+    <string-array name="wallet_type">
+        <item>B2B WALLET</item>
+        <!--<item>RDS WALLET</item>-->
+    </string-array>
+    <string-array name="network_type">
+        <item>VISA</item>
+        <item>MASTERCARD</item>
+    </string-array>
+
+    <string name="title_activity_aeps">AEPSActivity</string>
+    <string name="title_activity_eko_pay">EkoPayActivity</string>
+    <string name="no_internet">No Internet Connection !!!</string>
+    <string name="fetching_details">Fetching Details</string>
+    <string name="title_activity_credit_card">CreditCardActivity</string>
+    <string name="tab_text_1">Bill Payment</string>
+    <string name="tab_text_2">Refund</string>
+    <string name="credit_card">CreditCardBillPayment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_paytm">PaytmActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="fastag">FasTag</string>
+    <string name="technical_error">Technical failure</string>
+    <string name="fundsettlement_note">Please verify the settlement bank account prior to add</string>
+    <string name="note">-::NOTE::-</string>
+    <string name="helpsupport">Help &amp; Support</string>
+    <string name="terms_conditions">Terms and Conditions</string>
+    <string name="select_operator">Select Operator</string>
+    <string name="proceed">Proceed</string>
+    <string name="fetch_bill">Fetch Bill</string>
+</resources>

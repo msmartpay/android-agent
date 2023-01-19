@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/activity_sign_up"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="0.0dip"
+                    android:layout_height="45.0dip"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginRight="5.0dip"
+                    android:layout_weight="0.6"
+                    android:gravity="center"
+                    android:padding="10.0dip"
+                    android:text="Date Time"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="16.0dip"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="45.0dip"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginRight="5.0dip"
+                    android:layout_weight="0.8"
+                    android:paddingLeft="10.0dip"
+                    android:text="Account No"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="16.0dip"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="45.0dip"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginRight="5.0dip"
+                    android:layout_weight="0.6"
+                    android:text="Req. Amt"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="16.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <SearchView
+                android:id="@+id/inputSearch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search .."
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:background="@color/colorPrimary" />
+
+            <ListView
+                android:id="@+id/listview_sender"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

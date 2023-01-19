@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_matm_print_receipt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:background="@mipmap/ic_launcher" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_bene_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_matm_txn_amount"
+                            style="@style/LeftTextLabelNormal"
+                            android:layout_width="wrap_content"
+                            android:text="Transaction Amount"
+                            android:textSize="16.0dip"
+                            android:padding="5.0dip"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_matm_txn_amount_val"
+                            android:layout_width="wrap_content"
+                            style="@style/LeftTextLabelNormal"
+                            android:text="Amount"
+                            android:textSize="20.0dip"
+                            android:padding="5.0dip"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tv_matm_txn_date_time"
+                            android:layout_width="wrap_content"
+                            style="@style/TextLabelNormal"
+                            android:text="DateTime"
+                            android:textSize="16.0dip"
+                            android:padding="5.0dip"/>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0.0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/im_matm_txn_status"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_matm_txn_status"
+                            android:layout_width="wrap_content"
+                            style="@style/TextLabelNormal"
+                            android:layout_marginTop="10dp"
+                            android:text="Status"
+                            android:textSize="16.0dip"
+                            android:layout_gravity="center"
+                            android:padding="5.0dip"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/hintcolor"
+                    android:layout_marginBottom="5dp"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5.0dip"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_matm_txn_type"
+                        style="@style/tv_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="16.0sp"
+                        android:textStyle="bold"
+                        android:text="Message"
+                        android:textColor="@color/green"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="TID"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_txn_tid"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Bank RRN"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_txn_bank_rrn"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Mobile"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_txn_mobile"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Bank Name"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_txn_bank_name"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Card Type"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_card_type"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Card Number"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_card_no"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Terminal Id"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_terminal_id"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_account_bal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Account Balance"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_account_balance"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.7"
+                        android:text="Message"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.1"
+                        android:text=":"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_matm_txn_message"
+                        style="@style/tv_details"
+                        android:layout_weight="1.2"
+                        android:textSize="14.0sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30.0dip"
+                android:orientation="horizontal"
+                android:gravity="center"                    >
+
+                <Button
+                    android:id="@+id/btn_share_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_border"
+                    android:text="SHARE"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"/>
+
+                <Button
+                    android:id="@+id/btn_print_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_border"
+                    android:text="PRINT"
+                    android:layout_marginStart="10.0dip"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_matm_txn_done"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button1"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:text="Close"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/whitecolor"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+
+</RelativeLayout>

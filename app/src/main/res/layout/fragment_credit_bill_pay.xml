@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="30.0dip"
+    android:fillViewport="true">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5.0dip"
+        app:cardElevation="2.0dip"
+        app:cardUseCompatPadding="true">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    tools:context=".rechargeBillPay.CreditBillPayFragment">
+
+    <TextView
+        android:id="@+id/tv_otpMsg"
+        style="@style/tv_details"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:text="Otp Messahe"
+        android:textColor="@color/green" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_credit_bill_mobile"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv_otpMsg"
+        android:hint="Enter Customer Mobile Number"
+        style="@style/til_main_ot">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_credit_bill_mobile"
+            style="@style/til_main_ot"
+            android:ems="10"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_credit_bill_name"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/til_credit_bill_mobile"
+        android:hint="Enter Card Holder Name"
+        style="@style/til_main_ot">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_credit_bill_name"
+            style="@style/til_main_ot"
+            android:ems="10"
+             />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_network"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/til_credit_bill_name"
+        android:hint="Select Network"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        style="@style/til_main_ot_sp">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/et_network"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            style="@style/mactp_main_ot_sp"
+            android:ems="10"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_credit_bill_card_number"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/til_network"
+        style="@style/til_main_ot"
+        android:hint="Enter Card Number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_credit_bill_card_number"
+            style="@style/til_main_ot"
+            android:ems="10"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_credit_bill_card_amount"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/til_credit_bill_card_number"
+        style="@style/til_main_ot"
+        android:hint="Enter Amount (100-49000)">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_credit_bill_card_amount"
+            android:layout_marginTop="10dp"
+            style="@style/til_main_ot"
+            android:ems="10"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_credit_bill_card_remark"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/til_credit_bill_card_amount"
+        style="@style/til_main_ot">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_credit_bill_card_remark"
+            style="@style/til_main_ot"
+            android:ems="10"
+            android:hint="Enter Remark"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_credit_bill_card_otp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/til_credit_bill_card_remark"
+        android:visibility="gone"
+        style="@style/til_main">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_credit_bill_card_otp"
+            style="@style/til_main"
+            android:ems="10"
+            android:background="#fff"
+            android:hint="Enter OTP"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/id_balance_request_otp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/til_credit_bill_card_otp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/round_border"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:text="Get OTP"
+        android:textColor="@color/whitecolor"
+        android:textSize="12.0dip" />
+    <Button
+        android:id="@+id/id_balance_request_submit"
+        android:layout_width="match_parent"
+        android:layout_height="40.0dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_border"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:text="Confirm Payment"
+        android:textColor="@color/whitecolor"
+        android:textSize="14.0dip" />
+
+</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

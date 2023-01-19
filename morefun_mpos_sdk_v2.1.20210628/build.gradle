@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('morefun_mpos_sdk_v2.1.20210628.jar'))

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16.0dip"
+    android:paddingRight="16.0dip"
+    android:theme="@style/addView">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_cast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adult"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14.0sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_edit"
+            style="@style/btn_main"
+            android:layout_width="wrap_content"
+            android:layout_height="25.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="false"
+            android:text="Edit"
+            android:textSize="12.0sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mr." />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:text="Ms." />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:text="Mrs." />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_fNmae"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5.0dip"
+        android:hint="Enter First Name"
+        android:textColorHint="@color/active_tab">
+
+        <EditText
+            android:id="@+id/et_fNmae"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5.0dip"
+            android:paddingBottom="15.0dip"
+            android:textColor="@color/colorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_lName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5.0dip"
+        android:hint="Enter Last Name"
+        android:textColorHint="@color/active_tab">
+
+        <EditText
+            android:id="@+id/et_lName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5.0dip"
+            android:paddingBottom="15.0dip"
+            android:textColor="@color/colorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_dob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10.0dip"
+        android:hint="Enter DOB"
+        android:textColorHint="@color/active_tab">
+
+        <EditText
+            android:id="@+id/et_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:inputType="date"
+            android:paddingLeft="5.0dip"
+            android:paddingBottom="15.0dip"
+            android:textColor="@color/colorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

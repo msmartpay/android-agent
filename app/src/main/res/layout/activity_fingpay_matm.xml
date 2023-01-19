@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Customer Mobile Number"
+                style="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/et_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextLabel"
+                    android:inputType="number"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:hint="Enter Amount"
+                style="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/et_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextLabel"
+                    android:inputType="number"
+                    android:text="0"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:hint="Enter Remarks"
+                style="@style/TextLabel">
+
+                <EditText
+                    android:id="@+id/et_remarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextLabel"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/rb_apay"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_cw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cash_withdrawal"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_cd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cash_deposit"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+                <RadioButton
+                    android:id="@+id/rb_be"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/balance_enq"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_ms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mini_statement"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+                <RadioButton
+                    android:id="@+id/rb_ca"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/card_activation"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+                <RadioButton
+                    android:id="@+id/rb_rp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pin_reset"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+                <RadioButton
+                    android:id="@+id/rb_cp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_pin"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
+
+                <RadioButton
+                    android:id="@+id/rb_purchase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Purchase with Credit cards"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    />
+
+            </RadioGroup>
+
+
+            <Button
+                android:id="@+id/btn_fingpay"
+                style="@style/btn_main"
+                android:layout_marginTop="10dp"
+                android:text="@string/launch" />
+
+            <Button
+                android:id="@+id/btn_history"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_btn_login"
+                android:gravity="center"
+                android:text="Transaction History"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/tv_transaction"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

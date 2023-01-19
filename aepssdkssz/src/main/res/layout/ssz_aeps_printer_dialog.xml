@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/sszAePS_transparent_2"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/rl_print_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2.0">
+
+                                <ImageView
+                                    android:id="@+id/iv_status"
+                                    android:layout_width="0dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.3"
+                                    android:src="@drawable/ssz_aeps_ic_initiated" />
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="0.9"
+                                    android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="0.8"
+                                    android:src="@drawable/srk_money_flate" />
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        <TextView
+                            android:id="@+id/tv_txn_type"
+                            android:layout_width="wrap_content"
+                            android:layout_below="@+id/iv_status"
+
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="XXXXXX"
+                            android:textColor="@color/sszAePS_blackcolor"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tv_txn_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_txn_type"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="XXXXX"
+                            android:textColor="@color/sszAePS_green"
+                            android:textSize="18sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/ll_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/ssz_aeps_dot_round"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Comment" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_comment"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/ll_amount"
+                                style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Amount" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_amount"
+                                    style="@style/tv_details_right"
+                                    android:layout_height="match_parent"
+                                    android:hint="0.00" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Balance" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_balance"
+                                    style="@style/tv_details_right"
+                                    android:hint="0.00" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Bank" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_bank_name"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="TID" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_tid"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="RRN" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_rrn"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                style="@style/ll_details"
+                                android:visibility="gone">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Terminal ID" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_terminal_id"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Customer Mobile" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_cust_mob"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXXXXXXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Customer UID No" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_cust_uid_no"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXX XXXX XXXX XXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Date Time" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_date_time"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Merchant ID" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_merchant_id"
+                                    style="@style/tv_details_right"
+                                    android:hint="Merchant ID" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Merchant Name" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_merchant_name"
+                                    style="@style/tv_details_right"
+                                    android:hint="Merchant Name" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                <TextView
+                                    style="@style/tv_details_left"
+                                    android:text="Merchant Location" />
+
+                                <TextView style="@style/tv_details_dot" />
+
+                                <TextView
+                                    android:id="@+id/tv_merchant_location"
+                                    style="@style/tv_details_right"
+                                    android:hint="XXXXXX" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/ll_mini_statement_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:layout_marginTop="10dip">
+
+                                <TextView
+                                    android:id="@+id/tv_mini_statement_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="XXX"
+                                    android:textColor="@color/sszAePSColorPrimary"
+                                    android:textSize="12.0sp"/>
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/ll_mini_statement"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:layout_marginTop="10dip">
+
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="5.0dip"
+                                    android:background="@color/sszAePSColorPrimary"
+                                    android:weightSum="2.0">
+
+                                    <TextView
+
+                                        android:layout_width="0.0dip"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="Date"
+                                        android:textColor="@color/sszAePS_colorWhite"
+                                        android:textSize="12.0sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+
+                                        android:layout_width="0.0dip"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.4"
+                                        android:text="Txn Type"
+                                        android:textColor="@color/sszAePS_colorWhite"
+                                        android:textSize="12.0sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+
+                                        android:layout_width="0.0dip"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.4"
+                                        android:hint=""
+                                        android:text="Amount"
+                                        android:textColor="@color/sszAePS_colorWhite"
+                                        android:textSize="12.0sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+
+                                        android:layout_width="0.0dip"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.7"
+                                        android:text="Narration"
+                                        android:textColor="@color/sszAePS_colorWhite"
+                                        android:textSize="10.0dip"
+                                        android:textStyle="bold" />
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+                                <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_details">
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/aeps_mini_statement"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:choiceMode="singleChoice"
+                                        android:paddingTop="5.0dip"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_close"
+                            style="@style/btn_main"
+                            android:layout_width="120dp"
+                            android:layout_marginEnd="15dp"
+                            android:text="  Close  "/>
+
+                        <Button
+                            android:id="@+id/btn_print"
+                            style="@style/btn_main"
+                            android:layout_width="120dp"
+                            android:layout_marginStart="15dp"
+                            android:text="  Print  "/>
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

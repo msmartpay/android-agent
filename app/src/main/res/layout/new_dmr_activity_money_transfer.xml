@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@+id/personal_details">
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <EditText android:id="@+id/id_mobile_number" android:hint="Enter Mobile Number" android:maxLines="1" android:maxLength="10" android:layout_alignParentTop="true" style="@style/et_wallet" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <EditText android:id="@+id/id_first_name" android:hint="Enter First Name" android:maxLines="1" android:layout_below="@+id/id_mobile_number" style="@style/et_wallet" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <EditText android:id="@+id/id_last_name" android:hint="Enter Last Name" android:maxLines="1" android:ems="10" android:layout_below="@+id/id_first_name" style="@style/et_wallet" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <EditText android:id="@+id/id_dob" android:hint="Enter Date Of Birth" android:maxLines="1" android:ems="10" android:layout_below="@+id/id_last_name" style="@style/et_wallet" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <EditText android:id="@+id/id_pincode" android:hint="Enter Pin Code" android:maxLines="1" android:ems="10" android:maxLength="6" android:layout_below="@+id/id_dob" android:inputType="number" style="@style/et_wallet" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <EditText android:id="@+id/id_address" android:hint="Enter Address" android:maxLines="3" android:ems="10" android:layout_below="@+id/id_pincode" style="@style/et_wallet" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+    <Button android:textSize="18.0sp" android:typeface="sans" android:textColor="@color/whitecolor" android:id="@+id/id_update_details" android:background="@drawable/round_border" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Update Sender" android:layout_alignParentBottom="true" android:textAllCaps="false" />
+</RelativeLayout>

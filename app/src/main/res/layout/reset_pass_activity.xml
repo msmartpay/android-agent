@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50.0dip"
+        android:fillViewport="true"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="20.0dip"
+        android:scrollbarThumbVertical="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50.0dip"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:padding="20.0dip"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/reset_password_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reset Password"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24.0sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="20.0dip"
+                    android:text="Enter your old and new password below,\nWe're just being extra safe."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14.0sp" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/editHintColor">
+
+                <EditText
+                    android:id="@+id/old_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/key"
+                    android:drawablePadding="20.0dip"
+                    android:drawableTint="@color/colorPrimary"
+                    android:hint="Old Password"
+                    android:inputType="text"
+                    android:padding="15.0dip"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16.0dip" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password"
+                android:textColorHint="@color/editHintColor">
+
+                <EditText
+                    android:id="@+id/new_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20.0dip"
+                    android:drawableLeft="@drawable/key"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawablePadding="20.0dip"
+                    android:inputType="textPassword"
+                    android:padding="15.0dip"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16.0dip" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:textColorHint="@color/editHintColor">
+
+                <EditText
+                    android:id="@+id/confirm_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20.0dip"
+                    android:drawableLeft="@drawable/key"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawablePadding="20.0dip"
+                    android:inputType="text"
+                    android:padding="15.0dip"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16.0dip" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear_submit_pass"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_border"
+        android:foreground="?selectableItemBackgroundBorderless">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Done"
+            android:textColor="@color/whitecolor"
+            android:textSize="18.0dip"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

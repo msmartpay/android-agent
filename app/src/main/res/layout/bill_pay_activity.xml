@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitecolor"
+    android:orientation="vertical"
+    android:padding="16.0dip">
+
+    <TextView
+        android:id="@+id/tv_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3.0dip"
+        android:background="@color/light_white"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:padding="5.0dip"
+        android:text="Electricity"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18.0sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <TextView
+                android:id="@+id/tv_cn_hint"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Mobile No"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_cn"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="98xxxxxx55"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="3.0dip"
+            android:background="@color/hintcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <TextView
+                android:id="@+id/tv_oprator_hint"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Operator"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_oprator"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="vodafone" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="3.0dip"
+            android:background="@color/hintcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <TextView
+                android:id="@+id/tv_amunt_hint"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Amount"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/id_sure_ask_amount"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="0.00"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="3.0dip"
+            android:background="@color/hintcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_customer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Customer Name"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_customerName"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="NA"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="3.0dip"
+            android:background="@color/hintcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_dueAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Due Amount"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_dueAmount"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="NA"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="3.0dip"
+            android:background="@color/hintcolor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_dueDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Due Date"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02"
+                android:text=":"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_dueDate"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="NA"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="3.0dip"
+            android:layout_marginBottom="3.0dip"
+            android:background="@color/hintcolor" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35.0dip"
+        android:background="@drawable/round_border"
+        android:text="Proceed to pay"
+        android:textAllCaps="false"
+        android:textColor="@color/whitecolor"
+        android:textSize="14.0sp" />
+</LinearLayout>

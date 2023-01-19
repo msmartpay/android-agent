@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_side"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/whitecolor"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:id="@+id/uper_part"
+        android:layout_width="match_parent"
+        android:layout_height="120.0dip"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/drawer_pic"
+            android:layout_width="0.0dip"
+            android:layout_height="50.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="0.3"
+            android:src="@drawable/profile_defuilt" />
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.7"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/drawer_agent_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/whitecolor"
+                android:textSize="14.0dip" />
+
+            <TextView
+                android:id="@+id/drawer_email_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="distributor id"
+                android:textColor="@color/whitecolor"
+                android:textSize="14.0dip" />
+            <TextView
+                android:id="@+id/drawer_agent_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="distributor id"
+                android:textColor="@color/whitecolor"
+                android:textSize="14.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/uper_part"
+        android:layout_marginBottom="35.0dip"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_activate"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    android:id="@+id/activate"
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/active_service" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:layout_toEndOf="@+id/activate"
+                    android:paddingTop="2.0dip"
+                    android:text="Activate User" />
+
+                <ImageView
+                    android:id="@+id/iv_activate"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="false"
+                    android:src="@drawable/warning_message_red" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/mprofile"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/profile_icon" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="My Profile" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_kyc_upload"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/upload_doc_new"/>
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:paddingBottom="10.0dip"
+                    android:text="Upload Kyc Documents" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_wallet_history"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/reports" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:text="Wallet History"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_wallet_bal_req"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/rupee" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:text="Balance Request"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_wallet_trans_search"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/transaction_search" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:text="Transaction Search"/>
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_wallet_earning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10.0dip"
+                android:onClick="start"
+                android:orientation="horizontal"
+                android:paddingStart="30.0dip"
+                android:visibility="gone">
+
+                <ImageView
+                    style="@style/iv_home_drawer_child"
+                    android:src="@drawable/my_earning" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:text="My Earning" />
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/complaints"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/complaints" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="Complaints" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about_us"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/aboutus" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="About Us" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/help_support"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+               <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/help_support_icon" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:paddingBottom="10.0dip"
+                    android:text="@string/helpsupport" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/terms_conditions"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/terns_conditions" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:paddingBottom="10.0dip"
+                    android:text="@string/terms_conditions" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cpassword"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/change_password" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="Change Password" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/hintcolor"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:onClick="start"
+        android:orientation="horizontal"
+        android:paddingStart="16.0dip"
+        android:paddingTop="5.0dip"
+        android:paddingRight="16.0dip"
+        android:paddingBottom="5.0dip">
+
+        <ImageView
+            style="@style/iv_home_drawer"
+            android:src="@drawable/logout" />
+
+        <TextView
+            style="@style/tv_home_drawer"
+            android:paddingTop="2.0dip"
+            android:text="Logout" />
+
+        <TextView
+            android:id="@+id/tv_version_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="2.0dip"
+            android:text="version"
+            android:textColor="@color/editHintColor" />
+    </LinearLayout>
+</RelativeLayout>
+

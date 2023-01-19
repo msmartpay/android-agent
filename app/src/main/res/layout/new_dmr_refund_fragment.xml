@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/linear"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="16.0dip"
+                android:layout_marginTop="16.0dip"
+                android:layout_marginRight="16.0dip"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Refund Transaction"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18.0sp"
+                    android:typeface="sans" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25.0dip">
+
+                    <EditText
+                        android:id="@+id/edit_transaction_refund"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:hint="Enter service delivery Tid"
+                        android:maxLines="1"
+                        android:padding="10.0dip"
+                        android:textColor="@color/btncolor" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_refund_otp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:text="For Refund"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18.0sp"
+        android:typeface="sans" />
+</RelativeLayout>

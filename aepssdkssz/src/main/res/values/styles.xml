@@ -1,0 +1,124 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/sszAePSColorPrimary</item>
+        <item name="colorPrimaryDark">@color/sszAePSColorPrimaryDark</item>
+        <item name="colorAccent">@color/sszAePSColorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/sszAePSColorAccent</item>
+        <item name="android:textColorPrimary">@color/sszAePSColorPrimary</item>
+        <item name="android:background">@color/sszAePS_transparent</item>
+    </style>
+    <style name="DialogTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowEnterAnimation">@anim/ssz_aeps_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/ssz_aeps_slide_out</item>
+    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="ssz_sp_material">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+    </style>
+
+    <style name="ll_details">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:weightSum">1</item>
+    </style>
+    <style name="tv_details_left">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.35</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/sszAePS_blackcolor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="tv_details_dot">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:text">:</item>
+        <item name="android:layout_weight">0.1</item>
+        <item name="paddingStart">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="paddingEnd">5dp</item>
+        <item name="android:textColor">@color/sszAePS_blackcolor</item>
+    </style>
+    <style name="tv_details_right">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.55</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/sszAePS_blackcolor</item>
+    </style>
+    <style name="til_main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+    <style name="et_main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/sszAePS_blackcolor</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="btn_main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ssz_aeps_round_border_strock_pr_btn</item>
+        <item name="android:textColor">@color/sszAePS_colorWhite</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="tv_btn">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ssz_aeps_round_border_pr</item>
+        <item name="android:textColor">@color/sszAePS_blackcolor</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+    <style name="tv_cashout_main_large">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/sszAePS_blackcolor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+    <style name="SSZTextLabel" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/sszAePS_editHintColor</item>
+        <item name="android:textSize">18sp</item>
+
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/sszAePSColorPrimary</item>
+        <item name="colorControlNormal">@color/sszAePSColorPrimary</item>
+        <item name="colorControlActivated">@color/sszAePSColorPrimary</item>
+    </style>
+
+</resources>

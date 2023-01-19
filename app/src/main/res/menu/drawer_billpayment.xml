@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:itemBackground="@color/whitecolor">
+    <item
+        android:id="@+id/mpostpaid"
+        android:icon="@drawable/postpaid"
+        android:title="Mobile Postpaid" />
+    <item
+        android:id="@+id/landline"
+        android:icon="@drawable/landline"
+        android:title="Landline" />
+    <item
+        android:id="@+id/electricity"
+        android:icon="@drawable/electricity"
+        android:title="Electricity" />
+    <item
+        android:id="@+id/insurance"
+        android:icon="@drawable/insurence"
+        android:title="Insurance" />
+    <item
+        android:id="@+id/water"
+        android:icon="@drawable/water"
+        android:title="Water" />
+    <item
+        android:id="@+id/gas"
+        android:icon="@drawable/gas"
+        android:title="Gas" />
+</menu>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6.0dip"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginRight="6.0dip"
+        android:background="@drawable/bg_dialog"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="3.0dip">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flat_selector"
+            android:padding="10.0dip"
+            android:text="Confirm"
+            android:textColor="@android:color/white"
+            android:textSize="18.0sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20.0dip">
+
+                <LinearLayout
+                    android:id="@+id/confirm_full_dialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            android:id="@+id/tv_rename"
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Mobile No"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/confirm_mobile"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            android:id="@+id/operator_rename"
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Operator"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/confirm_operator"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Amount"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/confirm_amount"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_visible_gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:visibility="gone"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            android:id="@+id/confirm_policy_h_name"
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Contact Number"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/confirm_contact"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20.0dip"
+                    android:orientation="horizontal"
+                    android:weightSum="1.0">
+
+                    <TextView
+                        android:id="@+id/tv_cancel"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:gravity="right"
+                        android:text="Cancel"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16.0dip"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_recharge"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:gravity="right"
+                        android:text="Recharge"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="16.0dip"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

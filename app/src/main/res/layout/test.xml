@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10.0dip"
+        app:cardCornerRadius="5.0dip"
+        app:cardElevation="2.0dip"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:background="@color/whitecolor"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <ImageView
+                    android:id="@+id/hotel_pic"
+                    android:layout_width="70.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="5.0dip"
+                    android:background="@drawable/default_photo" />
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical"
+                    android:weightSum="2.0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:orientation="horizontal"
+                        android:padding="2.0dip"
+                        android:weightSum="1.0">
+
+                        <TextView
+                            android:id="@+id/tv_hotel_name"
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_weight="1.0"
+                            android:padding="5.0dip"
+                            android:text="Hotel Name"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12.0dip"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2.0dip">
+
+                        <TextView
+                            android:id="@+id/tv_hotel_address"
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5.0dip"
+                            android:layout_marginRight="5.0dip"
+                            android:layout_weight="0.5"
+                            android:padding="5.0dip"
+                            android:text="Hotel Address"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10.0dip"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5.0dip">
+
+                        <RatingBar
+                            android:id="@+id/ratingBar"
+                            style="?android:ratingBarStyleSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:numStars="5"
+                            android:rating="2.5"
+                            android:theme="@style/RatingBar" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="50.0dip"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical"
+                    android:weightSum="2.0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="1.5"
+                        android:background="@drawable/textview_rounded"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="1000"
+                            android:textColor="@color/manoj"
+                            android:textSize="16.0sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="35.0dip"
+        android:layout_height="35.0dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1.0dip"
+        android:background="@drawable/circle_white"
+        android:padding="10.0dip"
+        android:src="@drawable/icon_hotel_small" />
+</RelativeLayout>

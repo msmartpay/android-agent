@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/whitecolor">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tv_doc_type_label"
+                style="@style/tv_kyc_item"
+                android:text="Document Type : "
+                android:textColor="@color/colorPrimary" />
+            <TextView
+                android:id="@+id/tv_doc_type"
+                style="@style/tv_kyc_item"
+                android:layout_toRightOf="@+id/tv_doc_type_label"
+                android:text="aadhar"/>
+
+            <TextView
+                android:id="@+id/tv_doc_name_label"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_type_label"
+                android:text="Document Name : "
+                android:textColor="@color/colorPrimary" android:visibility="gone" />
+            <TextView
+                android:id="@+id/tv_doc_name"
+                style="@style/tv_kyc_item"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_below="@+id/tv_doc_type"
+                android:layout_toRightOf="@+id/tv_doc_name_label"
+                android:text="aadhar.jpg" android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_doc_no_label"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_name_label"
+                android:text="Document Number : "
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/tv_doc_no"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_name_label"
+                android:layout_toRightOf="@+id/tv_doc_no_label"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="35353" />
+
+            <TextView
+                android:id="@+id/tv_doc_status_label"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_no_label"
+                android:singleLine="true"
+                android:text="Status : "
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/tv_doc_status"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_no_label"
+                android:layout_toRightOf="@+id/tv_doc_status_label"
+                android:singleLine="true"
+                android:text="Pending" />
+
+            <TextView
+                android:id="@+id/tv_doc_remark_label"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_status"
+                android:singleLine="true"
+                android:text="Remark : "
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/tv_doc_remark"
+                style="@style/tv_kyc_item"
+                android:layout_below="@+id/tv_doc_status"
+                android:layout_toRightOf="@+id/tv_doc_remark_label"
+                android:singleLine="true"
+                android:text="Test" />
+
+            <ImageView
+                android:id="@+id/iv_kyc_download"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/download" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

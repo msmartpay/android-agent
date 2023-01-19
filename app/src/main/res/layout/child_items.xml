@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10.0dip">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Transport Name"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/child_transport_name"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Travelling Place"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/child_origin_destination"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Travel Date"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/child_travel_date"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Total Ticket"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/child_total_ticket"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Amount"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/child_amount"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Penalty Amount"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/child_penality_amount"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

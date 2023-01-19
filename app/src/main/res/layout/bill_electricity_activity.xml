@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_16sdp"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_operator"
+                style="@style/til_main_ot_sp"
+                android:layout_marginTop="0dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/select_operator">
+
+                <androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView
+                    android:id="@+id/et_operator"
+                    style="@style/mactp_main_ot_sp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tid_consumer_no"
+                style="@style/til_main_ot"
+                android:hint="Consumer No">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/et_main_ot"
+                    android:maxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tid_ad1"
+                style="@style/til_main_ot"
+                android:hint="Enter Ad1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/et_main_ot"
+                    android:maxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tid_ad2"
+                style="@style/til_main_ot"
+                android:hint="Enter Ad2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/et_main_ot"
+                    android:maxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tid_ad3"
+                style="@style/til_main_ot"
+                android:hint="Enter Ad3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/et_main_ot"
+                    android:maxLength="20" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tid_amount"
+                style="@style/til_main_ot"
+                android:hint="Amount">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/et_main_ot"
+                    android:inputType="number"
+                    android:maxLength="5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_proceed"
+                style="@style/btn_main2"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/proceed" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

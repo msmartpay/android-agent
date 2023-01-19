@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp"
+    android:layout_marginTop="1dp">
+    <RelativeLayout
+        android:id="@+id/activity_statement_adapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15.0dip">
+        <ImageView
+            android:id="@+id/iv_re"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/tick_ok"/>
+
+        <TextView
+            android:id="@+id/ac"
+            android:layout_width="130.0dip"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_re"
+            android:text="Service"
+            android:textColor="@color/green"
+            android:textSize="16.0dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/acc_op"
+            android:layout_width="130.0dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ac"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="14.0dip" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="100.0dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/acc_op"
+            android:layout_marginTop="5.0dip"
+            android:text="11/04/2016"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12.0dip" />
+
+        <TextView
+            android:id="@+id/txn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/date"
+            android:layout_alignBottom="@+id/date"
+            android:layout_toRightOf="@+id/ac"
+            android:text="\ 123456789123456"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12.0dip" />
+
+        <TextView
+            android:id="@+id/cd"
+            android:layout_width="10.0dip"
+            android:layout_height="20.0dip"
+            android:layout_alignLeft="@+id/txn_id"
+            android:layout_alignTop="@+id/ac"
+            android:layout_marginLeft="10.0dip"
+            android:text="-"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16.0dip"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/symbole"
+            android:layout_width="15.0dip"
+            android:layout_height="20.0dip"
+            android:layout_alignBaseline="@+id/cd"
+            android:layout_alignBottom="@+id/cd"
+            android:layout_toRightOf="@+id/cd"
+            android:text="₹"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16.0dip"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/amt"
+            android:layout_width="55.0dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/symbole"
+            android:layout_alignBottom="@+id/symbole"
+            android:layout_toRightOf="@+id/symbole"
+            android:text="Amount"
+            android:textColor="@color/green"
+            android:textSize="16.0dip"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cd"
+            android:layout_alignParentRight="true"
+            android:text="Status"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15.0dip" />
+
+        <TextView
+            android:id="@+id/tv_current_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/status"
+            android:layout_alignParentRight="true"
+            android:text="Status"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="13.0dip" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+

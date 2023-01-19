@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:padding="2.0dip">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/linear"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/sender_sender_mobile"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter Sender Mobile No."
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/sender_otp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter OTP"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip">
+
+                        <EditText
+                            android:id="@+id/sender_first_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter First Name"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip">
+
+                        <EditText
+                            android:id="@+id/sender_last_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Enter Last Name"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/sender_dob"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="Enter Date Of Birth"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:padding="10.0dip"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/sender_pincode"
+                            style="@style/et_wallet"
+                            android:layout_below="@+id/id_dob"
+                            android:hint="Enter Pin Code"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:maxLines="1"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/sender_address"
+                            style="@style/et_wallet"
+                            android:layout_below="@+id/id_pincode"
+                            android:hint="Enter Address"
+                            android:maxLines="3"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_resister"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_border"
+        android:text="Resister"
+        android:textColor="@android:color/white"
+        android:textSize="18.0dip" />
+</LinearLayout>

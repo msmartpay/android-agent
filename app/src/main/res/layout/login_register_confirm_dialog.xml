@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="6.0dip"
+        android:layout_marginTop="6.0dip"
+        android:layout_marginRight="6.0dip"
+        android:background="@drawable/round_layout_strok"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="20.0dip">
+
+        <ScrollView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20.0dip">
+
+
+
+                <TextView
+                    android:id="@+id/login_register_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="10.0dip"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:weightSum="2.0">
+
+                    <Button
+                        android:id="@+id/btn_reg_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/rounded_btn_login"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:text="No"
+                        android:textColor="@android:color/white"
+                        android:textStyle="normal"
+                        android:visibility="visible" />
+
+                    <Button
+                        android:id="@+id/btn_reg_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20.0dip"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/rounded_btn_login"
+                        android:foreground="?selectableItemBackgroundBorderless"
+                        android:text="YES"
+                        android:textColor="@android:color/white"
+                        android:textStyle="normal"
+                        android:visibility="visible" />
+                </TableRow>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/close_reg_dialog"
+        android:layout_width="40.0dip"
+        android:layout_height="40.0dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bt_dialog_close"
+        android:text="×"
+        android:textColor="@color/whitecolor"
+        android:visibility="visible" />
+</RelativeLayout>

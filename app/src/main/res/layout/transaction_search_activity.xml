@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50.0dip"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5.0dip"
+            card_view:cardElevation="2.0dip"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20.0dip"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/til_main_ot"
+                        android:layout_marginTop="10dp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Connection Number">
+
+                        <EditText
+                            android:id="@+id/edit_connection_no"
+                            style="@style/et_main_ot"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:maxLength="12"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+                    <Button
+                        android:id="@+id/btn_search_txn"
+                        style="@style/btn_main"
+                        android:text="SEARCH TRANSACTION" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
+
+</RelativeLayout>

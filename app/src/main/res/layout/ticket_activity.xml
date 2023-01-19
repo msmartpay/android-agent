@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50.0dip"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/activity_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16.0dip">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/tv_ticket"
+                    android:gravity="left"
+                    android:text="Operator"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/operator_ticketactivity"
+                    style="@style/tv_ticket"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/tv_ticket"
+                    android:gravity="left"
+                    android:text="Mobile Number"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mobileno_ticketactivity"
+                    style="@style/tv_ticket" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_ticket"
+                    android:gravity="left"
+                    android:text="Transaction ID"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/transaction_ticketactivity"
+                    style="@style/tv_ticket" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/til_main_ot"
+                android:layout_marginTop="10dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Enter Remark">
+
+                <EditText
+                    android:id="@+id/remark"
+                    style="@style/et_main_ot"
+                    android:ems="10"
+                    android:inputType="text">
+                    <requestFocus />
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentBottom="true"
+                android:foreground="?selectableItemBackgroundBorderless">
+
+                <Button
+                    android:id="@+id/ticketsubmit"
+                    style="@style/btn_main"
+                    android:text="SUBMIT COMPLAINT" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

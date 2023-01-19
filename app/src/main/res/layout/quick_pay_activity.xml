@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50.0dip"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5.0dip"
+            card_view:cardElevation="2.0dip"
+            card_view:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20.0dip"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/iv_quick_transfer_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="error message"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/green"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1.0">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0.0dip"
+                        style="@style/til_main_ot"
+                        android:layout_marginTop="0dp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_weight="1.0"
+                        android:hint="Agent Id or Registered Mobile No">
+
+                        <EditText
+                            android:id="@+id/edit_mobile_quick"
+                            style="@style/et_main_ot"
+                            android:ems="10"
+
+                            android:inputType="textCapCharacters"
+                            android:maxLength="10" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/image_contactlist_quick"
+                        android:layout_width="0.0dip"
+                        android:layout_height="40.0dip"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/contact"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_receiver_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/til_main_ot"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Receiver Name">
+
+                        <EditText
+                            android:id="@+id/edit_name_quick"
+                            style="@style/et_main_ot"
+                            android:enabled="false"
+                            android:inputType="text"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/til_main_ot"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Enter Amount">
+
+                        <EditText
+                            android:id="@+id/edit_amount_quick"
+                            style="@style/et_main_ot"
+
+                            android:inputType="number"
+                            android:maxLength="7"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/til_main_ot"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Enter Remark">
+
+                        <EditText
+                            android:id="@+id/edit_remark_quick"
+                            style="@style/et_main_ot"
+                             />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+                    <Button
+                        android:id="@+id/btn_quick_pay"
+                        style="@style/btn_main"
+                        android:text="CONFIRM TRANSFER"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btn_validate_receiver"
+                        style="@style/btn_main"
+                        android:text="VALIDATE RECEIVER" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
+
+</RelativeLayout>

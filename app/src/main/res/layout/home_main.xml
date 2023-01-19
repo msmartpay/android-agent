@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whitecolor"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/id_drawer_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:src="@drawable/ic_dehaze_white_24dp"
+                        app:tint="@color/colorPrimaryDark" />
+
+                    <ImageView
+                        android:id="@+id/iv_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toStartOf="@+id/iv_noti"
+                        android:layout_toEndOf="@+id/id_drawer_icon"
+                        android:src="@drawable/srk_money_logo_long" />
+
+                    <ImageView
+                        android:id="@+id/iv_noti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_baseline_notifications_24"
+                        app:tint="@color/colorPrimaryDark" />
+
+                </RelativeLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30.0dip"
+                    android:background="@drawable/gradient_back"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/whitecolor"
+                            android:padding="5dp"
+                            android:layout_margin="3dp"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/wallet_left"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Main wallet"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tv_main_wallet"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="00000:00"
+                                    android:layout_marginStart="5dp"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/wallet_left"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cash-in wallet"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tv_cash_in_wallet"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="00000:00"
+                                    android:layout_marginStart="5dp"
+                                    android:textColor="@color/whitecolor"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_marque"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="2dp"
+                            android:background="#eee"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/marqueText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:freezesText="true"
+                                android:textColor="@color/red"
+                                android:text="Need a very long message to scroll this message which should be longer than screen view"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:background="@drawable/bg_curv_bottom">
+                            <in.msmartpay.agent.utility.pagger.AutoScrollViewPager
+                                android:id="@+id/slider"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/tv_main_heading"
+                                android:paddingTop="5.0dip"
+                                android:paddingBottom="5.0dip"
+                                android:gravity="center"
+                                android:textColor="@color/whitecolor"
+                                android:text="@string/recharged"
+                                android:textSize="15.0dip" />
+
+
+                                <LinearLayout
+                                    android:id="@+id/Recharge_anim"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="15dp"
+                                    android:gravity="center"
+                                    android:weightSum="1.0">
+
+                                    <LinearLayout
+                                        android:id="@+id/id_mobile_prepaid"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/prepaid" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:textColor="@color/whitecolor"
+                                            android:text="Mobile " />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_dth"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/dth" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:textColor="@color/whitecolor"
+                                            android:text="DTH" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_datacard"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/pendrive" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:textColor="@color/whitecolor"
+                                            android:text="Datacard" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_fastag"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/wallet_history"/>
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:textColor="@color/whitecolor"
+                                            android:text="@string/fastag" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/finanance"
+                            android:layout_margin="3.0dip"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            app:cardCornerRadius="3.0dip"
+                            app:cardElevation="2.0dip">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/tv_main_heading"
+                                    android:paddingTop="5.0dip"
+                                    android:paddingBottom="5.0dip"
+                                    android:gravity="center"
+                                    android:text="@string/finance"
+                                    android:textSize="15.0dip" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_margin="15dp"
+                                    android:weightSum="1.0">
+
+                                    <LinearLayout
+                                        android:id="@+id/id_fingpay_aeps"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/cash_withdrawal_d" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="AePS1\n" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_cash_withdrawal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/cash_withdrawal_d" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="AePS2\n" />
+                                    </LinearLayout>
+
+
+
+                                    <LinearLayout
+                                        android:id="@+id/id_balance_enquiry"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:layout_weight="0.25"
+                                        android:orientation="vertical"
+                                        android:visibility="gone">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/balance_enquiry" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Balance\nEnquiry" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_mini_statement"
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                app:srcCompat="@drawable/mini_statement" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Mini\nStatement" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_aadhar_pay"
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                app:srcCompat="@drawable/aadhar_pay" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Aadhaar\nPay" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_margin="15dp"
+                                    android:weightSum="1.0">
+
+
+                                    <LinearLayout
+                                        android:id="@+id/id_dmr1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/money_transfer" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Money\nTransfer" />
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/id_icici_cash_deposit"
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                app:srcCompat="@drawable/cash_deposit" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Cash\nDeposit" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_micro_atm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/mini_atm" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Micro\nAtm" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_account_opening"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/ic_account_balance_24dp" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Account\nOpening" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_margin="15dp"
+                                    android:weightSum="1.0">
+
+                                    <LinearLayout
+                                        android:id="@+id/id_fino_cms"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/ic_account_balance_24dp" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="CMS\nPayment" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_claim_refund"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/claimrefund" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Claim\nRefund" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:visibility="visible"
+                            app:cardCornerRadius="3.0dip"
+                            app:cardElevation="2.0dip"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/tv_main_heading"
+                                    android:paddingTop="5.0dip"
+                                    android:paddingBottom="5.0dip"
+                                    android:gravity="center"
+                                    android:text="@string/billpayment"
+                                    android:textSize="15.0dip" />
+
+                                <LinearLayout
+                                    android:id="@+id/billpayment_anim"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="15dp"
+                                    android:gravity="center"
+                                    android:weightSum="1.0">
+
+                                    <LinearLayout
+                                        android:id="@+id/id_mobile_postpaid"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25"
+                                        android:visibility="visible">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/postpaid" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Postpaid\nMobile" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_landline"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/landline" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Landline\nBill" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_electricity"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/electricity" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Electricity\nBill" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_gas"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/gas" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Gas\nBill" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="15dp"
+                                    android:gravity="center"
+                                    android:weightSum="1.0">
+                                    <LinearLayout
+                                        android:id="@+id/id_water"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/water" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Water" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_insurence"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/insurence" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Insurance" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/id_credit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/creditcard" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="CreditCard" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_paytm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/wallet_history" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Paytm" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/wallet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3.0dip"
+                            android:layout_marginTop="5.0dip"
+                            android:layout_marginBottom="5.0dip"
+                            android:visibility="visible"
+                            app:cardCornerRadius="3.0dip"
+                            app:cardElevation="2.0dip">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    style="@style/tv_main_heading"
+                                    android:paddingTop="5.0dip"
+                                    android:paddingBottom="5.0dip"
+                                    android:text="@string/wallet"
+                                    android:gravity="center"
+                                    android:textSize="15.0dip" />
+
+
+                                    <LinearLayout
+                                        android:id="@+id/wallet_anim"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:layout_margin="15dp"
+                                        android:gravity="center"
+                                        android:weightSum="1.0">
+
+                                        <LinearLayout
+                                            android:id="@+id/id_fund_settlement"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical"
+                                            android:layout_weight="0.25">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    android:src="@drawable/fund_settlement" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Move To\nBank" />
+                                        </LinearLayout>
+
+
+
+                                        <LinearLayout
+                                            android:id="@+id/id_wallet_history"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical"
+                                            android:layout_weight="0.25">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    android:src="@drawable/wallet_history" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Wallet\nHistory" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/id_balance_request"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical"
+                                            android:layout_weight="0.25">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    android:src="@drawable/wallet" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Balance\nRequest" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/id_bank_details"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical"
+                                            android:layout_weight="0.25">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    app:srcCompat="@drawable/ic_account_balance_24dp" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Company\nBanks" />
+                                        </LinearLayout>
+
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="10.0dip"
+                                        android:weightSum="1">
+
+                                        <LinearLayout
+                                            android:id="@+id/id_wallet_transfer"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="0.25"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    android:src="@drawable/money_transfer" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Wallet\nTransfer" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/id_commission"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="0.5"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="30.0dip"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:visibility="gone"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    app:srcCompat="@drawable/ic_monetization_24dp" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:layout_height="wrap_content"
+                                                android:text="My\nEarning" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:id="@+id/id_audit_request"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="0.25"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    android:src="@drawable/creditcard" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Audit\nRequest" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/colorPrimary"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="2.0dip">
+
+                <TextView
+                    android:id="@+id/smart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_weight="1.0"
+                    android:text="@string/app_name_year"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="10.0dip"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5.0dip"
+                    android:layout_weight="1.0"
+                    android:gravity="right"
+                    android:text="@string/powerd_by"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="10.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom|center"
+                android:layout_margin="15.0dip"
+                android:src="@drawable/ic_call_white_24dp"
+                android:visibility="gone" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/home_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start" />
+</androidx.drawerlayout.widget.DrawerLayout>

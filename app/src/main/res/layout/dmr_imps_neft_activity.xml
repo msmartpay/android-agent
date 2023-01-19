@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55.0dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10.0dip">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_white"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/LeftTextLabelHeading"
+                        android:layout_weight="1.5"
+                        android:text="Confirm Beneficiary Details"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18.0sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_bene_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/hintcolor"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="top|center"
+                        android:background="@drawable/profile_defuilt" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_txn_bene_name"
+                        style="@style/TextLabelHeading"
+                        android:layout_width="wrap_content"
+                        android:hint="Beneficiary Name"
+                        android:padding="5.0dip"
+                        android:textSize="18.0sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_txn_bank_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Bank Name"
+                        android:padding="5.0dip"
+                        android:textColor="@color/color_grey"
+                        android:textSize="12.0dip"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_txn_account_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Account Number"
+                        android:padding="5.0dip"
+                        android:textColor="@color/btncolor"
+                        android:textSize="12.0sp" />
+
+                    <TextView
+                        android:id="@+id/tv_txn_bank_ifsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Bank IFSC"
+                        android:padding="5.0dip"
+                        android:textColor="@color/color_grey"
+                        android:textSize="12.0dip"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_txn_recipient_id"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:padding="5.0dip"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/LeftTextLabelHeading"
+                android:layout_width="wrap_content"
+                android:text="Enter Txn Amount"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_dmr_txn_amount"
+                style="@style/TextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Txn Amount">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/TextLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="5"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                style="@style/LeftTextLabelHeading"
+                android:layout_width="wrap_content"
+                android:text="Enter Remark"
+                android:textSize="14.0sp"
+                android:textStyle="bold" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_dmr_remark"
+                style="@style/TextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Remark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/TextLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15.0dip"
+                android:weightSum="2.0">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1.0">
+
+                    <RadioButton
+                        android:id="@+id/radio_imps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:buttonTint="@color/btncolor"
+                        android:checked="true"
+                        android:text="IMPS"
+                        android:textColor="@color/btncolor"
+                        android:textSize="14.0dip"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/radio_neft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.13"
+                        android:buttonTint="@color/btncolor"
+                        android:checked="false"
+                        android:text="NEFT"
+                        android:textColor="@color/btncolor"
+                        android:textSize="14.0sp"
+                        android:textStyle="bold" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_txn_transfer_message"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/txtsubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="18.0sp"
+                android:typeface="sans"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Transfer Payment"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_btn_login"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

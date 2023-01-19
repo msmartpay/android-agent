@@ -1,0 +1,26 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()// Warning: this repository is going to shut down soon
+        maven {
+            url "https://jitpack.io"
+        }
+        maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+rootProject.name = "MSmartPayAgent"
+include ':app'
+include ':aepssdkssz'
+include ':morefun_mpos_sdk_v2.1.20210628'

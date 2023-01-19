@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_electricity_payment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitecolor"
+    android:padding="16dp">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55.0dip"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Bank Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_recipient_id"
+                style="@style/et_main_ot"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Account Number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_fund_account_no"
+                style="@style/et_main_ot"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="IFSC">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_fund_ifsc"
+                style="@style/et_main_ot"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="textCapCharacters" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Wallet Balance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_wallet_balance"
+                style="@style/et_main_ot"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Unsettled Amount">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_available_amount"
+                style="@style/et_main_ot"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_cashout_charges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_14sdp"
+            android:layout_gravity="right"
+            android:text="Charges &amp; Help?"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Amount">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_amount"
+                style="@style/et_main_ot"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Remarks">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_remark"
+                style="@style/et_main_ot"
+                android:inputType="textCapWords" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15.0dip"
+            android:weightSum="2.0">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <RadioButton
+                    android:id="@+id/radio_imps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:checked="true"
+                    android:text="IMPS"
+                    android:textColor="@color/btncolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:buttonTint="@color/btncolor"/>
+
+                <RadioButton
+                    android:id="@+id/radio_neft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.13"
+                    android:checked="false"
+                    android:text="NEFT"
+                    android:textColor="@color/btncolor"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold"
+                    android:buttonTint="@color/btncolor" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_request"
+        style="@style/btn_main"
+        android:text="Submit Request"/>
+
+</RelativeLayout>

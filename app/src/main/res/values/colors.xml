@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--#4BB4F5-->
+    <color name="colorPrimary">#435297</color>
+    <color name="colorPrimaryDark">#364987</color>
+    <color name="colorPrimaryDark_ll">#4F5EA3</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorPrimaryLight">#6183ff</color>
+    <color name="btncolor">@color/colorPrimary</color>
+    <color name="whitecolor">#FFFFFF</color>
+    <color name="black">#F000</color>
+    <color name="hintcolor">#efe8e8</color>
+    <color name="editHintColor">#bbb</color>
+    <color name="light_white">#f9f9f9</color>
+    <color name="colorLightPrimary">#f4d4d6</color>
+    <color name="manoj">#ec1524</color>
+    <color name="active_tab">#999999</color>
+    <color name="orange_logo_icon">#F27A3F</color>
+    <color name="btntextwhite">#ffffff</color>
+    <color name="ancolorprimar">#6d262b</color>
+    <color name="green">#ff2bbc31</color>
+    <color name="lightDarkGreen">#43af75</color>
+    <color name="offWhite">#f8f8f8</color>
+
+    <color name="red">#cc0000</color>
+    <color name="sky_blue">#039BE5</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="spinner_base_color">#44000000</color>
+    <color name="spinner_hint_text_color">#ffffcc</color>
+    <color name="spinnerColor">#f2f2f2</color>
+    <color name="color_grey">#555555</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="sp_itemListSelectedColor">#37b748</color>
+    <color name="sp_underlineColor">#999999</color>
+    <color name="sp_itemListHintBackgroundColor">#FFFFFF</color>
+    <color name="sp_itemListHintColor">@color/editHintColor</color>
+    <color name="sp_itemListColor">@color/colorPrimary</color>
+    <color name="sp_itemColor">@color/colorPrimary</color>
+    <color name="sp_floatingLabelColor">#1976D2</color>
+    <color name="sp_hintColor">@color/editHintColor</color>
+
+
+    <color name="status_r">#003874</color>
+    <color name="status_s">#43af75</color>
+    <color name="status_p">#fbbc05</color>
+    <color name="status_f">#c84e0c</color>
+    <color name="status_c">#f53138</color>
+
+    <color name="white_dull">#F3E1DFDF</color>
+    <color name="et_border_color_gray">#BDBDBD</color>
+    <color name="et_bg_color">#f6f6f6</color>
+    <color name="box_color">#6B6E6E6E</color>
+
+
+</resources>

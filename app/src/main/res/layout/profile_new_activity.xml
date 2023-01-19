@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_balance_request"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip"
+            android:orientation="horizontal"
+            android:background="@color/offWhite"
+            android:weightSum="1.0">
+
+            <ImageView
+                android:id="@+id/id_my_profile_picc"
+                android:layout_width="match_parent"
+                android:layout_height="100.0dip"
+                android:layout_weight="0.5"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/profile_defuilt" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10.0dip"
+                android:orientation="vertical"
+                android:layout_weight="0.5">
+                <TextView
+                    android:id="@+id/tv_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_profile_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textColor="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/profile_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange_logo_icon"
+                app:tabBackground="@drawable/tab_selected"
+                app:tabIndicatorColor="@color/black"
+                app:tabIndicatorHeight="2.0dip"
+                app:tabSelectedTextColor="@color/whitecolor"
+                app:tabTextColor="@color/hintcolor" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/profile_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </LinearLayout>
+
+
+</LinearLayout>

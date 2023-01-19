@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55.0dip"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10.0dip"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_bank_message"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:hint="Customer Mobile Number"
+                    style="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/edit_sender_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextLabel"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:hint="Select Bank Name"
+                    style="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/et_searchbank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextLabel"
+                        android:clickable="true"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_ifsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:hint="Enter IFSC Code ( Optional )"
+                    style="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/edit_ifsc_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextLabel"
+                        android:inputType="text"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    app:passwordToggleDrawable="@drawable/show_hide_password_black"
+                    app:passwordToggleEnabled="true"
+                    android:hint="Enter Account Number"
+                    style="@style/TextLabel">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edit_account_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        style="@style/TextLabel"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:hint="Enter Confirm Account Number"
+                    style="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/edit_confirm_account_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        style="@style/TextLabel"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:visibility="gone"
+                    android:hint="Enter Beneficiary Mobile Number">
+
+                    <EditText
+                        android:id="@+id/edit_beneficiary_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginRight="10.0dip"
+
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:padding="10.0dip"
+                        android:textColor="@color/black"
+                        android:background="@color/whitecolor" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:hint="Enter Beneficiary Name"
+                    style="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/edit_beneficiary_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TextLabel"
+
+                        android:inputType="text"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/addwithverify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:text="Auto fetch Beneficiary Name" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="Account verification fee will be applied on auto fetch beneficiary name"
+                    android:layout_marginTop="5dp"/>
+
+                <Button
+                    android:id="@+id/btn_add_beneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/rounded_btn_login"
+                    android:text="Add Beneficiary"
+                    android:textColor="@color/whitecolor" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

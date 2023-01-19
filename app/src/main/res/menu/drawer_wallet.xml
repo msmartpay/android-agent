@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:itemBackground="@color/whitecolor">
+    <item
+        android:id="@+id/balance_request"
+        android:icon="@drawable/wallet"
+        android:title="Balance Request" />
+    <item
+        android:id="@+id/trans_search"
+        android:icon="@drawable/transaction_search"
+        android:title="Transaction Search" />
+    <item
+        android:id="@+id/wallet_history"
+        android:icon="@drawable/wallet"
+        android:title="Wallet History" />
+    <item
+        android:id="@+id/my_earning"
+        android:icon="@drawable/my_earning"
+        android:title="My Earning" />
+</menu>

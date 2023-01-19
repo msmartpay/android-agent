@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+            android:id="@+id/sp_service_type"
+            style="@style/sp_material"
+            app:smsp_enableErrorLabel="false"
+            app:smsp_hint="Select Model Type"
+            app:smsp_itemColor="@color/sp_itemColor"
+            app:smsp_itemListColor="@color/sp_itemListColor"
+            app:smsp_itemListHintBackgroundColor="@color/sp_itemListHintBackgroundColor"
+            app:smsp_itemListHintColor="@color/sp_itemListHintColor"
+            app:smsp_itemSize="@dimen/sp_size"
+            app:smsp_selectedItemListColor="@color/sp_itemListSelectedColor"
+            app:smsp_underlineColor="@color/sp_underlineColor"
+            android:layout_weight="0.5"/>
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whitecolor"
+            android:drawableStart="@drawable/ic_search_grey_500_24dp"
+            android:drawablePadding="5dp"
+            android:hint="Search"
+            android:padding="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:layout_weight="0.5"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_date"
+        android:layout_below="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:weightSum="3.0">
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="5.0dip"
+            android:text="From "
+            android:textColor="@color/whitecolor"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="match_parent"
+            android:background="@color/whitecolor" />
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="5.0dip"
+            android:text="To "
+            android:textColor="@color/whitecolor"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="match_parent"
+            android:background="@color/whitecolor" />
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5.0dip">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search_white_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Search"
+                android:textColor="@color/whitecolor"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transactionList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_below="@+id/ll_date"
+        android:choiceMode="singleChoice"
+        android:paddingTop="5.0dip"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:weightSum="3.0">
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="5.0dip"
+            android:text="All"
+            android:textColor="@color/whitecolor"
+            android:textSize="16.0sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="match_parent"
+            android:background="@color/whitecolor" />
+
+        <TextView
+            android:id="@+id/tv_in"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="5.0dip"
+            android:text="In"
+            android:textColor="@color/whitecolor"
+            android:textSize="16.0sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1.0dip"
+            android:layout_height="match_parent"
+            android:background="@color/whitecolor" />
+
+        <TextView
+            android:id="@+id/tv_out"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="5.0dip"
+            android:text="Out"
+            android:textColor="@color/whitecolor"
+            android:textSize="16.0sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

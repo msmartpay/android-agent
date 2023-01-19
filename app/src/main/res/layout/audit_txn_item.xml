@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_1sdp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:background="@color/cardview_shadow_end_color">
+            <TextView
+                android:id="@+id/tv_txn_id"
+                style="@style/tv_kyc_item"
+                android:layout_gravity="start"
+                android:layout_marginTop="0dp"
+                android:text="txn id"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_service_name"
+                style="@style/tv_kyc_item"
+                android:layout_marginTop="3dp"
+                android:layout_below="@+id/tv_txn_id"
+                android:text="ser name" />
+            <TextView
+                android:id="@+id/tv_amt"
+                android:layout_marginTop="0dp"
+                android:layout_below="@+id/tv_service_name"
+                android:layout_alignParentStart="true"
+                style="@style/tv_kyc_item"
+                android:text="Amount"/>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_marginTop="03dp"
+                android:layout_below="@+id/tv_txn_id"
+                android:layout_alignParentEnd="true"
+                style="@style/tv_kyc_item"
+                android:text="date"/>
+            <TextView
+                android:id="@+id/tv_rrn"
+                android:layout_marginTop="03dp"
+                android:layout_below="@+id/tv_service_name"
+                android:layout_alignParentEnd="true"
+                style="@style/tv_kyc_item"
+                android:text="RRN"/>
+            <TextView
+                android:id="@+id/tv_remark"
+                android:layout_marginTop="03dp"
+                android:layout_below="@+id/tv_rrn"
+                android:layout_alignParentStart="true"
+                style="@style/tv_kyc_item"
+                android:text="Remark"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

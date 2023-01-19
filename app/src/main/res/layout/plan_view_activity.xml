@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_proceed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitecolor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20.0dip"
+        android:paddingTop="5.0dip"
+        android:paddingEnd="20.0dip">
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/spinner_mob_dth"
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_dropDownHintView="@layout/spinner_material_dropdown_hint_view"
+            app:ms_hintView="@layout/spinner_material_hint_view"
+            android:layout_marginRight="2.0dip"
+            android:entries="@array/plan_type"
+            app:ms_enableErrorLabel="false"
+            app:ms_hint="Type" />
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/spinner_oprater"
+            app:ms_dropDownHintView="@layout/spinner_material_dropdown_hint_view"
+            app:ms_hintView="@layout/spinner_material_dropdown_hint_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2.0dip"
+            app:ms_enableErrorLabel="false"
+            app:ms_hint="Operator" />
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/spinner_circle"
+            app:ms_dropDownHintView="@layout/spinner_material_dropdown_hint_view"
+            app:ms_hintView="@layout/spinner_material_hint_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2.0dip"
+            android:entries="@array/plan_circle"
+            app:ms_enableErrorLabel="false"
+            app:ms_hint="Circle" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

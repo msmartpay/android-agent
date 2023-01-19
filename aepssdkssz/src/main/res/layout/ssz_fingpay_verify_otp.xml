@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sszAePS_colorWhite"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/ssz_toolbar_white_custom" />
+    <LinearLayout
+        android:id="@+id/ll_otp"
+        android:layout_below="@+id/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_verify_otp_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/sszAePS_green"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Hello"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_otp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter OTP"
+            style="@style/SSZTextLabel">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:maxEms="4"
+                android:textColor="@color/sszAePS_blackcolor"
+                android:inputType="number"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btn_verify"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Verify OTP"
+            android:background="@drawable/ssz_rounded_btn_login"
+            android:textColor="@color/sszAePS_colorWhite"/>
+        <TextView
+            android:id="@+id/ssz_tv_resend"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Resend OTP"
+            android:textColor="@color/sszAePSColorPrimary"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>

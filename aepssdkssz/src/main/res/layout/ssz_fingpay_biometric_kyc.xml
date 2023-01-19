@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sszAePS_colorWhite"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/ssz_toolbar_white_custom" />
+
+    <LinearLayout
+        android:id="@+id/ll_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include_toolbar"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+            android:id="@+id/ssz_sp_model_type"
+            android:layout_marginTop="15dp"
+            style="@style/ssz_sp_material"
+            app:smsp_enableErrorLabel="false"
+            app:smsp_hint="Select Model Type"
+            app:smsp_itemColor="@color/sszAePS_sp_itemColor"
+            app:smsp_itemListColor="@color/sszAePS_sp_itemListColor"
+            app:smsp_itemListHintBackgroundColor="@color/sszAePS_sp_itemListHintBackgroundColor"
+            app:smsp_itemListHintColor="@color/sszAePS_sp_itemListHintColor"
+            app:smsp_itemSize="@dimen/ssz_sp_size"
+            app:smsp_selectedItemListColor="@color/sszAePS_sp_itemListSelectedColor"
+            app:smsp_underlineColor="@color/sszAePS_sp_underlineColor"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ssz_iv_fingerprint"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Scan Customer's Fingerprint"
+                    android:textColor="@color/sszAePS_editHintColor"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Fingerprint device not found,Contact the device and click here to reply"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/ssz_iv_fingerprint"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ssz_aeps_ic_baseline_fingerprint_24" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="3dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/ssz_iv_fingerprint"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="-5dp"
+                android:layout_marginBottom="-5dp"
+                android:background="@color/sszAePSColorPrimary" />
+
+            <RadioButton
+                android:id="@+id/ssz_rb_morph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view"
+                android:layout_marginStart="7dp"
+                android:checked="true"
+                android:text="Morpho_RD Service" />
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/ssz_cv_capture_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:text=""
+            android:textAllCaps="true"
+            android:textColor="@color/sszAePS_red" />
+
+        <Button
+            android:id="@+id/kyc_btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ssz_rounded_btn_login"
+            android:text="Scan and Submit"
+            android:textColor="@color/sszAePS_colorWhite" />
+    </LinearLayout>
+</RelativeLayout>

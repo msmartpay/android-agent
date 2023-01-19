@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:id="@+id/left_side"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="#ffffffff"
+        android:clickable="true">
+
+        <LinearLayout
+            android:id="@+id/uper_part"
+            android:layout_width="match_parent"
+            android:layout_height="120.0dip"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/drawer_pic"
+                android:layout_width="0.0dip"
+                android:layout_height="50.0dip"
+                android:layout_gravity="center"
+                android:layout_weight="0.3"
+                android:src="@drawable/profile_defuilt" />
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/drawer_agent_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="#ffffffff"
+                    android:textSize="14.0dip" />
+
+                <TextView
+                    android:id="@+id/drawer_email_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="distributor id"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/uper_part"
+            android:layout_marginBottom="35.0dip"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_recharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip">
+
+                    <ImageView
+                        android:id="@+id/prepaid"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:gravity="center|right"
+                        android:src="@drawable/prepaid" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:layout_toRightOf="@+id/prepaid"
+                        android:paddingTop="2.0dip"
+                        android:text="Recharge" />
+
+                    <ImageView
+                        android:id="@+id/iv_recharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:src="@drawable/open_add" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_hide_recharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_white"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.100000024dip"
+                        android:layout_marginLeft="40.0dip"
+                        android:background="#ff9aa4b0" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_recharge_prepaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/prepaid" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Prepaid Recharge"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_recharge_pendrive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/pendrive" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="DataCard Recharge"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_recharge_dth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/dth" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="DTH Recharge"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_billpayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/iv_post"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:gravity="center|right"
+                        android:src="@drawable/postpaid" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:layout_toRightOf="@+id/iv_post"
+                        android:paddingTop="2.0dip"
+                        android:paddingBottom="10.0dip"
+                        android:text="Bill Payments" />
+
+                    <ImageView
+                        android:id="@+id/iv_billpayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:src="@drawable/open_add" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_hide_billpayement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.100000024dip"
+                        android:layout_marginLeft="40.0dip"
+                        android:background="#ff9aa4b0" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_billpayment_postpaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/postpaid" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Postpaid Payment"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_billpayment_landline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/landline" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Landline Payment"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_billpayment_electric"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/electricity" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Electricity Payment"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_billpayment_insurance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/insurence" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Insurance Payment"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_billpayment_water"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/water" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Water Payment"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_billpayment_gas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/gas" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Gas Payment"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_dmr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/money_transfer" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Money Transfer"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_finance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip">
+
+                    <ImageView
+                        android:id="@+id/iv_finance1"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:gravity="center|right"
+                        android:src="@drawable/finance" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:layout_toRightOf="@+id/iv_finance1"
+                        android:paddingTop="2.0dip"
+                        android:paddingBottom="10.0dip"
+                        android:text="Finance" />
+
+                    <ImageView
+                        android:id="@+id/iv_finance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:src="@drawable/open_add" />
+                    //
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_hide_finance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_white"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.100000024dip"
+                        android:layout_marginLeft="40.0dip"
+                        android:background="#ff9aa4b0" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_finance_indo_nepal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/indo_nepal" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Ind-Nepal"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_aeps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/claimrefund" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Aeps"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_money_transfer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/money_transfer" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Money Transfer"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip">
+
+                    <ImageView
+                        android:id="@+id/iv_wallet1"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:gravity="center|right"
+                        android:src="@drawable/wallet" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:layout_toRightOf="@+id/iv_wallet1"
+                        android:paddingTop="2.0dip"
+                        android:paddingBottom="10.0dip"
+                        android:text="My Wallet" />
+
+                    <ImageView
+                        android:id="@+id/iv_wallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="false"
+                        android:src="@drawable/open_add" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_hide_wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_white"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.100000024dip"
+                        android:layout_marginLeft="40.0dip"
+                        android:background="#ff9aa4b0" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_wallet_bal_req"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/wallet" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Balance Request"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_wallet_trans_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/transaction_search" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Transaction Search"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_wallet_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/wallet_history" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="Wallet History"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_wallet_earning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10.0dip"
+                        android:onClick="start"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30.0dip"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="20.0dip"
+                            android:layout_height="20.0dip"
+                            android:gravity="center|right"
+                            android:src="@drawable/my_earning" />
+
+                        <TextView
+                            style="@style/tv_drawer"
+                            android:paddingBottom="10.0dip"
+                            android:text="My Earning"
+                            android:textSize="13.0dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+
+                <LinearLayout
+                    android:id="@+id/mprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:onClick="start"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip">
+
+                    <ImageView
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:src="@drawable/profile" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:paddingTop="2.0dip"
+                        android:text="My Profile" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+
+                <LinearLayout
+                    android:id="@+id/cpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:onClick="start"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:src="@drawable/change_password" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:paddingTop="2.0dip"
+                        android:text="Reset Password" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+
+                <LinearLayout
+                    android:id="@+id/about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:onClick="start"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:src="@drawable/about" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:paddingTop="2.0dip"
+                        android:text="About Us" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+
+                <LinearLayout
+                    android:id="@+id/help_support"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:onClick="start"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingRight="16.0dip"
+                    android:paddingBottom="5.0dip">
+
+                    <ImageView
+                        android:layout_width="25.0dip"
+                        android:layout_height="25.0dip"
+                        android:src="@drawable/help" />
+
+                    <TextView
+                        style="@style/tv_drawer"
+                        android:paddingTop="2.0dip"
+                        android:paddingBottom="10.0dip"
+                        android:text="Help" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.100000024dip"
+                    android:layout_marginLeft="40.0dip"
+                    android:background="#ff9aa4b0" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/hintcolor"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:onClick="start"
+            android:orientation="horizontal"
+            android:paddingLeft="16.0dip"
+            android:paddingTop="5.0dip"
+            android:paddingRight="16.0dip"
+            android:paddingBottom="5.0dip">
+
+            <ImageView
+                android:layout_width="25.0dip"
+                android:layout_height="25.0dip"
+                android:src="@drawable/logout" />
+
+            <TextView
+                style="@style/tv_drawer"
+                android:paddingTop="2.0dip"
+                android:text="Logout" />
+
+            <TextView
+                android:id="@+id/tv_version_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="2.0dip"
+                android:text="version"
+                android:textColor="@color/editHintColor" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

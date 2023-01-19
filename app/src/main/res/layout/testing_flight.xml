@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/layoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="170.0dip"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/trip_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5.0dip"
+                android:background="@drawable/border_line_white"
+                android:gravity="center"
+                android:padding="10.0dip"
+                android:text="One Way"
+                android:textColor="@color/whitecolor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:background="@drawable/border_line_white"
+                android:gravity="center"
+                android:padding="10.0dip"
+                android:text="Round Trip"
+                android:textColor="@color/whitecolor"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trip_type"
+            android:layout_marginTop="10.0dip"
+            android:orientation="horizontal"
+            android:weightSum="2.1">
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="20.0dip"
+                android:layout_weight="1.0"
+                android:background="@drawable/border_line_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10.0dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From"
+                    android:textColor="@color/whitecolor"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ghaziabad"
+                    android:textAllCaps="true"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="20.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/swap_flight" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="20.0dip"
+                android:layout_weight="1.0"
+                android:background="@drawable/border_line_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10.0dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="To"
+                    android:textColor="@color/whitecolor"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Varanasi"
+                    android:textAllCaps="true"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="20.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutTop"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45.0dip"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:paddingLeft="5.0dip"
+        android:paddingRight="5.0dip">
+
+        <RelativeLayout
+            android:id="@+id/layoutBottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.0dip"
+            android:layout_alignParentBottom="true">
+
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/journey_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="5.0dip"
+                card_view:cardElevation="2.0dip"
+                card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10.0dip"
+                    android:orientation="horizontal"
+                    android:weightSum="1.0">
+
+                    <LinearLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="20.0dip"
+                                android:src="@drawable/calender" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Depart"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12.0sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linear_journey_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="1.0">
+
+                            <LinearLayout
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.8"
+                                android:orientation="vertical"
+                                android:paddingLeft="5.0dip"
+                                android:paddingTop="5.0dip">
+
+                                <TextView
+                                    android:id="@+id/tview_dapart_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="20.0dip"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tview_dapart_month_year"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Oct 2017, Tue"
+                                    android:textColor="@color/colorPrimary" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                android:gravity="center">
+
+                                <View
+                                    android:layout_width="1.0dip"
+                                    android:layout_height="50.0dip"
+                                    android:background="@color/colorPrimaryDark" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="20.0dip"
+                                android:src="@drawable/calender" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Return"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12.0sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="5.0dip"
+                            android:paddingTop="5.0dip">
+
+                            <TextView
+                                android:id="@+id/tview_return_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="20.0dip"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tview_return_month_year"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Oct 2017, Tue"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/design2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/journey_date"
+                card_view:cardCornerRadius="5.0dip"
+                card_view:cardElevation="2.0dip"
+                card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10.0dip"
+                        android:weightSum="3.0">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Adults\n(12+ Years)"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Children\n(2-11 Years)"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Infant\n(0 - 2 Years)"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@color/hintcolor"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/trangle_corner" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@color/hintcolor"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/trangle_corner" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:background="@color/hintcolor"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/trangle_corner" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="3.0">
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@color/hintcolor"
+                            android:gravity="center"
+                            android:padding="10.0dip">
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:src="@drawable/minus" />
+
+                            <TextView
+                                android:layout_width="20.0dip"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="20.0sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20.0dip"
+                                android:layout_marginLeft="5.0dip"
+                                android:src="@drawable/add" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2.0dip"
+                            android:layout_weight="1.0"
+                            android:background="@color/hintcolor"
+                            android:gravity="center"
+                            android:padding="10.0dip">
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:src="@drawable/minus" />
+
+                            <TextView
+                                android:layout_width="20.0dip"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="20.0sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20.0dip"
+                                android:layout_marginLeft="5.0dip"
+                                android:src="@drawable/add" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:background="@color/hintcolor"
+                            android:gravity="center"
+                            android:padding="10.0dip">
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20.0dip"
+                                android:layout_marginRight="5.0dip"
+                                android:src="@drawable/minus" />
+
+                            <TextView
+                                android:layout_width="20.0dip"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="20.0sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20.0dip"
+                                android:layout_marginLeft="5.0dip"
+                                android:src="@drawable/add" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/design2"
+                card_view:cardCornerRadius="5.0dip"
+                card_view:cardElevation="2.0dip"
+                card_view:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.0dip"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/border_line"
+                        android:gravity="center"
+                        android:padding="10.0dip"
+                        android:text="Economy"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5.0dip"
+                        android:layout_marginRight="5.0dip"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/border_line"
+                        android:gravity="center"
+                        android:padding="10.0dip"
+                        android:text="Business"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5.0dip"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/border_line"
+                        android:gravity="center"
+                        android:padding="10.0dip"
+                        android:text="First"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/border_line"
+                        android:gravity="center"
+                        android:padding="10.0dip"
+                        android:text="Premium"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="1.0dip"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:padding="10.0dip"
+        android:weightSum="1.0">
+
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="Search a Flight"
+            android:textAllCaps="true"
+            android:textColor="@color/whitecolor"
+            android:textSize="18.0sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:src="@drawable/ic_navigate_next_white_24dp" />
+    </LinearLayout>
+</RelativeLayout>

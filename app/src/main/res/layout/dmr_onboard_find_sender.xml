@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitecolor"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar_white_custom" />
+    <LinearLayout
+        android:id="@+id/ll_otp"
+        android:layout_below="@+id/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            style="@style/LeftTextLabelHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Search" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Number"
+            style="@style/TextLabel">
+
+            <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/tie_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="number"
+                android:maxLines="1"
+                android:maxEms="4"
+                style="@style/TextLabel"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_findsender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Get Customer"
+            style="@style/confirm_button"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Service Charge for Customer"
+                style="@style/TextLabel"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20.0dip"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/_2sdp"
+                android:background="@drawable/border_square_primary_color">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/TextLabelHeading"
+                        android:layout_height="90dp"
+                        android:layout_weight="1.0"
+                        android:text="Transaction Amount"
+                        android:background="@color/spinner_hint_text_color"/>
+
+
+                    <TextView
+                        style="@style/TextLabelHeading"
+                        android:layout_height="90dp"
+                        android:layout_weight="1.0"
+                        android:text="Charges"
+                        android:background="@color/spinner_hint_text_color"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2.0">
+
+                    <TextView
+                        style="@style/TextLabelNormal"
+                        android:layout_weight="1.0"
+                        android:text="100-5000"
+                        android:background="@color/offWhite"/>
+
+
+                    <TextView
+                        style="@style/TextLabelNormal"
+                        android:layout_weight="1.0"
+                        android:text="1.0%"
+                        android:background="@color/offWhite"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

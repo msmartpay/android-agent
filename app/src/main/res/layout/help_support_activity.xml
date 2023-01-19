@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20.0dip">
+
+            <ImageView
+                android:layout_width="200.0dip"
+                android:layout_height="150.0dip"
+                android:layout_gravity="center"
+                android:src="@drawable/help_support_icon" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_line"
+                    android:gravity="center"
+                    android:padding="10.0dip"
+                    android:text="FRIENDLY SUPPORT"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10.0dip"
+                android:background="@color/colorLightPrimary"
+                android:padding="5.0dip">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Feel Free to contact us : "
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:id="@+id/confirm_policy_h_name"
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Email ID"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/confirm_contact"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5.0dip"
+                android:weightSum="2.0">
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.7"
+                    android:text="Contact No."
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/tv_details"
+                    android:layout_weight="0.1"
+                    android:text=":"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/help_contact"
+                    style="@style/tv_details"
+                    android:layout_weight="1.2"
+                    android:text="+91 9711402774\nTiming (10:00 AM to 6:30 PM)" />/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10.0dip"
+                android:background="@color/colorLightPrimary"
+                android:padding="5.0dip">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Call us :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="5.0dip">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="right"
+                    android:text="Click to call"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/id_support_callbtn"
+                    android:layout_width="0.0dip"
+                    android:layout_height="50.0dip"
+                    android:layout_weight="1.0"
+                    android:src="@drawable/help_call_icon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10.0dip"
+                android:background="@color/colorLightPrimary"
+                android:padding="5.0dip">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Visit us :"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10.0dip"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="5.0dip">
+
+                <TextView
+                    android:id="@+id/website_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/website"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="17.0dip"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

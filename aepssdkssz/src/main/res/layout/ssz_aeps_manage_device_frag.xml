@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/sszAePS_colorWhite">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage Device"
+                android:textColor="@color/sszAePSColorPrimary"
+                android:textSize="22sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_d_type"
+                style="@style/til_main"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Device Type">
+
+                <EditText
+                    android:id="@+id/et_d_type"
+                    style="@style/et_main"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:background="@color/sszAePS_colorWhite"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_d_number"
+                style="@style/til_main"
+                android:layout_marginTop="35dp"
+                android:hint="Device Number">
+
+                <EditText
+                    android:id="@+id/et_d_number"
+                    style="@style/et_main"
+                    android:maxLength="25"
+                    android:background="@color/sszAePS_colorWhite"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginTop="20dp"
+                app:backgroundTint="@color/sszAePSColorPrimary"
+                app:srcCompat="@drawable/ssz_aeps_ic_baseline_arrow_forward_24"
+                app:tint="@color/sszAePS_colorWhite" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <include
+        layout="@layout/ssz_aeps_copyrights_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

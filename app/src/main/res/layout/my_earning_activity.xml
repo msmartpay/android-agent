@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16.0dip"
+        android:layout_marginTop="20.0dip"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_border_r"
+            android:orientation="vertical"
+            android:padding="30.0dip">
+
+            <TextView
+                android:id="@+id/turnoverdetails"
+                android:layout_width="150.0dip"
+                android:layout_height="30.0dip"
+                android:layout_marginTop="5.0dip"
+                android:layout_marginRight="10.0dip"
+                android:layout_marginBottom="10.0dip"
+                android:ems="10"
+                android:text="Your Earning Details"
+                android:textColor="#ff000000"
+                android:textSize="16.0dip"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:id="@+id/table1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:id="@+id/row1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/t1"
+                        android:layout_width="150.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:ems="10"
+                        android:text="Total Sale"
+                        android:textColor="#ff000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/t2"
+                        android:layout_width="10.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:ems="10"
+                        android:text=":"
+                        android:textColor="#ff000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/totalReq"
+                        android:layout_width="100.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:ems="10"
+                        android:text="1000"
+                        android:textColor="@color/colorPrimary" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/t11"
+                        android:layout_width="150.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:ems="10"
+                        android:text="Total Deduction"
+                        android:textColor="#ff000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/t22"
+                        android:layout_width="10.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:ems="10"
+                        android:text=":"
+                        android:textColor="#ff000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/totaldeduction"
+                        android:layout_width="100.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:ems="10"
+                        android:text="1000"
+                        android:textColor="@color/colorPrimary" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/row3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/t111"
+                        android:layout_width="150.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:ems="10"
+                        android:text="Total Earning"
+                        android:textColor="#ff000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/t222"
+                        android:layout_width="10.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:ems="10"
+                        android:text=":"
+                        android:textColor="#ff000000"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/totalcomm"
+                        android:layout_width="100.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginTop="5.0dip"
+                        android:ems="10"
+                        android:text="1000"
+                        android:textColor="@color/colorPrimary" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16.0dip"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10.0dip"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15.0dip"
+                android:background="@drawable/border_line"
+                android:gravity="center"
+                android:padding="10.0dip"
+                android:text="My Earning"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5.0dip"
+                android:layout_weight="0.9"
+                android:textColorHint="@color/editHintColor">
+
+                <EditText
+                    android:id="@+id/my_date"
+                    style="@style/et_electricity_payment"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="Select Date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/iv_calender"
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10.0dip"
+                android:layout_weight="0.1"
+                android:src="@drawable/calender" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/search"
+        style="@style/btn_main"
+        android:layout_alignParentBottom="true"
+        android:text="submit" />
+</RelativeLayout>
