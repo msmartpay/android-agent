@@ -105,12 +105,13 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 
 public interface AppMethods {
-    String VERSION = "1.8";
-    String DOMAIN = "https://srkmoney.in/";
+    String VERSION = "1.0";
+    String DOMAIN = "https://android.msmartpay.in/";
+
     String BASE_URL = DOMAIN + "MRA"+VERSION+"/resources/";
 
 
-    String DSID = "DS3001";
+    String DSID = "DSUP33273001";
     String CLIENT = "";
 
     String environment = "production";

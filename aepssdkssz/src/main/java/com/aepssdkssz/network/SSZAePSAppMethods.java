@@ -16,8 +16,8 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface SSZAePSAppMethods {
-    String VERSION = "1.8";
-    String DOMAIN = "https://srkmoney.in/";
+    String VERSION = "1.0";
+    String DOMAIN = "https://android.msmartpay.in/";
     String BASE_URL = DOMAIN + "MRA"+VERSION+"/resources/";
 
 
