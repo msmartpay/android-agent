@@ -3,9 +3,9 @@
 
     <color name="colorPrimary">#9a2ead</color>
     <color name="colorPrimaryDark">#7d3789</color>
-    <color name="colorAccent">#FF4081</color>
     <color name="colorAccent">@color/colorPrimary</color>
-    <color name="colorPrimaryLight">#6183ff</color>
+    <color name="colorPrimaryLight">#C19A2EAD</color>
+    <color name="colorPrimaryDark_ll">#7d3789</color>
     <color name="btncolor">@color/colorPrimary</color>
     <color name="whitecolor">#FFFFFF</color>
     <color name="black">#F000</color>
