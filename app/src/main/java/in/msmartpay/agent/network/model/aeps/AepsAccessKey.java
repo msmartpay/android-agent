@@ -13,6 +13,25 @@ public class AepsAccessKey {
     String logo;
     String aeps_status;
     String aadharpay_status;
+    String psPartnerId;
+    String psPartnerKey;
+
+    public String getPsPartnerId() {
+        return psPartnerId;
+    }
+
+    public void setPsPartnerId(String psPartnerId) {
+        this.psPartnerId = psPartnerId;
+    }
+
+    public String getPsPartnerKey() {
+        return psPartnerKey;
+    }
+
+    public void setPsPartnerKey(String psPartnerKey) {
+        this.psPartnerKey = psPartnerKey;
+    }
+
 
     public String getAeps_status() {
         return aeps_status;

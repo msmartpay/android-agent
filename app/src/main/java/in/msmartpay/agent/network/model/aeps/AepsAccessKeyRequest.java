@@ -8,6 +8,17 @@ public class AepsAccessKeyRequest {
     @SerializedName("Key")
     String txn_key;
 
+    @SerializedName("provider")
+    String provider;
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
     public String getAgent_id() {
         return agent_id;
     }

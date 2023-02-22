@@ -1,6 +1,8 @@
 package com.aepssdkssz.util;
 
 public interface Constants {
+
+    String AGENCY_NAME = "agency_name";
     String NUMBER = "mobilenumber";
     String INITIATOR_ID = "initiator_id";
     String ENVIRONMENT = "environment";
@@ -52,4 +54,9 @@ public interface Constants {
     String BANK_NAME="bankName";
 
     String WADH="E0jzJ/P8UopUHAieZn8CKqS4WPMi5ZSYXgfnlfkWjrc=";
+
+
+    String AEPS_BANK1 ="aepsBank1" ;
+    String AEPS_BANK2 ="aepsBank2" ;
+    String AEPS_BANK3 ="aepsBank3" ;
 }

@@ -58,6 +58,7 @@ import in.msmartpay.agent.network.model.dmr.SenderFindRequest;
 import in.msmartpay.agent.network.model.dmr.SenderHistoryResponse;
 import in.msmartpay.agent.network.model.dmr.SenderRegisterRequest;
 import in.msmartpay.agent.network.model.dmr.SenderRegisterResponse;
+import in.msmartpay.agent.network.model.dmr.ps.PSSenderRegisterRequest;
 import in.msmartpay.agent.network.model.fastag.FastagFetchRequest;
 import in.msmartpay.agent.network.model.fastag.FastagFetchResponse;
 import in.msmartpay.agent.network.model.fastag.FastagOperatorResponse;
@@ -103,6 +104,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Url;
 
 public interface AppMethods {
     String VERSION = "1.0";
@@ -120,6 +122,66 @@ public interface AppMethods {
     String LOGIN = "Login";
     String WS = "WS";
     String TH = "TH";
+
+
+    String DMR_PAYSPRINT="Paysprint",DMR_LEVIN="levin";
+
+    String FindSender="/FindSender";
+    String DeleteBene="/DeleteBene";
+    String RegisterSender="/RegisterSender";
+    String VerifySender="/VerifySender";
+    String BankDetails="/BankDetails";
+    String GetBankList="/GetBankList";
+    String SenderHistory="/SenderHistory";
+    String AddBeneAfterVerify="/AddBeneAfterVerify";
+    String AccountVerifyByBankAccountIFSC="/AccountVerifyByBankAccountIFSC";
+    String InitiateTransaction="/InitiateTransaction";
+    String TransStatus="/TransStatus";
+    String RefundTransaction="/RefundTransaction";
+    String RefundDMRConfirm="/RefundDMRConfirm";
+
+
+    /******* DMT *******/
+
+    @POST
+    Call<SenderDetailsResponse> findSenderDetails(@Url String url, @Body SenderFindRequest request);
+
+    @POST
+    Call<SenderRegisterResponse> registerSender(@Url String url,@Body PSSenderRegisterRequest request);
+
+    @POST
+    Call<SenderRegisterResponse> registerSenderConfirm(@Url String url,@Body PSSenderRegisterRequest request);
+
+    @POST
+    Call<BankListDmrResponse> getBankListDmr(@Url String url,@Body BankRequest request);
+
+    @POST
+    Call<BankDetailsDmrResponse> getBankDetailsDmr(@Url String url,@Body BankRequest request);
+
+    @POST
+    Call<AddBeneficiaryResponse> addBeneficiary(@Url String url,@Body AddBeneficiaryRequest request);
+
+    @POST
+    Call<MainResponse2> deleteBeneficiary(@Url String url, @Body DeleteBeneRequest request);
+
+    @POST
+    Call<SenderHistoryResponse> senderHistory(@Url String url,@Body SenderFindRequest request);
+
+    @POST
+    Call<AccountVerifyResponse> verifyAccount(@Url String url,@Body AccountVerifyRequest request);
+
+    @POST
+    Call<MoneyTransferResponse> moneyTransfer(@Url String url,@Body MoneyTransferRequest request);
+
+    @POST
+    Call<RefundLiveStatusResponse> transStatus(@Url String url,@Body RefundLiveStatusRequest request);
+
+    @POST
+    Call<MainResponse2> refundTransaction(@Url String url,@Body RefundLiveStatusRequest request);
+
+    @POST
+    Call<MainResponse2> refundTransactionConfirm(@Url String url,@Body RefundLiveStatusRequest request);
+
 
     @POST(LOGIN + "/Login")
     Call<LoginResponse> login(@Body LoginRequest request);

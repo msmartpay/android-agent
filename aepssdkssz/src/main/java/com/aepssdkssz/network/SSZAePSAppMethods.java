@@ -10,6 +10,8 @@ import com.aepssdkssz.network.model.fingpayonboard.FingpayOnboardResponse;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayOnboardUserRequest;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayStateResponse;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayUserRequest;
+import com.aepssdkssz.paysprint.model.PaysprintAepsRequest;
+import com.aepssdkssz.paysprint.model.PaysprintAepsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -30,6 +32,11 @@ public interface SSZAePSAppMethods {
 
     @POST("aeps/ipay-aeps/update-device")
     Call<MainResponse> updateDevice(@Body DeviceUpdateRequest request);
+
+    //PaySprint AEPS
+    @POST("aeps/paysprint-aeps-transaction")
+    Call<PaysprintAepsResponse> paySprintTransaction(@Body PaysprintAepsRequest request);
+
 
     //FINGPAY AEPS
     @POST("fingpay/validate-aeps-user")

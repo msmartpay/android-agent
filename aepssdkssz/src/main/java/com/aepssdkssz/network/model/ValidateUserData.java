@@ -35,6 +35,17 @@ public class ValidateUserData {
 
     private String partner_contact_us;
 
+    private BanksStatus bank;
+
+    public BanksStatus getBank() {
+        return bank;
+    }
+
+    public void setBank(BanksStatus bank) {
+        this.bank = bank;
+    }
+
+
     public boolean isKyc() {
         return kyc;
     }

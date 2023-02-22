@@ -28,6 +28,7 @@
     <string name="payment_sdus_bank">Please Select Bank</string>
     <string name="payment_sdus_device">Select Device Type</string>
 
+    <string name="select_aeps_bank_pipe">Select AePS Bank Pipe</string>
     <string name="note_1">Only E - aadhar will be accepted.</string>
     <string-array name="notes">
         <item>Only E - aadhar will be accepted.</item>

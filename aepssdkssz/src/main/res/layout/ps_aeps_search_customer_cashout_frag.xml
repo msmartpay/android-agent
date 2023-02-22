@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sszAePS_transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@color/sszAePS_transparent"
+        android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/sszAePS_colorWhite">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@+id/tv_custtext"
+                        android:text="Purpose of Payment"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="1.0">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_withdrawal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                style="@style/tv_cashout_main_large"
+                                android:text="Cash\nWithdrawal"
+                                android:textColor="@color/sszAePS_colorWhite"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_mini_statement"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/tv_cashout_main_large"
+                                android:text="Mini\nStatement"
+                                android:textColor="@color/sszAePS_colorWhite"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_balance_enquiry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/tv_cashout_main_large"
+                                android:text="Balance\nEnquiry"
+                                android:textColor="@color/sszAePS_colorWhite"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/rl_aadhaarpay"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                style="@style/tv_cashout_main_large"
+                                android:text="Aadhaar\nPay"
+                                android:textColor="@color/sszAePS_colorWhite"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_customer_mobile"
+                        style="@style/til_main"
+                        android:layout_marginTop="15dp"
+                        android:hint="Customer Mobile Number">
+
+                        <EditText
+                            android:id="@+id/et_customer_mobile"
+                            style="@style/et_main"
+                            android:background="@color/sszAePS_colorWhite"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:maxLength="10"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_aadhaar"
+                        style="@style/til_main"
+                        android:layout_marginTop="15dp"
+                        android:hint="Customer Aadhaar Number">
+
+                        <EditText
+                            android:id="@+id/et_aadhaar"
+                            style="@style/et_main"
+                            android:inputType="number"
+                            android:background="@color/sszAePS_colorWhite"
+                            android:lines="1"
+                            android:maxLength="12"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@+id/tv_custtext"
+                        android:text="Device"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_select_device"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1.0">
+
+                        <TextView
+                            android:id="@+id/tv_select_device"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                            android:padding="10dp"
+                            android:text="@string/payment_sdus_device"
+                            android:textSize="10sp"
+                            android:layout_weight="0.9"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                            android:drawableEnd="@drawable/ssz_aeps_ic_baseline_keyboard_arrow_down_24"
+                            android:text="..."
+                            android:layout_weight="0.1"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@+id/tv_custtext"
+                        android:text="Bank"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_select_bank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1.0">
+
+                        <TextView
+                            android:id="@+id/tv_select_bank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                            android:padding="10dp"
+                            android:text="@string/payment_sdus_bank"
+                            android:textSize="10sp"
+                            android:layout_weight="0.9"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                            android:drawableEnd="@drawable/ssz_aeps_ic_baseline_keyboard_arrow_down_24"
+                            android:text="..."
+                            android:layout_weight="0.1"/>
+                    </LinearLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Amount">
+
+                            <EditText
+                                android:id="@+id/et_amount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:background="@color/sszAePS_colorWhite"
+                                android:lines="1"
+                                android:maxLines="1"
+                                android:scrollHorizontally="true" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="15.0dip"
+                        android:weightSum="2.0">
+
+                        <RadioGroup
+                            android:id="@+id/bankRadioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1.0">
+
+                            <RadioButton
+                                android:id="@+id/radio_bank1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:buttonTint="@color/sszAePSColorPrimary"
+                                android:text="bank1"
+                                android:textColor="@color/sszAePSColorPrimary"
+                                android:textSize="14.0dip"
+                                android:textStyle="bold" />
+
+                            <RadioButton
+                                android:id="@+id/radio_bank2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="0.13"
+                                android:checked="false"
+                                android:text="bank2"
+                                android:textColor="@color/sszAePSColorPrimary"
+                                android:textSize="14.0sp"
+                                android:textStyle="bold"
+                                android:buttonTint="@color/sszAePSColorPrimary" />
+                            <RadioButton
+                                android:id="@+id/radio_bank3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="0.13"
+                                android:checked="false"
+                                android:text="bank3"
+                                android:textColor="@color/sszAePSColorPrimary"
+                                android:textSize="14.0sp"
+                                android:textStyle="bold"
+                                android:buttonTint="@color/sszAePSColorPrimary" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                   <!-- <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/sw_send_receipt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Send transaction receipt to customer's mobile (you will be charged extra 0.50 if you otp it)" />
+                    </LinearLayout>-->
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/iv_fingerprint"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:text="Scan Customer's Fingerprint"
+                                android:textColor="@color/sszAePS_editHintColor"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:text="Fingerprint device not found,Contact the device and click here to reply"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/iv_fingerprint"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ssz_aeps_ic_baseline_fingerprint_24" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="3dp"
+                            android:layout_height="20dp"
+                            android:layout_below="@+id/iv_fingerprint"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="-5dp"
+                            android:layout_marginBottom="-5dp"
+                            android:background="@color/sszAePSColorPrimary" />
+
+                        <RadioButton
+                            android:id="@+id/rb_morph"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/view"
+                            android:layout_marginStart="7dp"
+                            android:checked="true"
+                            android:text="Select RD Service" />
+
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/cv_capture_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="0%"
+                        android:textAllCaps="true"
+                        android:textColor="@color/sszAePS_red" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@+id/tv_custtext"
+                        android:text="Note:"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@+id/tv_custtext"
+                        android:text="As per the UIDAI guidelines,customers are not applicable to give any service charge for AePS transaction"
+                        android:textColor="@color/sszAePS_blackcolor"
+                        android:textSize="12sp" />
+
+
+                    <Button
+                        android:id="@+id/fab_cashout"
+                        android:layout_marginTop="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ssz_rounded_btn_login"
+                        android:textColor="@color/sszAePS_colorWhite"
+                        android:text="Scan and Proceed"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+        <include
+            layout="@layout/ssz_aeps_copyrights_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

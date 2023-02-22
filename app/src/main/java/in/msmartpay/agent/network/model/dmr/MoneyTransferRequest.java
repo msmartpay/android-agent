@@ -19,6 +19,16 @@ public class MoneyTransferRequest {
     private String latitude;
     private String longitude;
     private String ip;
+    private String transactionPin;
+
+    public String getTransactionPin() {
+        return transactionPin;
+    }
+
+    public void setTransactionPin(String transactionPin) {
+        this.transactionPin = transactionPin;
+    }
+
 
     public String getAgentID() {
         return AgentID;

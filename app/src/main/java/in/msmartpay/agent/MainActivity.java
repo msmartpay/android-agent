@@ -40,6 +40,7 @@ import in.msmartpay.agent.claimrefund.ClaimHistoryActivity;
 import in.msmartpay.agent.collectBanks.CollectBankActivity;
 import in.msmartpay.agent.commission.CommissionActivity;
 import in.msmartpay.agent.dmr.onboard.FindSenderDialog;
+import in.msmartpay.agent.dmrPaySprint.onboard.PSFindSenderDialog;
 import in.msmartpay.agent.fingpaymatm.FingpayMATMActivity;
 import in.msmartpay.agent.helpAndSupport.AboutUsWebViewActivity;
 import in.msmartpay.agent.helpAndSupport.HelpSupportActivity;
@@ -357,6 +358,12 @@ public class MainActivity extends BaseActivity{
                 intent.putExtra("transaction_type",Keys.FINGPAY);
 
                 startActivity(intent);
+            }else if (view.getId() == R.id.id_paysprint_aeps) {
+                view.getResources().getColor(R.color.active_tab);
+                Intent intent = new Intent(this, AEPSSDKActivity.class);
+                intent.putExtra("transaction_type",Keys.PAY_SPRINT);
+
+                startActivity(intent);
             }else if (view.getId() == R.id.id_cash_withdrawal) {
                 view.getResources().getColor(R.color.active_tab);
                 Intent intent = new Intent(this, AEPSSDKActivity.class);
@@ -382,6 +389,10 @@ public class MainActivity extends BaseActivity{
             }else if (view.getId() == R.id.id_dmr1 ) {
                 view.getResources().getColor(R.color.active_tab);
                 FindSenderDialog.showDialog(getSupportFragmentManager());
+            }
+            else if (view.getId() == R.id.id_dmr1 ) {
+                view.getResources().getColor(R.color.active_tab);
+                PSFindSenderDialog.showDialog(getSupportFragmentManager());
             }
             else if (view.getId() == R.id.id_account_opening) {
                 generateAccountOpeningURL();

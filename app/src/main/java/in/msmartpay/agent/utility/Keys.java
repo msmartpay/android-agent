@@ -118,4 +118,10 @@ public interface Keys {
     String MPOS_SERIAL_NUM = "MPOS_SERIAL_NUMBER";
     String ERROR_MSG = "ERROR_MSG";
     String MOBILE = "MOBILE";
+    String PAY_SPRINT = "paysprint";
+    String DYNAMIC_DMR_VENDOR = "dynamicDmr";
+    String OTPREFID = "OTPREFID";
+    String REGISTER_STATE = "state";
+    String USER_DMR_VENDOR = "userDmrVendor";
+    String TPIN_STATUS="tpinStatus";
 }

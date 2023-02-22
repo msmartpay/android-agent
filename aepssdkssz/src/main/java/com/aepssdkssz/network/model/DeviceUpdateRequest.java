@@ -4,6 +4,25 @@ public class DeviceUpdateRequest {
     private String device_number;
     private String device_type;
     private String user_code;
+    private String AgentID;
+    private String Key;
+    public String getAgentID() {
+        return AgentID;
+    }
+
+    public void setAgentID(String agentID) {
+        AgentID = agentID;
+    }
+
+    public String getKey() {
+        return Key;
+    }
+
+    public void setKey(String key) {
+        Key = key;
+    }
+
+
 
     public String getDevice_number() {
         return device_number;

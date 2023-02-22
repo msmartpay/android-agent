@@ -17,6 +17,28 @@ public class SenderDetailsResponse {
     @SerializedName("Status")
     private String mStatus;
 
+    @SerializedName("otp_required")
+    private int otpRequired;
+    @SerializedName("otp_ref_id")
+    private String otpRefId;
+
+    public int getOtpRequired() {
+        return otpRequired;
+    }
+
+    public void setOtpRequired(int otpRequired) {
+        this.otpRequired = otpRequired;
+    }
+
+    public String getOtpRefId() {
+        return otpRefId;
+    }
+
+    public void setOtpRefId(String otpRefId) {
+        this.otpRefId = otpRefId;
+    }
+
+
     public List<SenderBeneList> getBeneList() {
         return mBeneList;
     }

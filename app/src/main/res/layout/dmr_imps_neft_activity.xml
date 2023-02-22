@@ -15,6 +15,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10.0dip">
+            <TextView
+                android:id="@+id/dmr_txn_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10.0dip"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="14.0sp"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

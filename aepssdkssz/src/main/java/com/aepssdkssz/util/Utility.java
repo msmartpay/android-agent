@@ -3,8 +3,12 @@ package com.aepssdkssz.util;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,6 +17,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.content.ContextCompat;
@@ -372,5 +378,43 @@ public class Utility {
             }
         });
     }
+
+    public static boolean isAppInstalled(Context context, String packageName) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageName, 0);
+            return true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    public static boolean searchPackageName(Context context,String packageName){
+        final PackageManager pm = context.getPackageManager();
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.setPackage(packageName);
+        //intent.setAction();
+        List<ResolveInfo> resolveInfoList = pm.queryIntentActivities(intent, 0);
+        //L.m2("searchPackageName",resolveInfoList.isEmpty()+"");
+        return !resolveInfoList.isEmpty();
+    }
+    public static void openPlayStoreApp(String packageName,
+                                        ActivityResultLauncher<Intent> openPlayStoreLauncher) {
+        Uri uri = Uri.parse("market://details?id=" + packageName);
+        Intent goToMarketIntent = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        try {
+            openPlayStoreLauncher.launch(goToMarketIntent);
+            // context.startActivity(goToMarketIntent, null);
+        } catch (ActivityNotFoundException e) {
+            Intent intent = new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)
+            );
+            openPlayStoreLauncher.launch(intent);
+            //  context.startActivity(intent, null);
+        }
+    }
+
 
 }

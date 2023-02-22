@@ -34,6 +34,16 @@
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false"/>
+        <activity
+            android:name=".paysprint.PSAePSHomeActivity"
+            android:configChanges="screenSize|orientation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false"/>
+        <activity
+            android:name=".paysprint.PaySprintOnboardActivity"
+            android:configChanges="screenSize|orientation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false"/>
     </application>
 
 </manifest>

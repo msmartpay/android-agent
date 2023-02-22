@@ -4,6 +4,16 @@ public class BankListModel {
 
     private String bname;
     private String bcode;
+    private String ifscCode;
+
+    public String getIfscCode() {
+        return ifscCode;
+    }
+
+    public void setIfscCode(String ifscCode) {
+        this.ifscCode = ifscCode;
+    }
+
 
     public String getBankName() {
         return bname;
