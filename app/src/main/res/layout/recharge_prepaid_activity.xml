@@ -58,7 +58,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:orientation="vertical">
-
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/til_main_ot_sp"
                         android:focusableInTouchMode="false"

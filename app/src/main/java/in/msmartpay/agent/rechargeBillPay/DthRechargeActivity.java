@@ -142,7 +142,6 @@ public class DthRechargeActivity extends BaseActivity {
             }
         });
 
-
         tv_view_plan.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlansActivity.class);
             intent.putExtra("type", "dth");

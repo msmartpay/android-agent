@@ -31,11 +31,14 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.network.AppMethods;
 import in.msmartpay.agent.network.NetworkConnection;
 import in.msmartpay.agent.network.RetrofitClient;
 import in.msmartpay.agent.network.model.MainResponse;
 import in.msmartpay.agent.network.model.OperatorsRequest;
 import in.msmartpay.agent.network.model.OperatorsResponse;
+import in.msmartpay.agent.network.model.PlanRequest;
+import in.msmartpay.agent.network.model.PlanResponse;
 import in.msmartpay.agent.network.model.RechargeRequest;
 import in.msmartpay.agent.network.model.wallet.OperatorModel;
 import in.msmartpay.agent.rechargeBillPay.operator.OperatorSearchActivity;
@@ -49,6 +52,7 @@ import in.msmartpay.agent.utility.Service;
 import in.msmartpay.agent.utility.Util;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -72,7 +76,8 @@ public class PrepaidMobileActivity extends BaseActivity {
     private String agentID, txn_key = "";
     private ArrayList<OperatorModel> operatorList = new ArrayList<>();
     private OperatorModel opreatorModel = null;
-    private String opcode = null;
+    private String opcode = null,circle=null;
+    private String[] plan_circle;
 
 
     @Override
@@ -122,6 +127,7 @@ public class PrepaidMobileActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s) && s.length() == 10) {
+                    fetchMobileOperatorByNumber(edit_prepaid_mobile.getText().toString().trim());
                     if (opreatorModel != null)
                         tv_view_offer.setVisibility(View.VISIBLE);
                 } else {
@@ -235,6 +241,85 @@ public class PrepaidMobileActivity extends BaseActivity {
 
         d.show();
     }
+
+    private void fetchMobileOperatorByNumber(String mobileNumber) {
+        if (NetworkConnection.isConnectionAvailable(getApplicationContext())) {
+            pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "Fetching Plans...");
+            ProgressDialogFragment.showDialog(pd, getSupportFragmentManager());
+            PlanRequest request = new PlanRequest();
+            request.setAgent_id(agentID);
+            request.setTxn_key(txn_key);
+            request.setMobile(mobileNumber);
+            request.setClient(AppMethods.CLIENT);
+            request.setType("operatorcheck");
+
+
+            RetrofitClient.getClient(getApplicationContext()).getPlans(request)
+                    .enqueue(new Callback<PlanResponse>() {
+                        @Override
+                        public void onResponse(Call<PlanResponse> call, retrofit2.Response<PlanResponse> response) {
+                            if(pd!=null)
+                                pd.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                PlanResponse res = response.body();
+                                if (res.getStatus()==0) {
+                                    try {
+                                        JSONObject recordsObject = new JSONObject(res.getRecords().toString());
+                                        //JSONObject records=recordsObject.optJSONObject("records");
+                                        if(recordsObject!=null){
+                                            if(recordsObject.getInt("status")==1){
+
+                                                String fetchOperatorName=recordsObject.getString("Operator");
+
+                                                for (OperatorModel model :  operatorList){
+                                                    if(model.getDisplayName().equalsIgnoreCase(fetchOperatorName)){
+                                                        opcode=model.getOpCode();
+                                                        opreatorModel=model;
+                                                        edit_operator.setText(model.getDisplayName());
+                                                    }
+                                                }
+                                                circle=recordsObject.getString("comcircle");
+                                                //spinner_circle.getSelectedItem().
+                                                for(int i =0;i<plan_circle.length;i++){
+                                                    if(circle.equalsIgnoreCase(plan_circle[i])){
+                                                        edit_operator.setText(circle);
+                                                    }
+                                                }
+                                                Util.showView(tv_view_offer);
+                                                Util.showView(tv_view_plan);
+
+                                                Intent intent = new Intent(context, PlansActivity.class);
+                                                intent.putExtra("type", "mobile");
+                                                intent.putExtra("operator", fetchOperatorName);
+                                                intent.putExtra("mobile", "");
+                                                intent.putExtra("circle", circle);
+                                                startActivityForResult(intent, REQUEST_PLAN);
+                                            }
+                                        }
+
+                                        L.m2("Operator Name",recordsObject.toString());
+                                    }catch (Exception e){
+                                        L.toastS(getApplicationContext(), e.getMessage());
+                                    }
+
+                                }
+                            } else {
+                                L.toastS(getApplicationContext(), "No Response");
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<PlanResponse> call, Throwable t) {
+                            if(pd!=null)
+                                pd.dismiss();
+                            L.toastS(getApplicationContext(), "Error " + t.getMessage());
+                            finish();
+                        }
+                    });
+        }
+    }
+
 
     //===========prepaidRechargeRequest==============
     private void prepaidRechargeRequest() {
