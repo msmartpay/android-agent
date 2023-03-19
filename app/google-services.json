@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "522947478750",
+    "project_id": "msmart-pay",
+    "storage_bucket": "msmart-pay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522947478750:android:922e86a588aab656026e4f",
+        "android_client_info": {
+          "package_name": "in.msmartpayagent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522947478750-knmcrk1afujfgdoejcd7dt3cfe1cnlie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJIyfwqTqz1_CJ-rtRWsqLtxCCKnKRUVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522947478750-knmcrk1afujfgdoejcd7dt3cfe1cnlie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522947478750:android:df618145368d56eb026e4f",
+        "android_client_info": {
+          "package_name": "in.msmartpayagent.onboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522947478750-knmcrk1afujfgdoejcd7dt3cfe1cnlie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJIyfwqTqz1_CJ-rtRWsqLtxCCKnKRUVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522947478750-knmcrk1afujfgdoejcd7dt3cfe1cnlie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522947478750:android:1246daae1aeaef98026e4f",
+        "android_client_info": {
+          "package_name": "in.msmartpayagent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522947478750-knmcrk1afujfgdoejcd7dt3cfe1cnlie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJIyfwqTqz1_CJ-rtRWsqLtxCCKnKRUVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522947478750-knmcrk1afujfgdoejcd7dt3cfe1cnlie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

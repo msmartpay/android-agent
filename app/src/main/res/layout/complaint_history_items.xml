@@ -20,7 +20,7 @@
             android:orientation="vertical"
             android:layout_weight="0.15">
 
-            <in.msmartpay.agent.utility.VerticalTextView
+            <in.msmartpayagent.utility.VerticalTextView
                 android:id="@+id/tx_c_status"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

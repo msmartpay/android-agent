@@ -1,4 +1,4 @@
-package in.msmartpay.agent;
+package in.msmartpayagent;
 
 import org.junit.Test;
 
