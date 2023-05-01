@@ -12,9 +12,18 @@ public class AepsAccessKey {
     String callback_url;
     String logo;
     String aeps_status;
+    String aeps_api_status;
     String aadharpay_status;
     String psPartnerId;
     String psPartnerKey;
+
+    public String getAeps_api_status() {
+        return aeps_api_status;
+    }
+
+    public void setAeps_api_status(String aeps_api_status) {
+        this.aeps_api_status = aeps_api_status;
+    }
 
     public String getPsPartnerId() {
         return psPartnerId;

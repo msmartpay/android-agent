@@ -114,6 +114,7 @@ public class PSAePSHomeActivity extends AppCompatActivity {
             merchant_id = intent.getStringExtra(Constants.MERCHANT_ID);
             token = intent.getStringExtra(Constants.TOKEN);
 
+
             Utility.saveData(getApplicationContext(), Constants.TRANSACTION_TYPE, intent.getStringExtra(Constants.TRANSACTION_TYPE));
             Utility.saveData(getApplicationContext(), Constants.AGENCY_NAME,intent.getStringExtra(Constants.AGENCY_NAME));
             Utility.saveData(getApplicationContext(), Constants.PARTNER_LOGO_URL,intent.getStringExtra(Constants.PARTNER_LOGO_URL));
@@ -146,7 +147,7 @@ public class PSAePSHomeActivity extends AppCompatActivity {
             request.setMerchant_id(merchant_id);
 
             SSZAePSRetrofitClient.getClient(getApplicationContext())
-                    .validateUser(request)
+                    .validatePSUser(request)
                     .enqueue(new Callback<ValidateUserResponse>() {
                         @Override
                         public void onResponse(@NotNull Call<ValidateUserResponse> call, @NotNull Response<ValidateUserResponse> response) {
@@ -186,8 +187,9 @@ public class PSAePSHomeActivity extends AppCompatActivity {
                                         Utility.saveData(getApplicationContext(), Constants.MERCHANT_COMPANY,data.getMerchant_company());
                                         Utility.saveData(getApplicationContext(), Constants.MERCHANT_PAN,data.getMerchant_pan());
                                         Utility.saveData(getApplicationContext(), Constants.MERCHANT_LOCATION,data.getMerchant_location());
+                                        Utility.saveData(getApplicationContext(), Constants.PARTNER_NAME,data.getPartner_name());
 
-                                        tv_com_name.setText(Utility.getData(getApplicationContext(),Constants.PARTNER_NAME));
+                                        tv_com_name.setText(data.getPartner_name());
                                         //Picasso.get().load(Utility.getData(getApplicationContext(),Constants.PARTNER_LOGO_URL)).into(iv_comLogo);
 
                                         Utility.showView(ll_screen);
@@ -234,7 +236,7 @@ public class PSAePSHomeActivity extends AppCompatActivity {
     }
 
     private void setPages() {
-        SSZAePSSectionsPagerAdapter sectionsPagerAdapter = new SSZAePSSectionsPagerAdapter(this, getSupportFragmentManager());
+        PSAePSSectionsPagerAdapter sectionsPagerAdapter = new PSAePSSectionsPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
         tabs.setupWithViewPager(viewPager);
     }

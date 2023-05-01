@@ -6,10 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class FastagFetchResponse {
 
-    @SerializedName("Status")
     private String status;
     private String message;
-
+    private String response_type_id;
     FastagCustomerDetails data;
 
     public String getStatus() {
@@ -28,6 +27,14 @@ public class FastagFetchResponse {
         this.message = message;
     }
 
+    public String getResponse_type_id() {
+        return response_type_id;
+    }
+
+    public void setResponse_type_id(String response_type_id) {
+        this.response_type_id = response_type_id;
+    }
+
     public FastagCustomerDetails getData() {
         return data;
     }
@@ -39,18 +46,11 @@ public class FastagFetchResponse {
     public  class FastagCustomerDetails{
         @Expose
         private String amount;
-        @SerializedName("bill_fetch")
-        private BillFetch billFetch;
+        @SerializedName("billfetchresponse")
+        private String billFetch;
         @Expose
-        private String duedate;
-        @Expose
-        private String message;
-        @Expose
-        private String name;
-        @SerializedName("response_code")
-        private Long responseCode;
-        @Expose
-        private Boolean status;
+        private String utilitycustomername;
+        private String bbpstrxnrefid;
 
         public String getAmount() {
             return amount;
@@ -60,53 +60,28 @@ public class FastagFetchResponse {
             this.amount = amount;
         }
 
-        public BillFetch getBillFetch() {
+        public String getBillFetch() {
             return billFetch;
         }
 
-        public void setBillFetch(BillFetch billFetch) {
+        public void setBillFetch(String billFetch) {
             this.billFetch = billFetch;
         }
 
-        public String getDuedate() {
-            return duedate;
+        public String getUtilitycustomername() {
+            return utilitycustomername;
         }
 
-        public void setDuedate(String duedate) {
-            this.duedate = duedate;
+        public void setUtilitycustomername(String utilitycustomername) {
+            this.utilitycustomername = utilitycustomername;
         }
 
-        public String getMessage() {
-            return message;
+        public String getBbpstrxnrefid() {
+            return bbpstrxnrefid;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
+        public void setBbpstrxnrefid(String bbpstrxnrefid) {
+            this.bbpstrxnrefid = bbpstrxnrefid;
         }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Long getResponseCode() {
-            return responseCode;
-        }
-
-        public void setResponseCode(Long responseCode) {
-            this.responseCode = responseCode;
-        }
-
-        public Boolean getStatus() {
-            return status;
-        }
-
-        public void setStatus(Boolean status) {
-            this.status = status;
-        }
-
     }
 }

@@ -39,8 +39,8 @@ public interface Constants {
 
     String SOURCE_IP = "source_ip";
     String LAT_LONG = "latlong";
-    String LATITUDE ="LATITUDE" ;
-    String LONGITUDE = "LONGITUDE";
+    String LATITUDE ="latitude" ;
+    String LONGITUDE = "longitude";
     String BANK_LIST_PREFERRED = "BANK_LIST_preferred";
 
     String CUSTOMER_MOBILE ="Mobile_cust" ;

@@ -13,12 +13,14 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.TextInputLayout;
 
 import in.msmartpayagent.R;
 import in.msmartpayagent.network.AppMethods;
@@ -51,7 +53,7 @@ import java.util.Objects;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class DthRechargeActivity extends BaseActivity {
+public class SubscriptionRechargeActivity extends BaseActivity {
     private static final int REQUEST_PLAN = 0212;
     private static final int REQUEST_OPRATPOR = 02120;
     private LinearLayout linear_proceed_dth;
@@ -63,7 +65,7 @@ public class DthRechargeActivity extends BaseActivity {
     private Uri uriContact;
     private ProgressDialogFragment pd;
     private Context context;
-    private String agentID, txn_key = "";
+    private String agentID, txn_key = "",tpinSTatus,tpin="";
     private ArrayList<OperatorModel> operatorList = new ArrayList<>();
     private OperatorModel opreatorModel = null;
 
@@ -74,10 +76,10 @@ public class DthRechargeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dth_recharge_activity);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("DTH");
+        getSupportActionBar().setTitle("OTT Subscriptions");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-        context = DthRechargeActivity.this;
+        context = SubscriptionRechargeActivity.this;
 
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
@@ -172,7 +174,7 @@ public class DthRechargeActivity extends BaseActivity {
             OperatorsRequest request = new OperatorsRequest();
             request.setAgent_id(agentID);
             request.setTxn_key(txn_key);
-            request.setService("dth");
+            request.setService("subscription");
 
             RetrofitClient.getClient(getApplicationContext())
                     .operators(request).enqueue(new Callback<OperatorsResponse>() {
@@ -288,8 +290,13 @@ public class DthRechargeActivity extends BaseActivity {
 
         tv_recharge.setOnClickListener(view -> {
             try {
-                dthRechargeRequest();
+
                 d.dismiss();
+                if("Y".equalsIgnoreCase(tpinSTatus)){
+                    transactionPinDialog();
+                }else{
+                    dthRechargeRequest();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -319,6 +326,7 @@ public class DthRechargeActivity extends BaseActivity {
             request.setLongitude(Util.LoadPrefData(context, getString(R.string.longitude)));
             request.setIp(Util.getIpAddress(context));
             request.setAmount(edit_amount_dth.getText().toString().trim());
+            request.setTransactionPin(tpin);
 
             RetrofitClient.getClient(getApplicationContext())
                     .recharge(request).enqueue(new Callback<MainResponse>() {
@@ -333,6 +341,8 @@ public class DthRechargeActivity extends BaseActivity {
                             in.putExtra("mobileno", edit_account_no_dth.getText().toString().trim());
                             in.putExtra("requesttype", "dth");
                             in.putExtra("operator", opreatorModel.getDisplayName());
+                            in.putExtra("txnId", res.getTxnId());
+                            in.putExtra("operatorId", res.getOperatorId());
                             in.putExtra("amount", edit_amount_dth.getText().toString().trim());
                             startActivity(in);
                             finish();
@@ -349,6 +359,38 @@ public class DthRechargeActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(SubscriptionRechargeActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                dthRechargeRequest();
+            }
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
     }
 
     @Override

@@ -103,16 +103,16 @@
                             android:inputType="number"
                             android:maxLength="6" />
                     </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:id="@+id/tv_details"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/green"
-                    android:layout_marginStart="5.0dip"
-                    android:padding="10dip"
-                    android:textColor="@color/whitecolor"
-                    android:textSize="12.0sp"
-                    android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/tv_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/green"
+                        android:layout_marginTop="20dp"
+                        android:padding="10dip"
+                        android:textColor="@color/whitecolor"
+                        android:textSize="12.0sp"
+                        android:visibility="gone"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>

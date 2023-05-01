@@ -9,5 +9,5 @@
         android:id="@+id/iv_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/srk_slider"/>
+        android:src="@drawable/slider_1"/>
 </LinearLayout>

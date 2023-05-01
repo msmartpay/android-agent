@@ -4,9 +4,31 @@ import com.google.gson.annotations.SerializedName;
 
 public class MainResponse {
     @SerializedName("response-message")
-    String responseMessage;
+    private String responseMessage;
     @SerializedName("response-code")
-    String responseCode;
+    private String responseCode;
+
+    @SerializedName("Api_txn_id")
+    private String txnId;
+
+    @SerializedName("operator_id")
+    private String operatorId;
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    public String getTxnId() {
+        return txnId;
+    }
+
+    public void setTxnId(String txnId) {
+        this.txnId = txnId;
+    }
 
     public String getResponseMessage() {
         return responseMessage;

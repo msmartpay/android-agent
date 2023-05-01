@@ -17,7 +17,7 @@
 
         <fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/spinner_mob_dth"
-             android:layout_width="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:ms_dropDownHintView="@layout/spinner_material_dropdown_hint_view"
             app:ms_hintView="@layout/spinner_material_hint_view"
@@ -36,16 +36,7 @@
             app:ms_enableErrorLabel="false"
             app:ms_hint="Operator" />
 
-        <fr.ganfra.materialspinner.MaterialSpinner
-            android:id="@+id/spinner_circle"
-            app:ms_dropDownHintView="@layout/spinner_material_dropdown_hint_view"
-            app:ms_hintView="@layout/spinner_material_hint_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="2.0dip"
-            android:entries="@array/plan_circle"
-            app:ms_enableErrorLabel="false"
-            app:ms_hint="Circle" />
+
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout

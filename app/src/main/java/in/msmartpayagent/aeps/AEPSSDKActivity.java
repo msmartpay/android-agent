@@ -42,7 +42,6 @@ import retrofit2.Callback;
 
 public class AEPSSDKActivity extends BaseActivity {
     
-    private Button btn_aeps;
     private ProgressDialogFragment pd;
     String agentID = "", txnKey = "",transactionType="",psPartnerId="",psPartnerKey="";;
 
@@ -92,18 +91,12 @@ public class AEPSSDKActivity extends BaseActivity {
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txnKey = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
 
-        btn_aeps =  findViewById(R.id.btn_aeps);
 
-        if(Keys.FINGPAY.equalsIgnoreCase(transactionType) || Keys.FINGPAY_MS.equalsIgnoreCase(transactionType)
-        || Keys.AADHAAR_PAY.equalsIgnoreCase(transactionType)){
-            getFingpayAccessKey();
+        if(Keys.EKO_API.equalsIgnoreCase(transactionType) ){
+            getAccessKey();
         }if(Keys.PAY_SPRINT.equalsIgnoreCase(transactionType)){
             getPaySprintAccessKey();
-        }else {
-            getAccessKey();
         }
-        btn_aeps.setOnClickListener(v -> getAccessKey());
-
     }
 
     private void getAccessKey() {
@@ -124,11 +117,10 @@ public class AEPSSDKActivity extends BaseActivity {
                         AepsAccessKeyResponse res = response.body();
                         if (res.getResponseCode() != null && res.getResponseCode().equals("0")) {
 
-                            String aepsStatus=res.getData().getAeps_status();
+                            String ekoAepsApiStatus=res.getData().getAeps_api_status();
                             String aadhaarPayStatus=res.getData().getAadharpay_status();
 
-                            if(("1".equalsIgnoreCase(aepsStatus) && (Constants.CASH_WITHDRAWAL.equalsIgnoreCase(transactionType) || Constants.MINI_STATEMENT.equalsIgnoreCase(transactionType) || Constants.BALANCE_ENQUIRY.equalsIgnoreCase(transactionType)) )
-                                    || ("1".equalsIgnoreCase(aadhaarPayStatus) && Constants.AADHAAR_PAY.equalsIgnoreCase(transactionType))) {
+                            if("1".equalsIgnoreCase(ekoAepsApiStatus)) {
 
                                 Intent intent = new Intent(getApplicationContext(), SSZAePSHomeActivity.class);
                                 intent.putExtra("merchant_id", agentID);
@@ -139,18 +131,24 @@ public class AEPSSDKActivity extends BaseActivity {
                                 intent.putExtra("partner_powered_by", res.getData().getPartner_name());
                                 intent.putExtra("partner_contact_us", res.getData().getInitiator_id());
                                 intent.putExtra("source_ip", Util.getIpAddress(getApplicationContext()));
-                                intent.putExtra("transaction_type", transactionType);
+                                intent.putExtra("transaction_type", "");
                                 intent.putExtra("aadharpay_status", aadhaarPayStatus);
-                                intent.putExtra("aeps_status", aepsStatus);
+                                intent.putExtra("eko_aeps_api_status", ekoAepsApiStatus);
 
                                 String latLong = Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE) + "," + Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE);
 
-                                intent.putExtra("latlong", "28.6871302,77.4812148");
+                                intent.putExtra("latlong", latLong);
                                 startActivityForResult(intent, AEPS_REQUEST_CODE);
 
-                            }else{
+                            }else if("0".equalsIgnoreCase(ekoAepsApiStatus)) {
                                 Toast.makeText(getApplicationContext(), "Activate AePS service", Toast.LENGTH_SHORT).show();
                                 UserNumberDialog.showDialog(getSupportFragmentManager(), Util.LoadPrefData(getApplicationContext(), Keys.AGENT_MOB));
+                            }else if("2".equalsIgnoreCase(ekoAepsApiStatus)) {
+                                L.toastS(getApplicationContext(), res.getResponseMessage());
+                            }else if("3".equalsIgnoreCase(ekoAepsApiStatus)) {
+                                L.toastS(getApplicationContext(), res.getResponseMessage());
+                            }else{
+                                L.toastS(getApplicationContext(), res.getResponseMessage());
                             }
 
                         }else {

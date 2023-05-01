@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -26,19 +24,17 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 import in.msmartpayagent.aeps.AEPSSDKActivity;
+import in.msmartpayagent.aeps.EkoAEPSGatewayActivity;
 import in.msmartpayagent.aeps.SettlementDetailsActivity;
 import in.msmartpayagent.aeps.onboard.UserNumberDialog;
 import in.msmartpayagent.audit.AuditRequestActivity;
 import in.msmartpayagent.claimrefund.ClaimHistoryActivity;
 import in.msmartpayagent.collectBanks.CollectBankActivity;
-import in.msmartpayagent.commission.CommissionActivity;
 import in.msmartpayagent.dmr.onboard.FindSenderDialog;
 import in.msmartpayagent.dmrPaySprint.onboard.PSFindSenderDialog;
 import in.msmartpayagent.fingpaymatm.FingpayMATMActivity;
@@ -61,7 +57,7 @@ import in.msmartpayagent.network.model.wallet.BalanceRequest;
 import in.msmartpayagent.network.model.wallet.BalanceResponse;
 import in.msmartpayagent.rechargeBillPay.CreditCardActivity;
 import in.msmartpayagent.rechargeBillPay.DataCardRechargeActivity;
-import in.msmartpayagent.rechargeBillPay.DthRechargeActivity;
+import in.msmartpayagent.rechargeBillPay.SubscriptionRechargeActivity;
 import in.msmartpayagent.rechargeBillPay.ElectricityPayActivity;
 import in.msmartpayagent.rechargeBillPay.FastTagActivity;
 import in.msmartpayagent.rechargeBillPay.GasPayActivity;
@@ -312,7 +308,7 @@ public class MainActivity extends BaseActivity{
                 startActivity(in);
             } else if (view.getId() == R.id.id_dth) {
                 view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, DthRechargeActivity.class);
+                Intent in = new Intent(context, SubscriptionRechargeActivity.class);
                 startActivity(in);
             } else if (view.getId() == R.id.id_datacard) {
                 view.getResources().getColor(R.color.active_tab);
@@ -352,10 +348,10 @@ public class MainActivity extends BaseActivity{
                     UserNumberDialog.showDialog(getSupportFragmentManager(), Util.LoadPrefData(getApplicationContext(), Keys.AGENT_MOB));
                 }
 
-            }*/else if (view.getId() == R.id.id_fingpay_aeps) {
+            }*/else if (view.getId() == R.id.id_eko_aeps_api) {
                 view.getResources().getColor(R.color.active_tab);
                 Intent intent = new Intent(this, AEPSSDKActivity.class);
-                intent.putExtra("transaction_type",Keys.FINGPAY);
+                intent.putExtra("transaction_type",Keys.EKO_API);
 
                 startActivity(intent);
             }else if (view.getId() == R.id.id_paysprint_aeps) {
@@ -364,27 +360,15 @@ public class MainActivity extends BaseActivity{
                 intent.putExtra("transaction_type",Keys.PAY_SPRINT);
 
                 startActivity(intent);
-            }else if (view.getId() == R.id.id_cash_withdrawal) {
+            }else if (view.getId() == R.id.id_eko_aeps_gateway) {
                 view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, AEPSSDKActivity.class);
+                Intent intent = new Intent(this, EkoAEPSGatewayActivity.class);
                 intent.putExtra("transaction_type","Cash Withdrawal");
-                startActivity(intent);
-            }else if (view.getId() == R.id.id_balance_enquiry) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, AEPSSDKActivity.class);
-                intent.putExtra("transaction_type","Balance Enquiry");
                 startActivity(intent);
             }else if (view.getId() == R.id.id_aadhar_pay) {
                 view.getResources().getColor(R.color.active_tab);
                 Intent intent = new Intent(this, AEPSSDKActivity.class);
                 intent.putExtra("transaction_type","Aadhaar Pay");
-                startActivity(intent);
-            }else if (view.getId() == R.id.id_mini_statement) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, AEPSSDKActivity.class);
-                intent.putExtra("transaction_type",Keys.FINGPAY_MS);
-                //Intent intent = new Intent(this, AEPSSDKActivity.class);
-                //intent.putExtra("transaction_type","Mini Statement");
                 startActivity(intent);
             }else if (view.getId() == R.id.id_dmr1 ) {
                 view.getResources().getColor(R.color.active_tab);

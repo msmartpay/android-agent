@@ -300,7 +300,7 @@ public class ImpsNeftActivity extends BaseActivity {
         dialog_status.setCancelable(false);
         dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        dialog_status.setContentView(R.layout.dmr_ps_transaction_pin_dialog);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
         dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);

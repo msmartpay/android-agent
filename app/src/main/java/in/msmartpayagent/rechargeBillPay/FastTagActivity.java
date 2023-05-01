@@ -1,10 +1,16 @@
 package in.msmartpayagent.rechargeBillPay;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +62,7 @@ public class FastTagActivity extends BaseActivity {
     private FastagOperator opreatorModel = null;
     private  FastagFetchResponse fetchResponse = null;
 
-    private String agentID, txn_key;
+    private String agentID, txn_key,tpinSTatus="",tpin="";
     private GPSTrackerPresenter gpsTrackerPresenter=null;
     private boolean isLocationEnable = false;
 
@@ -71,6 +77,7 @@ public class FastTagActivity extends BaseActivity {
         context = FastTagActivity.this;
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+        tpinSTatus = Util.LoadPrefData(context,Keys.TPIN_STATUS);
 
         initViews();
 
@@ -110,7 +117,12 @@ public class FastTagActivity extends BaseActivity {
                 }else if (TextUtils.isEmpty(customerName) ) {
                     L.toastS(this,"Enter Customer Number");
                 }else {
-                    rechargeFastagRequest();
+                    if("Y".equalsIgnoreCase(tpinSTatus)){
+                        transactionPinDialog();
+                    }else{
+                        rechargeFastagRequest();
+                    }
+
                 }
             } else {
                 L.toastS(this,"No Internet Connection !!!");
@@ -195,10 +207,13 @@ public class FastTagActivity extends BaseActivity {
         if (NetworkConnection.isConnectionAvailable2(getApplicationContext())) {
             pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "Fetching Consumer Details...");
             ProgressDialogFragment.showDialog(pd, getSupportFragmentManager());
+            String latLong = Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE) + "," + Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE);
 
             FastagData data = new FastagData();
-            data.setCanumber(vehicleNo);
-            data.setOperator(opreatorModel.getId());
+            data.setUtility_acc_no(vehicleNo);
+            data.setOperator_id(opreatorModel.getOperator_id());
+            data.setLatlong(latLong);
+            data.setSource_ip(Util.getIpAddress(getApplicationContext()));
             FastagFetchRequest request2 =new FastagFetchRequest();
             request2.setAgentID(agentID);
             request2.setKey(txn_key);
@@ -219,7 +234,7 @@ public class FastTagActivity extends BaseActivity {
                             Util.showView(til_customer_name);
                             //et_amount.setText(fetchResponse.getAmount());
                             et_amount.requestFocus();
-                            et_customer_name.setText(fetchResponse.getData().getName());
+                            et_customer_name.setText(fetchResponse.getData().getUtilitycustomername());
                         } else {
                             L.toastS(context, fetchResponse.getMessage()!=null?fetchResponse.getMessage():"Oops!");
                         }
@@ -243,19 +258,20 @@ public class FastTagActivity extends BaseActivity {
             pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "Fetching Consumer Details...");
             ProgressDialogFragment.showDialog(pd, getSupportFragmentManager());
 
-            RechargeData data = new RechargeData();
-            data.setCanumber(vehicleNo);
-            data.setOperator(opreatorModel.getId());
+            String latLong = Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE) + "," + Util.LoadPrefData(getApplicationContext(), Keys.LATITUDE);
+
+            FastagData data = new FastagData();
+            data.setUtility_acc_no(vehicleNo);
+            data.setOperator_id(opreatorModel.getOperator_id());
             data.setAmount(amount);
-            data.setBillFetch(fetchResponse.getData().getBillFetch());
-            data.setLatitude(Double.parseDouble("".equals(Util.LoadPrefData(this, Keys.LATITUDE)) ?"0.0":Util.LoadPrefData(this,Keys.LATITUDE)));
-            data.setLongitude(Double.parseDouble("".equals(Util.LoadPrefData(this, Keys.LONGITUDE)) ?"0.0":Util.LoadPrefData(this,Keys.LONGITUDE)));
+            data.setBill_fetch(fetchResponse.getData().getBillFetch());
+            data.setLatlong(latLong);
+            data.setSource_ip(Util.getIpAddress(getApplicationContext()));
 
             FastagRechargeRequest request2 =new FastagRechargeRequest();
             request2.setAgentID(agentID);
             request2.setKey(txn_key);
-            request2.setIpaddress(Util.getIpAddress(this));
-            request2.setCname(customerName);
+            request2.setOpname(opreatorModel.getName());
             request2.setData(data);
 
             RetrofitClient.getClient(getApplicationContext())
@@ -273,8 +289,9 @@ public class FastTagActivity extends BaseActivity {
                             in.putExtra("operator", opreatorModel.getName());
                             in.putExtra("cust_name", customerName);
                             in.putExtra("amount", amount);
-                            in.putExtra("txnId", res.getClientRefId());
-                            in.putExtra("txnStatus", res.getTxnStatus());
+                            in.putExtra("txnId", res.getData().getTxnId());
+                            in.putExtra("operatorId", res.getData().getOperatorId());
+                            in.putExtra("txnStatus", res.getData().getTxnStatus());
                             startActivity(in);
                             finish();
                             L.toastS(context, res.getMessage()!=null?res.getMessage():"Oops!");
@@ -291,6 +308,39 @@ public class FastTagActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(FastTagActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                rechargeFastagRequest();
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
     }
 
     @Override

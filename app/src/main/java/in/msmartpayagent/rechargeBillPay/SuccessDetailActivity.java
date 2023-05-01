@@ -54,12 +54,18 @@ public class SuccessDetailActivity extends BaseActivity {
         String requestType = getIntent().getStringExtra("requesttype");
         Log.d("requestType--->", requestType);
 
-        if(requestType != null && requestType.equalsIgnoreCase("prepaid-mobile")){
+        if(requestType != null && (requestType.equalsIgnoreCase("prepaid-mobile")
+        || requestType.equals("dth"))){
+
+            success_mobile_dth.setText("Connection Number");
             suceess_status.setText(getIntent().getStringExtra("responce"));
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
-            success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
+            success_mobile.setText(getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
+
+            Util.showView(success_txnid);
+
         }else if(requestType != null && requestType.equalsIgnoreCase("fastag")){
             Util.showView(receipt_cus_name);
             Util.showView(receipt_cus_name_hd);
@@ -74,65 +80,57 @@ public class SuccessDetailActivity extends BaseActivity {
             success_mobile.setText(getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
         }else if(requestType != null && requestType.equalsIgnoreCase("postpaid-mobile")){
+
+            success_mobile_dth.setText("Connection Number");
+
             suceess_status.setText(getIntent().getStringExtra("responce"));
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
-        }else if (requestType != null && requestType.equals("dth")) {
-             suceess_status.setText(getIntent().getStringExtra("responce"));
-            success_mobile_dth.setText("DTH Number");
-            success_txnid.setText("Txn ID : "+"987654321");
-            success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
-            success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
-            success_operator.setText(getIntent().getStringExtra("operator"));
-        }else if (requestType != null && requestType.equals("datacard")) {
-             suceess_status.setText(getIntent().getStringExtra("responce"));
-            success_mobile_dth.setText("Datacard Number");
-            success_txnid.setText("Txn ID : "+"987654321");
-            success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
-            success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
-            success_operator.setText(getIntent().getStringExtra("operator"));
+
         }else if (requestType != null && requestType.equals("landline")) {
              suceess_status.setText(getIntent().getStringExtra("responce"));
             success_mobile_dth.setText("Landline Number");
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
         }else if (requestType != null && requestType.equals("Electricity")) {
              suceess_status.setText(getIntent().getStringExtra("responce"));
             success_mobile_dth.setText("Connection Number");
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
         }else if (requestType != null && requestType.equals("gas-bill")) {
              suceess_status.setText(getIntent().getStringExtra("responce"));
-            success_mobile_dth.setText("Bill Number");
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_mobile_dth.setText("Connection Number");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("Consumerno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
+
         }else if (requestType != null && requestType.equals("water-bill")) {
              suceess_status.setText(getIntent().getStringExtra("responce"));
             success_mobile_dth.setText("Bill Number");
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("Consumerno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
         }else if (requestType != null && requestType.equals("insurance-bill")) {
-             suceess_status.setText(getIntent().getStringExtra("responce"));
+            suceess_status.setText(getIntent().getStringExtra("responce"));
             success_mobile_dth.setText("Policy Number");
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("policyno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
+
         }else if (requestType != null && requestType.equals("wallet")) {
              suceess_status.setText(getIntent().getStringExtra("responce"));
             success_mobile_dth.setText("Mobile Number");
             success_agentid.setText("Agent ID");
-            success_txnid.setText("Txn ID : "+"987654321");
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText("+91 "+getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("agent_id"));

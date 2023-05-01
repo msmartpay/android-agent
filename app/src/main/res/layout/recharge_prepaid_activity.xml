@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -111,6 +112,15 @@
                             android:inputType="number"
                             android:maxLength="5" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_circle"
+                        style="@style/mactp_main_ot_sp"
+                        android:entries="@array/plan_circle"
+                        app:ms_dropDownHintView="@layout/spinner_material_dropdown_hint_view"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_hint="Select Operator Circle"/>
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

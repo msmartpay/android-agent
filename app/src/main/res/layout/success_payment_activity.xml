@@ -44,7 +44,7 @@
                             android:gravity="center"
                             android:text="Recharge\nSuccess"
                             android:textColor="@color/whitecolor"
-                            android:textSize="25.0sp"
+                            android:textSize="16.0sp"
                             android:typeface="serif" />
 
                         <ImageView

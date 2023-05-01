@@ -25,7 +25,7 @@
                     android:layout_height="400dip"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="21.0dip"
-                    android:src="@drawable/srk_money_full" />
+                    android:src="@drawable/logo" />
 
                 <Button
                     android:id="@+id/trans_status_button"

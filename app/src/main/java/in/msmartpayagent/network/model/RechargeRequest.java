@@ -12,6 +12,16 @@ public class RechargeRequest {
     String longitude;
     String ip;
 
+    String transactionPin;
+    public String getTransactionPin() {
+        return transactionPin;
+    }
+
+    public void setTransactionPin(String transactionPin) {
+        this.transactionPin = transactionPin;
+    }
+
+
     public String getAmount() {
         return amount;
     }

@@ -18,9 +18,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.TextInputLayout;
 
 import in.msmartpayagent.R;
 import in.msmartpayagent.network.AppMethods;
@@ -73,10 +77,11 @@ public class PrepaidMobileActivity extends BaseActivity {
     private Uri uriContact;
     private ProgressDialogFragment pd;
     private Context context;
-    private String agentID, txn_key = "";
+    private String agentID, txn_key = "",tpinSTatus,tpin="";
     private ArrayList<OperatorModel> operatorList = new ArrayList<>();
     private OperatorModel opreatorModel = null;
     private String opcode = null,circle=null;
+    private Spinner spinner_circle;
     private String[] plan_circle;
 
 
@@ -85,13 +90,14 @@ public class PrepaidMobileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recharge_prepaid_activity);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Prepaid");
+        getSupportActionBar().setTitle("Prepaid Mobile");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = PrepaidMobileActivity.this;
 
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+        tpinSTatus = Util.LoadPrefData(context,Keys.TPIN_STATUS);
 
         edit_prepaid_mobile = (EditText) findViewById(R.id.edit_prepaid_mobile);
         edit_amount = (EditText) findViewById(R.id.edit_amount);
@@ -100,6 +106,8 @@ public class PrepaidMobileActivity extends BaseActivity {
         linear_proceed = (LinearLayout) findViewById(R.id.linear_proceed);
         tv_view_plan = findViewById(R.id.tv_view_plan);
         tv_view_offer = findViewById(R.id.tv_view_offer);
+        spinner_circle = findViewById(R.id.spinner_circle);
+        plan_circle = getResources().getStringArray(R.array.plan_circle);
         image_contactlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +148,20 @@ public class PrepaidMobileActivity extends BaseActivity {
 
             }
         });
+        spinner_circle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > -1) {
+                    circle = spinner_circle.getSelectedItem().toString();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
          linear_proceed.setOnClickListener(view -> {
              if (isConnectionAvailable()) {
                  if (TextUtils.isEmpty(edit_prepaid_mobile.getText().toString().trim()) || edit_prepaid_mobile.getText().toString().trim().length() < 10) {
@@ -163,6 +185,7 @@ public class PrepaidMobileActivity extends BaseActivity {
             intent.putExtra("type", "mobile");
             intent.putExtra("operator", opreatorModel.getDisplayName());
             intent.putExtra("mobile", "");
+            intent.putExtra("circle", circle);
             startActivityForResult(intent, REQUEST_PLAN);
         });
         tv_view_offer.setOnClickListener(v -> {
@@ -170,6 +193,7 @@ public class PrepaidMobileActivity extends BaseActivity {
             intent.putExtra("type", "mobile");
             intent.putExtra("operator", opreatorModel.getDisplayName());
             intent.putExtra("mobile", edit_prepaid_mobile.getText().toString());
+            intent.putExtra("circle", circle);
             startActivityForResult(intent, REQUEST_PLAN);
         });
     }
@@ -230,8 +254,13 @@ public class PrepaidMobileActivity extends BaseActivity {
 
         tv_recharge.setOnClickListener(view -> {
             try {
-                prepaidRechargeRequest();
                 d.dismiss();
+                if("Y".equalsIgnoreCase(tpinSTatus)){
+                    transactionPinDialog();
+                }else{
+                    prepaidRechargeRequest();
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -282,7 +311,8 @@ public class PrepaidMobileActivity extends BaseActivity {
                                                 //spinner_circle.getSelectedItem().
                                                 for(int i =0;i<plan_circle.length;i++){
                                                     if(circle.equalsIgnoreCase(plan_circle[i])){
-                                                        edit_operator.setText(circle);
+                                                        int position=i+1;
+                                                        spinner_circle.setSelection(position);
                                                     }
                                                 }
                                                 Util.showView(tv_view_offer);
@@ -320,8 +350,6 @@ public class PrepaidMobileActivity extends BaseActivity {
         }
     }
 
-
-    //===========prepaidRechargeRequest==============
     private void prepaidRechargeRequest() {
         if (NetworkConnection.isConnectionAvailable2(getApplicationContext())) {
             pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "Recharging...");
@@ -339,6 +367,7 @@ public class PrepaidMobileActivity extends BaseActivity {
             request.setLongitude(Util.LoadPrefData(context, getString(R.string.longitude)));
             request.setIp(Util.getIpAddress(context));
             request.setAmount(edit_amount.getText().toString().trim());
+            request.setTransactionPin(tpin);
             Log.d("RechargeRequest",request.toString());
             RetrofitClient.getClient(getApplicationContext())
                     .recharge(request).enqueue(new Callback<MainResponse>() {
@@ -353,6 +382,8 @@ public class PrepaidMobileActivity extends BaseActivity {
                             in.putExtra("mobileno", edit_prepaid_mobile.getText().toString().trim());
                             in.putExtra("requesttype", "prepaid-mobile");
                             in.putExtra("operator", opreatorModel.getDisplayName());
+                            in.putExtra("txnId", res.getTxnId());
+                            in.putExtra("operatorId", res.getOperatorId());
                             in.putExtra("amount", edit_amount.getText().toString().trim());
                             startActivity(in);
                             finish();
@@ -371,8 +402,38 @@ public class PrepaidMobileActivity extends BaseActivity {
         }
     }
 
-    //====================================
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(PrepaidMobileActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                prepaidRechargeRequest();
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

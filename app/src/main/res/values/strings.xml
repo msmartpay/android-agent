@@ -2,15 +2,15 @@
     <string name="app_name">MSmartPay</string>
     <string name="rupee_symbol">₹</string>
     <string name="report"> If you have encountered any issue or have any feedback, please click on Call Button.</string>
-    <string name="support">support@smartkinda.in</string>
-    <string name="app_name_sapce">Smart Kinda</string>
-    <string name="email_id">support@smartkinda.com</string>
+    <string name="support">care@msmartpay.in</string>
+    <string name="app_name_sapce">MSmart Pay</string>
+    <string name="email_id">care@msmartpay.in</string>
     <string name="website"><u>www.msmartpay.in</u></string>
-    <string name="url">http://msmartpay.in</string>
-    <string name="app_name_year"> © 2018 Instaload</string>
-    <string name="powerd_by">Powered By\nInstaload</string>
-    <string name="adult">support@smartkinda.com</string>
-    <string name="child"><u>www.smartkinda.com</u></string>
+    <string name="url">https://msmartpay.in</string>
+    <string name="app_name_year"> © 2016 MSmartPay</string>
+    <string name="powerd_by">Powered By\nM K Jindal PVT LTD</string>
+    <string name="adult">care@msmartpay.in</string>
+    <string name="child"><u>www.msmartpay.in</u></string>
     <string name="infant">Infant\n 2 Years</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
@@ -169,7 +169,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="fastag">FasTag</string>
+    <string name="fastag">FasTag\nRecharges</string>
     <string name="technical_error">Technical failure</string>
     <string name="fundsettlement_note">Please verify the settlement bank account prior to add</string>
     <string name="note">-::NOTE::-</string>

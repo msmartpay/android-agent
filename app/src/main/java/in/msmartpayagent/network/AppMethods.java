@@ -108,9 +108,9 @@ import retrofit2.http.Url;
 
 public interface AppMethods {
     String VERSION = "1.0";
-    String DOMAIN = "https://android.msmartpay.in/";
+    String DOMAIN = "https://msmartpay.in/";
 
-    String BASE_URL = DOMAIN + "MRA"+VERSION+"/resources/";
+    String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
 
 
     String DSID = "DSUP33273001";

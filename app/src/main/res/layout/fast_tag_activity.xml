@@ -46,7 +46,8 @@
                     android:id="@+id/et_vehicle_no"
                     style="@style/et_main_ot"
                     android:ems="10"
-                    android:maxLength="10" />
+                    android:maxLength="10"
+                    android:textAllCaps="true"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

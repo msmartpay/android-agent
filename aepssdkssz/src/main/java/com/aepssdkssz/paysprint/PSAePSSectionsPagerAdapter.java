@@ -30,9 +30,9 @@ public class PSAePSSectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return SSZAePSSearchCashOutFragment.newInstance(position + 1);
+            return PSAePSSearchCashOutFragment.newInstance(position + 1);
         } else {
-            return SSZAePSManageDeviceFragment.newInstance(position + 1);
+            return PSAePSManageDeviceFragment.newInstance(position + 1);
         }
     }
 

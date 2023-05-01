@@ -57,7 +57,7 @@ public class SSZAePSDeviceSearchAdapter extends RecyclerView.Adapter<SSZAePSDevi
 
         public void bind(final BiometricDevice deviceModel, final DeviceListener listener) {
             tv_name.setText(deviceModel.getDevice_name());
-            Picasso.get().load(deviceModel.getImage()).into(iv_img);
+            //Picasso.get().load(deviceModel.getImage()).into(iv_img);
             itemView.setOnClickListener(view -> listener.onDeviceSelected(deviceModel));
         }
     }

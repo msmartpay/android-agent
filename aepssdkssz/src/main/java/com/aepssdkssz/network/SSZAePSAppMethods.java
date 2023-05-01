@@ -19,8 +19,8 @@ import retrofit2.http.POST;
 
 public interface SSZAePSAppMethods {
     String VERSION = "1.0";
-    String DOMAIN = "https://android.msmartpay.in/";
-    String BASE_URL = DOMAIN + "MRA"+VERSION+"/resources/";
+    String DOMAIN = "https://msmartpay.in/";
+    String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
 
 
     //EKO AEPS
@@ -34,6 +34,8 @@ public interface SSZAePSAppMethods {
     Call<MainResponse> updateDevice(@Body DeviceUpdateRequest request);
 
     //PaySprint AEPS
+    @POST("aeps/validate-psaeps-user")
+    Call<ValidateUserResponse> validatePSUser(@Body ValidateUserRequest request);
     @POST("aeps/paysprint-aeps-transaction")
     Call<PaysprintAepsResponse> paySprintTransaction(@Body PaysprintAepsRequest request);
 

@@ -53,6 +53,7 @@ public interface Keys {
 
     String AEPS_PROVIDER="aepsProvider";
     String FINGPAY="fingpay";
+    String EKO_API="eko_api";
     String FINGPAY_MS="fingpay_ms";
     String AADHAAR_PAY="Aadhaar Pay";
     String EKO="eko";

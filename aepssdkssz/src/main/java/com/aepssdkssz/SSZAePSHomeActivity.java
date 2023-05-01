@@ -114,6 +114,7 @@ public class SSZAePSHomeActivity extends AppCompatActivity {
             merchant_id = intent.getStringExtra(Constants.MERCHANT_ID);
             token = intent.getStringExtra(Constants.TOKEN);
 
+            tv_com_name.setText(intent.getStringExtra(Constants.PARTNER_NAME));
 
             Utility.saveData(getApplicationContext(), Constants.TRANSACTION_TYPE, intent.getStringExtra(Constants.TRANSACTION_TYPE));
 

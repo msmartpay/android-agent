@@ -42,7 +42,7 @@
                         android:layout_height="30dp"
                         android:layout_toStartOf="@+id/iv_noti"
                         android:layout_toEndOf="@+id/id_drawer_icon"
-                        android:src="@drawable/srk_money_logo_long" />
+                        android:src="@drawable/flat_logo_long" />
 
                     <ImageView
                         android:id="@+id/iv_noti"
@@ -80,13 +80,12 @@
                                 android:padding="5dp"
                                 android:layout_marginEnd="5dp"
                                 android:layout_marginStart="5dp"
-                                android:background="@drawable/wallet_left"
                                 android:orientation="horizontal">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Main wallet"
-                                    android:textColor="@color/whitecolor"
+                                    android:text="Wallet Balance"
+                                    android:textColor="@color/colorPrimary"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
                                 <TextView
@@ -95,7 +94,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="00000:00"
                                     android:layout_marginStart="5dp"
-                                    android:textColor="@color/whitecolor"
+                                    android:textColor="@color/colorPrimary"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
@@ -108,11 +107,12 @@
                                 android:layout_marginEnd="5dp"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/wallet_left"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Cash-in wallet"
+                                    android:text="IRCTC Wallet"
                                     android:textColor="@color/whitecolor"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
@@ -153,31 +153,13 @@
                                 android:text="Need a very long message to scroll this message which should be longer than screen view"/>
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="170dp"
-                            android:background="@drawable/bg_curv_bottom">
-                            <in.msmartpayagent.utility.pagger.AutoScrollViewPager
-                                android:id="@+id/slider"
-                                android:layout_width="match_parent"
-                                android:layout_height="150dp"/>
-                        </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="vertical">
-
-                            <TextView
-                                style="@style/tv_main_heading"
-                                android:paddingTop="5.0dip"
-                                android:paddingBottom="5.0dip"
-                                android:gravity="center"
-                                android:textColor="@color/whitecolor"
-                                android:text="@string/recharged"
-                                android:textSize="15.0dip" />
-
 
                                 <LinearLayout
                                     android:id="@+id/Recharge_anim"
@@ -186,13 +168,13 @@
                                     android:orientation="horizontal"
                                     android:layout_margin="15dp"
                                     android:gravity="center"
-                                    android:weightSum="1.0">
+                                    android:weightSum="1.2">
 
                                     <LinearLayout
                                         android:id="@+id/id_mobile_prepaid"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.25"
+                                        android:layout_weight="0.4"
                                         android:gravity="center"
                                         android:onClick="click"
                                         android:orientation="vertical">
@@ -208,14 +190,14 @@
                                         <TextView
                                             style="@style/tv_main_large"
                                             android:textColor="@color/whitecolor"
-                                            android:text="Mobile " />
+                                            android:text="Mobile\nRecharges" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/id_dth"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.25"
+                                        android:layout_weight="0.4"
                                         android:gravity="center"
                                         android:onClick="click"
                                         android:orientation="vertical">
@@ -231,17 +213,18 @@
                                         <TextView
                                             style="@style/tv_main_large"
                                             android:textColor="@color/whitecolor"
-                                            android:text="DTH" />
+                                            android:text="DTH\nRecharges" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/id_datacard"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.25"
+                                        android:layout_weight="0.4"
                                         android:gravity="center"
                                         android:onClick="click"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:visibility="gone">
 
                                         <LinearLayout
                                             style="@style/ll_home">
@@ -254,14 +237,14 @@
                                         <TextView
                                             style="@style/tv_main_large"
                                             android:textColor="@color/whitecolor"
-                                            android:text="Datacard" />
+                                            android:text="Subscription" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/id_fastag"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.25"
+                                        android:layout_weight="0.4"
                                         android:gravity="center"
                                         android:onClick="click"
                                         android:orientation="vertical">
@@ -283,6 +266,15 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:background="@drawable/bg_curv_bottom">
+                            <in.msmartpayagent.utility.pagger.AutoScrollViewPager
+                                android:id="@+id/slider"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"/>
+                        </LinearLayout>
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/finanance"
@@ -317,8 +309,8 @@
                                     android:weightSum="1.0">
 
                                     <LinearLayout
-                                        android:id="@+id/id_fingpay_aeps"
-                                        android:layout_width="wrap_content"
+                                        android:id="@+id/id_eko_aeps_api"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.25"
                                         android:gravity="center"
@@ -335,12 +327,12 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="AePS1\n" />
+                                            android:text="AePS\nFINO" />
                                     </LinearLayout>
 
                                     <LinearLayout
-                                        android:id="@+id/id_cash_withdrawal"
-                                        android:layout_width="wrap_content"
+                                        android:id="@+id/id_eko_aeps_gateway"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.25"
                                         android:gravity="center"
@@ -357,12 +349,12 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="AePS2\n" />
+                                            android:text="AePS\nFingpay" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/id_paysprint_aeps"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.25"
                                         android:gravity="center"
@@ -379,36 +371,13 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="AePS3\n" />
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:id="@+id/id_balance_enquiry"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:onClick="click"
-                                        android:layout_weight="0.25"
-                                        android:orientation="vertical"
-                                        android:visibility="gone">
-
-                                        <LinearLayout
-                                            style="@style/ll_home">
-
-                                            <ImageView
-                                                style="@style/iv_home"
-                                                android:src="@drawable/balance_enquiry" />
-                                        </LinearLayout>
-
-                                        <TextView
-                                            style="@style/tv_main_large"
-                                            android:text="Balance\nEnquiry" />
+                                            android:text="AePS\nPayTM" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/id_mini_statement"
 
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.25"
                                         android:gravity="center"
@@ -444,7 +413,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_dmr1"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -466,7 +435,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_dmr2"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -489,8 +458,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_icici_cash_deposit"
-
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.25"
                                         android:gravity="center"
@@ -512,7 +480,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_micro_atm"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -545,7 +513,7 @@
                                     <LinearLayout
                                         android:id="@+id/id_aadhar_pay"
 
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="0.25"
                                         android:gravity="center"
@@ -566,7 +534,7 @@
                                     </LinearLayout>
                                     <LinearLayout
                                         android:id="@+id/id_fino_cms"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -589,7 +557,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_claim_refund"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -611,7 +579,7 @@
                                     </LinearLayout>
                                     <LinearLayout
                                         android:id="@+id/id_account_opening"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"

@@ -6,75 +6,97 @@ import com.google.gson.annotations.SerializedName;
 
 public class FastagRechargeResponse {
 
-    @SerializedName("ackno")
-    private String mAckno;
-    @SerializedName("client_ref_id")
-    private String mClientRefId;
-    @SerializedName("date_time")
-    private String mDateTime;
-    @SerializedName("message")
-    private String mMessage;
-    @SerializedName("operator_id")
-    private String mOperatorId;
-    @SerializedName("Status")
-    private String mStatus;
-    @SerializedName("txn_status")
-    private String mTxnStatus;
-
-    public String getAckno() {
-        return mAckno;
-    }
-
-    public void setAckno(String ackno) {
-        mAckno = ackno;
-    }
-
-    public String getClientRefId() {
-        return mClientRefId;
-    }
-
-    public void setClientRefId(String clientRefId) {
-        mClientRefId = clientRefId;
-    }
-
-    public String getDateTime() {
-        return mDateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        mDateTime = dateTime;
-    }
-
-    public String getMessage() {
-        return mMessage;
-    }
-
-    public void setMessage(String message) {
-        mMessage = message;
-    }
-
-    public String getOperatorId() {
-        return mOperatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        mOperatorId = operatorId;
-    }
+    private String status;
+    private String message;
+    private FastagTransactionData data;
 
     public String getStatus() {
-        return mStatus;
+        return status;
     }
 
     public void setStatus(String status) {
-        mStatus = status;
+        this.status = status;
     }
 
-    public String getTxnStatus() {
-        return mTxnStatus;
+    public String getMessage() {
+        return message;
     }
 
-    public void setTxnStatus(String txnStatus) {
-        mTxnStatus = txnStatus;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
+    public FastagTransactionData getData() {
+        return data;
+    }
+
+    public void setData(FastagTransactionData data) {
+        this.data = data;
+    }
+
+    public  class FastagTransactionData{
+
+        private String amount;
+        @SerializedName("txn_status")
+        private String txnStatus;
+        @SerializedName("date_time")
+        private String dateTime;
+
+        @SerializedName("api_txn_id")
+        private String txnId;
+
+        @SerializedName("tid")
+        private String tid;
+
+        @SerializedName("operator_id")
+        private String operatorId;
+
+        public String getAmount() {
+            return amount;
+        }
+
+        public void setAmount(String amount) {
+            this.amount = amount;
+        }
+
+        public String getTxnStatus() {
+            return txnStatus;
+        }
+
+        public void setTxnStatus(String txnStatus) {
+            this.txnStatus = txnStatus;
+        }
+
+        public String getDateTime() {
+            return dateTime;
+        }
+
+        public void setDateTime(String dateTime) {
+            this.dateTime = dateTime;
+        }
+
+        public String getTxnId() {
+            return txnId;
+        }
+
+        public void setTxnId(String txnId) {
+            this.txnId = txnId;
+        }
+
+        public String getTid() {
+            return tid;
+        }
+
+        public void setTid(String tid) {
+            this.tid = tid;
+        }
+
+        public String getOperatorId() {
+            return operatorId;
+        }
+
+        public void setOperatorId(String operatorId) {
+            this.operatorId = operatorId;
+        }
+    }
 }

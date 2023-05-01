@@ -38,7 +38,7 @@ public class PaysprintAepsRequestData {
 
     @SerializedName("data")
     private String xmlData;
-
+    @SerializedName("pipe")
     private String bankPipe;
     public String getBankPipe() {
         return bankPipe;

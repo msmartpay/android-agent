@@ -26,7 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.aepssdkssz.R;
-import com.aepssdkssz.SSZAePSHomeActivity;
 import com.aepssdkssz.paysprint.dialog.PSAePSPrinterDialogFrag;
 import com.aepssdkssz.dialog.SSZAePSBankSearchDialogFrag;
 import com.aepssdkssz.dialog.SSZAePSDeviceSearchDialogFrag;
@@ -126,9 +125,6 @@ public class PSAePSSearchCashOutFragment extends Fragment {
 
     private void initViews(View view) {
 
-        //Utility.saveData(getApplicationContext(), Constants.AEPS_BANK1, banksStatus.getBank1());
-        //Utility.saveData(getApplicationContext(), Constants.AEPS_BANK2, banksStatus.getBank2());
-        //Utility.saveData(getApplicationContext(), Constants.AEPS_BANK3, banksStatus.getBank3());
         radio_bank1= view.findViewById(R.id.radio_bank1);
         radio_bank2= view.findViewById(R.id.radio_bank2);
         radio_bank3= view.findViewById(R.id.radio_bank3);
@@ -251,10 +247,10 @@ public class PSAePSSearchCashOutFragment extends Fragment {
             Utility.setCaptureFingerED(iv_fingerprint, false);
             if (this.validateRequest()) {
                 if (this.getActivity() != null) {
-                    final Intent intent = ((com.aepssdkssz.SSZAePSHomeActivity) this.getActivity()).checkBiometricProvider(this.device_type, this.biometricFormat);
+                    final Intent intent = ((PSAePSHomeActivity) this.getActivity()).checkBiometricProvider(this.device_type, this.biometricFormat);
                     Utility.loge("Device App", Utility.getStringFromModel(intent));
                     if (intent != null) {
-                        this.startActivityForResult(intent, ((com.aepssdkssz.SSZAePSHomeActivity) this.getActivity()).getRequestCode());
+                        this.startActivityForResult(intent, ((PSAePSHomeActivity) this.getActivity()).getRequestCode());
                     }
                 } else {
                     Utility.setCaptureFingerED(iv_fingerprint, true);
@@ -275,8 +271,8 @@ public class PSAePSSearchCashOutFragment extends Fragment {
                 progressDialog = Utility.getProgressDialog(requireActivity());
                 progressDialog.show();
 
-                JSONObject jsonObjPidData = ((com.aepssdkssz.SSZAePSHomeActivity) requireActivity()).getPieJsonData();
-                JSONObject jsonBody = ((com.aepssdkssz.SSZAePSHomeActivity) requireActivity()).getTransactionInfo();
+                JSONObject jsonObjPidData = ((PSAePSHomeActivity) requireActivity()).getPieJsonData();
+                JSONObject jsonBody = ((PSAePSHomeActivity) requireActivity()).getTransactionInfo();
                 if (jsonObjPidData != null) {
                     final JSONObject jsonPid = jsonObjPidData.getJSONObject("PidData");
                     final JSONObject jsonResp = jsonPid.getJSONObject("Resp");
@@ -302,7 +298,7 @@ public class PSAePSSearchCashOutFragment extends Fragment {
                                 }
                             }
                         } else {
-                            deviceSerno = ((com.aepssdkssz.SSZAePSHomeActivity) requireActivity()).getMorphoDeviceSerno();
+                            deviceSerno = ((PSAePSHomeActivity) requireActivity()).getMorphoDeviceSerno();
                         }
                         //jsonBody.put("deviceserno", (Object) Utility.encodeBase64(deviceSerno));
                         //jsonBody.put("biodata", (Object) Utility.encodeBase64(jsonObjPidData.toString()));
@@ -328,49 +324,54 @@ public class PSAePSSearchCashOutFragment extends Fragment {
                         request.setTxnKey(Utility.getData(requireActivity(),Constants.TOKEN));
 
                         String amount="0";
-                        if("2".equalsIgnoreCase(serviceType) || "5".equalsIgnoreCase(serviceType))
+                        if("1".equalsIgnoreCase(serviceType) || "4".equalsIgnoreCase(serviceType))
                             amount=et_amount.getText().toString();
-                        else
+                        else if("2".equalsIgnoreCase(serviceType) || "3".equalsIgnoreCase(serviceType))
                             amount="0";
 
-                        data.setAmount(amount);
-                        request.setData(data);
+                        if("1".equalsIgnoreCase(serviceType) || "4".equalsIgnoreCase(serviceType)
+                        || "2".equalsIgnoreCase(serviceType) || "3".equalsIgnoreCase(serviceType)) {
 
-                        SSZAePSRetrofitClient.getClient(requireActivity())
-                                .paySprintTransaction(request)
-                                .enqueue(new Callback<PaysprintAepsResponse>() {
-                                    @Override
-                                    public void onResponse(@NotNull Call<PaysprintAepsResponse> call, @NotNull Response<PaysprintAepsResponse> response) {
-                                        progressDialog.dismiss();
-                                        try {
-                                            if (response.isSuccessful() && response.body() != null) {
-                                                PaysprintAepsResponse res = response.body();
-                                                if (res.getStatus() != 1) {
-                                                    PSAePSPrinterDialogFrag printerDialogFrag = PSAePSPrinterDialogFrag.newInstance(Utility.getStringFromModel(res), () -> {
-                                                        freshData();
-                                                    });
-                                                    printerDialogFrag.show(requireActivity().getSupportFragmentManager(), "Show Status");
+                            data.setAmount(amount);
+                            request.setData(data);
+
+                            SSZAePSRetrofitClient.getClient(requireActivity())
+                                    .paySprintTransaction(request)
+                                    .enqueue(new Callback<PaysprintAepsResponse>() {
+                                        @Override
+                                        public void onResponse(@NotNull Call<PaysprintAepsResponse> call, @NotNull Response<PaysprintAepsResponse> response) {
+                                            progressDialog.dismiss();
+                                            try {
+                                                if (response.isSuccessful() && response.body() != null) {
+                                                    PaysprintAepsResponse res = response.body();
+                                                    if (res.getStatus() != 1) {
+                                                        PSAePSPrinterDialogFrag printerDialogFrag = PSAePSPrinterDialogFrag.newInstance(Utility.getStringFromModel(res), () -> {
+                                                            freshData();
+                                                        });
+                                                        printerDialogFrag.show(requireActivity().getSupportFragmentManager(), "Show Status");
+                                                    } else {
+                                                        Utility.showMessageDialogue(requireActivity(), "" + res.getMessage(), "Submit Request");
+                                                    }
                                                 } else {
-                                                    Utility.showMessageDialogue(requireActivity(), "" + res.getMessage(), "Submit Request");
+                                                    SSZAePSAPIError error = SSZAePSAPIError.parseError(response, requireActivity());
+                                                    Utility.showMessageDialogue(requireActivity(), error.message(), "Submit Request");
                                                 }
-                                            } else {
-                                                SSZAePSAPIError error = SSZAePSAPIError.parseError(response, requireActivity());
-                                                Utility.showMessageDialogue(requireActivity(), error.message(), "Submit Request");
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                                Utility.showMessageDialogue(requireActivity(), "" + response.message(), "Submit Request");
                                             }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                            Utility.showMessageDialogue(requireActivity(), "" + response.message(), "Submit Request");
                                         }
-                                    }
 
-                                    @Override
-                                    public void onFailure(@NotNull Call<PaysprintAepsResponse> call, @NotNull Throwable t) {
-                                        progressDialog.dismiss();
-                                        Utility.showMessageDialogue(requireActivity(), t.getMessage(), "Submit Request");
-                                        Utility.loge("validate User", t.getMessage());
-                                    }
-                                });
-
+                                        @Override
+                                        public void onFailure(@NotNull Call<PaysprintAepsResponse> call, @NotNull Throwable t) {
+                                            progressDialog.dismiss();
+                                            Utility.showMessageDialogue(requireActivity(), t.getMessage(), "Submit Request");
+                                            Utility.loge("validate User", t.getMessage());
+                                        }
+                                    });
+                        }else{
+                            Utility.showMessageDialogue(requireActivity(), "Invalid Transaction Type", "Alert!");
+                        }
                     } else {
                         Utility.showMessageDialogue(requireActivity(), jsonResp.toString(), "Submit Request");
                     }
@@ -510,9 +511,9 @@ public class PSAePSSearchCashOutFragment extends Fragment {
                 }
             } else if (requestCode == 1100) {
                 if (this.getActivity() != null) {
-                    final Intent intent = ((com.aepssdkssz.SSZAePSHomeActivity) this.getActivity()).verifyActivityResult(requestCode, data, this.biometricFormat);
+                    final Intent intent = ((PSAePSHomeActivity) this.getActivity()).verifyActivityResult(requestCode, data, this.biometricFormat);
                     if (intent != null) {
-                        this.startActivityForResult(intent, ((com.aepssdkssz.SSZAePSHomeActivity) this.getActivity()).getRequestCode());
+                        this.startActivityForResult(intent, ((PSAePSHomeActivity) this.getActivity()).getRequestCode());
                     } else {
                         Utility.toast(requireActivity(), "Some error occurred!");
                         Utility.setCaptureFingerED(iv_fingerprint, true);
@@ -533,7 +534,7 @@ public class PSAePSSearchCashOutFragment extends Fragment {
                         cv_capture_score.setVisibility(View.VISIBLE);
                         final String errCode = jsonResp.getString("errCode");
                         if (this.getActivity() != null) {
-                            ((com.aepssdkssz.SSZAePSHomeActivity) this.getActivity()).updatePidJson(jsonObjPidData);
+                            ((PSAePSHomeActivity) this.getActivity()).updatePidJson(jsonObjPidData);
                         }
                         if (errCode.equals("0")) {
 
@@ -587,33 +588,30 @@ public class PSAePSSearchCashOutFragment extends Fragment {
         tv_select_device.setText("");
         Utility.setTextViewBG_TextColor(tv_select_device, false);
 
-        ((SSZAePSHomeActivity) requireActivity()).updatePidJson(null);
+        ((PSAePSHomeActivity) requireActivity()).updatePidJson(null);
         Utility.setCaptureFingerED(iv_fingerprint, false);
     }
 
     private void setTransactionType(String purposeOfPayment){
         if(Constants.CASH_WITHDRAWAL.equalsIgnoreCase(purposeOfPayment)){
-
             rl_withdrawal.setBackgroundColor(getResources().getColor(R.color.sszAePSColorPrimary));
             rl_balance_enquiry.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_ministatement.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_aadhaarpay.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             Utility.showView(rl_amount);
+            serviceType="1";
+        }else if(Constants.BALANCE_ENQUIRY.equalsIgnoreCase(purposeOfPayment)){
+            rl_balance_enquiry.setBackgroundColor(getResources().getColor(R.color.sszAePSColorPrimary));
+            rl_ministatement.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
+            rl_withdrawal.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
+            rl_aadhaarpay.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
+            Utility.hideView(rl_amount);
             serviceType="2";
         }else if(Constants.MINI_STATEMENT.equalsIgnoreCase(purposeOfPayment)){
             rl_ministatement.setBackgroundColor(getResources().getColor(R.color.sszAePSColorPrimary));
             rl_withdrawal.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_balance_enquiry.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_aadhaarpay.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
-
-            Utility.hideView(rl_amount);
-            serviceType="4";
-        }else if(Constants.BALANCE_ENQUIRY.equalsIgnoreCase(purposeOfPayment)){
-            rl_balance_enquiry.setBackgroundColor(getResources().getColor(R.color.sszAePSColorPrimary));
-            rl_ministatement.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
-            rl_withdrawal.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
-            rl_aadhaarpay.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
-
             Utility.hideView(rl_amount);
             serviceType="3";
         }else if(Constants.AADHAAR_PAY.equalsIgnoreCase(purposeOfPayment)){
@@ -622,15 +620,14 @@ public class PSAePSSearchCashOutFragment extends Fragment {
             rl_ministatement.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_withdrawal.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             Utility.showView(rl_amount);
-            serviceType="5";
+            serviceType="4";
         }else{
             rl_withdrawal.setBackgroundColor(getResources().getColor(R.color.sszAePSColorPrimary));
             rl_balance_enquiry.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_ministatement.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
             rl_aadhaarpay.setBackgroundColor(getResources().getColor(R.color.sszAePS_editHintColor));
-
             Utility.showView(rl_amount);
-            serviceType="2";
+            serviceType="1";
         }
     }
 }

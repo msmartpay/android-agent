@@ -71,12 +71,9 @@
             android:name=".aeps.onboard.ActivateAepsActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize" />
+
         <activity
-            android:name=".aeps.SSZPLAEPSActivity"
-            android:exported="false"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".aeps.AEPSActivity"
+            android:name=".aeps.EkoAEPSGatewayActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize" />
         <activity
@@ -120,7 +117,7 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.DthRechargeActivity"
+            android:name=".rechargeBillPay.SubscriptionRechargeActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />

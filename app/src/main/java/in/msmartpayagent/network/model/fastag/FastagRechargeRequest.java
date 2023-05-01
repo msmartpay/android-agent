@@ -9,14 +9,12 @@ public class FastagRechargeRequest {
 
     @SerializedName("AgentID")
     private String agentID;
-    @Expose
-    private String cname;
-    @Expose
-    private RechargeData data;
-    @Expose
-    private String ipaddress;
     @SerializedName("Key")
     private String key;
+    @Expose
+    private String opname;
+    @Expose
+    private FastagData data;
 
     public String getAgentID() {
         return agentID;
@@ -24,30 +22,6 @@ public class FastagRechargeRequest {
 
     public void setAgentID(String agentID) {
         this.agentID = agentID;
-    }
-
-    public String getCname() {
-        return cname;
-    }
-
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
-
-    public RechargeData getData() {
-        return data;
-    }
-
-    public void setData(RechargeData data) {
-        this.data = data;
-    }
-
-    public String getIpaddress() {
-        return ipaddress;
-    }
-
-    public void setIpaddress(String ipaddress) {
-        this.ipaddress = ipaddress;
     }
 
     public String getKey() {
@@ -58,4 +32,19 @@ public class FastagRechargeRequest {
         this.key = key;
     }
 
+    public String getOpname() {
+        return opname;
+    }
+
+    public void setOpname(String opname) {
+        this.opname = opname;
+    }
+
+    public FastagData getData() {
+        return data;
+    }
+
+    public void setData(FastagData data) {
+        this.data = data;
+    }
 }

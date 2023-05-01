@@ -220,6 +220,7 @@ public class SSZAePSSearchCashOutFragment extends Fragment {
             Utility.loge("fab_cashout", "onclck");
             if (this.validateRequest()) {
                 captureFingurePrint();
+
             }
         });
     }
