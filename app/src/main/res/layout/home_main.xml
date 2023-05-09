@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="">
+    tools:openDrawer="start">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -430,7 +430,7 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Money\nTransfer" />
+                                            android:text="Money\nTransfer1" />
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -452,31 +452,32 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Money\nTransfer" />
+                                            android:text="Money\nTransfer2" />
                                     </LinearLayout>
-
-
                                     <LinearLayout
-                                        android:id="@+id/id_icici_cash_deposit"
+                                        android:id="@+id/id_account_opening"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="0.25"
                                         android:gravity="center"
                                         android:onClick="click"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
 
                                         <LinearLayout
                                             style="@style/ll_home">
 
                                             <ImageView
                                                 style="@style/iv_home"
-                                                app:srcCompat="@drawable/cash_deposit" />
+                                                android:src="@drawable/ic_account_balance_24dp" />
                                         </LinearLayout>
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Cash\nDeposit" />
+                                            android:text="Account\nOpening" />
+
                                     </LinearLayout>
+
+
 
                                     <LinearLayout
                                         android:id="@+id/id_micro_atm"
@@ -569,7 +570,7 @@
 
                                             <ImageView
                                                 style="@style/iv_home"
-                                                android:src="@drawable/claimrefund" />
+                                                android:src="@drawable/wallet_history" />
                                         </LinearLayout>
 
                                         <TextView
@@ -578,26 +579,25 @@
 
                                     </LinearLayout>
                                     <LinearLayout
-                                        android:id="@+id/id_account_opening"
+                                        android:id="@+id/id_icici_cash_deposit"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_weight="0.25"
                                         android:gravity="center"
                                         android:onClick="click"
-                                        android:orientation="vertical"
-                                        android:layout_weight="0.25">
+                                        android:orientation="vertical">
 
                                         <LinearLayout
                                             style="@style/ll_home">
 
                                             <ImageView
                                                 style="@style/iv_home"
-                                                android:src="@drawable/ic_account_balance_24dp" />
+                                                app:srcCompat="@drawable/cash_deposit" />
                                         </LinearLayout>
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Account\nOpening" />
-
+                                            android:text="Cash\nDeposit" />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -640,7 +640,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_mobile_postpaid"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -663,7 +663,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_landline"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -685,7 +685,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_electricity"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -707,7 +707,7 @@
 
                                     <LinearLayout
                                         android:id="@+id/id_gas"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -738,7 +738,7 @@
                                     android:weightSum="1.0">
                                     <LinearLayout
                                         android:id="@+id/id_water"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -755,12 +755,12 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Water" />
+                                            android:text="Water\nBill" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/id_insurence"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -777,11 +777,11 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Insurance" />
+                                            android:text="Insurance\nPremium" />
                                     </LinearLayout>
                                     <LinearLayout
                                         android:id="@+id/id_credit"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -798,12 +798,12 @@
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="CreditCard" />
+                                            android:text="CreditCard\nBill" />
                                     </LinearLayout>
 
                                     <LinearLayout
-                                        android:id="@+id/id_paytm"
-                                        android:layout_width="wrap_content"
+                                        android:id="@+id/id_lic"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:onClick="click"
@@ -815,12 +815,35 @@
 
                                             <ImageView
                                                 style="@style/iv_home"
-                                                android:src="@drawable/wallet_history" />
+                                                android:src="@drawable/claimrefund" />
                                         </LinearLayout>
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="Paytm" />
+                                            android:text="LIC\nPremium" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_paytm"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25"
+                                        android:visibility="gone">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/claimrefund" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="LIC\nPremium" />
                                     </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -863,7 +886,7 @@
 
                                         <LinearLayout
                                             android:id="@+id/id_fund_settlement"
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
                                             android:onClick="click"
@@ -887,7 +910,7 @@
 
                                         <LinearLayout
                                             android:id="@+id/id_wallet_history"
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
                                             android:onClick="click"
@@ -909,7 +932,7 @@
 
                                         <LinearLayout
                                             android:id="@+id/id_balance_request"
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
                                             android:onClick="click"
@@ -930,13 +953,36 @@
                                         </LinearLayout>
 
                                         <LinearLayout
+                                            android:id="@+id/id_wallet_transfer"
+                                            android:layout_width="0dp"
+                                            android:layout_weight="0.25"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:onClick="click"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                style="@style/ll_home">
+
+                                                <ImageView
+                                                    style="@style/iv_home"
+                                                    android:src="@drawable/money_transfer" />
+                                            </LinearLayout>
+
+                                            <TextView
+                                                style="@style/tv_main_large"
+                                                android:text="Wallet\nTransfer" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
                                             android:id="@+id/id_bank_details"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
                                             android:onClick="click"
                                             android:orientation="vertical"
-                                            android:layout_weight="0.25">
+                                            android:layout_weight="0.25"
+                                            android:visibility="gone">
 
                                             <LinearLayout
                                                 style="@style/ll_home">
@@ -962,29 +1008,10 @@
                                         android:gravity="center"
                                         android:orientation="horizontal"
                                         android:padding="10.0dip"
-                                        android:weightSum="1">
+                                        android:weightSum="1"
+                                        android:visibility="gone">
 
-                                        <LinearLayout
-                                            android:id="@+id/id_wallet_transfer"
-                                            android:layout_width="0dp"
-                                            android:layout_weight="0.25"
-                                            android:layout_height="wrap_content"
-                                            android:gravity="center"
-                                            android:onClick="click"
-                                            android:orientation="vertical">
 
-                                            <LinearLayout
-                                                style="@style/ll_home">
-
-                                                <ImageView
-                                                    style="@style/iv_home"
-                                                    android:src="@drawable/money_transfer" />
-                                            </LinearLayout>
-
-                                            <TextView
-                                                style="@style/tv_main_large"
-                                                android:text="Wallet\nTransfer" />
-                                        </LinearLayout>
 
                                         <LinearLayout
                                             android:id="@+id/id_commission"

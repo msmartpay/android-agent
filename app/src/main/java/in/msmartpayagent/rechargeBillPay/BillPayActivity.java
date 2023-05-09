@@ -12,15 +12,18 @@ import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
 import java.util.Objects;
 
 import in.msmartpayagent.R;
+import in.msmartpayagent.myWallet.TransactionHistoryReceipt;
 import in.msmartpayagent.network.NetworkConnection;
 import in.msmartpayagent.network.RetrofitClient;
 import in.msmartpayagent.network.model.BillPayRequest;
 import in.msmartpayagent.network.model.BillPayResponse;
 import in.msmartpayagent.network.model.post.OperatorData;
 import in.msmartpayagent.network.model.wallet.OperatorModel;
+import in.msmartpayagent.network.model.wallet.TransactionItems;
 import in.msmartpayagent.utility.BaseActivity;
 import in.msmartpayagent.utility.Keys;
 import in.msmartpayagent.utility.L;
@@ -176,14 +179,34 @@ public class BillPayActivity extends BaseActivity {
                                 // ll_dueAmount.setVisibility(View.VISIBLE);
                             } else {
 
-                                Intent in = new Intent();
-                                in.setClass(context, SuccessDetailActivity.class);
-                                in.putExtra("responce", res.getResponseMessage());
-                                in.putExtra("mobileno", connectionNo);
-                                in.putExtra("requesttype", "Electricity");
-                                in.putExtra("operator", operatorCodeModel.getDisplayName());
-                                in.putExtra("amount", amtt.getText().toString());
-                                startActivity(in);
+                                TransactionItems transactionModel = new TransactionItems();
+                                transactionModel.setTran_id(res.getTid());
+                                transactionModel.setMobile_operator(operatorCodeModel.getDisplayName());
+                                transactionModel.setMobile_number(connectionNo);
+                                transactionModel.setService("Utility");
+                                transactionModel.setAction_on_bal_amt("Debit");
+                                transactionModel.setTran_status(res.getTxn_status());
+                                transactionModel.setTxnAmount(amtt.getText().toString());
+                                transactionModel.setNet_amout(amtt.getText().toString());
+                                transactionModel.setDeductedAmt(amtt.getText().toString());
+                                transactionModel.setDot(new Date().toString());
+                                transactionModel.setTot("NA");
+                                transactionModel.setAgent_balAmt_b_Ded("0");
+                                transactionModel.setAgent_F_balAmt("0");
+                                transactionModel.setBankRefId(res.getOperatorId());
+                                transactionModel.setOperatorId(res.getOperatorId());
+                                transactionModel.setCommission("0");
+                                transactionModel.setServiceCharge("0");
+                                transactionModel.setRemark(res.getResponseMessage());
+                                transactionModel.setBene_Account("NA");
+                                transactionModel.setBene_Bank_IFSC("NA");
+                                transactionModel.setCustomer_name(tv_customerName.getText()==null?"NA":tv_customerName.getText().toString());
+                                transactionModel.setDue_date(tv_dueDate.getText()==null?"NA":tv_dueDate.getText().toString());
+
+                                Intent intent = new Intent( getApplicationContext(), TransactionHistoryReceipt.class);
+                                intent.putExtra("position", 1);
+                                intent.putExtra("historyModel", Util.getGson().toJson(transactionModel));
+                                startActivity(intent);
                                 finish();
                             }
                         } else if (res.getResponseCode() != null && res.getResponseCode().equals("1")) {

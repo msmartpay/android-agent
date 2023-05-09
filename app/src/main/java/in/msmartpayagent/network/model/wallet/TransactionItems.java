@@ -28,6 +28,25 @@ public class TransactionItems {
     private String Bene_Bank_Name="";
     private String Bene_Bank_IFSC="";
 
+    private String customer_name;
+    private String due_date;
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
+    }
+
     public String getServiceCharge() {
         return serviceCharge;
     }

@@ -38,10 +38,11 @@ public class TransactionHistoryReceipt extends BaseActivity {
     private Context context;
     private String emailId, agentName, agentMobile;
     private TextView name, mobileno, email, transaction_id_value, date_value, ser_value, amt_value,
-            tran_amt__value, charge_amt_value, tot_amt_value, tv_site,operator_id_value,operator_id_text;
+            tran_amt__value, charge_amt_value, tot_amt_value, tv_site,operator_id_value,operator_id_text,
+            id_customer_name,id_due_date,tv_txn_status;
     private float charge = 0l, tranAmount, tot;
     private TextView Bene_name, Bene_ac, Bank_name, Bank_ifsc;
-    private LinearLayoutCompat comm_detail_value,Bene_Name_detail_value1, Bene_ac_detail_value2, Bank_Name_detail_value3, Bank_IFSC_detail_value4;
+    private LinearLayoutCompat customer_name_detail_value1,due_date_detail_value1,comm_detail_value,Bene_Name_detail_value1, Bene_ac_detail_value2, Bank_Name_detail_value3, Bank_IFSC_detail_value4;
     private LinearLayoutCompat ll_print_receipt;
     @SuppressLint("SetTextI18n")
     @Override
@@ -49,7 +50,7 @@ public class TransactionHistoryReceipt extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_history_receipt);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Transaction History");
+        setTitle("Transaction Receipt");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = TransactionHistoryReceipt.this;
@@ -59,6 +60,8 @@ public class TransactionHistoryReceipt extends BaseActivity {
         agentMobile = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_MOB);
 
         initViews();
+        Util.hideView(customer_name_detail_value1);
+        Util.hideView(due_date_detail_value1);
         Bene_Name_detail_value1.setVisibility(View.GONE);
         Bene_ac_detail_value2.setVisibility(View.GONE);
         Bank_Name_detail_value3.setVisibility(View.GONE);
@@ -86,10 +89,13 @@ public class TransactionHistoryReceipt extends BaseActivity {
 
             tot_amt_value.setText(tranAmount+ "");
 
+            tv_txn_status.setText(model.getTran_status());
 
-            if (service.equalsIgnoreCase("Remittance") ||
-                    service.equalsIgnoreCase("Verification") ||
-                    service.equalsIgnoreCase("Fund-Settlement") ) {
+            if (service.equalsIgnoreCase("Remittance")
+                    || service.equalsIgnoreCase("Remittance2")
+                    || service.equalsIgnoreCase("Verification")
+                    || service.equalsIgnoreCase("Verification2")
+                    || service.equalsIgnoreCase("Fund-Settlement") ) {
 
                 Util.showView(comm_detail_value);
 
@@ -120,7 +126,8 @@ public class TransactionHistoryReceipt extends BaseActivity {
                 ser_value.setText(model.getService() +
                         " (" + model.getMobile_number() + ")");
 
-                if(service.equalsIgnoreCase("Remittance") || service.equalsIgnoreCase("Remittance2")){
+                if(service.equalsIgnoreCase("Remittance")
+                        || service.equalsIgnoreCase("Remittance2")){
                     charge = tranAmount * 0.01f;
                     if(charge<10)
                         charge=10;
@@ -138,6 +145,27 @@ public class TransactionHistoryReceipt extends BaseActivity {
                 operator_id_value.setText(model.getBankRefId());
 
                 ser_value.setText(model.getService()+"\n"+model.getRemark());
+            }else if (service.contains("Utility") ){
+                Util.hideView(comm_detail_value);
+                operator_id_text.setText("Operator Id");
+                operator_id_value.setText(model.getOperatorId());
+
+                ser_value.setText(model.getService() + " ("+model.getMobile_operator()+") "+
+                        "\nConnection: " + model.getMobile_number() );
+
+                Util.showView(customer_name_detail_value1);
+                Util.showView(due_date_detail_value1);
+                Bank_Name_detail_value3.setVisibility(View.VISIBLE);
+
+                if ("".equals(model.getCustomer_name()))
+                    id_customer_name.setText("n/a");
+                else
+                    id_customer_name.setText(model.getCustomer_name());
+                if ("".equals(model.getDue_date()))
+                    id_due_date.setText("n/a");
+                else
+                    id_due_date.setText(model.getDue_date());
+
             }else{
                 Util.hideView(comm_detail_value);
                 operator_id_text.setText("Operator Id");
@@ -186,6 +214,10 @@ public class TransactionHistoryReceipt extends BaseActivity {
         ticket = (Button) findViewById(R.id.tiket);
         btn_share_receipt = (Button) findViewById(R.id.btn_share_receipt);
         btn_print_receipt = (Button) findViewById(R.id.btn_print_receipt);
+
+        tv_txn_status = findViewById(R.id.tv_txn_status);
+        id_customer_name = findViewById(R.id.id_customer_name);
+        id_due_date = findViewById(R.id.id_due_date);
         name = (TextView) findViewById(R.id.name);
         mobileno = (TextView) findViewById(R.id.mobileno);
         email = (TextView) findViewById(R.id.email);
@@ -209,6 +241,9 @@ public class TransactionHistoryReceipt extends BaseActivity {
         Bene_ac_detail_value2 = findViewById(R.id.Bene_ac_detail_value2);
         Bank_Name_detail_value3 = findViewById(R.id.Bank_Name_detail_value3);
         Bank_IFSC_detail_value4 = findViewById(R.id.Bank_IFSC_detail_value4);
+
+        customer_name_detail_value1 = findViewById(R.id.customer_name_detail_value1);
+        due_date_detail_value1 = findViewById(R.id.due_date_detail_value1);
 
     }
     private void myPermissions(boolean isPrint) {

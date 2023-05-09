@@ -42,6 +42,16 @@ public class LoginResponse {
     private String agency_name;
     private String address;
 
+    private String kycStatus;
+
+    public String getKycStatus() {
+        return kycStatus;
+    }
+
+    public void setKycStatus(String kycStatus) {
+        this.kycStatus = kycStatus;
+    }
+
     private String termsAndConditions;
 
     public String getTermsAndConditions() {

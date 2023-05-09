@@ -24,7 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import in.msmartpayagent.R;
 import in.msmartpayagent.aeps.onboard.UserNumberDialog;
-import in.msmartpayagent.dmrPaySprint.dashboard.MoneyTransferActivity;
+import in.msmartpayagent.dmrPaySprint.dashboard.PSMoneyTransferActivity;
 import in.msmartpayagent.network.AppMethods;
 import in.msmartpayagent.network.NetworkConnection;
 import in.msmartpayagent.network.RetrofitClient;
@@ -108,7 +108,7 @@ public class PSFindSenderDialog extends DialogFragment {
                         if (res.getStatus().equals("0")) {
                             Util.SavePrefData(context, Keys.SENDER_MOBILE, number);
                             Util.SavePrefData(context, Keys.SENDER, Util.getGson().toJson(res));
-                            startActivity(new Intent(context, MoneyTransferActivity.class));
+                            startActivity(new Intent(context, PSMoneyTransferActivity.class));
                             dismiss();
                         } else if (res.getStatus().equals("1")) {
                             showResponseDialog(res.getMessage(), 1);
@@ -141,7 +141,7 @@ public class PSFindSenderDialog extends DialogFragment {
         d.setCancelable(false);
         Objects.requireNonNull(d.getWindow()).requestFeature(Window.FEATURE_NO_TITLE);
         d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        d.setContentView(R.layout.dmr_sender_resister_dialog);
+        d.setContentView(R.layout.ps_dmr_sender_resister_dialog);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         Button btnOK = (Button) d.findViewById(R.id.btn_resister_ok);

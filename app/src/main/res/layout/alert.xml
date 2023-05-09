@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whitecolor"
+    android:orientation="vertical"
+    android:padding="15.0dip">
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingBottom="20.0dip">
+        android:layout_gravity="center_horizontal"
+        android:padding="20.0dip"
+        android:textColor="#ff999999" />
 
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="20.0dip"
-            android:textColor="#ff999999" />
+    <ImageView
+        android:id="@+id/statusImage"
+        android:layout_width="40.0dip"
+        android:layout_height="40.0dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="21.0dip"
+        android:src="@drawable/failed" />
 
-        <ImageView
-            android:id="@+id/statusImage"
-            android:layout_width="40.0dip"
-            android:layout_height="40.0dip"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="21.0dip"
-            android:src="@drawable/failed" />
-
-        <Button
-            android:id="@+id/trans_status_button"
-            android:layout_width="wrap_content"
-            android:layout_height="40.0dip"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20.0dip"
-            android:background="@drawable/rounded_btn_login"
-            android:text="OK"
-            android:textColor="@color/whitecolor"
-            android:textStyle="bold" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/trans_status_button"
+        android:layout_width="match_parent"
+        android:layout_height="40.0dip"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20.0dip"
+        android:background="@drawable/round_border"
+        android:text="OK"
+        android:textColor="@color/whitecolor"
+        android:textStyle="bold" />
+</LinearLayout>

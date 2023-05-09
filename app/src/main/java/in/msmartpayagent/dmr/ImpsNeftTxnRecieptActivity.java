@@ -40,7 +40,7 @@ import retrofit2.Callback;
 
 public class ImpsNeftTxnRecieptActivity extends BaseActivity {
 
-    private TextView tv_bank_rrn, tv_sender_id, tv_sender_name,  tv_bene_mobile, tviewTransferedAmount, tviewBeneficiaryName
+    private TextView tv_dmr_txn_status,tv_bank_rrn, tv_sender_id, tv_sender_name,  tv_bene_mobile, tviewTransferedAmount, tviewBeneficiaryName
             , tviewBankName, tviewAccountNo, tviewIFSCCode, tv_date_time,tv_message,tv_dmr_txn_tid;
 
     private String SenderId, SenderName, BeneMobile, accountNumber, bankName, beneName, Ifsc, BankRRN,
@@ -82,6 +82,7 @@ public class ImpsNeftTxnRecieptActivity extends BaseActivity {
         btn_print_receipt = findViewById(R.id.btn_print_receipt);
         btnDone = (Button) findViewById(R.id.btn_dmr_txn_done);
 
+        tv_dmr_txn_status = (TextView)findViewById(R.id.tv_dmr_txn_status);
         tv_dmr_txn_tid = (TextView) findViewById(R.id.tv_dmr_txn_tid);
         tv_bank_rrn = (TextView) findViewById(R.id.tv_dmr_txn_bank_rrn);
         tv_sender_id = (TextView) findViewById(R.id.tv_dmr_txn_sender_id);
@@ -110,6 +111,7 @@ public class ImpsNeftTxnRecieptActivity extends BaseActivity {
         tviewIFSCCode.setText(Ifsc);
         tv_date_time.setText(TxnDate+" "+TxnTime);
         tv_message.setText(message);
+        tv_dmr_txn_status.setText(txnStatus);
 
         if("Success".equalsIgnoreCase(txnStatus)){
             im_dmr_txn_status.setImageResource(R.drawable.tick_ok);

@@ -6,11 +6,6 @@ import com.aepssdkssz.network.model.ValidateUserResponse;
 import java.util.List;
 import java.util.Map;
 
-import in.msmartpayagent.kyc.BaseRequest;
-import in.msmartpayagent.kyc.DocumentDataRequestContainer;
-import in.msmartpayagent.kyc.DocumentDataResponseContainer;
-import in.msmartpayagent.kyc.DocumentTypeResponseModel;
-import in.msmartpayagent.kyc.FileUploadResponse;
 import in.msmartpayagent.network.model.BankCollectResponse;
 import in.msmartpayagent.network.model.BillPayRequest;
 import in.msmartpayagent.network.model.BillPayResponse;
@@ -37,8 +32,6 @@ import in.msmartpayagent.network.model.aeps.PayworldAccessKeyRequest;
 import in.msmartpayagent.network.model.aeps.PayworldAccessKeyResponse;
 import in.msmartpayagent.network.model.aeps.onboard.UserRegisterRequest;
 import in.msmartpayagent.network.model.aeps.onboard.UserRequest;
-import in.msmartpayagent.network.model.audit.AuditResponse;
-import in.msmartpayagent.network.model.audit.AuditUpdateRequest;
 import in.msmartpayagent.network.model.commission.CommissionRequest;
 import in.msmartpayagent.network.model.commission.CommissionResponse;
 import in.msmartpayagent.network.model.dmr.AccountVerifyRequest;
@@ -58,12 +51,17 @@ import in.msmartpayagent.network.model.dmr.SenderFindRequest;
 import in.msmartpayagent.network.model.dmr.SenderHistoryResponse;
 import in.msmartpayagent.network.model.dmr.SenderRegisterRequest;
 import in.msmartpayagent.network.model.dmr.SenderRegisterResponse;
+import in.msmartpayagent.network.model.dmr.ps.PSMoneyTransferResponse;
 import in.msmartpayagent.network.model.dmr.ps.PSSenderRegisterRequest;
 import in.msmartpayagent.network.model.fastag.FastagFetchRequest;
 import in.msmartpayagent.network.model.fastag.FastagFetchResponse;
 import in.msmartpayagent.network.model.fastag.FastagOperatorResponse;
 import in.msmartpayagent.network.model.fastag.FastagRechargeRequest;
 import in.msmartpayagent.network.model.fastag.FastagRechargeResponse;
+import in.msmartpayagent.network.model.kyc.*;
+import in.msmartpayagent.network.model.lic.LicBillFetchRequest;
+import in.msmartpayagent.network.model.lic.LicBillFetchResponse;
+import in.msmartpayagent.network.model.lic.LicBillpayResponse;
 import in.msmartpayagent.network.model.matm.MicroInitiateTransactionData;
 import in.msmartpayagent.network.model.matm.MicroInitiateTransactionRequest;
 import in.msmartpayagent.network.model.matm.MicroInitiateTransactionResponse;
@@ -107,11 +105,11 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Url;
 
 public interface AppMethods {
-    String VERSION = "1.0";
+    String VERSION = "1.2";
     String DOMAIN = "https://msmartpay.in/";
 
     String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
-
+    String KYC_BASE_URL = DOMAIN+"FileServer";
 
     String DSID = "DSUP33273001";
     String CLIENT = "";
@@ -124,7 +122,7 @@ public interface AppMethods {
     String TH = "TH";
 
 
-    String DMR_PAYSPRINT="Paysprint",DMR_LEVIN="levin";
+    String DMR_PAYSPRINT="Paysprint";
 
     String FindSender="/FindSender";
     String DeleteBene="/DeleteBene";
@@ -171,7 +169,7 @@ public interface AppMethods {
     Call<AccountVerifyResponse> verifyAccount(@Url String url,@Body AccountVerifyRequest request);
 
     @POST
-    Call<MoneyTransferResponse> moneyTransfer(@Url String url,@Body MoneyTransferRequest request);
+    Call<PSMoneyTransferResponse> moneyTransfer(@Url String url, @Body MoneyTransferRequest request);
 
     @POST
     Call<RefundLiveStatusResponse> transStatus(@Url String url,@Body RefundLiveStatusRequest request);
@@ -405,6 +403,12 @@ public interface AppMethods {
     @POST(BASE_URL + "Paysprint/fastag/recharge")
     Call<FastagRechargeResponse> rechargeFastag(@Body FastagRechargeRequest request);
 
+    @POST(BASE_URL + "lic/fetchlicbill")
+    Call<LicBillFetchResponse> fetchLicBill(@Body LicBillFetchRequest request);
+
+    @POST(BASE_URL + "lic/paylicbill")
+    Call<LicBillpayResponse> payLicBill(@Body MainRequest2 request);
+
     /*******END DMT *******/
 
     /*********  MATM ********/
@@ -435,11 +439,6 @@ public interface AppMethods {
     Call<DocumentDataResponseContainer> fetchDocumentData(@Body BaseRequest baseRequest);
 
     @POST(LOGIN + "/updateKYC")
-    Call<DocumentDataResponseContainer> updateKYCStatus(@Body BaseRequest baseRequest);
+    Call<DocumentTypeResponseModel> updateKYCStatus(@Body BaseRequest baseRequest);
 
-    @POST(WS + "/auditHistory")
-    Call<AuditResponse> fetchAuditRequest(@Body BaseRequest baseRequest);
-
-    @POST(WS + "/updateAuditDetails")
-    Call<MainResponse2> updateAuditDetails(@Body AuditUpdateRequest baseRequest);
 }

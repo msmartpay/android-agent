@@ -3,6 +3,7 @@ package in.msmartpayagent.rechargeBillPay;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -73,6 +74,8 @@ public class ElectricityPayActivity extends BaseActivity {
         Util.showView(binding.btnProceed);
         operatorsCodeRequest();
 
+
+
         binding.etOperator.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), OperatorSearchActivity.class);
             intent.putExtra(Keys.ARRAY_LIST, Util.getJsonFromModel(operatorList));
@@ -84,11 +87,11 @@ public class ElectricityPayActivity extends BaseActivity {
                 connectionNo = Objects.requireNonNull(binding.tidConsumerNo.getEditText()).getText().toString();
                 amt = Objects.requireNonNull(binding.tidAmount.getEditText()).getText().toString();
                 if (isAd1)
-                ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
+                    ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
                 if (isAd2)
-                ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
+                    ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
                 if (isAd3)
-                ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
+                    ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
                 if (opreatorModel == null) {
                   L.toastS(context, "Select Operator");
                 } else if ("".equals(connectionNo)) {
@@ -111,7 +114,7 @@ public class ElectricityPayActivity extends BaseActivity {
                     }else {
                         L.toastS(context, "Enter " + Objects.requireNonNull(binding.tidAd3.getHint()));
                     }
-                }else if ("".equals(amt) || Double.parseDouble(amt) < 10) {
+                }else if("0".equalsIgnoreCase(operatorData.getViewbill()) && amt.isEmpty()){
                     L.toastS(context,  "Enter Valid Amount");
                 } else {
                     Intent intent = new Intent(context, BillPayActivity.class);
@@ -187,6 +190,11 @@ public class ElectricityPayActivity extends BaseActivity {
                                 OperatorResponse res = response.body();
                                 if ("0".equals(res.getStatus()) && res.getData()!=null) {
                                         operatorData = res.getData();
+
+                                    if("1".equalsIgnoreCase(operatorData.getViewbill())){
+
+                                        binding.tidAmount.setVisibility(View.GONE);
+                                    }
                                     isAd1  = false;
                                     isAd2  = false;
                                     isAd3  = false;

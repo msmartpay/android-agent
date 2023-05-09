@@ -23,7 +23,7 @@ import in.msmartpayagent.utility.Util;
 public class SuccessDetailActivity extends BaseActivity {
 
     private String supportnumber1;
-    private TextView receipt_cus_name_hd,receipt_cus_name,success_txnid, success_amount, success_mobile, success_operator, suceess_status, success_mobile_dth, success_agentid;
+    private TextView operator_id,receipt_cus_name_hd,receipt_cus_name,success_txnid, success_amount, success_mobile, success_operator, suceess_status, success_mobile_dth, success_agentid;
     private Button btn_done;
     private ImageView success_issue;
 
@@ -41,6 +41,7 @@ public class SuccessDetailActivity extends BaseActivity {
         Util.hideView(receipt_cus_name);
         Util.hideView(receipt_cus_name_hd);
 
+        operator_id = (TextView) findViewById(R.id.operator_id);
         suceess_status = (TextView) findViewById(R.id.suceess_status);
         success_txnid = (TextView) findViewById(R.id.success_txnid);
         success_amount = (TextView) findViewById(R.id.success_amount);
@@ -57,16 +58,35 @@ public class SuccessDetailActivity extends BaseActivity {
         if(requestType != null && (requestType.equalsIgnoreCase("prepaid-mobile")
         || requestType.equals("dth"))){
 
+            Util.showView(operator_id);
             success_mobile_dth.setText("Connection Number");
             suceess_status.setText(getIntent().getStringExtra("responce"));
             success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
             success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
             success_mobile.setText(getIntent().getStringExtra("mobileno"));
             success_operator.setText(getIntent().getStringExtra("operator"));
+            operator_id.setText("Operator Id : "+getIntent().getStringExtra("operatorId"));
 
             Util.showView(success_txnid);
 
-        }else if(requestType != null && requestType.equalsIgnoreCase("fastag")){
+        }
+        else if(requestType != null && requestType.equalsIgnoreCase("LIC")){
+            Util.showView(receipt_cus_name);
+            Util.showView(receipt_cus_name_hd);
+            Util.showView(success_txnid);
+            Util.showView(operator_id);
+
+            receipt_cus_name_hd.setText("Customer Name");
+            receipt_cus_name.setText(getIntent().getStringExtra("cust_name"));
+            success_mobile_dth.setText("Policy Number");
+            suceess_status.setText(getIntent().getStringExtra("responce"));
+            success_txnid.setText("Txn ID : "+getIntent().getStringExtra("txnId"));
+            success_amount.setText("\u20B9 "+getIntent().getStringExtra("amount"));
+            success_mobile.setText(getIntent().getStringExtra("mobileno"));
+            success_operator.setText(getIntent().getStringExtra("operator"));
+            operator_id.setText("Operator Id : "+getIntent().getStringExtra("operatorId"));
+        }
+        else if(requestType != null && requestType.equalsIgnoreCase("fastag")){
             Util.showView(receipt_cus_name);
             Util.showView(receipt_cus_name_hd);
             Util.showView(success_txnid);

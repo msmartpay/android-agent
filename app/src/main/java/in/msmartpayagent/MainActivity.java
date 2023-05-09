@@ -32,7 +32,6 @@ import in.msmartpayagent.aeps.AEPSSDKActivity;
 import in.msmartpayagent.aeps.EkoAEPSGatewayActivity;
 import in.msmartpayagent.aeps.SettlementDetailsActivity;
 import in.msmartpayagent.aeps.onboard.UserNumberDialog;
-import in.msmartpayagent.audit.AuditRequestActivity;
 import in.msmartpayagent.claimrefund.ClaimHistoryActivity;
 import in.msmartpayagent.collectBanks.CollectBankActivity;
 import in.msmartpayagent.dmr.onboard.FindSenderDialog;
@@ -56,8 +55,9 @@ import in.msmartpayagent.network.model.MainResponse2;
 import in.msmartpayagent.network.model.wallet.BalanceRequest;
 import in.msmartpayagent.network.model.wallet.BalanceResponse;
 import in.msmartpayagent.rechargeBillPay.CreditCardActivity;
-import in.msmartpayagent.rechargeBillPay.DataCardRechargeActivity;
+import in.msmartpayagent.rechargeBillPay.LICPremiumActivity;
 import in.msmartpayagent.rechargeBillPay.SubscriptionRechargeActivity;
+import in.msmartpayagent.rechargeBillPay.DthRechargeActivity;
 import in.msmartpayagent.rechargeBillPay.ElectricityPayActivity;
 import in.msmartpayagent.rechargeBillPay.FastTagActivity;
 import in.msmartpayagent.rechargeBillPay.GasPayActivity;
@@ -308,11 +308,11 @@ public class MainActivity extends BaseActivity{
                 startActivity(in);
             } else if (view.getId() == R.id.id_dth) {
                 view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, SubscriptionRechargeActivity.class);
+                Intent in = new Intent(context, DthRechargeActivity.class);
                 startActivity(in);
             } else if (view.getId() == R.id.id_datacard) {
                 view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, DataCardRechargeActivity.class);
+                Intent in = new Intent(context, SubscriptionRechargeActivity.class);
                 startActivity(in);
             } else if (view.getId() == R.id.id_landline) {
                 view.getResources().getColor(R.color.active_tab);
@@ -374,8 +374,9 @@ public class MainActivity extends BaseActivity{
                 view.getResources().getColor(R.color.active_tab);
                 FindSenderDialog.showDialog(getSupportFragmentManager());
             }
-            else if (view.getId() == R.id.id_dmr1 ) {
+            else if (view.getId() == R.id.id_dmr2 ) {
                 view.getResources().getColor(R.color.active_tab);
+                Util.SavePrefData(getApplicationContext(), Keys.DYNAMIC_DMR_VENDOR, AppMethods.BASE_URL + AppMethods.DMR_PAYSPRINT);
                 PSFindSenderDialog.showDialog(getSupportFragmentManager());
             }
             else if (view.getId() == R.id.id_account_opening) {
@@ -425,11 +426,15 @@ public class MainActivity extends BaseActivity{
                 view.getResources().getColor(R.color.active_tab);
                 Intent in = new Intent(context, PaytmActivity.class);
                 startActivity(in);
-            }else if (view.getId() == R.id.id_audit_request) {
+            }else if (view.getId() == R.id.id_lic) {
+                view.getResources().getColor(R.color.active_tab);
+                Intent in = new Intent(context, LICPremiumActivity.class);
+                startActivity(in);
+            }/*else if (view.getId() == R.id.id_audit_request) {
                 view.getResources().getColor(R.color.active_tab);
                 Intent in = new Intent(context, AuditRequestActivity.class);
                 startActivity(in);
-            }
+            }*/
         }
     }
 

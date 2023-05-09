@@ -44,7 +44,7 @@ public class TicketActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ticket_activity);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        setTitle("Place Ticket");
+        setTitle("Submit a complaint");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = TicketActivity.this;

@@ -24,13 +24,16 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.Key;
+import java.util.Date;
 
 import in.msmartpayagent.R;
+import in.msmartpayagent.myWallet.TransactionHistoryReceipt;
 import in.msmartpayagent.network.NetworkConnection;
 import in.msmartpayagent.network.RetrofitClient;
 import in.msmartpayagent.network.model.dmr.MoneyTransferRequest;
 import in.msmartpayagent.network.model.dmr.MoneyTransferResponse;
 import in.msmartpayagent.network.model.dmr.SenderDetailsResponse;
+import in.msmartpayagent.network.model.wallet.TransactionItems;
 import in.msmartpayagent.utility.BaseActivity;
 import in.msmartpayagent.utility.Keys;
 import in.msmartpayagent.utility.L;
@@ -237,7 +240,38 @@ public class ImpsNeftActivity extends BaseActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 MoneyTransferResponse res = response.body();
                                 if (res.getStatus().equalsIgnoreCase("0")) {
-                                    Intent intent = new Intent(ImpsNeftActivity.this, ImpsNeftTxnRecieptActivity.class);
+
+                                    TransactionItems transactionModel = new TransactionItems();
+                                    transactionModel.setTran_id(res.getTid());
+                                    transactionModel.setMobile_operator("");
+                                    transactionModel.setMobile_number(res.getSenderId());
+                                    transactionModel.setService("Remittance");
+                                    transactionModel.setAction_on_bal_amt("Debit");
+                                    transactionModel.setTran_status(res.getTxnStatus());
+                                    transactionModel.setTxnAmount(res.getTxnAmount());
+                                    transactionModel.setNet_amout(res.getTxnAmount());
+                                    transactionModel.setDeductedAmt(res.getTxnAmount());
+                                    transactionModel.setDot(res.getTxnDate());
+                                    transactionModel.setTot(res.getTxnTime());
+                                    transactionModel.setAgent_balAmt_b_Ded("0");
+                                    transactionModel.setAgent_F_balAmt("0");
+                                    transactionModel.setBankRefId(res.getBankRRN());
+                                    transactionModel.setOperatorId(res.getBankRRN());
+                                    transactionModel.setCommission("0");
+                                    transactionModel.setServiceCharge("0");
+                                    transactionModel.setRemark(res.getMessage());
+                                    transactionModel.setBene_Account(res.getBeneAccount());
+                                    transactionModel.setBene_Bank_IFSC(res.getIfsc());
+                                    transactionModel.setBene_Name(res.getBeneName());
+                                    transactionModel.setBene_Bank_Name(res.getBankName());
+
+                                    Intent intent = new Intent( getApplicationContext(), TransactionHistoryReceipt.class);
+                                    intent.putExtra("position", 1);
+                                    intent.putExtra("historyModel", Util.getGson().toJson(transactionModel));
+                                    startActivity(intent);
+                                    ImpsNeftActivity.this.finish();
+
+                                    /*Intent intent = new Intent(ImpsNeftActivity.this, ImpsNeftTxnRecieptActivity.class);
                                     intent.putExtra("SenderId", res.getSenderId());
                                     intent.putExtra("SenderName", res.getSenderName());
                                     intent.putExtra("BeneMobile",res.getBeneMobile());
@@ -253,7 +287,7 @@ public class ImpsNeftActivity extends BaseActivity {
                                     intent.putExtra("txnStatus",res.getTxnStatus());
                                     intent.putExtra("tid",res.getTid());
                                     startActivity(intent);
-                                    ImpsNeftActivity.this.finish();
+                                    ImpsNeftActivity.this.finish();*/
                                 } else {
                                     L.toastS(getApplicationContext(), res.getMessage());
                                 }

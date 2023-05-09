@@ -84,7 +84,6 @@ public class GasPayActivity extends BaseActivity {
         Util.showView(binding.btnProceed);
         operatorsCodeRequest();
 
-
         binding.etOperator.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), OperatorSearchActivity.class);
             intent.putExtra(Keys.ARRAY_LIST, Util.getJsonFromModel(operatorList));
@@ -123,8 +122,8 @@ public class GasPayActivity extends BaseActivity {
                     }else {
                         L.toastS(context, "Enter " + Objects.requireNonNull(binding.tidAd3.getHint()));
                     }
-                } else if ("".equals(amt) || Double.parseDouble(amt) < 10) {
-                    L.toastS(context, "Enter Valid Amount");
+                }else if("0".equalsIgnoreCase(operatorData.getViewbill()) && amt.isEmpty()){
+                    L.toastS(context,  "Enter Valid Amount");
                 } else {
                     Intent intent = new Intent(context, BillPayActivity.class);
                     intent.putExtra("CN", consumerno);
@@ -201,6 +200,12 @@ public class GasPayActivity extends BaseActivity {
                                 OperatorResponse res = response.body();
                                 if ("0".equals(res.getStatus())) {
                                     operatorData = res.getData();
+
+                                    if("1".equalsIgnoreCase(operatorData.getViewbill())){
+
+                                        binding.tidAmount.setVisibility(View.GONE);
+                                    }
+
                                     isAd1  = false;
                                     isAd2  = false;
                                     isAd3  = false;

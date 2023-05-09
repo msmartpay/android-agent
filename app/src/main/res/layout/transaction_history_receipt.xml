@@ -63,21 +63,36 @@
                             android:textColor="@color/colorPrimaryDark" />
 
                         <TextView
-                        android:id="@+id/mobileno"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/email"
-                        android:layout_marginTop="5.0dip"
-                        android:hint="xxxxxx9857"
-                        android:textColor="@color/colorPrimaryDark" />
+                            android:id="@+id/mobileno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/email"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="xxxxxx9857"
+                            android:textColor="@color/colorPrimaryDark" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <ImageView
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.8"
-                        android:src="@mipmap/ic_launcher" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="0.8">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/tv_txn_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10.0dip"
+                            android:hint="Status"
+                            android:gravity="center"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -206,6 +221,59 @@
                             android:hint="00.00"
                             android:textColor="@color/colorPrimaryDark" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/customer_name_detail_value1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+
+                            style="@style/tv_history"
+                            android:layout_width="170dp"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1"
+                            android:textStyle="normal"
+                            android:text="Customer Name" />
+
+                        <TextView
+                            android:id="@+id/id_customer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="00.00"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/due_date_detail_value1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+
+                            style="@style/tv_history"
+                            android:layout_width="170dp"
+                            android:layout_marginBottom="5.0dip"
+                            android:layout_weight="1"
+                            android:textStyle="normal"
+                            android:text="Due date" />
+
+                        <TextView
+                            android:id="@+id/id_due_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="00.00"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/Bene_Name_detail_value1"
                         android:layout_width="match_parent"

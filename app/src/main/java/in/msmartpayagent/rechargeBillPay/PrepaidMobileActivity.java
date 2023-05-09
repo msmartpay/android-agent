@@ -308,6 +308,9 @@ public class PrepaidMobileActivity extends BaseActivity {
                                                     }
                                                 }
                                                 circle=recordsObject.getString("comcircle");
+                                                if("Delhi".equalsIgnoreCase(circle))
+                                                    circle = "Delhi NCR";
+
                                                 //spinner_circle.getSelectedItem().
                                                 for(int i =0;i<plan_circle.length;i++){
                                                     if(circle.equalsIgnoreCase(plan_circle[i])){

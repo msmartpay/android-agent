@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:paddingBottom="55.0dip">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_dmr_print_receipt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        android:weightSum="1.0">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="0.2"
+                            android:background="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_status"
+                            android:layout_width="wrap_content"
+                            style="@style/LeftTextLabelNormal"
+                            android:layout_marginLeft="20dp"
+                            android:text="Status"
+                            android:textSize="22.0dip"
+                            android:padding="10.0dip"
+                            android:textStyle="bold"/>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ll_bene_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.7"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/LeftTextLabelNormal"
+                                android:layout_width="wrap_content"
+                                android:text="Transaction Amount"
+                                android:textSize="18.0dip"
+                                android:padding="5.0dip"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/tv_dmr_txn_amount"
+                                android:layout_width="wrap_content"
+                                style="@style/LeftTextLabelNormal"
+                                android:text="Amount"
+                                android:textSize="22.0dip"
+                                android:padding="5.0dip"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/tv_dmr_txn_date_time"
+                                android:layout_width="wrap_content"
+                                style="@style/TextLabelNormal"
+                                android:text="DateTime"
+                                android:textSize="16.0dip"
+                                android:padding="5.0dip"/>
+
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0.0dip"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.3"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/im_dmr_txn_status"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/hintcolor"
+                        android:layout_marginBottom="20dp"/>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="TID"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_tid"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Bank RRN"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_bank_rrn"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Sender Id"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_sender_id"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Sender Name"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_sender_name"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Bene Mobile"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_bene_mobile"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="IFSC Code"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_ifsc_code"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Account No."
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_acc_number"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Bene Name"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_bene_name"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Bank Name"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_bank_name"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.7"
+                            android:text="Message"
+                            android:textSize="14.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/tv_details"
+                            android:layout_weight="0.1"
+                            android:text=":"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_dmr_txn_message"
+                            style="@style/tv_details"
+                            android:layout_weight="1.2"
+                            android:textSize="14.0sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30.0dip"
+                android:orientation="horizontal"
+                android:gravity="center"                    >
+
+                <Button
+                    android:id="@+id/btn_share_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_border"
+                    android:text="SHARE"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"/>
+
+                <Button
+                    android:id="@+id/btn_print_receipt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_border"
+                    android:text="PRINT"
+                    android:layout_marginStart="10.0dip"
+                    android:textColor="@color/whitecolor"
+                    android:textSize="14.0dip"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_dmr_txn_done"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button1"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:text="Close"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/whitecolor"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+
+</RelativeLayout>

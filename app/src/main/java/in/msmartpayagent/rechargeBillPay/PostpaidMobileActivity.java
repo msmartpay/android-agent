@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -110,6 +111,7 @@ public class PostpaidMobileActivity extends BaseActivity {
         operatorsCodeRequest();
 
 
+
         binding.etOperator.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), OperatorSearchActivity.class);
             intent.putExtra(Keys.ARRAY_LIST, Util.getJsonFromModel(operatorList));
@@ -124,7 +126,7 @@ public class PostpaidMobileActivity extends BaseActivity {
                     Toast.makeText(context, "Enter 10 digit mobile no. !!!", Toast.LENGTH_SHORT).show();
                 } else if (opreatorModel == null) {
                     Toast.makeText(context, "Select Operator !!!", Toast.LENGTH_SHORT).show();
-                } else if (amt.isEmpty()) {
+                } else if ("0".equalsIgnoreCase(operatorData.getViewbill()) && amt.isEmpty()) {
                     Objects.requireNonNull(binding.tidAmount.getEditText()).requestFocus();
                     Toast.makeText(context, "Enter Amount !!!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -202,6 +204,13 @@ public class PostpaidMobileActivity extends BaseActivity {
                                 OperatorResponse res = response.body();
                                 if ("0".equals(res.getStatus()) && res.getData()!=null) {
                                         operatorData = res.getData();
+
+
+                                    if("1".equalsIgnoreCase(operatorData.getViewbill())){
+
+                                        binding.tidAmount.setVisibility(View.GONE);
+                                    }
+
                                     isAd1  = false;
                                     isAd2  = false;
                                     isAd3  = false;
@@ -209,24 +218,24 @@ public class PostpaidMobileActivity extends BaseActivity {
                                     Util.hideView(binding.tidAd2);
                                     Util.hideView(binding.tidAd3);
                                     if (!"0".equals(operatorData.getAd1DName())) {
-                                            isAd1 = true;
-                                            Util.showView(binding.tidAd1);
-                                            Objects.requireNonNull(binding.tidAd1.getEditText()).setText("");
-                                            binding.tidAd1.setHint(operatorData.getAd1DName());
-                                        }
-                                        if (!"0".equals(operatorData.getAd2DName())) {
-                                            isAd2 = true;
-                                            Util.showView(binding.tidAd2);
-                                            Objects.requireNonNull(binding.tidAd2.getEditText()).setText("");
-                                            binding.tidAd2.setHint(operatorData.getAd2DName());
+                                        isAd1 = true;
+                                        Util.showView(binding.tidAd1);
+                                        Objects.requireNonNull(binding.tidAd1.getEditText()).setText("");
+                                        binding.tidAd1.setHint(operatorData.getAd1DName());
+                                    }
+                                    if (!"0".equals(operatorData.getAd2DName())) {
+                                        isAd2 = true;
+                                        Util.showView(binding.tidAd2);
+                                        Objects.requireNonNull(binding.tidAd2.getEditText()).setText("");
+                                        binding.tidAd2.setHint(operatorData.getAd2DName());
 
-                                        }
-                                        if (!"0".equals(operatorData.getAd3DName())) {
-                                            isAd3 = true;
-                                            Util.showView(binding.tidAd3);
-                                            Objects.requireNonNull(binding.tidAd3.getEditText()).setText("");
-                                            binding.tidAd3.setHint(operatorData.getAd3DName());
-                                        }
+                                    }
+                                    if (!"0".equals(operatorData.getAd3DName())) {
+                                        isAd3 = true;
+                                        Util.showView(binding.tidAd3);
+                                        Objects.requireNonNull(binding.tidAd3.getEditText()).setText("");
+                                        binding.tidAd3.setHint(operatorData.getAd3DName());
+                                    }
 
                                 } else {
                                     L.toastS(context, res.getMessage());

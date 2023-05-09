@@ -93,6 +93,8 @@ public class InsurancePayActivity extends BaseActivity {
         Util.showView(binding.btnProceed);
         operatorsCodeRequest();
 
+
+
         binding.btnProceed.setOnClickListener(view -> {
             connectionNo = Objects.requireNonNull(binding.tidConsumerNo.getEditText()).getText().toString();
             amt = Objects.requireNonNull(binding.tidAmount.getEditText()).getText().toString();
@@ -124,7 +126,7 @@ public class InsurancePayActivity extends BaseActivity {
                 }else {
                     L.toastS(context, "Enter " + Objects.requireNonNull(binding.tidAd3.getHint()));
                 }
-            }else if ("".equals(amt) || Double.parseDouble(amt) < 10) {
+            }else if("0".equalsIgnoreCase(operatorData.getViewbill()) && amt.isEmpty()){
                 L.toastS(context,  "Enter Valid Amount");
             } else {
                 Intent intent = new Intent(context, BillPayActivity.class);
@@ -218,6 +220,11 @@ public class InsurancePayActivity extends BaseActivity {
                                 OperatorResponse res = response.body();
                                 if ("0".equals(res.getStatus()) && res.getData()!=null) {
                                     operatorData = res.getData();
+
+                                    if("1".equalsIgnoreCase(operatorData.getViewbill())){
+
+                                        binding.tidAmount.setVisibility(View.GONE);
+                                    }
                                     isAd1  = false;
                                     isAd2  = false;
                                     isAd3  = false;

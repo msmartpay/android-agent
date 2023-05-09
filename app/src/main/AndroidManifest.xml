@@ -56,6 +56,10 @@
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".rechargeBillPay.LICPremiumActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".rechargeBillPay.CreditCardActivity"
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
@@ -117,12 +121,12 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.SubscriptionRechargeActivity"
+            android:name=".rechargeBillPay.DthRechargeActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".rechargeBillPay.DataCardRechargeActivity"
+            android:name=".rechargeBillPay.SubscriptionRechargeActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />
@@ -305,15 +309,62 @@
             android:exported="false"
             android:configChanges="screenSize|orientation" />
         <activity
+            android:name=".dmrPaySprint.PSImpsNeftTxnRecieptActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.dashboard.PSMoneyTransferActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.PSImpsNeftActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".dmrPaySprint.PSTransactionReceiptActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.PSSenderFullHistoryActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.PSAddBeneficiaryActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.PSBankSearchActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.PSSenderHistoryActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".dmrPaySprint.PSRefundLiveStatusActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize" />
+        <activity
             android:name=".commission.CommissionActivity"
             android:exported="false"
             android:configChanges="screenSize|orientation" />
         <activity
             android:name=".rechargeBillPay.FastTagActivity"
-            android:exported="false"
-            android:configChanges="screenSize|orientation" />
-        <activity
-            android:name=".audit.AuditRequestActivity"
             android:exported="false"
             android:configChanges="screenSize|orientation" />
 

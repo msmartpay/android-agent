@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import in.msmartpayagent.R;
-import in.msmartpayagent.dmrPaySprint.dashboard.MoneyTransferActivity;
+import in.msmartpayagent.dmrPaySprint.dashboard.PSMoneyTransferActivity;
 import in.msmartpayagent.network.AppMethods;
 import in.msmartpayagent.network.NetworkConnection;
 import in.msmartpayagent.network.RetrofitClient;
@@ -51,7 +51,7 @@ public class PSSenderRegisterConfirmDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dmr_ps_onboard_register_sende_confirmr, container, false);
+        return inflater.inflate(R.layout.ps_dmr_onboard_register_sende_confirmr, container, false);
     }
 
     @Override
@@ -175,7 +175,7 @@ public class PSSenderRegisterConfirmDialog extends DialogFragment {
                     if (res.getStatus().equals("0")) {
                         Util.SavePrefData(context, Keys.SENDER_MOBILE, number);
                         Util.SavePrefData(context, Keys.SENDER, Util.getGson().toJson(res));
-                        Intent intent = new Intent(context, MoneyTransferActivity.class);
+                        Intent intent = new Intent(context, PSMoneyTransferActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         dismiss();

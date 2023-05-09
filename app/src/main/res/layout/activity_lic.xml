@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".rechargeBillPay.PaytmActivity"
+    app:cardUseCompatPadding="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        tools:context=".rechargeBillPay.CreditBillPayFragment">
+
+        <TextView
+            android:id="@+id/tv_lic_message"
+            style="@style/tv_details"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:text="Message"
+            android:textColor="@color/green" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:hint="Enter Policy Number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lic_policy_number"
+                style="@style/til_main_ot"
+                android:ems="10"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:hint="Enter Email Id"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lic_email_id"
+                style="@style/til_main_ot"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:hint="Policy Holder Name"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lic_policy_holder_name"
+                style="@style/til_main_ot"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:hint="Due Date"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lic_due_date"
+                style="@style/til_main_ot"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
+            android:hint="Due Amount"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lic_due_amount"
+                style="@style/til_main_ot"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="1.0">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_lic_fetch_bill"
+                style="@style/btn_main2"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Fetch Bill" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_lic_payment"
+                style="@style/btn_main2"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Pay Premium"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>
