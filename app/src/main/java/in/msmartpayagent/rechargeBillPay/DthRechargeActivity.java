@@ -42,6 +42,7 @@ import in.msmartpayagent.utility.ProgressDialogFragment;
 import in.msmartpayagent.utility.RandomNumber;
 import in.msmartpayagent.utility.Util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,7 +77,7 @@ public class DthRechargeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dth_recharge_activity);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("OTT Subscriptions");
+        getSupportActionBar().setTitle("DTH Recharges");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         context = DthRechargeActivity.this;
@@ -174,7 +175,7 @@ public class DthRechargeActivity extends BaseActivity {
             OperatorsRequest request = new OperatorsRequest();
             request.setAgent_id(agentID);
             request.setTxn_key(txn_key);
-            request.setService("subscription");
+            request.setService("dth");
 
             RetrofitClient.getClient(getApplicationContext())
                     .operators(request).enqueue(new Callback<OperatorsResponse>() {
@@ -220,41 +221,54 @@ public class DthRechargeActivity extends BaseActivity {
                 public void onResponse(@NotNull Call<PlanResponse> call, @NotNull retrofit2.Response<PlanResponse> response) {
                     pd.dismiss();
                     if (response.isSuccessful() && response.body() != null) {
-                        PlanResponse res = response.body();
-                        if (res.getStatus()==1) {
-                            StringBuilder builder = new StringBuilder();
-                            tv_details.setVisibility(View.VISIBLE);
+                        try {
+                            PlanResponse res = response.body();
+                            if (res.getStatus()==1) {
+                                StringBuilder builder = new StringBuilder();
+                                tv_details.setVisibility(View.VISIBLE);
 
-                            JSONArray array = null;
-                            try {
-                                array = new JSONArray(res.getRecords().toString());
-                                for (int i = 0; i < array.length(); i++) {
-                                    JSONObject object = array.getJSONObject(i);
-                                    if (object.has("customerName"))
-                                        builder.append("Name : " + object.getString("customerName")+"\n");
-                                    if (object.has("status"))
-                                        builder.append(", Status : " + object.getString("status")+"\n");
-                                    if (object.has("MonthlyRecharge"))
-                                        builder.append(", Monthly Recharge : " + object.getString("MonthlyRecharge")+"\n");
-                                    if (object.has("lastrechargeamount"))
-                                        builder.append(", Last Recharge Amount : " + object.getString("lastrechargeamount")+"\n");
-                                    if (object.has("lastrechargedate"))
-                                        builder.append(", Last Recharge Date : " + object.getString("lastrechargedate")+"\n\n");
-                                    if (object.has("planname")) {
-                                        String planname= object.getString("planname");
-                                        planname=planname.replaceAll(",","\n");
-                                        builder.append(", Plan Name : " + planname);
+                                JSONArray array = null;
+
+                                    array = new JSONArray(res.getRecords().toString());
+                                    for (int i = 0; i < array.length(); i++) {
+                                        JSONObject object = array.getJSONObject(i);
+                                        if (object.has("customerName"))
+                                            builder.append("Name : " + object.getString("customerName")+"\n");
+                                        if (object.has("status"))
+                                            builder.append(", Status : " + object.getString("status")+"\n");
+                                        if (object.has("MonthlyRecharge"))
+                                            builder.append(", Monthly Recharge : " + object.getString("MonthlyRecharge")+"\n");
+                                        if (object.has("lastrechargeamount"))
+                                            builder.append(", Last Recharge Amount : " + object.getString("lastrechargeamount")+"\n");
+                                        if (object.has("lastrechargedate"))
+                                            builder.append(", Last Recharge Date : " + object.getString("lastrechargedate")+"\n\n");
+                                        if (object.has("planname")) {
+                                            String planname= object.getString("planname");
+                                            planname=planname.replaceAll(",","\n");
+                                            builder.append(", Plan Name : " + planname);
+                                        }
                                     }
-                                }
-                            } catch (JSONException e) {
-                                //e.printStackTrace();
-                            }
 
-                            tv_details.setText(builder.toString());
-                        } else {
-                            L.toastS(context, res.getMessage());
+                                tv_details.setText(builder.toString());
+                            } else {
+                                JSONObject record = new JSONObject(res.getRecords().toString());
+                                if(record!=null) {
+                                    String message = record.optString("msg");
+                                    if (StringUtils.isNotBlank(message)) {
+                                        L.toastS(getApplicationContext(), message);
+                                    } else{
+                                        L.toastS(getApplicationContext(), "Customer details not found");
+                                    }
+                                }else {
+                                    L.toastS(getApplicationContext(), "Customer details not found");
+                                }
+                            }
+                        } catch (JSONException e) {
+                            L.toastS(getApplicationContext(), "Something went wrong!");
                         }
+
                     }
+
                 }
 
                 @Override

@@ -6,7 +6,16 @@ public class PlanResponse {
 
     int status;
     String message;
+    private String msg;
     JsonElement records;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getStatus() {
         return status;

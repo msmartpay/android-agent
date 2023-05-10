@@ -45,13 +45,6 @@
                             android:maxLength="10"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:id="@+id/image_contactlist"
-                        android:layout_width="0.0dip"
-                        android:layout_height="40.0dip"
-                        android:layout_weight="0.1"
-                        android:src="@drawable/contact"
-                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout

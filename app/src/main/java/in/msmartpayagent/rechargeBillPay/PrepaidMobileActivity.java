@@ -72,7 +72,6 @@ public class PrepaidMobileActivity extends BaseActivity {
     private EditText edit_prepaid_mobile, edit_amount;
     private MaterialAutoCompleteTextView edit_operator;
     private TextView tv_view_plan, tv_view_offer;
-    private ImageView image_contactlist;
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
     private Uri uriContact;
     private ProgressDialogFragment pd;
@@ -102,22 +101,13 @@ public class PrepaidMobileActivity extends BaseActivity {
         edit_prepaid_mobile = (EditText) findViewById(R.id.edit_prepaid_mobile);
         edit_amount = (EditText) findViewById(R.id.edit_amount);
         edit_operator = findViewById(R.id.edit_operator);
-        image_contactlist = (ImageView) findViewById(R.id.image_contactlist);
         linear_proceed = (LinearLayout) findViewById(R.id.linear_proceed);
         tv_view_plan = findViewById(R.id.tv_view_plan);
         tv_view_offer = findViewById(R.id.tv_view_offer);
         spinner_circle = findViewById(R.id.spinner_circle);
         plan_circle = getResources().getStringArray(R.array.plan_circle);
-        image_contactlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                startActivityForResult(intent, REQUEST_CODE_PICK_CONTACTS);
-            }
-        });
 
         //For operatorList
-
         operatorsCodeRequest();
 
         edit_operator.setOnClickListener(v -> {
@@ -153,7 +143,6 @@ public class PrepaidMobileActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > -1) {
                     circle = spinner_circle.getSelectedItem().toString();
-
                 }
             }
 
@@ -162,7 +151,7 @@ public class PrepaidMobileActivity extends BaseActivity {
 
             }
         });
-         linear_proceed.setOnClickListener(view -> {
+        linear_proceed.setOnClickListener(view -> {
              if (isConnectionAvailable()) {
                  if (TextUtils.isEmpty(edit_prepaid_mobile.getText().toString().trim()) || edit_prepaid_mobile.getText().toString().trim().length() < 10) {
                      edit_prepaid_mobile.requestFocus();
@@ -310,7 +299,6 @@ public class PrepaidMobileActivity extends BaseActivity {
                                                 circle=recordsObject.getString("comcircle");
                                                 if("Delhi".equalsIgnoreCase(circle))
                                                     circle = "Delhi NCR";
-
                                                 //spinner_circle.getSelectedItem().
                                                 for(int i =0;i<plan_circle.length;i++){
                                                     if(circle.equalsIgnoreCase(plan_circle[i])){
@@ -441,11 +429,7 @@ public class PrepaidMobileActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_PICK_CONTACTS && resultCode == RESULT_OK) {
-            Log.d("Contact", "Response: " + data.toString());
-            uriContact = data.getData();
-            retrieveContactNumber();
-        } else if (requestCode == REQUEST_PLAN && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_PLAN && resultCode == RESULT_OK) {
             if (data != null) {
                 if (data.getStringExtra("price") != null)
                     edit_amount.setText(data.getStringExtra("price"));
@@ -465,66 +449,6 @@ public class PrepaidMobileActivity extends BaseActivity {
                     tv_view_offer.setVisibility(View.GONE);
                 }
             }
-        }
-    }
-
-    private void retrieveContactNumber() {
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS)) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODE_PICK_CONTACTS);
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODE_PICK_CONTACTS);
-            }
-        } else {
-            getContact();
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_PICK_CONTACTS: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-                        getContact();
-                    }
-                } else {
-                    Toast.makeText(this, "No Permission Granted", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
-    public void getContact() {
-        String contactNumber = null;
-        Cursor c = getContentResolver().query(uriContact,
-                new String[]{ContactsContract.Contacts._ID},
-                null, null, null);
-        if (c.moveToFirst()) {
-            String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
-            Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-            phones.moveToFirst();
-            String cNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            if (cNumber.equals(null)) {
-                Toast.makeText(context, "Invalid Number", Toast.LENGTH_LONG).show();
-            } else if (cNumber.equals("") || cNumber.length() < 10) {
-
-            }
-            if (cNumber.length() >= 10) {
-                Service sc = new Service();
-                String correctno = sc.validateMobileNumber(cNumber);
-
-                if (null != correctno) {
-                    edit_prepaid_mobile.setText(correctno);
-                } else {
-                    Toast.makeText(context, "Invalid Contact Details", Toast.LENGTH_LONG).show();
-                }
-            }
-            phones.close();
-            Log.d("Contact", "Contact Phone Number: " + contactNumber);
         }
     }
 
