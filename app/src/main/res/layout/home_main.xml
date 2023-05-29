@@ -270,7 +270,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:background="@drawable/bg_curv_bottom">
-                            <in.msmartpayagent.utility.pagger.AutoScrollViewPager
+                            <in.msmartpay.agent.utility.pagger.AutoScrollViewPager
                                 android:id="@+id/slider"
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"/>

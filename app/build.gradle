@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'in.msmartpayagent'
+    namespace 'in.msmartpay.agent'
     compileSdk 33
 
     defaultConfig {
-        applicationId "in.msmartpayagent"
+        applicationId "in.msmartpay.agent"
         minSdk 21
         targetSdk 33
         versionCode 1

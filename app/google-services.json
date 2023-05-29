@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:522947478750:android:922e86a588aab656026e4f",
         "android_client_info": {
-          "package_name": "in.msmartpayagent"
+          "package_name": "in.msmartpay.agent"
         }
       },
       "oauth_client": [
@@ -38,7 +38,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:522947478750:android:df618145368d56eb026e4f",
         "android_client_info": {
-          "package_name": "in.msmartpayagent.onboard"
+          "package_name": "in.msmartpay.agent.onboard"
         }
       },
       "oauth_client": [
