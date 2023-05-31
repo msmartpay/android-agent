@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity{
     private String dmrVendor;
     private String agent_id_full, emailId, agentName;
 
-    private TextView balanceview,tv_main_wallet,tv_cash_in_wallet;
+    private TextView balanceview,tv_main_wallet;
     private ImageView img, iv_activate;
     private LinearLayout id_fastag,my_profile, id_money_transfer, id_money_transfer2,id_fino_cms,id_claim_refund;
 
@@ -173,13 +173,12 @@ public class MainActivity extends BaseActivity{
         id_money_transfer = findViewById(R.id.id_dmr1);
         id_money_transfer2 = findViewById(R.id.id_dmr1);
         tv_main_wallet= findViewById(R.id.tv_main_wallet);
-        tv_cash_in_wallet= findViewById(R.id.tv_cash_in_wallet);
         mDemoSlider =  findViewById(R.id.slider);
         TextView marqueText =findViewById(R.id.marqueText);
         marqueText.setSelected(true);
         marqueText.setText(alertMessage);
-        tv_main_wallet.setText("\u20B9 " + debit_balance);
-        tv_cash_in_wallet.setText("\u20B9 " + credit_balance);
+        tv_main_wallet.setText(debit_balance);
+
 
         if (dmrVendor.equalsIgnoreCase("DMR1")) {
             id_money_transfer2.setVisibility(View.GONE);
@@ -588,8 +587,7 @@ public class MainActivity extends BaseActivity{
 
                             kycStatus=res.getKycStatus();
 
-                            tv_main_wallet.setText("\u20B9 " + res.getDebit());
-                            tv_cash_in_wallet.setText("\u20B9 " + res.getCredit());
+                            tv_main_wallet.setText(res.getDebit());
 
                             if (res.getKycStatus() == 0 || res.getKycStatus() == 2 || res.getKycStatus() == 3) {
 
