@@ -105,7 +105,7 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Url;
 
 public interface AppMethods {
-    String VERSION = "1.2";
+    String VERSION = "1.0";
     String DOMAIN = "https://msmartpay.in/";
 
     String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
