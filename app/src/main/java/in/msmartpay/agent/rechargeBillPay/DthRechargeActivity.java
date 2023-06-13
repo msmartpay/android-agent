@@ -349,7 +349,8 @@ public class DthRechargeActivity extends BaseActivity {
                     pd.dismiss();
                     if (response.isSuccessful() && response.body() != null) {
                         MainResponse res = response.body();
-                        if (res.getResponseCode() != null && res.getResponseCode().equals("0") || res.getResponseCode().equals("1") || res.getResponseCode().equals("2")) {
+                        if (res.getResponseCode() != null && res.getResponseCode().equals("0")
+                                || res.getResponseCode().equals("2")) {
                             Intent in = new Intent(context, SuccessDetailActivity.class);
                             in.putExtra("responce", res.getResponseMessage());
                             in.putExtra("mobileno", edit_account_no_dth.getText().toString().trim());
@@ -361,7 +362,7 @@ public class DthRechargeActivity extends BaseActivity {
                             startActivity(in);
                             finish();
                         } else {
-                            L.toastS(context, "Unable To Process Your Request. Please try later");
+                            L.toastS(context, res.getResponseMessage());
                         }
                     }
                 }

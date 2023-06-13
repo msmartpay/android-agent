@@ -125,6 +125,50 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cpassword"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/change_password" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="Change Password" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setup_tpin"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/tpinsetting" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="TPIN Setup" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/enable_disable_tpin"
+                style="@style/rl_home_drawer_header"
+                android:onClick="start">
+
+                <ImageView
+                    style="@style/iv_home_drawer"
+                    android:src="@drawable/key" />
+
+                <TextView
+                    style="@style/tv_home_drawer_child"
+                    android:paddingTop="2.0dip"
+                    android:text="Enable/Disable TPIN" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_wallet_history"
                 style="@style/rl_home_drawer_header"
                 android:onClick="start">
@@ -256,20 +300,7 @@
                     android:text="@string/terms_conditions" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/cpassword"
-                style="@style/rl_home_drawer_header"
-                android:onClick="start">
 
-                <ImageView
-                    style="@style/iv_home_drawer"
-                    android:src="@drawable/change_password" />
-
-                <TextView
-                    style="@style/tv_home_drawer_child"
-                    android:paddingTop="2.0dip"
-                    android:text="Change Password" />
-            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

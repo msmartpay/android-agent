@@ -43,7 +43,14 @@ public class LoginResponse {
     private String address;
 
     private String kycStatus;
+    private String tpinStatus;
+    public String getTpinStatus() {
+        return tpinStatus;
+    }
 
+    public void setTpinStatus(String tpinStatus) {
+        this.tpinStatus = tpinStatus;
+    }
     public String getKycStatus() {
         return kycStatus;
     }

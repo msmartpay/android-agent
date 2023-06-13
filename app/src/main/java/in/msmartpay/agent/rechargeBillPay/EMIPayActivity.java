@@ -1,19 +1,26 @@
 package in.msmartpay.agent.rechargeBillPay;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
 
 import in.msmartpay.agent.R;
-import in.msmartpay.agent.databinding.BillElectricityActivityBinding;
+import in.msmartpay.agent.databinding.BillEmiActivityBinding;
+import in.msmartpay.agent.databinding.BillInsuranceActivityBinding;
 import in.msmartpay.agent.network.NetworkConnection;
 import in.msmartpay.agent.network.RetrofitClient;
 import in.msmartpay.agent.network.model.OperatorsRequest;
@@ -30,14 +37,18 @@ import in.msmartpay.agent.utility.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class ElectricityPayActivity extends BaseActivity {
-    private BillElectricityActivityBinding binding;
+public class EMIPayActivity extends BaseActivity {
+    private BillEmiActivityBinding binding;
+
     private ProgressDialogFragment pd;
     private Context context;
+    private String agentID, txn_key = "";
+    private String ser_sel = "Insurance";
+    private SimpleDateFormat dateFormatter;
+    private DatePickerDialog fromDatePickerDialog;
     private ArrayList<OperatorModel> operatorList = new ArrayList<>();
-
     private OperatorModel opreatorModel = null;
-    private String agentID, txn_key, mob = "", amt = "", connectionNo = "";
+    private String connectionNo;
     private OperatorData operatorData = null;
     private boolean isAd1= false, isAd2= false, isAd3= false;
     private String  ad1= "", ad2= "", ad3= "";
@@ -59,22 +70,45 @@ public class ElectricityPayActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = BillElectricityActivityBinding.inflate(getLayoutInflater());
+        binding = BillEmiActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Electricity");
+        getSupportActionBar().setTitle("EMI Payment");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-        context = ElectricityPayActivity.this;
+        context = EMIPayActivity.this;
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
         Util.hideView(binding.tidAd1);
         Util.hideView(binding.tidAd2);
         Util.hideView(binding.tidAd3);
+        Util.hideView(binding.tidAmount);
         Util.showView(binding.btnProceed);
         operatorsCodeRequest();
 
+        binding.btnProceed.setOnClickListener(view -> {
+            connectionNo = Objects.requireNonNull(binding.tidConsumerNo.getEditText()).getText().toString();
 
+
+            if (opreatorModel == null) {
+                L.toastS(context, "Select Operator");
+            } else if ("".equals(connectionNo)) {
+                L.toastS(context, "Enter Valid " + Objects.requireNonNull(binding.tidConsumerNo.getHint()));
+            }else {
+                Intent intent = new Intent(context, BillPayActivity.class);
+                intent.putExtra("CN", connectionNo);
+                intent.putExtra("CN_hint", Objects.requireNonNull(binding.tidConsumerNo.getHint()).toString());
+                intent.putExtra("Amt", "0");
+                intent.putExtra("AD1", ad1);
+                intent.putExtra("AD2", ad2);
+                intent.putExtra("AD3", ad3);
+                intent.putExtra(getString(R.string.pay_operator_data),Util.getJsonFromModel(operatorData));
+                intent.putExtra(getString(R.string.pay_operator_model), getGson().toJson(opreatorModel));
+                startActivity(intent);
+            }
+
+        });
+       // dob.setVisibility(View.GONE);
 
         binding.etOperator.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), OperatorSearchActivity.class);
@@ -82,69 +116,30 @@ public class ElectricityPayActivity extends BaseActivity {
             activityOperatorLauncher.launch(intent);
         });
 
-        binding.btnProceed.setOnClickListener(view -> {
-            if (isConnectionAvailable()) {
-                connectionNo = Objects.requireNonNull(binding.tidConsumerNo.getEditText()).getText().toString();
-                amt = Objects.requireNonNull(binding.tidAmount.getEditText()).getText().toString();
-                if (isAd1)
-                    ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
-                if (isAd2)
-                    ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
-                if (isAd3)
-                    ad1 = Objects.requireNonNull(binding.tidAd1.getEditText()).getText().toString();
-                if (opreatorModel == null) {
-                  L.toastS(context, "Select Operator");
-                } else if ("".equals(connectionNo)) {
-                    L.toastS(context, "Enter Valid " + Objects.requireNonNull(binding.tidConsumerNo.getHint()));
-                } else if (isAd1 && ad1.isEmpty()) {
-                    if (!"0".equals(operatorData.getAd1Regex()) && Util.checkRegexValidation(operatorData.getAd1Regex(),ad1)){
-                        L.toastS(context, "Enter Valid " + Objects.requireNonNull(binding.tidAd1.getHint()));
-                    }else {
-                        L.toastS(context, "Enter " + Objects.requireNonNull(binding.tidAd1.getHint()));
-                    }
-                } else if (isAd2 && ad2.isEmpty()) {
-                    if (!"0".equals(operatorData.getAd2Regex()) && Util.checkRegexValidation(operatorData.getAd2Regex(),ad2)){
-                        L.toastS(context, "Enter Valid " + Objects.requireNonNull(binding.tidAd2.getHint()));
-                    }else {
-                        L.toastS(context, "Enter " + Objects.requireNonNull(binding.tidAd2.getHint()));
-                    }
-                } else if (isAd3 && ad3.isEmpty()) {
-                    if (!"0".equals(operatorData.getAd3Regex()) && Util.checkRegexValidation(operatorData.getAd3Regex(),ad3)){
-                        L.toastS(context, "Enter Valid " + Objects.requireNonNull(binding.tidAd3.getHint()));
-                    }else {
-                        L.toastS(context, "Enter " + Objects.requireNonNull(binding.tidAd3.getHint()));
-                    }
-                }else if("0".equalsIgnoreCase(operatorData.getViewbill()) && amt.isEmpty()){
-                    L.toastS(context,  "Enter Valid Amount");
-                } else {
-                    Intent intent = new Intent(context, BillPayActivity.class);
-                    intent.putExtra("CN", connectionNo);
-                    intent.putExtra("CN_hint", Objects.requireNonNull(binding.tidConsumerNo.getHint()).toString());
-                    intent.putExtra("Amt", amt);
-                    intent.putExtra("AD1", ad1);
-                    intent.putExtra("AD2", ad2);
-                    intent.putExtra("AD3", ad3);
-                    intent.putExtra(getString(R.string.pay_operator_data),Util.getJsonFromModel(operatorData));
-                    intent.putExtra(getString(R.string.pay_operator_model), Util.getJsonFromModel(opreatorModel));
-                    startActivity(intent);
-                }
-            } else {
-                L.toastS(context, "No Internet Connection !!!");
-            }
-        });
+    }
 
+
+    private void setDateTimeField(EditText editText,String rgx) {
+        editText.setOnClickListener(v -> fromDatePickerDialog.show());
+        Calendar newCalendar = Calendar.getInstance();
+       fromDatePickerDialog = new DatePickerDialog(this, (view, year, monthOfYear, dayOfMonth) -> {
+           dateFormatter = new SimpleDateFormat(rgx, Locale.US);
+           Calendar newDate = Calendar.getInstance();
+           newDate.set(year, monthOfYear, dayOfMonth);
+           editText.setText(dateFormatter.format(newDate.getTime()));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
     //===========operatorCodeRequest==============
     private void operatorsCodeRequest() {
         if (NetworkConnection.isConnectionAvailable2(getApplicationContext())) {
-            pd = ProgressDialogFragment.newInstance("Loading. Please wait...","Fetching Operators...");
-            ProgressDialogFragment.showDialog(pd,getSupportFragmentManager());
 
+            pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "Fetching Operators...");
+            ProgressDialogFragment.showDialog(pd, getSupportFragmentManager());
             OperatorsRequest request = new OperatorsRequest();
             request.setAgent_id(agentID);
             request.setTxn_key(txn_key);
-            request.setService("ELECTRICITY");
+            request.setService("EMI");
 
             RetrofitClient.getClient(getApplicationContext())
                     .operators(request).enqueue(new Callback<OperatorsResponse>() {
@@ -161,12 +156,12 @@ public class ElectricityPayActivity extends BaseActivity {
                     }
                 }
 
-                        @Override
-                        public void onFailure(@NotNull Call<OperatorsResponse> call, @NotNull Throwable t) {
-                            L.toastS(getApplicationContext(), "data failuer " + t.getLocalizedMessage());
-                            pd.dismiss();
-                        }
-                    });
+                @Override
+                public void onFailure(@NotNull Call<OperatorsResponse> call, @NotNull Throwable t) {
+                    L.toastS(getApplicationContext(), "data failuer " + t.getLocalizedMessage());
+                    pd.dismiss();
+                }
+            });
         }
     }
 
@@ -190,7 +185,7 @@ public class ElectricityPayActivity extends BaseActivity {
                             if (response.isSuccessful() && response.body() != null) {
                                 OperatorResponse res = response.body();
                                 if ("0".equals(res.getStatus()) && res.getData()!=null) {
-                                        operatorData = res.getData();
+                                    operatorData = res.getData();
 
                                     if("1".equalsIgnoreCase(operatorData.getViewbill())){
 
@@ -202,25 +197,42 @@ public class ElectricityPayActivity extends BaseActivity {
                                     Util.hideView(binding.tidAd1);
                                     Util.hideView(binding.tidAd2);
                                     Util.hideView(binding.tidAd3);
-                                    if (!"0".equals(operatorData.getAd1DName())) {
-                                            isAd1 = true;
-                                            Util.showView(binding.tidAd1);
-                                            Objects.requireNonNull(binding.tidAd1.getEditText()).setText("");
-                                            binding.tidAd1.setHint(operatorData.getAd1DName());
+                                    if (!"0".equals(operatorData.getAd1DName())){
+                                        isAd1=true;
+                                        Util.showView(binding.tidAd1);
+                                        Objects.requireNonNull(binding.tidAd1.getEditText()).setText("");
+                                        binding.tidAd1.setHint(operatorData.getAd1DName());
+                                        if ("dateofBirth".equalsIgnoreCase(operatorData.getAd1Name())){
+                                            Util.nonEditable(binding.tidAd1);
+                                            setDateTimeField(binding.tidAd1.getEditText(),operatorData.getAd1Regex());
+                                        }else {
+                                            Util.editable(binding.tidAd1);
                                         }
-                                        if (!"0".equals(operatorData.getAd2DName())) {
-                                            isAd2 = true;
-                                            Util.showView(binding.tidAd2);
-                                            Objects.requireNonNull(binding.tidAd2.getEditText()).setText("");
-                                            binding.tidAd2.setHint(operatorData.getAd2DName());
-
+                                    }
+                                    if (!"0".equals(operatorData.getAd2DName())){
+                                        isAd2=true;
+                                        Util.showView(binding.tidAd2);
+                                        Objects.requireNonNull(binding.tidAd2.getEditText()).setText("");
+                                        binding.tidAd2.setHint(operatorData.getAd2DName());
+                                        if ("dateofBirth".equalsIgnoreCase(operatorData.getAd2Name())){
+                                            Util.nonEditable(binding.tidAd2);
+                                            setDateTimeField(binding.tidAd2.getEditText(),operatorData.getAd2Regex());
+                                        }else {
+                                            Util.editable(binding.tidAd2);
                                         }
-                                        if (!"0".equals(operatorData.getAd3DName())) {
-                                            isAd3 = true;
-                                            Util.showView(binding.tidAd3);
-                                            Objects.requireNonNull(binding.tidAd3.getEditText()).setText("");
-                                            binding.tidAd3.setHint(operatorData.getAd3DName());
+                                    }
+                                    if (!"0".equals(operatorData.getAd3DName())){
+                                        isAd3=true;
+                                        Util.showView(binding.tidAd3);
+                                        Objects.requireNonNull(binding.tidAd3.getEditText()).setText("");
+                                        binding.tidAd3.setHint(operatorData.getAd3DName());
+                                        if ("dateofBirth".equalsIgnoreCase(operatorData.getAd3Name())){
+                                            Util.nonEditable(binding.tidAd3);
+                                            setDateTimeField(binding.tidAd3.getEditText(),operatorData.getAd3Regex());
+                                        }else {
+                                            Util.editable(binding.tidAd3);
                                         }
+                                    }
                                 } else {
                                     L.toastS(context, res.getMessage());
                                 }

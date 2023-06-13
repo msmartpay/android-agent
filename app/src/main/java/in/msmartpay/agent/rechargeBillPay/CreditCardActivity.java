@@ -30,9 +30,6 @@ public class CreditCardActivity extends BaseActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-
-
-
     }
     @Override
     public void onBackPressed() {

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 
 import in.msmartpay.agent.R;
+import in.msmartpay.agent.dmrPaySprint.PSImpsNeftActivity;
 import in.msmartpay.agent.myWallet.TransactionHistoryReceipt;
 import in.msmartpay.agent.network.NetworkConnection;
 import in.msmartpay.agent.network.RetrofitClient;
@@ -53,7 +54,7 @@ public class ImpsNeftActivity extends BaseActivity {
     private String radioButtonValue;
     private TextView tv_txn_bene_name, tv_txn_bank_name, tv_txn_account_no,tv_txn_bank_ifsc;
     private SharedPreferences sharedPreferences;
-    private String agentID, txnKey;
+    private String agentID, txnKey,tpinSTatus,tpin="";
     private String senderId, senderName,beneName,beneAccount,beneIFSC,beneBank,recipientId,IMPS,NEFT,Channel,
             RecipientIdType;
     private Context context;
@@ -80,6 +81,7 @@ public class ImpsNeftActivity extends BaseActivity {
         sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txnKey = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+        tpinSTatus = Util.LoadPrefData(getApplicationContext() , Keys.TPIN_STATUS);
         SenderDetailsResponse sender = Util.getGson().fromJson(Util.LoadPrefData(getApplicationContext(), Keys.SENDER),SenderDetailsResponse.class);
 
         senderId = sender.getSenderDetails().getSenderId();
@@ -194,8 +196,12 @@ public class ImpsNeftActivity extends BaseActivity {
         btnNO.setOnClickListener(v -> d.dismiss());
 
         btnOK.setOnClickListener(v -> {
-            ImpsNeftTransactionRequest();
             d.dismiss();
+            if("Y".equalsIgnoreCase(tpinSTatus)){
+                transactionPinDialog();
+            }else{
+                impsNeftTransactionRequest();
+            }
         });
 
         close_dmr_cnf_button.setOnClickListener(v -> {
@@ -204,9 +210,41 @@ public class ImpsNeftActivity extends BaseActivity {
         });
         d.show();
     }
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(ImpsNeftActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                impsNeftTransactionRequest();
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
+    }
 
     //==========For Imps Neft Transaction=================
-    private void ImpsNeftTransactionRequest() {
+    private void impsNeftTransactionRequest() {
         if (NetworkConnection.isConnectionAvailable(getApplicationContext())) {
             pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "Money Transfer...");
             ProgressDialogFragment.showDialog(pd, getSupportFragmentManager());
@@ -228,6 +266,8 @@ public class ImpsNeftActivity extends BaseActivity {
             request.setLatitude(Util.LoadPrefData(context, Keys.LATITUDE));
             request.setLongitude(Util.LoadPrefData(context,Keys.LONGITUDE));
             request.setIp(Util.getIpAddress(context));
+            request.setTransactionPin(tpin);
+
             RetrofitClient.getClient(getApplicationContext()).moneyTransfer(request)
                     .enqueue(new Callback<MoneyTransferResponse>() {
                         @Override

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,6 +67,7 @@ public class UploadDocumentActivity extends AppCompatActivity implements View.On
     private RecyclerView rv_document;
     private  DocumentAdapter adapter;
     private TextView tv_error_msg;
+    private LinearLayout ll_upload_body;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class UploadDocumentActivity extends AppCompatActivity implements View.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Upload Documents");
 
+        ll_upload_body = findViewById(R.id.ll_upload_body);
         edit_document_number = findViewById(R.id.edit_document_number);
         sp_type = findViewById(R.id.sp_kyc_document);
         btn_select_doc = findViewById(R.id.btn_kyc_select);
@@ -91,8 +94,10 @@ public class UploadDocumentActivity extends AppCompatActivity implements View.On
         kycStatus = Util.LoadPrefData(getApplicationContext(), Keys.KYC_STATUS);
         if("3".equalsIgnoreCase(kycStatus)
         || "0".equalsIgnoreCase(kycStatus)){
+            Util.showView(ll_upload_body);
             Util.showView(btn_submit_kyc);
         }else{
+            Util.hideView(ll_upload_body);
             Util.hideView(btn_submit_kyc);
         }
 
@@ -391,6 +396,9 @@ public class UploadDocumentActivity extends AppCompatActivity implements View.On
             if("Pending".equalsIgnoreCase(doc.getDocument_status())
                     || "Approved".equalsIgnoreCase(doc.getDocument_status()))
                 data.remove(doc.getDocument_type());
+        }
+        if(data==null || data.size()==0){
+            Util.hideView(ll_upload_body);
         }
 
         sp_type.setItem(data);

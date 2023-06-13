@@ -15,6 +15,14 @@ public class FastagRechargeRequest {
     private String opname;
     @Expose
     private FastagData data;
+    private String transactionPin;
+    public String getTransactionPin() {
+        return transactionPin;
+    }
+
+    public void setTransactionPin(String transactionPin) {
+        this.transactionPin = transactionPin;
+    }
 
     public String getAgentID() {
         return agentID;

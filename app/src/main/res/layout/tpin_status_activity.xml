@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50.0dip"
+        android:fillViewport="true"
+        android:scrollbarThumbVertical="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50.0dip"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="20.0dip"
+                android:src="@drawable/settion_image" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update  Transaction PIN Status"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18.0sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20.0dip"/>
+
+                <TextView
+                    android:id="@+id/update_tpin_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10.0dip"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="18.0sp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/tpin_status_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:switchMinWidth="56dp"
+                android:text=""
+                android:checked="true"
+                android:textOff="N"
+                android:textOn="Y"
+                android:layout_gravity="center_horizontal"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_update_tpin_otp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter 6-digit OTP"
+                style="@style/TextLabel">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    style="@style/TextLabel"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tv_resend_status_tpin_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="20.0dip"
+                android:layout_weight="1.0"
+                android:gravity="center_horizontal"
+                android:padding="5.0dip"
+                android:text="Resend OTP"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16.0sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+            <Button
+                android:id="@+id/btn_update_tpin_status"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="UPDATE TPIN STATUS"
+                android:background="@drawable/rounded_btn_login"
+                android:textColor="@color/whitecolor"/>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

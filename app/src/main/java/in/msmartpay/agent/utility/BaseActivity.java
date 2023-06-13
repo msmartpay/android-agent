@@ -222,6 +222,7 @@ public class BaseActivity extends AppCompatActivity {
                                 Util.SavePrefData(getApplicationContext(),Keys.AGENT_FULL, (String)res.getAgentInitial() + res.getAgentId() );
                                 Util.SavePrefData(getApplicationContext(),Keys.BALANCE,res.getBalance() + "");
                                 Util.SavePrefData(getApplicationContext(),Keys.TXN_KEY,res.getTxn_key() + "");
+                                Util.SavePrefData(getApplicationContext(),Keys.TPIN_STATUS,res.getTpinStatus());
                                 Util.SavePrefData(getApplicationContext(),Keys.AGENT_ID,res.getAgentId()  + "");
                                 Util.SavePrefData(getApplicationContext(),Keys.KYC_STATUS,res.getKycStatus());
                                 Util.SavePrefData(getApplicationContext(),"statement_download","true");

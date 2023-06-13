@@ -148,6 +148,7 @@
     <string-array name="network_type">
         <item>VISA</item>
         <item>MASTERCARD</item>
+        <item>AMEX</item>
     </string-array>
 
     <string name="title_activity_aeps">AEPSActivity</string>
@@ -179,4 +180,5 @@
     <string name="proceed">Proceed</string>
     <string name="fetch_bill">Fetch Bill</string>
     <string name="app_notification_channel_id">msmart</string>
+    <string name="service_not_available">Service not available at this time. Please contact to customer care.</string>
 </resources>

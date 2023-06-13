@@ -798,6 +798,81 @@
                                             android:text="LIC\nPremium" />
                                     </LinearLayout>
                                 </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="15dp"
+                                    android:gravity="center"
+                                    android:weightSum="1.0">
+
+
+                                    <LinearLayout
+                                        android:id="@+id/id_emi"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/insurence" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Loan\nEMI" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/id_lpg"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/creditcard" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="LPG\nBill" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/id_cable"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/electricity" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="Cable\nBill" />
+                                    </LinearLayout>
+                                </LinearLayout>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 

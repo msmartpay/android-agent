@@ -91,7 +91,7 @@ public class AEPSSDKActivity extends BaseActivity {
 
         if(Keys.EKO_API.equalsIgnoreCase(transactionType) ){
             getAccessKey();
-        }if(Keys.PAY_SPRINT.equalsIgnoreCase(transactionType)){
+        }else if(Keys.PAY_SPRINT.equalsIgnoreCase(transactionType) || Keys.AADHAAR_PAY.equalsIgnoreCase(transactionType)){
             getPaySprintAccessKey();
         }
     }

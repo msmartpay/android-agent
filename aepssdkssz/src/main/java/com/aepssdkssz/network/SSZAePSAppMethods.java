@@ -18,7 +18,7 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface SSZAePSAppMethods {
-    String VERSION = "1.0";
+    String VERSION = "1.1";
     String DOMAIN = "https://msmartpay.in/";
     String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
 

@@ -68,6 +68,8 @@ import in.msmartpay.agent.network.model.matm.MicroInitiateTransactionResponse;
 import in.msmartpay.agent.network.model.matm.MicroPostTransactionRequest;
 import in.msmartpay.agent.network.model.matm.MicroPostTransactionResponse;
 import in.msmartpay.agent.network.model.post.OperatorResponse;
+import in.msmartpay.agent.network.model.setting.UpdateTPINRequest;
+import in.msmartpay.agent.network.model.setting.UpdateTPINStatusRequest;
 import in.msmartpay.agent.network.model.user.ChangePasswordRequest;
 import in.msmartpay.agent.network.model.user.DistrictRequest;
 import in.msmartpay.agent.network.model.user.DistrictResponse;
@@ -105,7 +107,7 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Url;
 
 public interface AppMethods {
-    String VERSION = "1.0";
+    String VERSION = "1.1";
     String DOMAIN = "https://msmartpay.in/";
 
     String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
@@ -138,6 +140,16 @@ public interface AppMethods {
     String RefundTransaction="/RefundTransaction";
     String RefundDMRConfirm="/RefundDMRConfirm";
 
+    String SETTING = "setting";
+
+    @POST(SETTING + "/tpin/otp/resend")
+    Call<MainResponse2> tpinOtpResend(@Body UpdateTPINRequest request);
+
+    @POST(SETTING + "/tpin/status")
+    Call<MainResponse2> updateTPINStatus(@Body UpdateTPINStatusRequest request);
+
+    @POST(SETTING + "/tpin/update")
+    Call<MainResponse2> updateTPIN(@Body UpdateTPINRequest request);
 
     /******* DMT *******/
 

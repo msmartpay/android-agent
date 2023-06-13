@@ -181,6 +181,7 @@ public class PlansActivity extends BaseActivity {
                                                     PlanModel model = new PlanModel();
                                                     model.setRs(object.getString("rs"));
                                                     model.setDesc(object.getString("desc"));
+                                                    model.setValidity(object.optString("validity"));
                                                     if (!object.getString("desc").equalsIgnoreCase("Plan Not Available"))
                                                         modelArrayList.add(model);
                                                 }
@@ -211,6 +212,7 @@ public class PlansActivity extends BaseActivity {
                                                                 model.setRs(object.getString("rs"));
                                                                 model.setDesc(object.getString("desc"));
                                                                 model.setLast_update(object.getString("last_update"));
+                                                                model.setValidity(object.optString("validity"));
                                                                 modelArrayList.add(model);
                                                             }
                                                             plansList.add(modelArrayList);
@@ -227,6 +229,7 @@ public class PlansActivity extends BaseActivity {
                                                                     model.setRs(object1.getString(dynamicKey1));
                                                                     model.setDesc(dynamicKey1 + "  " + object.getString("desc"));
                                                                     model.setLast_update(object.getString("last_update"));
+                                                                    model.setValidity(object.optString("validity"));
 
                                                                     ArrayList<PlanModel> modelArrayList = new ArrayList<>();
                                                                     if (map.get(dynamicKey1) == null) {

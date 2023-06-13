@@ -267,6 +267,7 @@ public class FastTagActivity extends BaseActivity {
             request2.setKey(txn_key);
             request2.setOpname(opreatorModel.getName());
             request2.setData(data);
+            request2.setTransactionPin(tpin);
 
             RetrofitClient.getClient(getApplicationContext())
                     .rechargeFastag(request2).enqueue(new Callback<FastagRechargeResponse>() {
@@ -288,9 +289,9 @@ public class FastTagActivity extends BaseActivity {
                             in.putExtra("txnStatus", res.getData().getTxnStatus());
                             startActivity(in);
                             finish();
-                            L.toastS(context, res.getMessage()!=null?res.getMessage():"Oops!");
+                            L.toastS(context, res.getMessage()!=null?res.getMessage():"Oops! something went wrong.");
                         } else {
-                            L.toastS(context, res.getMessage()!=null?res.getMessage():"Oops!");
+                            L.toastS(context, res.getMessage()!=null?res.getMessage():"Oops! something went wrong.");
                         }
                     }
                 }

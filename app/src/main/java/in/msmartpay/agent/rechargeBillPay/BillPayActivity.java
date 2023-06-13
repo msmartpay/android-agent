@@ -3,11 +3,18 @@ package in.msmartpay.agent.rechargeBillPay;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +46,7 @@ public class BillPayActivity extends BaseActivity {
     private String connectionNo, amountString;
     private Context context;
     private ProgressDialogFragment pd;
-    private String mob = "", agentID, txn_key;
+    private String mob = "", agentID, txn_key,tpinStatus="",tpin="";
     private String AD1 = "", AD2 = "", AD3 = "", AD4 = "", CN = "", OP = "", operator, op, referenceId = "";
     //private String gTPin_Url = HttpURL.GetTPinVerified;
     private Dialog d;
@@ -78,6 +85,7 @@ public class BillPayActivity extends BaseActivity {
 
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+        tpinStatus = Util.LoadPrefData(getApplicationContext(), Keys.TPIN_STATUS);
 
         Util.hideView(ll_customer);
         Util.hideView(ll_dueDate);
@@ -107,17 +115,60 @@ public class BillPayActivity extends BaseActivity {
             if (operatorData.getViewbill().equalsIgnoreCase("1") && value == 0) {
                 submitPayment("ViewBill");
             } else {
+                boolean validationStatus=false;
+                String message="";
                 if (value == 1) {
                     if (dueAmt > 0)
-                        submitPayment("Pay");
+                        validationStatus=true;
                     else
-                        Toast.makeText(context, "Due amount is greater than 0", Toast.LENGTH_LONG).show();
-
+                        message="Due amount is greater than 0";
                 } else {
-                    submitPayment("Pay");
+                    validationStatus=true;
+                }
+                if(validationStatus){
+                    if("Y".equalsIgnoreCase(tpinStatus)){
+                        transactionPinDialog();
+                    }else{
+                        submitPayment("Pay");
+                    }
+                }else{
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(BillPayActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                submitPayment("Pay");
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
     }
 
     private void submitPayment(final String reqType) {

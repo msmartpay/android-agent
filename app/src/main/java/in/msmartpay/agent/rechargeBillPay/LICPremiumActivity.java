@@ -2,14 +2,20 @@ package in.msmartpay.agent.rechargeBillPay;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Date;
 
@@ -17,6 +23,7 @@ import in.msmartpay.agent.MainActivity;
 import in.msmartpay.agent.R;
 import in.msmartpay.agent.databinding.ActivityLicBinding;
 import in.msmartpay.agent.databinding.ActivityPaytmBinding;
+import in.msmartpay.agent.dmr.ImpsNeftActivity;
 import in.msmartpay.agent.myWallet.TransactionHistoryReceipt;
 import in.msmartpay.agent.network.RetrofitClient;
 import in.msmartpay.agent.network.model.MainRequest2;
@@ -46,7 +53,7 @@ public class LICPremiumActivity extends BaseActivity {
     private ProgressDialogFragment pd;
     private String billId;
     private String validationId;
-    private String billFetch;
+    private String billFetch,tpin="",tpinStatus="";
 
 
     @Override
@@ -57,6 +64,8 @@ public class LICPremiumActivity extends BaseActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("LIC Premium Payment");
+
+        tpinStatus = Util.LoadPrefData(getApplicationContext(),Keys.TPIN_STATUS);
 
         et_lic_policy_number = binding.etLicPolicyNumber;
         et_lic_email = binding.etLicEmailId;
@@ -88,7 +97,13 @@ public class LICPremiumActivity extends BaseActivity {
             }
         });
 
-        btn_lic_payment.setOnClickListener(view -> licPaymentRequest());
+        btn_lic_payment.setOnClickListener(view -> {
+            if("Y".equalsIgnoreCase(tpinStatus)){
+                transactionPinDialog();
+            }else{
+                licPaymentRequest();
+            }
+        });
 
     }
 
@@ -151,6 +166,39 @@ public class LICPremiumActivity extends BaseActivity {
         });
     }
 
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(LICPremiumActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(getApplicationContext(), "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                licPaymentRequest();
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
+    }
+
     private void licPaymentRequest() {
         pd = ProgressDialogFragment.newInstance("Loading. Please wait...", "PayTM Wallet Payment...");
         ProgressDialogFragment.showDialog(pd, getSupportFragmentManager());
@@ -159,6 +207,7 @@ public class LICPremiumActivity extends BaseActivity {
         request2.setAgentID(Util.LoadPrefData(this, Keys.AGENT_ID));
         request2.setKey(Util.LoadPrefData(this, Keys.TXN_KEY));
         request2.setIp(Util.getIpAddress(this));
+        request2.setTransactionPin(tpin);
 
         LicBillpayRequest data = new LicBillpayRequest();
         data.setCanumber(et_lic_policy_number.getText().toString());

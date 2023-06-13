@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:weightSum="1.0"
             android:orientation="horizontal">
 
             <TextView
@@ -28,24 +29,49 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="14.0sp" />
 
-            <TextView
-                android:id="@+id/tv_desc"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5.0dip"
-                android:layout_toRightOf="@+id/tv_price"
-                android:padding="5.0dip"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14.0sp" />
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5.0dip"
+                    android:padding="5.0dip"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14.0sp"
+                    android:text="Description"/>
+                <TextView
+                    android:id="@+id/tv_plan_validity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5.0dip"
+                    android:padding="5.0dip"
+                    android:textColor="@color/green"
+                    android:textSize="12.0sp"
+                    android:textStyle="bold"
+                    android:text="Validity"/>
+
+                <TextView
+                    android:id="@+id/tv_last_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_desc"
+                    android:layout_marginStart="5.0dp"
+                    android:padding="5.0dip"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14.0sp"
+                    android:text="Last Updated Date"/>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_last_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_desc"
-            android:padding="5.0dip"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14.0sp" />
+
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -5,8 +5,18 @@ public class MainRequest2 {
     private String Key;
     private Object data;
     private String ip;
-
     private String ipaddress;
+
+    private String transactionPin;
+
+    public String getTransactionPin() {
+        return transactionPin;
+    }
+
+    public void setTransactionPin(String transactionPin) {
+        this.transactionPin = transactionPin;
+    }
+
     public String getIpaddress() {
         return ipaddress;
     }

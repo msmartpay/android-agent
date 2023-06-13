@@ -11,6 +11,16 @@ public class BalanceResponse {
     private String credit;
     private int kycStatus;
 
+    private ServicesModel services;
+
+    public ServicesModel getServices() {
+        return services;
+    }
+
+    public void setServices(ServicesModel services) {
+        this.services = services;
+    }
+
     public int getKycStatus() {
         return kycStatus;
     }

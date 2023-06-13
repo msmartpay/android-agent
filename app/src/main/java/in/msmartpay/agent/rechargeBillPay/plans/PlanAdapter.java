@@ -37,7 +37,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyHolder> {
     final PlanModel model = planListModels.get(i);
     holder.tv_price.setText(model.getRs());
     holder.tv_desc.setText(model.getDesc());
-    holder.tv_last_date.setText(model.getLast_update());
+    holder.tv_last_date.setText("Last Updated Date: "+model.getLast_update());
+    holder.tv_plan_validity.setText("Validity: "+model.getValidity());
     holder.view.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -52,7 +53,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyHolder> {
         return planListModels.size();
     }
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView tv_price, tv_last_date, tv_desc;
+        TextView tv_price, tv_last_date, tv_desc,tv_plan_validity;
         View view;
 
         public MyHolder(View itemView) {
@@ -61,7 +62,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.MyHolder> {
             tv_price = itemView.findViewById(R.id.tv_price);
             tv_desc = itemView.findViewById(R.id.tv_desc);
             tv_last_date = itemView.findViewById(R.id.tv_last_date);
-            tv_last_date.setVisibility(View.GONE);
+            //tv_last_date.setVisibility(View.GONE);
+            tv_plan_validity = itemView.findViewById(R.id.tv_plan_validity);
         }
     }
 

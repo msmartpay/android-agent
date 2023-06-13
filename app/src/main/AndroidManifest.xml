@@ -52,6 +52,16 @@
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".user.SetupTpinActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".user.TpinStatusActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
             android:name=".rechargeBillPay.PaytmActivity"
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
@@ -152,6 +162,23 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".rechargeBillPay.InsurancePayActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".rechargeBillPay.CablePayActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".rechargeBillPay.EMIPayActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".rechargeBillPay.LPGPayActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden" />

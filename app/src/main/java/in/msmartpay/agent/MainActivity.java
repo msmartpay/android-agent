@@ -54,8 +54,12 @@ import in.msmartpay.agent.network.model.MainRequest2;
 import in.msmartpay.agent.network.model.MainResponse2;
 import in.msmartpay.agent.network.model.wallet.BalanceRequest;
 import in.msmartpay.agent.network.model.wallet.BalanceResponse;
+import in.msmartpay.agent.network.model.wallet.ServicesModel;
+import in.msmartpay.agent.rechargeBillPay.CablePayActivity;
 import in.msmartpay.agent.rechargeBillPay.CreditCardActivity;
+import in.msmartpay.agent.rechargeBillPay.EMIPayActivity;
 import in.msmartpay.agent.rechargeBillPay.LICPremiumActivity;
+import in.msmartpay.agent.rechargeBillPay.LPGPayActivity;
 import in.msmartpay.agent.rechargeBillPay.SubscriptionRechargeActivity;
 import in.msmartpay.agent.rechargeBillPay.DthRechargeActivity;
 import in.msmartpay.agent.rechargeBillPay.ElectricityPayActivity;
@@ -69,6 +73,8 @@ import in.msmartpay.agent.rechargeBillPay.PrepaidMobileActivity;
 import in.msmartpay.agent.rechargeBillPay.WaterPayActivity;
 import in.msmartpay.agent.user.MyProfile;
 import in.msmartpay.agent.user.ResetPasswordActivity;
+import in.msmartpay.agent.user.SetupTpinActivity;
+import in.msmartpay.agent.user.TpinStatusActivity;
 import in.msmartpay.agent.utility.BaseActivity;
 import in.msmartpay.agent.utility.Keys;
 import in.msmartpay.agent.utility.L;
@@ -100,6 +106,7 @@ public class MainActivity extends BaseActivity{
     private TextView draweragentemail, tv_version_code,tv_agent_name;
     private DrawerLayout mDrawer;
     private AutoScrollViewPager mDemoSlider;
+    private ServicesModel servicesModel=new ServicesModel();
 
     String aepsStatus,aepsStatusSszpl,aadharpayStatus;
     // Declare the UpdateManager
@@ -254,7 +261,15 @@ public class MainActivity extends BaseActivity{
                 Intent intent = new Intent(context, ComplaintActivity.class);
                 startActivity(intent);
                 mDrawer.closeDrawers();
-            } else if (v.getId() == R.id.cpassword) {
+            }else if (v.getId() == R.id.setup_tpin) {
+                Intent intent = new Intent(context, SetupTpinActivity.class);
+                startActivity(intent);
+                mDrawer.closeDrawers();
+            } else if (v.getId() == R.id.enable_disable_tpin) {
+                Intent intent = new Intent(context, TpinStatusActivity.class);
+                startActivity(intent);
+                mDrawer.closeDrawers();
+            }  else if (v.getId() == R.id.cpassword) {
                 Intent intent = new Intent(context, ResetPasswordActivity.class);
                 startActivity(intent);
                 mDrawer.closeDrawers();
@@ -294,49 +309,117 @@ public class MainActivity extends BaseActivity{
             //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
             if (view.getId() == R.id.id_fastag) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, FastTagActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getFastag())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, FastTagActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_mobile_prepaid) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, PrepaidMobileActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getRecharge())){
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, PrepaidMobileActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_mobile_postpaid) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, PostpaidMobileActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, PostpaidMobileActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_dth) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, DthRechargeActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getRecharge())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, DthRechargeActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_datacard) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, SubscriptionRechargeActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getRecharge())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, SubscriptionRechargeActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_landline) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, LandlinePayActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, LandlinePayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_electricity) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, ElectricityPayActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, ElectricityPayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_gas) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, GasPayActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, GasPayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_water) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, WaterPayActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, WaterPayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_insurence) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, InsurancePayActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, InsurancePayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
+            }else if (view.getId() == R.id.id_emi) {
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, EMIPayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
+            }else if (view.getId() == R.id.id_lpg) {
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, LPGPayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
+            }else if (view.getId() == R.id.id_cable) {
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, CablePayActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_micro_atm) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, FingpayMATMActivity.class);
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getBus())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, FingpayMATMActivity.class);
+                    startActivity(intent);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }  /* else if (view.getId() == R.id.id_Aeps) {
                 view.getResources().getColor(R.color.active_tab);
                 if ("1".equalsIgnoreCase(aepsStatus)) {
@@ -348,57 +431,97 @@ public class MainActivity extends BaseActivity{
                 }
 
             }*/else if (view.getId() == R.id.id_eko_aeps_api) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, AEPSSDKActivity.class);
-                intent.putExtra("transaction_type",Keys.EKO_API);
-
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getAeps1())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, AEPSSDKActivity.class);
+                    intent.putExtra("transaction_type", Keys.EKO_API);
+                    startActivity(intent);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_paysprint_aeps) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, AEPSSDKActivity.class);
-                intent.putExtra("transaction_type",Keys.PAY_SPRINT);
-
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getAeps2())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, AEPSSDKActivity.class);
+                    intent.putExtra("transaction_type", Keys.PAY_SPRINT);
+                    startActivity(intent);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_eko_aeps_gateway) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, EkoAEPSGatewayActivity.class);
-                intent.putExtra("transaction_type","Cash Withdrawal");
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getAeps1())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, EkoAEPSGatewayActivity.class);
+                    intent.putExtra("transaction_type", "Cash Withdrawal");
+                    startActivity(intent);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_aadhar_pay) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, AEPSSDKActivity.class);
-                intent.putExtra("transaction_type","Aadhaar Pay");
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getAeps2()) || "Y".equalsIgnoreCase(servicesModel.getAeps1())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, AEPSSDKActivity.class);
+                    intent.putExtra("transaction_type", "Aadhaar Pay");
+                    startActivity(intent);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_dmr1 ) {
-                view.getResources().getColor(R.color.active_tab);
-                FindSenderDialog.showDialog(getSupportFragmentManager());
+                if("Y".equalsIgnoreCase(servicesModel.getDmr1())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    FindSenderDialog.showDialog(getSupportFragmentManager());
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }
             else if (view.getId() == R.id.id_dmr2 ) {
-                view.getResources().getColor(R.color.active_tab);
-                Util.SavePrefData(getApplicationContext(), Keys.DYNAMIC_DMR_VENDOR, AppMethods.BASE_URL + AppMethods.DMR_PAYSPRINT);
-                PSFindSenderDialog.showDialog(getSupportFragmentManager());
+                if("Y".equalsIgnoreCase(servicesModel.getDmr2())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Util.SavePrefData(getApplicationContext(), Keys.DYNAMIC_DMR_VENDOR, AppMethods.BASE_URL + AppMethods.DMR_PAYSPRINT);
+                    PSFindSenderDialog.showDialog(getSupportFragmentManager());
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }
             else if (view.getId() == R.id.id_account_opening) {
-                generateAccountOpeningURL();
+                if("Y".equalsIgnoreCase(servicesModel.getAxisAccount())) {
+                    generateAccountOpeningURL();
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }
             else if (view.getId() == R.id.id_fino_cms) {
-                generateCMSURL();
+                if("Y".equalsIgnoreCase(servicesModel.getCMS())) {
+                    generateCMSURL();
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }
             else if (view.getId() == R.id.id_claim_refund) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, ClaimHistoryActivity.class);
-                in.putExtra("service","refund_pending");
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getDmr1()) || "Y".equalsIgnoreCase(servicesModel.getDmr2())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, ClaimHistoryActivity.class);
+                    in.putExtra("service", "refund_pending");
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }
             else if (view.getId() == R.id.id_wallet_transfer) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, QuickPayActivity.class);
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getW2W())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, QuickPayActivity.class);
+                    startActivity(intent);
+                }
             }
             else if (view.getId() == R.id.id_fund_settlement) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent intent = new Intent(this, SettlementDetailsActivity.class);
-                startActivity(intent);
+                if("Y".equalsIgnoreCase(servicesModel.getCashout())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent intent = new Intent(this, SettlementDetailsActivity.class);
+                    startActivity(intent);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }
             else if (view.getId() == R.id.id_wallet_history) {
                 view.getResources().getColor(R.color.active_tab);
@@ -418,17 +541,29 @@ public class MainActivity extends BaseActivity{
                 Intent in = new Intent(context, CommissionActivity.class);
                 startActivity(in);
             } */else if (view.getId() == R.id.id_credit) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, CreditCardActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getCreditcard())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, CreditCardActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             } else if (view.getId() == R.id.id_paytm) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, PaytmActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getPaytm())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, PaytmActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_lic) {
-                view.getResources().getColor(R.color.active_tab);
-                Intent in = new Intent(context, LICPremiumActivity.class);
-                startActivity(in);
+                if("Y".equalsIgnoreCase(servicesModel.getLic())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, LICPremiumActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }/*else if (view.getId() == R.id.id_audit_request) {
                 view.getResources().getColor(R.color.active_tab);
                 Intent in = new Intent(context, AuditRequestActivity.class);
@@ -584,6 +719,8 @@ public class MainActivity extends BaseActivity{
                             Util.SavePrefData(getApplicationContext(), Keys.BALANCE, "" + res.getDebit());
                             Util.SavePrefData(getApplicationContext(), Keys.BALANCE_CASH, "" + res.getCredit());
                             Util.SavePrefData(getApplicationContext(), Keys.KYC_STATUS, "" + res.getKycStatus());
+
+                            servicesModel = res.getServices();
 
                             kycStatus=res.getKycStatus();
 

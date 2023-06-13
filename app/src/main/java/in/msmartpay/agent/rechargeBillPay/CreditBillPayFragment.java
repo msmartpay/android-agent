@@ -3,6 +3,8 @@ package in.msmartpay.agent.rechargeBillPay;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,22 +52,15 @@ import retrofit2.Response;
  */
 public class CreditBillPayFragment extends Fragment {
 
-    EditText mobileNumber;
-    EditText customerName;
-    EditText cardNumber;
-    EditText et_amount;
-    EditText remarks;
-    EditText otp;
-    Button payment;
-    Button requestOtp;
-    TextView tv_otpMsg;
-    MaterialAutoCompleteTextView et_network;
+    private EditText mobileNumber,customerName,cardNumber,et_amount,remarks,otp;
+    private Button payment,requestOtp;
+    private TextView tv_otpMsg;
+    private MaterialAutoCompleteTextView et_network;
     private ProgressDialogFragment pd;
     private Context context;
-    int amount=0;
+    private int amount=0;
     private List<String> networkList;
-    private String networkValue;
-    private String refId;
+    private String networkValue,refId,tpin,tpinSTatus;
     private TextInputLayout ilOtp;
     public CreditBillPayFragment() {
         // Required empty public constructor
@@ -109,6 +105,9 @@ public class CreditBillPayFragment extends Fragment {
         Util.hideView(tv_otpMsg);
         Util.hideView(payment);
         context = getActivity();
+
+        tpinSTatus = Util.LoadPrefData(getActivity(),Keys.TPIN_STATUS);
+
         networkList = Arrays.asList(getResources().getStringArray(R.array.network_type));
         et_network.setOnClickListener(v -> showNetworkDialog());
         et_network.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -153,7 +152,12 @@ public class CreditBillPayFragment extends Fragment {
              if (TextUtils.isEmpty(otp.getText().toString())){
                 Toast.makeText(context, "Please enter OTP", Toast.LENGTH_LONG).show();
             }else{
-                requestPayment();
+                 L.toastL(context,"TPIN Status : "+tpinSTatus);
+                 if("Y".equalsIgnoreCase(tpinSTatus)){
+                     transactionPinDialog();
+                 }else{
+                     requestPayment();
+                 }
             }
         });
 
@@ -191,7 +195,7 @@ public class CreditBillPayFragment extends Fragment {
             @Override
             public void onResponse(Call<MainResponse2> call, Response<MainResponse2> response) {
                 pd.dismiss();
-                L.toastS(getActivity(), "data success " +response.body());
+
                 if (response.isSuccessful() && response.body() != null) {
                     MainResponse2 res = response.body();
                     cardPaymentResponseDialog(res.getMessage() + "", res.getStatus());
@@ -270,6 +274,38 @@ public class CreditBillPayFragment extends Fragment {
         et_amount.setEnabled(true);
         remarks.setEnabled(true);
         ilOtp.setVisibility(View.GONE);
+    }
+
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(getActivity());
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                requestPayment();
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+        });
+
+        dialog_status.show();
     }
     private void cardPaymentResponseDialog(String msg, String status) {
         Dialog dialog_status = new Dialog(requireActivity());
