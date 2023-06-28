@@ -16,6 +16,7 @@ import java.util.Objects;
 import in.co.eko.ekopay.EkoPayActivity;
 import in.msmartpay.agent.R;
 import in.msmartpay.agent.aeps.onboard.UserNumberDialog;
+import in.msmartpay.agent.aeps.onboard.UserSuccessDialog;
 import in.msmartpay.agent.network.AppMethods;
 import in.msmartpay.agent.network.NetworkConnection;
 import in.msmartpay.agent.network.RetrofitClient;
@@ -135,7 +136,7 @@ public class EkoAEPSGatewayActivity extends BaseActivity {
                         }else if(res.getResponseCode() != null && res.getResponseCode().equals("2")) {
                             L.toastS(getApplicationContext(), res.getResponseMessage());
                         }else if(res.getResponseCode() != null && res.getResponseCode().equals("3")) {
-                            L.toastS(getApplicationContext(), res.getResponseMessage());
+                            UserSuccessDialog.showDialog(getSupportFragmentManager());
                         }else{
                             L.toastS(getApplicationContext(), res.getResponseMessage());
                         }

@@ -141,7 +141,7 @@
                 android:text=":"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/id_sure_ask_amount"
                 android:layout_width="0.0dip"
                 android:layout_height="wrap_content"

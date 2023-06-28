@@ -323,9 +323,7 @@ public class UploadDocumentActivity extends AppCompatActivity implements View.On
     private void requestMyPermissions() {
         L.m2("permissions", "Clicked");
         Dexter.withContext(UploadDocumentActivity.this)
-                .withPermissions(Manifest.permission.CAMERA,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withPermissions(Util.storagePermissions())
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
@@ -415,8 +413,8 @@ public class UploadDocumentActivity extends AppCompatActivity implements View.On
                     Uri uri = data.getData();
                     String filePath= ImageUtils.getRealPathFromURI(UploadDocumentActivity.this,uri);
 
-                        file = filePath;
-                        iv_file.setImageURI(uri);
+                    file = filePath;
+                    iv_file.setImageURI(uri);
                     iv_file.setVisibility(View.VISIBLE);
 
                 });

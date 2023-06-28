@@ -302,7 +302,7 @@ public class PrepaidMobileActivity extends BaseActivity {
                                                 Intent intent = new Intent(context, PlansActivity.class);
                                                 intent.putExtra("type", "mobile");
                                                 intent.putExtra("operator", fetchOperatorName);
-                                                intent.putExtra("mobile", "");
+                                                intent.putExtra("mobile", mobileNumber);
                                                 intent.putExtra("circle", circle);
                                                 startActivityForResult(intent, REQUEST_PLAN);
                                             }

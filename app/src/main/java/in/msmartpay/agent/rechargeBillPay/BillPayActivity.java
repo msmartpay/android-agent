@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,8 @@ import retrofit2.Callback;
 
 public class BillPayActivity extends BaseActivity {
 
-    private TextView tv_cn_hint, tv_cn, amtt, tv_amunt_hint, tv_oprator_hint, tv_oprator, tv_dueDate, tv_customerName, tv_dueAmount, tv_service;
+    private EditText amtt;
+    private TextView tv_cn_hint, tv_cn,tv_dueAmount, tv_amunt_hint, tv_oprator_hint, tv_oprator, tv_dueDate, tv_customerName, tv_service;
     private LinearLayout ll_customer, ll_dueAmount, ll_dueDate;
     private String connectionNo, amountString;
     private Context context;
@@ -117,6 +119,7 @@ public class BillPayActivity extends BaseActivity {
             } else {
                 boolean validationStatus=false;
                 String message="";
+                dueAmt_Req=amtt.getText().toString();
                 if (value == 1) {
                     if (dueAmt > 0)
                         validationStatus=true;

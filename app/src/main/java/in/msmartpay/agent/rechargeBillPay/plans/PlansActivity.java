@@ -151,6 +151,7 @@ public class PlansActivity extends BaseActivity {
             request.setOperator(opname);
             request.setClient(AppMethods.CLIENT);
             request.setType(type);
+            request.setMobile(mobile);
             if ("mobile".equalsIgnoreCase(type))
                 request.setCricle(circle);
 
