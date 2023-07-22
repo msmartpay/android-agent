@@ -13,8 +13,17 @@ public class MainResponse2 {
     @SerializedName("response-code")
     String responseCode;
 
+    private String userCode;
     @SerializedName("data")
     Object data;
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
+    }
 
     public Object getData() {
         return data;

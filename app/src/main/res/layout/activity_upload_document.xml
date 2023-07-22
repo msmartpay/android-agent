@@ -109,23 +109,21 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_submit_kyc"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/round_login_shape"
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:padding="15.0dip"
-                android:text="Submit For Verification"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17.0sp"
-                android:textStyle="bold"/>
-
         </LinearLayout>
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit_kyc"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_login_shape"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:padding="15.0dip"
+            android:text="Submit For Verification"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17.0sp"
+            android:textStyle="bold"/>
         <View
             android:id="@+id/view"
             android:layout_marginTop="15dp"

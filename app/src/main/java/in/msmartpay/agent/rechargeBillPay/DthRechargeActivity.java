@@ -84,6 +84,7 @@ public class DthRechargeActivity extends BaseActivity {
 
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+        tpinSTatus = Util.LoadPrefData(getApplicationContext(),Keys.TPIN_STATUS);
 
         edit_account_no_dth = findViewById(R.id.edit_account_no_dth);
         edit_amount_dth = findViewById(R.id.edit_amount_dth);

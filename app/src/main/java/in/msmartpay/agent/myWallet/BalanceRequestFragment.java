@@ -246,9 +246,10 @@ public class BalanceRequestFragment extends BaseFragment {
                             bankList = new ArrayList<>();
                         else
                             bankList.clear();
-                        if (res.getBank_List()!=null)
-                        bankList = res.getBank_List();
-                        sp_bank.setItem(bankList);
+                        if (res.getBank_List()!=null) {
+                            bankList = res.getBank_List();
+                            sp_bank.setItem(bankList);
+                        }
                     } else {
                         L.toastS(getActivity(), res.getResponseMessage());
                     }

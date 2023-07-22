@@ -1,7 +1,7 @@
 package in.msmartpay.agent.utility;
 
 public interface Keys {
-    String MY_FILE = "novabharat.txt";
+    String MY_FILE = "msmartpay.txt";
     String AGENT_ID = "agentonlyid";
     String AGENT_FULL = "agentFull";
     String TXN_KEY = "txn-key";
@@ -25,7 +25,10 @@ public interface Keys {
     String AGENT_OFF_CITY = "office_city";
     String AGENT_OFFICE_PINCODE= "office_pincode";
     String AGENT_M_NAME = "agent_middle_name";
-
+    String ADDRESS ="address" ;
+    String STATE ="state" ;
+    String DISTRICT ="district" ;
+    String PINCODE ="pincode" ;
 
     String AGENT_EMAIL = "emailId";
     String AGENT_MOB = "agentMobile";
@@ -126,4 +129,5 @@ public interface Keys {
     String USER_DMR_VENDOR = "userDmrVendor";
     String TPIN_STATUS="tpinStatus";
     String FCM_TOKEN = "FCM_TOKEN";
+    String USER_CODE="eko_user_code";
 }

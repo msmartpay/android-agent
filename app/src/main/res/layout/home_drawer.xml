@@ -82,7 +82,7 @@
                     style="@style/tv_home_drawer_child"
                     android:layout_toEndOf="@+id/activate"
                     android:paddingTop="2.0dip"
-                    android:text="Activate User" />
+                    android:text="Activate Service" />
 
                 <ImageView
                     android:id="@+id/iv_activate"

@@ -135,6 +135,8 @@ public class UserRegistrationDialog extends DialogFragment {
                         if (response.isSuccessful() && response.body() != null) {
                             MainResponse2 res = response.body();
                             if ("0".equalsIgnoreCase(res.getStatus())) {
+                                String userCode = res.getUserCode();
+                                Util.SavePrefData(requireActivity(),Keys.USER_CODE,userCode);
                                 UserSuccessDialog.showDialog(requireActivity().getSupportFragmentManager());
                                 dismiss();
                             } else {

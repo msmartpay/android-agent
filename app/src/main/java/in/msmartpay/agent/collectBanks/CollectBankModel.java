@@ -37,6 +37,7 @@ public class CollectBankModel {
 
     @Override
     public String toString() {
-        return bank_name;
+
+        return bank_name+ " "+bank_account+"\n"+bnk_ifsc+ "\n"+bank_account_name;
     }
 }

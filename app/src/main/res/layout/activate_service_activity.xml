@@ -195,19 +195,23 @@
 
             </LinearLayout>
 
-            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/sp_service_type"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_enableFloatingLabel="false"
+                app:ms_hint="Select Service Type"
+                android:entries="@array/service_type"/>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
                 android:id="@+id/sp_model_type"
                 android:layout_marginTop="15dp"
-                style="@style/sp_material"
-                app:smsp_enableErrorLabel="false"
-                app:smsp_hint="Select Model Type"
-                app:smsp_itemColor="@color/sp_itemColor"
-                app:smsp_itemListColor="@color/sp_itemListColor"
-                app:smsp_itemListHintBackgroundColor="@color/sp_itemListHintBackgroundColor"
-                app:smsp_itemListHintColor="@color/sp_itemListHintColor"
-                app:smsp_itemSize="@dimen/sp_size"
-                app:smsp_selectedItemListColor="@color/sp_itemListSelectedColor"
-                app:smsp_underlineColor="@color/sp_underlineColor"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_enableFloatingLabel="false"
+                app:ms_hint="Select Model Type"
+                android:entries="@array/model_type"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -246,7 +250,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="State">
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/actv_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -290,10 +294,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_btn_login"
+                android:background="@drawable/rounded_button"
                 android:text="Activate"
                 android:onClick="start"
-                android:textColor="@color/whitecolor" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

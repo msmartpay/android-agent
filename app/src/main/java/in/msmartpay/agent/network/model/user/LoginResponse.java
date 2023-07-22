@@ -41,9 +41,50 @@ public class LoginResponse {
     private String pin;
     private String agency_name;
     private String address;
+    @SerializedName("state")
+    private String state;
+    @SerializedName("district")
+    private String district;
 
+    @SerializedName("pincode")
+    private String pincode;
     private String kycStatus;
     private String tpinStatus;
+    @SerializedName("ekoUserCode")
+    private String ekoUserCode;
+
+    public String getEkoUserCode() {
+        return ekoUserCode;
+    }
+
+    public void setEkoUserCode(String ekoUserCode) {
+        this.ekoUserCode = ekoUserCode;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
     public String getTpinStatus() {
         return tpinStatus;
     }

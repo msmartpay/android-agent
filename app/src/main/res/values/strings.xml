@@ -72,6 +72,7 @@
         <item>Tamil Nadu</item>
         <item>UP East</item>
         <item>UP West</item>
+        <item>UP West and Uttaranchal</item>
         <item>West Bengal</item>
     </string-array>
     <string-array name="states">
@@ -140,6 +141,13 @@
         <item>Mantra</item>
         <item>Startek</item>
         <item>TMF20</item>
+    </string-array>
+    <string-array name="service_type">
+        <item>AePS</item>
+        <item>AePSAPI</item>
+        <item>Settlement</item>
+        <item>AadhaarPay</item>
+        <item>BBPS</item>
     </string-array>
     <string-array name="wallet_type">
         <item>B2B WALLET</item>

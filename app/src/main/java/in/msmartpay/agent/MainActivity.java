@@ -31,6 +31,7 @@ import java.util.Objects;
 import in.msmartpay.agent.aeps.AEPSSDKActivity;
 import in.msmartpay.agent.aeps.EkoAEPSGatewayActivity;
 import in.msmartpay.agent.aeps.SettlementDetailsActivity;
+import in.msmartpay.agent.aeps.onboard.ActivateAepsActivity;
 import in.msmartpay.agent.aeps.onboard.UserNumberDialog;
 import in.msmartpay.agent.claimrefund.ClaimHistoryActivity;
 import in.msmartpay.agent.collectBanks.CollectBankActivity;
@@ -235,8 +236,9 @@ public class MainActivity extends BaseActivity{
     public void start(View v) {
         if (isConnectionAvailable()) {
             if (v.getId() == R.id.rl_activate) {
+                Intent in=new Intent(context, ActivateAepsActivity.class);
+                startActivity(in);
                 mDrawer.closeDrawers();
-                UserNumberDialog.showDialog(getSupportFragmentManager(), Util.LoadPrefData(getApplicationContext(), Keys.AGENT_MOB));
             } else if (v.getId() == R.id.ll_wallet_bal_req) {
                 startActivity(new Intent(context, BalanceRequestActivity.class));
                 mDrawer.closeDrawers();
@@ -304,6 +306,7 @@ public class MainActivity extends BaseActivity{
         }
     }
 
+    //Dashboard action
     public void click(View view) {
         if (isConnectionAvailable()) {
             //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
@@ -577,7 +580,7 @@ public class MainActivity extends BaseActivity{
         super.onResume();
         aepsStatus = Util.LoadPrefData(getApplicationContext(), Keys.AEPS_STATUS);
         if (kycStatus==1) {
-            rl_activate.setClickable(false);
+            //rl_activate.setClickable(false);
             iv_activate.setImageResource(R.drawable.tick_ok);
         } else {
             rl_activate.setClickable(true);

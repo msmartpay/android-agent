@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16.0dip">
+                android:padding="5.0dip">
 
                 <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
                     android:id="@+id/sp_bank"
@@ -32,7 +32,7 @@
                     app:smsp_itemListColor="@color/sp_itemListColor"
                     app:smsp_itemListHintBackgroundColor="@color/sp_itemListHintBackgroundColor"
                     app:smsp_itemListHintColor="@color/sp_itemListHintColor"
-                    app:smsp_itemSize="@dimen/sp_size"
+                    app:smsp_itemSize="@dimen/sp14_size"
                     app:smsp_selectedItemListColor="@color/sp_itemListSelectedColor"
                     app:smsp_underlineColor="@color/sp_underlineColor" />
 

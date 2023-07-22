@@ -221,6 +221,7 @@ public class BaseActivity extends AppCompatActivity {
                                 Util.SavePrefData(getApplicationContext(),"agent_id","&agent_id=" + res.getAgentId() );
                                 Util.SavePrefData(getApplicationContext(),Keys.AGENT_FULL, (String)res.getAgentInitial() + res.getAgentId() );
                                 Util.SavePrefData(getApplicationContext(),Keys.BALANCE,res.getBalance() + "");
+                                Util.SavePrefData(getApplicationContext(), Keys.USER_CODE,  res.getEkoUserCode());
                                 Util.SavePrefData(getApplicationContext(),Keys.TXN_KEY,res.getTxn_key() + "");
                                 Util.SavePrefData(getApplicationContext(),Keys.TPIN_STATUS,res.getTpinStatus());
                                 Util.SavePrefData(getApplicationContext(),Keys.AGENT_ID,res.getAgentId()  + "");
@@ -245,6 +246,12 @@ public class BaseActivity extends AppCompatActivity {
                                 Util.SavePrefData(getApplicationContext(),Keys.DMR_VENDOR, "" + res.getDmrVendor());
                                 Util.SavePrefData(getApplicationContext(),Keys.TIME,""+res.getTime());
                                 Util.SavePrefData(getApplicationContext(),Keys.ABOUT_US_URL,""+res.getAbout());
+
+                                Util.SavePrefData(getApplicationContext(), Keys.ADDRESS, "" + res.getAddress());
+                                Util.SavePrefData(getApplicationContext(), Keys.STATE, "" + res.getState());
+                                Util.SavePrefData(getApplicationContext(), Keys.DISTRICT, "" + res.getDistrict());
+                                Util.SavePrefData(getApplicationContext(), Keys.PINCODE, "" + res.getPincode());
+
                                 Util.SavePrefData(getApplicationContext(),Keys.TERMS_AND_CONDITIONS_URL,""+res.getTermsAndConditions());
                                 String appText = "";
                                 if (res.getApp_text() != null) {

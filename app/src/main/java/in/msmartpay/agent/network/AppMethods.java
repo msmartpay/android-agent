@@ -102,13 +102,15 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Url;
 
 public interface AppMethods {
-    String VERSION = "1.1";
+    String VERSION = "1.2";
     String DOMAIN = "https://msmartpay.in/";
+    String BASE_URL_NEW=DOMAIN+"agentapi/";
 
     String BASE_URL = DOMAIN + "ArpitAgentApi"+VERSION+"/resources/";
     String KYC_BASE_URL = DOMAIN+"FileServer";
@@ -310,10 +312,9 @@ public interface AppMethods {
 
 
     @Multipart
-    @POST("aeps/ActivateService")
+    @PUT("eko/user/service/activate")
     Call<MainResponse2> activateService(@PartMap Map<String, RequestBody> partMap,
                                         @Part List<MultipartBody.Part> files);
-    //End Activate User
 
     @POST("aeps/generateAccessKey")
     Call<AepsAccessKeyResponse> getAepsAccessKey(@Body AepsAccessKeyRequest request);

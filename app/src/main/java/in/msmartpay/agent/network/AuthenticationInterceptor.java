@@ -27,7 +27,9 @@ public class AuthenticationInterceptor implements Interceptor {
         Request.Builder builder = chain.request()
                 .newBuilder()
                 .header("Authorization",
-                        Credentials.basic(Util.LoadPrefData(context, Keys.AGENT_ID), Util.LoadPrefData(context, Keys.TXN_KEY)));
+                        Credentials.basic(Util.LoadPrefData(context, Keys.AGENT_ID), Util.LoadPrefData(context, Keys.TXN_KEY)))
+                .header("AuthId", Util.LoadPrefData(context, Keys.AGENT_ID))
+                .header("AuthPassword", Util.LoadPrefData(context, Keys.TXN_KEY));
         Request newRequest = builder.build();
         return chain.proceed(newRequest);
     }
