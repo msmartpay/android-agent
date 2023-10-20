@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sszAePS_transparent">
+
+    <LinearLayout
+        android:layout_below="@+id/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_two_factor_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10.0dip"
+            android:text=""
+            android:textColor="#ff000000"
+            android:textSize="14.0sp"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:id="@+id/ll_two_factor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/ssz_sp_aeps_bank_type"
+                android:layout_marginTop="15dp"
+                style="@style/ssz_sp_material"
+                app:smsp_enableErrorLabel="false"
+                app:smsp_hint="Select Provider Bank"
+                app:smsp_itemColor="@color/sszAePS_sp_itemColor"
+                app:smsp_itemListColor="@color/sszAePS_sp_itemListColor"
+                app:smsp_itemListHintBackgroundColor="@color/sszAePS_sp_itemListHintBackgroundColor"
+                app:smsp_itemListHintColor="@color/sszAePS_sp_itemListHintColor"
+                app:smsp_itemSize="@dimen/ssz_sp_size"
+                app:smsp_selectedItemListColor="@color/sszAePS_sp_itemListSelectedColor"
+                app:smsp_underlineColor="@color/sszAePS_sp_underlineColor"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_aadhar_number"
+                style="@style/SSZTextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Enter Aadhaar Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:textColor="@color/sszAePSColorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="12"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/tv_custtext"
+                android:text="Select Device"
+                android:textSize="12sp" />
+            <LinearLayout
+                android:id="@+id/ll_select_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:id="@+id/tv_select_device"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                    android:padding="10dp"
+                    android:text="@string/payment_sdus_device"
+                    android:textSize="10sp"
+                    android:layout_weight="0.9"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                    android:drawableEnd="@drawable/ssz_aeps_ic_baseline_keyboard_arrow_down_24"
+                    android:text="..."
+                    android:layout_weight="0.1"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ssz_iv_fingerprint"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Scan Customer's Fingerprint"
+                        android:textColor="@color/sszAePS_editHintColor"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Fingerprint device not found,Contact the device and click here to reply"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/ssz_iv_fingerprint"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ssz_aeps_ic_baseline_fingerprint_24" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="3dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/ssz_iv_fingerprint"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginBottom="-5dp"
+                    android:background="@color/sszAePSColorPrimary" />
+
+                <RadioButton
+                    android:id="@+id/ssz_rb_morph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"
+                    android:layout_marginStart="7dp"
+                    android:checked="true"
+                    android:text="Morpho_RD Service" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/ssz_cv_capture_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:padding="10dp"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/sszAePS_red" />
+
+            <Button
+            android:id="@+id/kyc_btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ssz_rounded_btn_login"
+            android:text="Scan and Submit"
+            android:textColor="@color/sszAePS_colorWhite" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
