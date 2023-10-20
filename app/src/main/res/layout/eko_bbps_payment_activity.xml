@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50.0dip"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5.0dip"
+            app:cardElevation="2.0dip"
+            app:cardUseCompatPadding="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_12sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/border_line"
+                    android:gravity="center"
+                    android:padding="10.0dip"
+                    android:text="Bill Payment"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_select_category"
+                    style="@style/til_main_ot_sp_dis"
+                    android:layout_marginTop="0dp"
+                    android:hint="Select Category">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/mact_select_category"
+                        style="@style/mactv_main_ot_sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_select_location"
+                    style="@style/til_main_ot_sp_dis"
+                    android:hint="Select Location">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/mact_select_location"
+                        style="@style/mactv_main_ot_sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_select_operator"
+                    style="@style/til_main_ot_sp_dis"
+                    android:hint="Select Operator">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/mactv_select_operator"
+                        style="@style/mactv_main_ot_sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_dynamic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_sender_name"
+                    style="@style/til_main_ot"
+                    android:hint="Enter Sender Name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/et_main_ot" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_sender_mob"
+                    style="@style/til_main_ot"
+                    android:hint="Enter Sender Mobile">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/et_main_ot"
+                        android:maxLength="10"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_customer_name"
+                    style="@style/til_main_ot_dis"
+                    android:hint="Customer Name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/et_main_ot_dis" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_bill_date"
+                    style="@style/til_main_ot_dis"
+                    android:hint="Bill Date">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/et_main_ot_dis" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_bill_amount"
+                    style="@style/til_main_ot_dis"
+                    android:hint="Bill Amount">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/et_main_ot" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <RadioGroup
+                    android:id="@+id/rg_offline_online"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_online"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Online" />
+
+                    <RadioButton
+                        android:id="@+id/rb_offline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="Offline" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/billpay_err_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:padding="5.0dip"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/greenColor"
+                    android:textStyle="bold"
+                    android:textSize="12.0sp"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_border"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Proceed"
+            android:textColor="@color/whitecolor"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_view_bill"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_border"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="View Bill"
+            android:textColor="@color/whitecolor"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/ll_loader"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
