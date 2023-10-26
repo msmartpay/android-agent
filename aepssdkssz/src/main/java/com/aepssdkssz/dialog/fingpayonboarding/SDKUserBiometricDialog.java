@@ -27,9 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.aepssdkssz.FingpayAePSHomeActivity;
+import com.aepssdkssz.fingpay.FingpayAePSHomeActivity;
 import com.aepssdkssz.R;
-import com.aepssdkssz.SSZAePSHomeActivity;
 import com.aepssdkssz.network.SSZAePSRetrofitClient;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayOnboardResponse;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayUserRequest;

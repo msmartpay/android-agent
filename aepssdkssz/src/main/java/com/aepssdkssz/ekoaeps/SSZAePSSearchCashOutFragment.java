@@ -1,4 +1,4 @@
-package com.aepssdkssz;
+package com.aepssdkssz.ekoaeps;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
@@ -13,10 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.aepssdkssz.R;
 import com.aepssdkssz.dialog.SSZAePSBankSearchDialogFrag;
 import com.aepssdkssz.dialog.SSZAePSDeviceSearchDialogFrag;
 import com.aepssdkssz.dialog.SSZAePSPrinterDialogFrag;

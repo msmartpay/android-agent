@@ -53,6 +53,15 @@ import in.msmartpay.agent.network.model.dmr.SenderRegisterRequest;
 import in.msmartpay.agent.network.model.dmr.SenderRegisterResponse;
 import in.msmartpay.agent.network.model.dmr.ps.PSMoneyTransferResponse;
 import in.msmartpay.agent.network.model.dmr.ps.PSSenderRegisterRequest;
+import in.msmartpay.agent.network.model.ekobbps.OperatorResponse;
+import in.msmartpay.agent.network.model.ekobbps.BillPayMainRequest;
+import in.msmartpay.agent.network.model.ekobbps.FetchBillRequest;
+import in.msmartpay.agent.network.model.ekobbps.FetchBillResponse;
+import in.msmartpay.agent.network.model.ekobbps.OperatorCategoryResponse;
+import in.msmartpay.agent.network.model.ekobbps.OperatorLocationResponse;
+import in.msmartpay.agent.network.model.ekobbps.OperatorParametersResponse;
+import in.msmartpay.agent.network.model.ekobbps.PayBillRequest;
+import in.msmartpay.agent.network.model.ekobbps.PayBillResponse;
 import in.msmartpay.agent.network.model.fastag.FastagFetchRequest;
 import in.msmartpay.agent.network.model.fastag.FastagFetchResponse;
 import in.msmartpay.agent.network.model.fastag.FastagOperatorResponse;
@@ -67,7 +76,7 @@ import in.msmartpay.agent.network.model.matm.MicroInitiateTransactionRequest;
 import in.msmartpay.agent.network.model.matm.MicroInitiateTransactionResponse;
 import in.msmartpay.agent.network.model.matm.MicroPostTransactionRequest;
 import in.msmartpay.agent.network.model.matm.MicroPostTransactionResponse;
-import in.msmartpay.agent.network.model.post.OperatorResponse;
+import in.msmartpay.agent.network.model.post.EMIOperatorResponse;
 import in.msmartpay.agent.network.model.setting.UpdateTPINRequest;
 import in.msmartpay.agent.network.model.setting.UpdateTPINStatusRequest;
 import in.msmartpay.agent.network.model.user.ChangePasswordRequest;
@@ -108,7 +117,7 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Url;
 
 public interface AppMethods {
-    String VERSION = "1.2";
+    String VERSION = "1.3";
     String DOMAIN = "https://msmartpay.in/";
     String BASE_URL_NEW=DOMAIN+"agentapi/";
 
@@ -238,7 +247,7 @@ public interface AppMethods {
     Call<OperatorsResponse> operators(@Body OperatorsRequest request);
 
     @POST("POST/billpayOperatorStatus")
-    Call<OperatorResponse> getOperatorDetails(@Body OperatorsRequest request);
+    Call<EMIOperatorResponse> getOperatorDetails(@Body OperatorsRequest request);
 
     @POST("PRE/Recharge")
     Call<MainResponse> recharge(@Body RechargeRequest request);
@@ -454,4 +463,24 @@ public interface AppMethods {
     @POST(LOGIN + "/updateKYC")
     Call<DocumentTypeResponseModel> updateKYCStatus(@Body BaseRequest baseRequest);
 
+    /***** Eko Bill Pay ****/
+
+    @POST(BASE_URL + "POST/eko/billpayments/operators_category")
+    Call<OperatorCategoryResponse> operatorsCategoryRequest(@Body BillPayMainRequest request);
+
+    @POST(BASE_URL + "POST/eko/billpayments/operators_locations")
+    Call<OperatorLocationResponse>  operatorsLocationRequest(@Body BillPayMainRequest request);
+    @POST(BASE_URL + "POST/eko/billpayments/operators")
+    Call<OperatorResponse>  operatorsRequest(@Body BillPayMainRequest request);
+
+    @POST(BASE_URL + "POST/eko/billpayments/operators_parameters")
+    Call<OperatorParametersResponse>  operatorsParametersRequest(@Body BillPayMainRequest request);
+
+    @POST(BASE_URL + "POST/eko/billpayments/fetchbill")
+    Call<FetchBillResponse>  fetchBillRequest(@Body FetchBillRequest request);
+
+    @POST(BASE_URL + "POST/eko/billpayments/paybill")
+    Call<PayBillResponse>  payBillRequest(@Body PayBillRequest request);
+
+    /***** End Eko Bill Pay ****/
 }

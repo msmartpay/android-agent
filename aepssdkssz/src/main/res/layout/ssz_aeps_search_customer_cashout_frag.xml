@@ -212,12 +212,12 @@
                             android:id="@+id/tv_select_bank"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
                             android:background="@drawable/ssz_aeps_round_border_strock_hint"
                             android:drawableEnd="@drawable/ssz_aeps_ic_baseline_keyboard_arrow_down_24"
                             android:padding="10dp"
                             android:text="@string/payment_sdus_bank"
-                            android:textSize="16sp"
-                            android:layout_weight="0.9"/>
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 

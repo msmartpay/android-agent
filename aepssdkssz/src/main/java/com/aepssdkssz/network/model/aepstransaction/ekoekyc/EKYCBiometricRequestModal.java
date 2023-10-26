@@ -2,7 +2,7 @@ package com.aepssdkssz.network.model.aepstransaction.ekoekyc;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EKYCVerifyOTPModal {
+public class EKYCBiometricRequestModal {
 
     @SerializedName("customer_id")
     private String agentRegisteredMobile;
@@ -17,6 +17,27 @@ public class EKYCVerifyOTPModal {
     private String otpRefId;
     @SerializedName("reference_tid")
     private String referenceTid;
+    @SerializedName("bank_code")
+    private String bankCode;
+
+    @SerializedName("piddata")
+    private String piddata;
+
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
+    }
+
+    public String getPiddata() {
+        return piddata;
+    }
+
+    public void setPiddata(String piddata) {
+        this.piddata = piddata;
+    }
 
     public String getOtp() {
         return otp;

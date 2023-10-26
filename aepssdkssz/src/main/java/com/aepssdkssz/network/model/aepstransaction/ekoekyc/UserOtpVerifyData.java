@@ -1,5 +1,5 @@
 
-package in.msmartpay.agent.network.model.aeps.onboard;
+package com.aepssdkssz.network.model.aepstransaction.ekoekyc;
 
 import com.google.gson.annotations.SerializedName;
 

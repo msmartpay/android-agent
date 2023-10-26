@@ -3,7 +3,7 @@ package com.aepssdkssz.network.model.aepstransaction.ekoekyc;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EKYCRequestOtpData {
+public class EKYCRequestOtpResponseData {
 
     @SerializedName("user_code")
     private String userCode;

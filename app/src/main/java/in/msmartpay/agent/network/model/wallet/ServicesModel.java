@@ -17,6 +17,7 @@ public class ServicesModel implements Serializable {
     private String axisAccount;
     private String aeps2;
     private String aeps1;
+    private String aeps3;//EKO AEPS API
     private String w2W;
     private String cashout;
     private String dmr1;
@@ -26,6 +27,30 @@ public class ServicesModel implements Serializable {
     private String paytm;
     private String dmr2;
     private String lic;
+
+    public String getPg() {
+        return pg;
+    }
+
+    public void setPg(String pg) {
+        this.pg = pg;
+    }
+
+    public String getAeps3() {
+        return aeps3;
+    }
+
+    public void setAeps3(String aeps3) {
+        this.aeps3 = aeps3;
+    }
+
+    public String getCms() {
+        return cms;
+    }
+
+    public void setCms(String cms) {
+        this.cms = cms;
+    }
 
     @SerializedName("auto_credit")
     private String autoCredit;

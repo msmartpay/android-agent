@@ -25,12 +25,12 @@
         tools:node="merge"
         tools:targetApi="n">
         <activity
-            android:name=".SSZAePSHomeActivity"
+            android:name=".ekoaeps.SSZAePSHomeActivity"
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false"/>
         <activity
-            android:name=".FingpayAePSHomeActivity"
+            android:name=".fingpay.FingpayAePSHomeActivity"
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false"/>

@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.aepssdkssz.R;
-import com.aepssdkssz.SSZAePSSectionsPagerAdapter;
 import com.aepssdkssz.network.SSZAePSAPIError;
 import com.aepssdkssz.network.SSZAePSRetrofitClient;
 import com.aepssdkssz.network.model.BanksStatus;
@@ -188,6 +187,10 @@ public class PSAePSHomeActivity extends AppCompatActivity {
                                         Utility.saveData(getApplicationContext(), Constants.MERCHANT_PAN,data.getMerchant_pan());
                                         Utility.saveData(getApplicationContext(), Constants.MERCHANT_LOCATION,data.getMerchant_location());
                                         Utility.saveData(getApplicationContext(), Constants.PARTNER_NAME,data.getPartner_name());
+
+                                        Utility.saveData(getApplicationContext(), Constants.PS_TWO_FACTOR_REG, data.getPsTwofactorReg());
+                                        Utility.saveData(getApplicationContext(), Constants.PS_TWO_FACTOR_AUTH, data.getPsTwofactorAuth());
+
 
                                         tv_com_name.setText(data.getPartner_name());
                                         //Picasso.get().load(Utility.getData(getApplicationContext(),Constants.PARTNER_LOGO_URL)).into(iv_comLogo);

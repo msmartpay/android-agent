@@ -13,11 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import com.aepssdkssz.util.Utility;
+import com.aepssdkssz.R;
 
-import in.msmartpay.agent.R;
-import in.msmartpay.agent.utility.Util;
-
-public class UserSuccessDialog extends DialogFragment {
+public class EkoEKYCSuccessDialog extends DialogFragment {
 
     @Override
     public int getTheme() {
@@ -27,7 +26,7 @@ public class UserSuccessDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activate_success, container, false);
+        return inflater.inflate(R.layout.eko_ekyc_status_dialog, container, false);
     }
 
     @Override
@@ -38,30 +37,35 @@ public class UserSuccessDialog extends DialogFragment {
         TextView tv_done = view.findViewById(R.id.tv_done);
         ImageView iv_close = view.findViewById(R.id.iv_close);
         Button btn_aeps_activate = view.findViewById(R.id.btn_aeps_activate);
-        tv_toolbar_title.setText("Onboard Success");
-        Util.hideView(tv_done);
+
+        ImageView iv_success = view.findViewById(R.id.iv_success);
+        TextView tv_success = view.findViewById(R.id.tv_success);
+
+        tv_toolbar_title.setText("e-KYC Status");
+        Utility.hideView(tv_done);
 
         iv_close.setOnClickListener(v -> {
             dismiss();
         });
         btn_aeps_activate.setOnClickListener(v -> {
-            startActivity(new Intent(requireActivity(),ActivateAepsActivity.class));
+            //startActivity(new Intent(requireActivity(),ActivateAepsActivity.class));
             dismiss();
         });
 
 
     }
 
-    public static UserSuccessDialog newInstance() {
+    public static EkoEKYCSuccessDialog newInstance(String message) {
         Bundle args = new Bundle();
-        UserSuccessDialog fragment = new UserSuccessDialog();
+        EkoEKYCSuccessDialog fragment = new EkoEKYCSuccessDialog();
+        args.putString("message",message);
         fragment.setArguments(args);
         // fragment.setListener(listener);
         return fragment;
     }
 
-    public static void showDialog(FragmentManager manager) {
-        UserSuccessDialog dialog = UserSuccessDialog.newInstance();
+    public static void showDialog(FragmentManager manager,String message) {
+        EkoEKYCSuccessDialog dialog = EkoEKYCSuccessDialog.newInstance(message);
         dialog.show(manager, "Show Dialog");
     }
 }

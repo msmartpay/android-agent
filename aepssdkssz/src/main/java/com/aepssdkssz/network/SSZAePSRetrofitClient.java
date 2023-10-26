@@ -1,6 +1,5 @@
 package com.aepssdkssz.network;
 
-
 import android.content.Context;
 
 import com.google.gson.Gson;
@@ -13,18 +12,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by
- * anil on 09/05/18.
- */
-
 public class SSZAePSRetrofitClient {
 
     private static Retrofit retrofit = null;
 
-   /* private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
-            .setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-  */
    private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -52,4 +43,5 @@ public class SSZAePSRetrofitClient {
     public static SSZAePSAppMethods getClient(Context context) {
         return getRetrofit(context).create(SSZAePSAppMethods.class);
     }
+
 }

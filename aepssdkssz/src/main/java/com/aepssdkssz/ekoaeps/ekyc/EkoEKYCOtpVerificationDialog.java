@@ -1,5 +1,6 @@
 package com.aepssdkssz.ekoaeps.ekyc;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,25 +15,30 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.aepssdkssz.network.SSZAePSRetrofitClient;
+import com.aepssdkssz.network.model.aepstransaction.ekoekyc.EKYCRequestOTPModal;
+import com.aepssdkssz.network.model.aepstransaction.ekoekyc.EKYCResponseModal;
+import com.aepssdkssz.network.model.aepstransaction.ekoekyc.EKYCVerifyOTPModal;
+import com.aepssdkssz.util.Constants;
 import com.aepssdkssz.util.Utility;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Objects;
-
 import com.aepssdkssz.R;
 
-public class EkoEKYCRequestOTPDialog extends DialogFragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class EkoEKYCOtpVerificationDialog extends DialogFragment {
 
     private String otp = "";
     private Context context;
-    private ProgressDialogFragment pd;
-    private UserNumberVerifyListener listener;
-    private boolean isGenerateOtp;
+    private ProgressDialog progressDialog;
     private String number, name;
+    private TextInputLayout til_eko_registered_mobile,til_eko_registered_aadhar,til_verification_otp;
 
-    public void setListener(UserNumberVerifyListener listener) {
-        this.listener = listener;
-    }
+    private boolean isRequestOtp = true;
+    private EKYCVerifyOTPModal ekycVerifyOTPRequest;
 
     @Override
     public int getTheme() {
@@ -42,7 +48,7 @@ public class EkoEKYCRequestOTPDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.eko_ekyc_request_otp, container, false);
+        return inflater.inflate(R.layout.eko_ekyc_otp_verification, container, false);
     }
 
     @Override
@@ -55,17 +61,22 @@ public class EkoEKYCRequestOTPDialog extends DialogFragment {
 
         Utility.hideView(tv_done);
         tv_toolbar_title.setText("e-KYC OTP Verification");
-
         Button btn_send = view.findViewById(R.id.btn_send);
-        TextInputLayout til_number = view.findViewById(R.id.til_number);
 
+        //Form Fields
+        til_verification_otp = view.findViewById(R.id.til_verification_otp);
+        til_eko_registered_mobile = view.findViewById(R.id.til_eko_registered_mobile);
+        til_eko_registered_aadhar = view.findViewById(R.id.til_eko_registered_aadhar);
+
+        if(isRequestOtp)
+            Utility.hideView(til_verification_otp);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            number = bundle.getString(Keys.CUSTOMER_MOBILE);
-            til_number.getEditText().setText(number);
-            til_number.getEditText().setFocusable(false);
-            til_number.getEditText().setFocusableInTouchMode(false);
+            number = bundle.getString(Constants.MERCHANT_MOBILE);
+            til_eko_registered_mobile.getEditText().setText(number);
+            til_eko_registered_mobile.getEditText().setFocusable(false);
+            til_eko_registered_mobile.getEditText().setFocusableInTouchMode(false);
         }
 
 
@@ -74,31 +85,120 @@ public class EkoEKYCRequestOTPDialog extends DialogFragment {
         });
 
         btn_send.setOnClickListener(v -> {
-            number = Objects.requireNonNull(til_number.getEditText()).getText().toString().trim();
-            if (number.isEmpty() || number.length()<10) {
-                L.toastS(context, "Enter Number");
+            if (til_eko_registered_aadhar.getEditText().getText().toString()==null || til_eko_registered_aadhar.getEditText().getText().toString().trim().length()<12) {
+                Utility.toast(context, "Enter Valid Aadhaar Number");
             } else {
-                UserVerifyOtpDialog.showDialog(requireActivity().getSupportFragmentManager(), number);
-                dismiss();
+                if(isRequestOtp)
+                    requestEKYCOTP();
+                else {
+                    if (til_verification_otp.getEditText().getText().toString()==null || "".equalsIgnoreCase(til_verification_otp.getEditText().getText().toString())) {
+                        Utility.toast(context, "Enter Valid Aadhaar Verification OTP");
+                    } else {
+                        verifyEKYCOTP();
+                    }
+                }
             }
         });
     }
 
-    public interface UserNumberVerifyListener {
-        void onNumberVerify();
-    }
-
-    public static EkoEKYCRequestOTPDialog newInstance(String number) {
+    public static EkoEKYCOtpVerificationDialog newInstance() {
         Bundle args = new Bundle();
-        EkoEKYCRequestOTPDialog fragment = new EkoEKYCRequestOTPDialog();
-        args.putString(Keys.CUSTOMER_MOBILE, number);
-        fragment.setArguments(args);
+        EkoEKYCOtpVerificationDialog fragment = new EkoEKYCOtpVerificationDialog();
+        //args.putString(Keys.CUSTOMER_MOBILE, number);
+        //fragment.setArguments(args);
         // fragment.setListener(listener);
         return fragment;
     }
 
-    public static void showDialog(FragmentManager manager, String number) {
-        EkoEKYCRequestOTPDialog dialog = EkoEKYCRequestOTPDialog.newInstance(number);
+    public static void showDialog(FragmentManager manager) {
+        EkoEKYCOtpVerificationDialog dialog = EkoEKYCOtpVerificationDialog.newInstance();
         dialog.show(manager, "Show Dialog");
+    }
+
+    private void requestEKYCOTP() {
+        if (Utility.checkConnection(requireActivity())) {
+            progressDialog = Utility.getProgressDialog(requireActivity());
+            progressDialog.show();
+            EKYCRequestOTPModal req = new EKYCRequestOTPModal();
+            req.setAgentRegisteredMobile(til_eko_registered_mobile.getEditText().getText().toString().trim());
+            req.setAgentAadhaarNumber(til_eko_registered_aadhar.getEditText().getText().toString().trim());
+            req.setLatlong(Utility.getData(requireActivity(),Constants.LAT_LONG));
+            SSZAePSRetrofitClient.getClient(requireActivity())
+                    .ekoEKycRequestOtp(req)
+                    .enqueue(new Callback<EKYCResponseModal>() {
+                        @Override
+                        public void onResponse(Call<EKYCResponseModal> call, Response<EKYCResponseModal> response) {
+                            try {
+                                progressDialog.dismiss();
+                                if (response.isSuccessful() && response.body() != null) {
+                                    EKYCResponseModal res = response.body();
+                                    if ("0".equalsIgnoreCase(res.getStatus())) {
+
+                                        ekycVerifyOTPRequest = new EKYCVerifyOTPModal();
+                                        ekycVerifyOTPRequest.setOtpRefId(res.getData().getOtpRefId());
+                                        ekycVerifyOTPRequest.setReferenceTid(res.getData().getReferenceTid());
+
+                                    } else if ("2".equalsIgnoreCase(res.getStatus())) {
+
+                                    } else {
+
+                                    }
+                                } else {
+
+                                }
+                            } catch (Exception e) {
+                                Utility.toast(requireActivity(), "Parser Error : " + e.getLocalizedMessage());
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<EKYCResponseModal> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Utility.toast(requireActivity(), "Error : " + t.getLocalizedMessage());
+                        }
+                    });
+        }
+    }
+
+    private void verifyEKYCOTP() {
+        if (Utility.checkConnection(requireActivity())) {
+            progressDialog = Utility.getProgressDialog(requireActivity());
+            progressDialog.show();
+
+            ekycVerifyOTPRequest.setAgentRegisteredMobile(til_eko_registered_mobile.getEditText().getText().toString().trim());
+            ekycVerifyOTPRequest.setAgentAadhaarNumber(til_eko_registered_aadhar.getEditText().getText().toString().trim());
+            ekycVerifyOTPRequest.setLatlong(Utility.getData(requireActivity(),Constants.LAT_LONG));
+            ekycVerifyOTPRequest.setOtp(til_verification_otp.getEditText().getText().toString().trim());
+            SSZAePSRetrofitClient.getClient(requireActivity())
+                    .ekoEKycVerifyOtp(ekycVerifyOTPRequest)
+                    .enqueue(new Callback<EKYCResponseModal>() {
+                        @Override
+                        public void onResponse(Call<EKYCResponseModal> call, Response<EKYCResponseModal> response) {
+                            try {
+                                progressDialog.dismiss();
+                                if (response.isSuccessful() && response.body() != null) {
+                                    EKYCResponseModal res = response.body();
+                                    if ("0".equalsIgnoreCase(res.getStatus())) {
+                                        EkoEKYCBiometricDialog.showDialog(requireActivity().getSupportFragmentManager(),ekycVerifyOTPRequest,res);
+                                    } else {
+
+                                    }
+                                } else {
+
+                                }
+                            } catch (Exception e) {
+                                Utility.toast(requireActivity(), "Parser Error : " + e.getLocalizedMessage());
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<EKYCResponseModal> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Utility.toast(requireActivity(), "Error : " + t.getLocalizedMessage());
+                        }
+                    });
+        }
     }
 }

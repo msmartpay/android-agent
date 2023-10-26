@@ -19,7 +19,9 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
+import android.text.InputType;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -43,8 +45,11 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
@@ -62,7 +67,32 @@ public class Util {
     public static SharedPreferences.Editor editor;
     public static Gson gson1;
 
-
+    public static int getInputType(String inputType) {
+        if (inputType.equalsIgnoreCase("Numeric")) {
+            return InputType.TYPE_CLASS_NUMBER;
+        }else if (inputType.equalsIgnoreCase("AlphaNumeric")) {
+            return InputType.TYPE_CLASS_TEXT;
+        } else
+            return InputType.TYPE_CLASS_TEXT;
+    }
+    public static String getCurrentDate(){
+        Date currentDate = new Date();
+        String dateToStr = DateFormat.getInstance().format(currentDate);
+        return dateToStr;
+    }
+    public static String formatDateDDMMYYYY(String strDate){
+        String desiredDate="NA";
+        Date date2 = null;
+        try {
+            date2 = new SimpleDateFormat("ddMMyyyy").parse(strDate);
+        } catch (ParseException e) {
+            desiredDate=strDate;
+        }catch(Exception e){
+            desiredDate = strDate;
+        }
+        desiredDate=new SimpleDateFormat("dd-MM-yyyy").format(date2);
+        return desiredDate;
+    }
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
     public static String getDate(int year, int monthOfYear, int dayOfMonth) {
@@ -378,5 +408,7 @@ public class Util {
         }
         return p;
     }
-
+    public static void loge(String tag, String msg) {
+        Log.e(tag, msg);
+    }
 }

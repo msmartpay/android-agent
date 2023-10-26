@@ -1,5 +1,7 @@
 package com.aepssdkssz.network.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class ValidateUserData {
@@ -7,15 +9,15 @@ public class ValidateUserData {
     private String transaction_url;
     private String device_type;
     private String device_number;
+    @SerializedName("ps_twofactor_reg")
+    private String psTwofactorReg;
+    @SerializedName("ps_twofactor_auth")
+    private String psTwofactorAuth;
     private List<BiometricDevice> biometric_providers;
     private List<BankModel> bank_list;
     private List<BankModel> preferred_bank_list;
 
     private boolean allow;//for process further
-
-
-
-
     private boolean kyc;//for process further
     private String merchant_name;
     private String merchant_mobile;
@@ -36,6 +38,22 @@ public class ValidateUserData {
     private String partner_contact_us;
 
     private BanksStatus bank;
+
+    public String getPsTwofactorReg() {
+        return psTwofactorReg;
+    }
+
+    public void setPsTwofactorReg(String psTwofactorReg) {
+        this.psTwofactorReg = psTwofactorReg;
+    }
+
+    public String getPsTwofactorAuth() {
+        return psTwofactorAuth;
+    }
+
+    public void setPsTwofactorAuth(String psTwofactorAuth) {
+        this.psTwofactorAuth = psTwofactorAuth;
+    }
 
     public BanksStatus getBank() {
         return bank;

@@ -1,4 +1,4 @@
-package com.scinfotech.network.model.ekobbps;
+package in.msmartpay.agent.network.model.ekobbps;
 
 public class BillPayMainRequest {
     String category_id;

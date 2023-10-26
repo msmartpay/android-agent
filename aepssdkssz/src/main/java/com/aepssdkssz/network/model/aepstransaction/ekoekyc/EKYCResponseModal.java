@@ -3,7 +3,7 @@ package com.aepssdkssz.network.model.aepstransaction.ekoekyc;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EKYCRequestOTPResponse {
+public class EKYCResponseModal {
 
     @SerializedName("data")
     private EKYCRequestOtpResponseData data;

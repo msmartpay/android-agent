@@ -1,4 +1,4 @@
-package in.aepssdkssz.network.model.paysprint;
+package com.aepssdkssz.network.model.paysprint;
 
 import com.google.gson.annotations.SerializedName;
 

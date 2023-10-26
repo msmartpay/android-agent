@@ -1,4 +1,4 @@
-package com.scinfotech.network.model.ekobbps;
+package in.msmartpay.agent.network.model.ekobbps;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,6 +17,15 @@ public class PayBillRequest {
 
 	@SerializedName("opname")
 	private String opname;
+
+	private String transactionPin;
+	public String getTransactionPin() {
+		return transactionPin;
+	}
+
+	public void setTransactionPin(String transactionPin) {
+		this.transactionPin = transactionPin;
+	}
 
 	public void setAgentId(String agentId){
 		this.agentId = agentId;

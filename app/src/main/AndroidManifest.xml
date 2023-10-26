@@ -24,6 +24,19 @@
 
     <uses-feature android:name="android.hardware.location.gps" />
 
+    <queries>
+        <package android:name="com.mantra.rdservice" />
+        <package android:name="com.acpl.registersdk" />
+        <package android:name="com.tatvik.bio.tmf20" />
+        <package android:name="com.secugen.rdservice" />
+        <package android:name="com.evolute.rdservice" />
+        <package android:name="com.scl.rdservice" />
+
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="image/jpeg" />
+        </intent>
+    </queries>
     <!-- <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/> -->
     <application
         android:name=".MyApp"
@@ -194,6 +207,14 @@
             android:configChanges="screenSize|orientation" />
         <activity
             android:name=".rechargeBillPay.BillPayActivity"
+            android:exported="false"
+            android:configChanges="screenSize|orientation" />
+        <activity
+            android:name=".ekobbps.BillPaymentActivity"
+            android:exported="false"
+            android:configChanges="screenSize|orientation" />
+        <activity
+            android:name=".ekobbps.BillPaymentReceiptActivity"
             android:exported="false"
             android:configChanges="screenSize|orientation" />
         <activity

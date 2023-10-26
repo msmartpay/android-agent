@@ -1,4 +1,4 @@
-package com.scinfotech.ekobbps;
+package in.msmartpay.agent.ekobbps;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,10 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.scinfotech.R;
-import com.scinfotech.databinding.SearchDialogBinding;
-import com.scinfotech.network.model.ekobbps.Operator;
-import com.scinfotech.utility.L;
+import in.msmartpay.agent.R;
+import in.msmartpay.agent.databinding.EkoBbpsSearchDialogBinding;
+import in.msmartpay.agent.network.model.ekobbps.Operator;
+import in.msmartpay.agent.utility.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class BillPayOperatorDialogFrag extends DialogFragment {
     private List<Operator> list = new ArrayList<>();
     private BillPayOperatorAdapter adapter;
     private SelectedListener listener;
-    private SearchDialogBinding binding;
+    private EkoBbpsSearchDialogBinding binding;
 
     public void setListener(SelectedListener listener){
         this.listener = listener;
@@ -46,7 +46,7 @@ public class BillPayOperatorDialogFrag extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = SearchDialogBinding.inflate(inflater,container,false);
+        binding = EkoBbpsSearchDialogBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 

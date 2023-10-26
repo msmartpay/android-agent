@@ -1,35 +1,45 @@
-package com.scinfotech.ekobbps;
+package in.msmartpay.agent.ekobbps;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import com.scinfotech.databinding.BillPaymentActivityBinding;
-import com.scinfotech.network.NetworkConnection;
-import com.scinfotech.network.RetrofitClient;
-import com.scinfotech.network.model.ekobbps.BillPayMainRequest;
-import com.scinfotech.network.model.ekobbps.FetchBillRequest;
-import com.scinfotech.network.model.ekobbps.FetchBillResponse;
-import com.scinfotech.network.model.ekobbps.FetchDetails;
-import com.scinfotech.network.model.ekobbps.Operator;
-import com.scinfotech.network.model.ekobbps.OperatorCategory;
-import com.scinfotech.network.model.ekobbps.OperatorCategoryResponse;
-import com.scinfotech.network.model.ekobbps.OperatorLocation;
-import com.scinfotech.network.model.ekobbps.OperatorLocationResponse;
-import com.scinfotech.network.model.ekobbps.OperatorParameter;
-import com.scinfotech.network.model.ekobbps.OperatorParametersResponse;
-import com.scinfotech.network.model.ekobbps.OperatorResponse;
-import com.scinfotech.network.model.ekobbps.PayBillRequest;
-import com.scinfotech.network.model.ekobbps.PayBillResponse;
-import com.scinfotech.utility.BaseActivity;
-import com.scinfotech.utility.Keys;
-import com.scinfotech.utility.L;
-import com.scinfotech.utility.ProgressDialogFragment;
-import com.scinfotech.utility.Util;
+import com.google.android.material.textfield.TextInputLayout;
+
+import in.msmartpay.agent.R;
+import in.msmartpay.agent.databinding.EkoBbpsPaymentActivityBinding;
+import in.msmartpay.agent.network.NetworkConnection;
+import in.msmartpay.agent.network.RetrofitClient;
+import in.msmartpay.agent.network.model.ekobbps.BillPayMainRequest;
+import in.msmartpay.agent.network.model.ekobbps.FetchBillRequest;
+import in.msmartpay.agent.network.model.ekobbps.FetchBillResponse;
+import in.msmartpay.agent.network.model.ekobbps.FetchDetails;
+import in.msmartpay.agent.network.model.ekobbps.Operator;
+import in.msmartpay.agent.network.model.ekobbps.OperatorCategory;
+import in.msmartpay.agent.network.model.ekobbps.OperatorCategoryResponse;
+import in.msmartpay.agent.network.model.ekobbps.OperatorLocation;
+import in.msmartpay.agent.network.model.ekobbps.OperatorLocationResponse;
+import in.msmartpay.agent.network.model.ekobbps.OperatorParameter;
+import in.msmartpay.agent.network.model.ekobbps.OperatorParametersResponse;
+import in.msmartpay.agent.network.model.ekobbps.OperatorResponse;
+import in.msmartpay.agent.network.model.ekobbps.PayBillRequest;
+import in.msmartpay.agent.network.model.ekobbps.PayBillResponse;
+import in.msmartpay.agent.rechargeBillPay.BillPayActivity;
+import in.msmartpay.agent.utility.BaseActivity;
+import in.msmartpay.agent.utility.Keys;
+import in.msmartpay.agent.utility.L;
+import in.msmartpay.agent.utility.ProgressDialogFragment;
+import in.msmartpay.agent.utility.Util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -45,9 +55,9 @@ import retrofit2.Callback;
 public class BillPaymentActivity extends BaseActivity {
 
     private Context context;
-    private String agentID, txn_key;
+    private String agentID, txn_key,tpinStatus="",tpin="";
     private ProgressDialogFragment pd;
-    private BillPaymentActivityBinding binding;
+    private EkoBbpsPaymentActivityBinding binding;
     private List<OperatorCategory> operatorCategorylist = new ArrayList<>();
     private List<OperatorLocation> operatorLocationlist = new ArrayList<>();
     private List<Operator> operatorList = new ArrayList<>();
@@ -64,7 +74,7 @@ public class BillPaymentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = BillPaymentActivityBinding.inflate(getLayoutInflater());
+        binding = EkoBbpsPaymentActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("BBPS BillPayment");
@@ -72,6 +82,7 @@ public class BillPaymentActivity extends BaseActivity {
         context = BillPaymentActivity.this;
         agentID = Util.LoadPrefData(getApplicationContext(), Keys.AGENT_ID);
         txn_key = Util.LoadPrefData(getApplicationContext(), Keys.TXN_KEY);
+        tpinStatus = Util.LoadPrefData(getApplicationContext(), Keys.TPIN_STATUS);
 
         setUpDynamicBoxList();
         categoryRequest();
@@ -136,7 +147,12 @@ public class BillPaymentActivity extends BaseActivity {
                 data.put("billfetchresponse",fetchDetails.getBillfetchresponse());
                 data.put("bbpstrxnrefid",fetchDetails.getBbpstrxnrefid());
                 data.put("bbpstrxnrefid",fetchDetails.getBbpstrxnrefid());
-                payBillRequest();
+                if("Y".equalsIgnoreCase(tpinStatus)){
+                    transactionPinDialog();
+                }else{
+                    payBillRequest();
+                }
+
             }else{
                 L.toastS(getApplicationContext(), "Invalid required param");
             }
@@ -392,7 +408,7 @@ public class BillPaymentActivity extends BaseActivity {
                                     Util.showView(binding.tilBillAmount);
                                     Objects.requireNonNull(binding.tilCustomerName.getEditText()).setText(fetchDetails.getUtilitycustomername());
                                     if(StringUtils.isNotBlank(fetchDetails.getBillDueDate()))
-                                        Objects.requireNonNull(binding.tilBillDate.getEditText()).setText(Util.formatDateDDMMYYYY(fetchDetails.getBillDueDate()));
+                                        Objects.requireNonNull(binding.tilBillDate.getEditText()).setText(fetchDetails.getBillDueDate());
                                     else
                                         Objects.requireNonNull(binding.tilBillDate.getEditText()).setText("NA");
                                     Objects.requireNonNull(binding.tilBillAmount.getEditText()).setText(fetchDetails.getAmount());
@@ -431,6 +447,7 @@ public class BillPaymentActivity extends BaseActivity {
             request.setAgentId(agentID);
             request.setTxnKey(txn_key);
             request.setOpname(operator.getName());
+            request.setTransactionPin(tpin);
             request.setData(data);
             RetrofitClient.getClient(getApplicationContext())
                     .payBillRequest(request).enqueue(new Callback<PayBillResponse>() {
@@ -447,6 +464,7 @@ public class BillPaymentActivity extends BaseActivity {
                                         intent.putExtra(Keys.MESSAGE,res.getMessage());
                                         intent.putExtra(Keys.Service_OP,operator.getName());
                                         intent.putExtra(Keys.DUE_DATE,binding.tilBillDate.getEditText().getText().toString());
+                                        intent.putExtra(Keys.CUSTOMER_NAME,binding.tilCustomerName.getEditText().getText().toString());
                                         startActivity(intent);
                                     }else {
                                         binding.billpayErrMsg.setText(response.body().getMessage());
@@ -472,6 +490,38 @@ public class BillPaymentActivity extends BaseActivity {
         }
     }
 
+    private void transactionPinDialog() {
+        final Dialog dialog_status = new Dialog(BillPaymentActivity.this);
+        dialog_status.setCancelable(false);
+        dialog_status.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog_status.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog_status.setContentView(R.layout.transaction_pin_dialog);
+        dialog_status.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextInputLayout til_enter_tpin =  dialog_status.findViewById(R.id.til_enter_tpin);
+
+        Button btn_confirm_tpin =  dialog_status.findViewById(R.id.btn_confirm_tpin);
+        Button close_confirm_tpin =  dialog_status.findViewById(R.id.close_confirm_tpin);
+
+        btn_confirm_tpin.setOnClickListener(view -> {
+            if(TextUtils.isEmpty(til_enter_tpin.getEditText().getText().toString().trim())){
+                Toast.makeText(context, "Enter valid 4-digit Transaction pin!!", Toast.LENGTH_SHORT).show();
+                til_enter_tpin.getEditText().requestFocus();
+            }else{
+                tpin=til_enter_tpin.getEditText().getText().toString().trim();
+                dialog_status.dismiss();
+                payBillRequest();
+            }
+
+        });
+
+        close_confirm_tpin.setOnClickListener(view -> {
+            dialog_status.cancel();
+            hideKeyBoard(til_enter_tpin.getEditText());
+        });
+
+        dialog_status.show();
+    }
     private void hideAndResetByCategoryViews() {
         operatorLocation = null;
         Objects.requireNonNull(binding.tilSelectLocation.getEditText()).setText("");

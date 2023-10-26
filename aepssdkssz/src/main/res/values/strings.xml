@@ -4,7 +4,7 @@
     <string name="tab_cashout">Aadhaar ATM</string>
     <string name="tab_device">Manage Device</string>
     <string name="tab_biometric_kyc">Biometric KYC</string>
-
+    <string name="tab_two_factor"><b>Daily KYC</b></string>
     <string name="enter_aadhaar_number">Please Enter Aadhaar Number</string>
     <string name="enter_adhar">Please enter aadhaar number.</string>
     <string name="enter_amount">Please Enter Amount</string>
@@ -45,5 +45,10 @@
         <item>Mantra</item>
         <item>Startek</item>
         <item>TMF20</item>
+    </string-array>
+
+    <string-array name="ssz_ps_aeps_bank">
+    <item>bank2</item>
+    <item>bank3</item>
     </string-array>
 </resources>

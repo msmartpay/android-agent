@@ -1,6 +1,4 @@
-package in.aepssdkssz.network.model.paysprint;
-
-import com.google.gson.annotations.SerializedName;
+package com.aepssdkssz.network.model.paysprint;
 
 public class PaysprintTwoFactorResponseData {
 

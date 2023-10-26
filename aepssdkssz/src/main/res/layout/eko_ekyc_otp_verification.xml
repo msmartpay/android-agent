@@ -1,49 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whitecolor"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
-    <include
-        android:id="@+id/include_toolbar"
-        layout="@layout/toolbar_white_custom" />
-
-    <LinearLayout
-        android:id="@+id/ll_otp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/include_toolbar"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/sszAePS_colorWhite">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_number"
-            style="@style/TextLabel"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Enter Mobile Number">
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/TextLabel"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="e-KYC OTP Verification"
+                android:textColor="@color/sszAePSColorPrimary"
+                android:textSize="22sp" />
+
+        <!--<com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_d_type"
+            style="@style/til_main"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Device Type">
+
+            <EditText
+                android:id="@+id/et_d_type"
+                style="@style/et_main"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:inputType="number"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:maxLength="10"
+                android:background="@color/sszAePS_colorWhite"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_eko_registered_mobile"
+            style="@style/til_main"
+            android:layout_marginTop="35dp"
+            android:hint="Enter Registered Mobile Number">
+
+            <EditText
+                style="@style/et_main"
+                android:maxLength="25"
+                android:background="@color/sszAePS_colorWhite"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_send"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_btn_login"
-            android:text="Send OTP"
-            android:textColor="@color/whitecolor" />
-    </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_eko_registered_aadhar"
+            style="@style/til_main"
+            android:layout_marginTop="35dp"
+            android:hint="Enter Registered Aadhaar Number">
+
+            <EditText
+                style="@style/et_main"
+                android:maxLength="25"
+                android:background="@color/sszAePS_colorWhite"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_verification_otp"
+            style="@style/til_main"
+            android:layout_marginTop="35dp"
+            android:hint="Enter Verification OTP">
+
+            <EditText
+                style="@style/et_main"
+                android:maxLength="25"
+                android:background="@color/sszAePS_colorWhite"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_ekyc_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginTop="20dp"
+                app:backgroundTint="@color/sszAePSColorPrimary"
+                app:srcCompat="@drawable/ssz_aeps_ic_baseline_arrow_forward_24"
+                app:tint="@color/sszAePS_colorWhite" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <include
+        layout="@layout/ssz_aeps_copyrights_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

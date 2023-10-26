@@ -1,4 +1,4 @@
-package com.aepssdkssz;
+package com.aepssdkssz.fingpay;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -17,10 +17,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.aepssdkssz.dialog.fingpayonboarding.SDKUserBiometricDialog;
+import com.aepssdkssz.R;
 import com.aepssdkssz.dialog.fingpayonboarding.SDKUserNumberDialog;
 import com.aepssdkssz.dialog.fingpayonboarding.SDKUserRegistrationDialog;
-import com.aepssdkssz.dialog.fingpayonboarding.SDKUserVerifyOtpDialog;
 import com.aepssdkssz.network.SSZAePSAPIError;
 import com.aepssdkssz.network.SSZAePSRetrofitClient;
 import com.aepssdkssz.network.model.ValidateUserData;

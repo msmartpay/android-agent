@@ -19,7 +19,7 @@ import in.msmartpay.agent.network.RetrofitClient;
 import in.msmartpay.agent.network.model.OperatorsRequest;
 import in.msmartpay.agent.network.model.OperatorsResponse;
 import in.msmartpay.agent.network.model.post.OperatorData;
-import in.msmartpay.agent.network.model.post.OperatorResponse;
+import in.msmartpay.agent.network.model.post.EMIOperatorResponse;
 import in.msmartpay.agent.network.model.wallet.OperatorModel;
 import in.msmartpay.agent.rechargeBillPay.operator.OperatorSearchActivity;
 import in.msmartpay.agent.utility.BaseActivity;
@@ -183,12 +183,12 @@ public class ElectricityPayActivity extends BaseActivity {
             request.setOperatorId(opreatorModel.getOpCode());
 
             RetrofitClient.getClient(getApplicationContext())
-                    .getOperatorDetails(request).enqueue(new Callback<OperatorResponse>() {
+                    .getOperatorDetails(request).enqueue(new Callback<EMIOperatorResponse>() {
                         @Override
-                        public void onResponse(@NotNull Call<OperatorResponse> call, @NotNull retrofit2.Response<OperatorResponse> response) {
+                        public void onResponse(@NotNull Call<EMIOperatorResponse> call, @NotNull retrofit2.Response<EMIOperatorResponse> response) {
                             pd.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                                OperatorResponse res = response.body();
+                                EMIOperatorResponse res = response.body();
                                 if ("0".equals(res.getStatus()) && res.getData()!=null) {
                                         operatorData = res.getData();
 
@@ -228,7 +228,7 @@ public class ElectricityPayActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onFailure(@NotNull Call<OperatorResponse> call, @NotNull Throwable t) {
+                        public void onFailure(@NotNull Call<EMIOperatorResponse> call, @NotNull Throwable t) {
                             L.toastS(getApplicationContext(), "data failuer " + t.getLocalizedMessage());
                             pd.dismiss();
                         }

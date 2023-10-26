@@ -45,7 +45,7 @@
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/mact_select_category"
-                        style="@style/mactv_main_ot_sp" />
+                        style="@style/mactp_main_ot_sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -55,7 +55,7 @@
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/mact_select_location"
-                        style="@style/mactv_main_ot_sp" />
+                        style="@style/mactp_main_ot_sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +65,7 @@
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/mactv_select_operator"
-                        style="@style/mactv_main_ot_sp" />
+                        style="@style/mactp_main_ot_sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -147,7 +147,7 @@
                     android:padding="5.0dip"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="@color/greenColor"
+                    android:textColor="@color/green"
                     android:textStyle="bold"
                     android:textSize="12.0sp"/>
             </androidx.appcompat.widget.LinearLayoutCompat>

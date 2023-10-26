@@ -1,4 +1,4 @@
-package com.scinfotech.ekobbps;
+package in.msmartpay.agent.ekobbps;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.scinfotech.R;
-import com.scinfotech.network.model.ekobbps.OperatorParameter;
-import com.scinfotech.utility.Util;
+import in.msmartpay.agent.R;
+import in.msmartpay.agent.network.model.ekobbps.OperatorParameter;
+import in.msmartpay.agent.utility.Util;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class EkoEditBoxAdapter extends RecyclerView.Adapter<EkoEditBoxAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bill_payment_eko_edit_box_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.eko_bbps_payment_edit_box_item, parent, false));
     }
 
     @Override

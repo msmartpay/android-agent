@@ -50,8 +50,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -63,6 +65,12 @@ public class Utility {
     private static SharedPreferences.Editor editor;
     private static Gson gson;
 
+    public static String getCurrentDate() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        String time1 = df.format(new Date());
+        return time1;
+    }
     public static Gson getGson() {
         if (gson == null) gson = new Gson();
         return gson;

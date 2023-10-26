@@ -1,9 +1,7 @@
-package in.aepssdkssz.network.model.paysprint;
+package com.aepssdkssz.network.model.paysprint;
 
 
 import com.google.gson.annotations.SerializedName;
-
-import in.aepssdkssz.network.model.aepstransaction.PaysprintAepsRequestData;
 
 public class PaysprintTwoFactorRequest {
 

@@ -1,4 +1,4 @@
-package in.aepssdkssz.network.model.paysprint;
+package com.aepssdkssz.network.model.paysprint;
 
 import java.io.Serializable;
 

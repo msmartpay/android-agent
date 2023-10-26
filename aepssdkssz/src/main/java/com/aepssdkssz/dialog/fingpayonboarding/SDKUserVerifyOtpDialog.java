@@ -1,23 +1,15 @@
 package com.aepssdkssz.dialog.fingpayonboarding;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.aepssdkssz.FingpayAePSBiometricFragment;
-import com.aepssdkssz.FingpayAePSBiometricPagerAdapter;
 import com.aepssdkssz.R;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

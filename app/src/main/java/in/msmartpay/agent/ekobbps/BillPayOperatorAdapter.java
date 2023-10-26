@@ -1,4 +1,4 @@
-package com.scinfotech.ekobbps;
+package in.msmartpay.agent.ekobbps;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.scinfotech.R;
-import com.scinfotech.network.model.ekobbps.Operator;
+import in.msmartpay.agent.R;
+import in.msmartpay.agent.network.model.ekobbps.Operator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class BillPayOperatorAdapter extends RecyclerView.Adapter<BillPayOperator
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.bill_payment_bank_search_item, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.eko_bbps_payment_bank_search_item, parent, false));
     }
 
     @Override

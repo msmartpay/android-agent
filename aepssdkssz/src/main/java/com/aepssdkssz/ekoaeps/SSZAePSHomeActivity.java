@@ -1,7 +1,6 @@
-package com.aepssdkssz;
+package com.aepssdkssz.ekoaeps;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.aepssdkssz.R;
 import com.aepssdkssz.network.SSZAePSAPIError;
 import com.aepssdkssz.network.SSZAePSRetrofitClient;
 import com.aepssdkssz.network.model.ValidateUserData;

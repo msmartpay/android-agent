@@ -1,40 +1,48 @@
-package in.msmartpay.agent.network.model.aeps.onboard;
+package com.aepssdkssz.network.model.aepstransaction.ekoekyc;
 
-public class UserRequest {
-    String Key;
-    String AgentID;
-    String Mobile;
-    String OTP;
+import com.google.gson.annotations.SerializedName;
 
-    public String getKey() {
-        return Key;
+public class EKYCRequestOTPModal {
+
+    @SerializedName("customer_id")
+    private String agentRegisteredMobile;
+
+    @SerializedName("user_code")
+    private String ekoUserCode;
+
+    @SerializedName("aadhar")
+    private String agentAadhaarNumber;
+    private String latlong;
+
+    public String getAgentRegisteredMobile() {
+        return agentRegisteredMobile;
     }
 
-    public void setKey(String key) {
-        Key = key;
+    public void setAgentRegisteredMobile(String agentRegisteredMobile) {
+        this.agentRegisteredMobile = agentRegisteredMobile;
     }
 
-    public String getAgentID() {
-        return AgentID;
+    public String getEkoUserCode() {
+        return ekoUserCode;
     }
 
-    public void setAgentID(String agentID) {
-        AgentID = agentID;
+    public void setEkoUserCode(String ekoUserCode) {
+        this.ekoUserCode = ekoUserCode;
     }
 
-    public String getMobile() {
-        return Mobile;
+    public String getAgentAadhaarNumber() {
+        return agentAadhaarNumber;
     }
 
-    public void setMobile(String mobile) {
-        Mobile = mobile;
+    public void setAgentAadhaarNumber(String agentAadhaarNumber) {
+        this.agentAadhaarNumber = agentAadhaarNumber;
     }
 
-    public String getOTP() {
-        return OTP;
+    public String getLatlong() {
+        return latlong;
     }
 
-    public void setOTP(String OTP) {
-        this.OTP = OTP;
+    public void setLatlong(String latlong) {
+        this.latlong = latlong;
     }
 }

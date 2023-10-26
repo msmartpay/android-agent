@@ -1,4 +1,4 @@
-package in.aepssdkssz;
+package com.aepssdkssz.paysprint;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -28,6 +28,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.aepssdkssz.R;
+import com.aepssdkssz.util.Constants;
+import com.aepssdkssz.util.Utility;
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -41,18 +43,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import in.aepssdkssz.dialog.SSZAePSDeviceSearchDialogFrag;
-import in.aepssdkssz.fingpay.model.FingpayUserRequest;
-import in.aepssdkssz.fingpay.model.FingpayUserRequestData;
-import in.aepssdkssz.fingpay.model.fingpayonboard.FingpayOnboardResponse;
-import in.aepssdkssz.network.SSZAePSRetrofitClient;
-import in.aepssdkssz.network.model.BiometricDevice;
-import in.aepssdkssz.network.model.paysprint.PaysprintTwoFactorRequest;
-import in.aepssdkssz.network.model.paysprint.PaysprintTwoFactorRequestData;
-import in.aepssdkssz.network.model.paysprint.PaysprintTwoFactorResponse;
-import in.aepssdkssz.util.Constants;
-import in.aepssdkssz.util.DialogProgressFragment;
-import in.aepssdkssz.util.Utility;
+import com.aepssdkssz.dialog.SSZAePSDeviceSearchDialogFrag;
+import com.aepssdkssz.network.SSZAePSRetrofitClient;
+import com.aepssdkssz.network.model.BiometricDevice;
+import com.aepssdkssz.network.model.paysprint.PaysprintTwoFactorRequest;
+import com.aepssdkssz.network.model.paysprint.PaysprintTwoFactorRequestData;
+import com.aepssdkssz.network.model.paysprint.PaysprintTwoFactorResponse;
+import com.aepssdkssz.util.Constants;
+import com.aepssdkssz.util.DialogProgressFragment;
+import com.aepssdkssz.util.Utility;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +66,7 @@ public class PSAePSTwoFactorFragment extends Fragment {
     private SmartMaterialSpinner sp_aeps_bank_type;
     private Button kyc_btn_send;
     private String source_ip="",xmlData="",twoFactorType="Registration",title="AePS Two Factor Registration";
-    private String psTwofactorReg="0",psTwofactorAuth="0";
+    private String psTwofactorReg="0",psTwofactorAuthDate="";
     private String biometricFormat;
     private String device_type;
     private StringBuilder reportData;
@@ -123,7 +122,7 @@ public class PSAePSTwoFactorFragment extends Fragment {
         ll_select_device = view.findViewById(R.id.ll_select_device);
         tv_select_device = view.findViewById(R.id.tv_select_device);
 
-        device_type = Utility.getData(requireActivity(),Constants.DEVICE_TYPE);
+        device_type = Utility.getData(requireActivity(), Constants.DEVICE_TYPE);
         if(device_type!=null && !"".equalsIgnoreCase(device_type)) {
             tv_select_device.setText(device_type);
             Utility.setTextViewBG_TextColor(tv_select_device, true);
@@ -179,11 +178,16 @@ public class PSAePSTwoFactorFragment extends Fragment {
         });
         Utility.showView(ll_two_factor);
         psTwofactorReg = Utility.getData(requireActivity(),Constants.PS_TWO_FACTOR_REG);
-        psTwofactorAuth = Utility.getData(requireActivity(),Constants.PS_TWO_FACTOR_AUTH);
+        psTwofactorAuthDate = Utility.getData(requireActivity(),Constants.PS_TWO_FACTOR_AUTH);
+        String currentDate = Utility.getCurrentDate();
+        int psTwofactorAuthStatus=0;
+        if(currentDate.equalsIgnoreCase(psTwofactorAuthDate))
+            psTwofactorAuthStatus=1;
+
         if("0".equalsIgnoreCase(psTwofactorReg)) {
             title = "AePS Two Factor Registration";
             twoFactorType = "Registration";
-        }else if("0".equalsIgnoreCase(psTwofactorAuth)) {
+        }else if(0== psTwofactorAuthStatus) {
             title = "AePS Two Factor Authentication";
             twoFactorType = "Authenticate";
         }else{
@@ -198,10 +202,10 @@ public class PSAePSTwoFactorFragment extends Fragment {
             Utility.setCaptureFingerED(ssz_iv_fingerprint, false);
 
                 if (this.getActivity() != null) {
-                    final Intent intent = ((SSZAePSHomeActivity) this.getActivity()).checkBiometricProvider(this.device_type, this.biometricFormat);
+                    final Intent intent = ((PSAePSHomeActivity) this.getActivity()).checkBiometricProvider(this.device_type, this.biometricFormat);
                     Utility.loge("Device App", Utility.getStringFromModel(intent));
                     if (intent != null) {
-                        this.startActivityForResult(intent, ((SSZAePSHomeActivity) this.getActivity()).getRequestCode());
+                        this.startActivityForResult(intent, ((PSAePSHomeActivity) this.getActivity()).getRequestCode());
                     }
                 } else {
                     Utility.setCaptureFingerED(ssz_iv_fingerprint, true);
@@ -241,9 +245,9 @@ public class PSAePSTwoFactorFragment extends Fragment {
                 }
             } else if (requestCode == 1100) {
                 if (this.getActivity() != null) {
-                    final Intent intent = ((SSZAePSHomeActivity) this.getActivity()).verifyActivityResult(requestCode, data, this.biometricFormat);
+                    final Intent intent = ((PSAePSHomeActivity) this.getActivity()).verifyActivityResult(requestCode, data, this.biometricFormat);
                     if (intent != null) {
-                        this.startActivityForResult(intent, ((SSZAePSHomeActivity) this.getActivity()).getRequestCode());
+                        this.startActivityForResult(intent, ((PSAePSHomeActivity) this.getActivity()).getRequestCode());
                     } else {
                         Utility.toast(requireActivity(), "Some error occurred!");
                         Utility.setCaptureFingerED(ssz_iv_fingerprint, true);
@@ -264,7 +268,7 @@ public class PSAePSTwoFactorFragment extends Fragment {
                         cv_capture_score.setVisibility(View.VISIBLE);
                         final String errCode = jsonResp.getString("errCode");
                         if (this.getActivity() != null) {
-                            ((SSZAePSHomeActivity) this.getActivity()).updatePidJson(jsonObjPidData);
+                            ((PSAePSHomeActivity) this.getActivity()).updatePidJson(jsonObjPidData);
                         }
                         if (errCode.equals("0")) {
 

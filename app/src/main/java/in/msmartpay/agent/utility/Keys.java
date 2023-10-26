@@ -71,6 +71,8 @@ public interface Keys {
     String ARRAY_LIST = "array_list";
     String OBJECT ="object" ;
     String OBJECT2 ="object2" ;
+    String DUE_DATE = "dueDate";
+    String CUSTOMER_NAME = "customerName";
     String Service_OP = "serviceOP";
     String CUSTOMER_MOBILE ="Mobile_cust" ;
     String LATITUDE ="LATITUDE" ;

@@ -10,8 +10,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 
-import com.aepssdkssz.FingpayAePSHomeActivity;
-import com.aepssdkssz.SSZAePSHomeActivity;
+import com.aepssdkssz.fingpay.FingpayAePSHomeActivity;
+import com.aepssdkssz.ekoaeps.SSZAePSHomeActivity;
 import com.aepssdkssz.paysprint.PSAePSHomeActivity;
 import com.aepssdkssz.util.Constants;
 import com.aepssdkssz.util.Utility;

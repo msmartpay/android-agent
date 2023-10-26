@@ -1,4 +1,4 @@
-package com.aepssdkssz;
+package com.aepssdkssz.fingpay;
 
 import android.content.Context;
 
@@ -7,6 +7,8 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.aepssdkssz.R;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

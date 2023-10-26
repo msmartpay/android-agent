@@ -14,20 +14,68 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
-            android:id="@+id/ssz_sp_model_type"
-            android:layout_marginTop="15dp"
-            style="@style/ssz_sp_material"
-            app:smsp_enableErrorLabel="false"
-            app:smsp_hint="Select Model Type"
-            app:smsp_itemColor="@color/sszAePS_sp_itemColor"
-            app:smsp_itemListColor="@color/sszAePS_sp_itemListColor"
-            app:smsp_itemListHintBackgroundColor="@color/sszAePS_sp_itemListHintBackgroundColor"
-            app:smsp_itemListHintColor="@color/sszAePS_sp_itemListHintColor"
-            app:smsp_itemSize="@dimen/ssz_sp_size"
-            app:smsp_selectedItemListColor="@color/sszAePS_sp_itemListSelectedColor"
-            app:smsp_underlineColor="@color/sszAePS_sp_underlineColor"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tv_custtext"
+            android:text="Select Device"
+            android:textColor="@color/sszAePSColorPrimary"
+            android:textStyle="normal"
+            android:textSize="14sp" />
 
+        <LinearLayout
+            android:id="@+id/ll_select_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <TextView
+                android:id="@+id/tv_select_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                android:drawableEnd="@drawable/ssz_aeps_ic_baseline_keyboard_arrow_down_24"
+                android:padding="10dp"
+                android:text="@string/payment_sdus_device"
+                android:textSize="16sp"
+                android:layout_weight="0.9"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/tv_custtext"
+            android:text="Select Bank"
+            android:textColor="@color/sszAePSColorPrimary"
+            android:textStyle="normal"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_select_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <TextView
+                android:id="@+id/tv_select_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@drawable/ssz_aeps_round_border_strock_hint"
+                android:drawableEnd="@drawable/ssz_aeps_ic_baseline_keyboard_arrow_down_24"
+                android:padding="10dp"
+                android:text="@string/payment_sdus_bank"
+                android:textSize="16sp" />
+
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +128,7 @@
                 android:layout_below="@+id/view"
                 android:layout_marginStart="7dp"
                 android:checked="true"
-                android:text="Morpho_RD Service" />
+                android:text="RD Service" />
 
         </RelativeLayout>
         <TextView

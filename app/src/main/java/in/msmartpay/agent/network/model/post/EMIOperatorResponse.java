@@ -3,7 +3,7 @@ package in.msmartpay.agent.network.model.post;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class OperatorResponse {
+public class EMIOperatorResponse {
 
 @SerializedName("Status")
 @Expose

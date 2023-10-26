@@ -1,7 +1,8 @@
 package com.aepssdkssz.util;
 
 public interface Constants {
-
+    String PS_TWO_FACTOR_REG = "psTwofactorReg";
+    String PS_TWO_FACTOR_AUTH = "psTwofactorAuth";
     String AGENCY_NAME = "agency_name";
     String NUMBER = "mobilenumber";
     String INITIATOR_ID = "initiator_id";

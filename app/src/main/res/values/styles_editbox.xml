@@ -154,12 +154,31 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="et_main_ot_dis">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
     <style name="til_main_ot" parent="TextLabel">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/_10sdp</item>
         <item name="android:singleLine">true</item>
         <item name="android:maxLines">1</item>
+    </style>
+    <style name="til_main_ot_dis" parent="TextLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:focusable">false</item>
     </style>
     <!--ml - multiline-->
     <style name="til_main_ot_ml" parent="TextLabel">
@@ -179,7 +198,13 @@
         <item name="android:maxLines">1</item>
         <item name="android:layout_marginTop">@dimen/_10sdp</item>
     </style>
-
+    <style name="til_main_ot_sp_dis" parent="TextLabel_sp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:focusable">false</item>
+    </style>
     <style name="til_main_ot_sp_2" parent="TextLabel_sp_2">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -195,6 +220,22 @@
     </style>
 
     <style name="mactp_main_ot_sp_2" parent="TextLabel_sp_2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="mactv_main_ot_sp" parent="TextLabel_sp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="mactv_main_ot_sp_2" parent="TextLabel_sp_2">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>

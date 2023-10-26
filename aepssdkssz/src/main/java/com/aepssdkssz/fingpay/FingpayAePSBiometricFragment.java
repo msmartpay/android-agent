@@ -1,4 +1,4 @@
-package com.aepssdkssz;
+package com.aepssdkssz.fingpay;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,11 +18,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,17 +27,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.aepssdkssz.dialog.SSZAePSBankSearchDialogFrag;
-import com.aepssdkssz.dialog.SSZAePSDeviceSearchDialogFrag;
-import com.aepssdkssz.dialog.SSZAePSPrinterDialogFrag;
+import com.aepssdkssz.R;
 import com.aepssdkssz.dialog.fingpayonboarding.SDKUserNumberDialog;
-import com.aepssdkssz.network.SSZAePSAPIError;
 import com.aepssdkssz.network.SSZAePSRetrofitClient;
-import com.aepssdkssz.network.model.BankModel;
 import com.aepssdkssz.network.model.BiometricDevice;
-import com.aepssdkssz.network.model.aepstransaction.AepsRequest;
-import com.aepssdkssz.network.model.aepstransaction.AepsRequestData;
-import com.aepssdkssz.network.model.aepstransaction.AepsResponse;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayOnboardResponse;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayUserRequest;
 import com.aepssdkssz.network.model.fingpayonboard.FingpayUserRequestData;
@@ -51,14 +41,11 @@ import com.chivorn.smartmaterialspinner.SmartMaterialSpinner;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 

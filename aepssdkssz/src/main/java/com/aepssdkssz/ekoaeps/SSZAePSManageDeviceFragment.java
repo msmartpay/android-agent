@@ -1,4 +1,4 @@
-package com.aepssdkssz;
+package com.aepssdkssz.ekoaeps;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.aepssdkssz.R;
 import com.aepssdkssz.dialog.SSZAePSDeviceSearchDialogFrag;
 import com.aepssdkssz.network.SSZAePSAPIError;
 import com.aepssdkssz.network.SSZAePSRetrofitClient;

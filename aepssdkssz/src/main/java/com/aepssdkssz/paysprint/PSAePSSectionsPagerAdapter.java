@@ -9,8 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.aepssdkssz.R;
-import com.aepssdkssz.SSZAePSManageDeviceFragment;
-import com.aepssdkssz.SSZAePSSearchCashOutFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -19,7 +17,7 @@ import com.aepssdkssz.SSZAePSSearchCashOutFragment;
 public class PSAePSSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_cashout, R.string.tab_device};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_cashout, R.string.tab_device,R.string.tab_two_factor};
     private final Context mContext;
 
     public PSAePSSectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -31,8 +29,10 @@ public class PSAePSSectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return PSAePSSearchCashOutFragment.newInstance(position + 1);
-        } else {
-            return PSAePSManageDeviceFragment.newInstance(position + 1);
+        } else if (position == 1) {
+            return PSAePSSearchCashOutFragment.newInstance(position + 1);
+        } else{
+            return PSAePSTwoFactorFragment.newInstance(position + 1);
         }
     }
 
@@ -44,7 +44,7 @@ public class PSAePSSectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
-        return 2;
+        // Show 3 total pages.
+        return 3;
     }
 }

@@ -1,9 +1,8 @@
-package com.scinfotech.ekobbps;
+package in.msmartpay.agent.ekobbps;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -11,19 +10,17 @@ import androidx.core.content.ContextCompat;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.scinfotech.R;
-import com.scinfotech.databinding.BillPaymentTxnRecieptBinding;
-import com.scinfotech.network.model.ekobbps.PayBillReceipt;
-import com.scinfotech.utility.BaseActivity;
-import com.scinfotech.utility.ImageUtil;
-import com.scinfotech.utility.ImageUtils;
-import com.scinfotech.utility.Keys;
-import com.scinfotech.utility.L;
-import com.scinfotech.utility.Util;
+
+import in.msmartpay.agent.MainActivity;
+import in.msmartpay.agent.R;
+import in.msmartpay.agent.databinding.EkoBbpsPaymentTxnRecieptBinding;
+import in.msmartpay.agent.network.model.ekobbps.PayBillReceipt;
+import in.msmartpay.agent.utility.BaseActivity;
+import in.msmartpay.agent.utility.ImageUtils;
+import in.msmartpay.agent.utility.Keys;
+import in.msmartpay.agent.utility.Util;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,15 +29,15 @@ import java.util.Objects;
 public class BillPaymentReceiptActivity extends BaseActivity {
 
     private Context context;
-    private String txnMessage="",opName="",dueDate = "",txnId="";
-    private BillPaymentTxnRecieptBinding binding;
+    private String txnMessage="",opName="",dueDate = "",txnId="",customerName="";
+    private EkoBbpsPaymentTxnRecieptBinding binding;
     private HashMap<String, Object> billRequestData;
     private PayBillReceipt data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = BillPaymentTxnRecieptBinding.inflate(getLayoutInflater());
+        binding = EkoBbpsPaymentTxnRecieptBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Bill Payment Receipt");
@@ -51,6 +48,7 @@ public class BillPaymentReceiptActivity extends BaseActivity {
         txnMessage = intent.getStringExtra(Keys.MESSAGE);
         opName = intent.getStringExtra(Keys.Service_OP);
         dueDate = intent.getStringExtra(Keys.DUE_DATE);
+        customerName = intent.getStringExtra(Keys.CUSTOMER_NAME);
 
 
         if (intent != null && intent.hasExtra(Keys.OBJECT)) {
@@ -71,7 +69,10 @@ public class BillPaymentReceiptActivity extends BaseActivity {
         binding.btnShareReceipt.setOnClickListener(v -> {
             myPermissions(false);
         });
-        binding.btnTxnDone.setOnClickListener(v -> finish());
+        binding.btnTxnDone.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            finish();
+        });
     }
 
     private void setUPScreen() {
@@ -94,7 +95,7 @@ public class BillPaymentReceiptActivity extends BaseActivity {
         }
 
 
-        binding.tvCustomerName.setText(billRequestData.get("sender_name")==null?"NA":billRequestData.get("sender_name").toString());
+        binding.tvCustomerName.setText(customerName);
         binding.tvCustomerMobile.setText(billRequestData.get("confirmation_mobile_no")==null?"NA":billRequestData.get("confirmation_mobile_no").toString());
         binding.tvBillNumber.setText(billRequestData.get("utility_acc_no").toString());
         binding.tvBillDueDate.setText(dueDate);

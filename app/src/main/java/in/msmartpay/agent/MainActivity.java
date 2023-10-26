@@ -37,6 +37,7 @@ import in.msmartpay.agent.claimrefund.ClaimHistoryActivity;
 import in.msmartpay.agent.collectBanks.CollectBankActivity;
 import in.msmartpay.agent.dmr.onboard.FindSenderDialog;
 import in.msmartpay.agent.dmrPaySprint.onboard.PSFindSenderDialog;
+import in.msmartpay.agent.ekobbps.BillPaymentActivity;
 import in.msmartpay.agent.fingpaymatm.FingpayMATMActivity;
 import in.msmartpay.agent.helpAndSupport.AboutUsWebViewActivity;
 import in.msmartpay.agent.helpAndSupport.HelpSupportActivity;
@@ -99,7 +100,8 @@ public class MainActivity extends BaseActivity{
 
     private TextView balanceview,tv_main_wallet;
     private ImageView img, iv_activate;
-    private LinearLayout id_fastag,my_profile, id_money_transfer, id_money_transfer2,id_fino_cms,id_claim_refund;
+    private LinearLayout id_fastag,my_profile, id_money_transfer, id_money_transfer2,id_fino_cms,id_claim_refund,
+            id_paysprint_aeps,id_eko_aeps_api,id_eko_aeps_gateway;
 
     private FloatingActionButton floatingButtonCall;
     private RelativeLayout drawerpane, rl_activate;
@@ -174,12 +176,15 @@ public class MainActivity extends BaseActivity{
 
     private void homeInitialize() {
 
+        id_eko_aeps_gateway = findViewById(R.id.id_eko_aeps_gateway);
+        id_eko_aeps_api = findViewById(R.id.id_eko_aeps_api);
+        id_paysprint_aeps=findViewById(R.id.id_paysprint_aeps);
         id_claim_refund=findViewById(R.id.id_claim_refund);
         img = findViewById(R.id.id_drawer_icon);
         id_fastag=  findViewById(R.id.id_fastag);
         floatingButtonCall =  findViewById(R.id.fab);
         id_money_transfer = findViewById(R.id.id_dmr1);
-        id_money_transfer2 = findViewById(R.id.id_dmr1);
+        id_money_transfer2 = findViewById(R.id.id_dmr2);
         tv_main_wallet= findViewById(R.id.tv_main_wallet);
         mDemoSlider =  findViewById(R.id.slider);
         TextView marqueText =findViewById(R.id.marqueText);
@@ -188,7 +193,7 @@ public class MainActivity extends BaseActivity{
         tv_main_wallet.setText(debit_balance);
 
 
-        if (dmrVendor.equalsIgnoreCase("DMR1")) {
+        /*if (dmrVendor.equalsIgnoreCase("DMR1")) {
             id_money_transfer2.setVisibility(View.GONE);
             id_money_transfer.setVisibility(View.VISIBLE);
         } else if (dmrVendor.equalsIgnoreCase("DMR2")) {
@@ -197,7 +202,7 @@ public class MainActivity extends BaseActivity{
         } else {
             id_money_transfer.setVisibility(View.GONE);
             id_money_transfer2.setVisibility(View.GONE);
-        }
+        }*/
 
         img.setOnClickListener(v -> mDrawer.openDrawer(drawerpane));
 
@@ -399,6 +404,14 @@ public class MainActivity extends BaseActivity{
                 }else{
                     L.toastL(context,getResources().getString(R.string.service_not_available));
                 }
+            }else if (view.getId() == R.id.id_bbps) {
+                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, BillPaymentActivity.class);
+                    startActivity(in);
+                }else{
+                    L.toastL(context,getResources().getString(R.string.service_not_available));
+                }
             }else if (view.getId() == R.id.id_lpg) {
                 if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
                     view.getResources().getColor(R.color.active_tab);
@@ -434,7 +447,7 @@ public class MainActivity extends BaseActivity{
                 }
 
             }*/else if (view.getId() == R.id.id_eko_aeps_api) {
-                if("Y".equalsIgnoreCase(servicesModel.getAeps1())) {
+                if("Y".equalsIgnoreCase(servicesModel.getAeps3())) {
                     view.getResources().getColor(R.color.active_tab);
                     Intent intent = new Intent(this, AEPSSDKActivity.class);
                     intent.putExtra("transaction_type", Keys.EKO_API);
@@ -461,7 +474,7 @@ public class MainActivity extends BaseActivity{
                     L.toastL(context,getResources().getString(R.string.service_not_available));
                 }
             }else if (view.getId() == R.id.id_aadhar_pay) {
-                if("Y".equalsIgnoreCase(servicesModel.getAeps2()) || "Y".equalsIgnoreCase(servicesModel.getAeps1())) {
+                if("Y".equalsIgnoreCase(servicesModel.getAeps2()) ) {
                     view.getResources().getColor(R.color.active_tab);
                     Intent intent = new Intent(this, AEPSSDKActivity.class);
                     intent.putExtra("transaction_type", "Aadhaar Pay");
@@ -725,6 +738,23 @@ public class MainActivity extends BaseActivity{
 
                             servicesModel = res.getServices();
 
+                            if(!"Y".equalsIgnoreCase(servicesModel.getAeps3())) {
+                                Util.hideView(id_eko_aeps_api);
+                            }
+                            if(!"Y".equalsIgnoreCase(servicesModel.getAeps2())) {
+                                Util.hideView(id_paysprint_aeps);
+                            }
+                            if(!"Y".equalsIgnoreCase(servicesModel.getAeps1())) {
+                                Util.hideView(id_eko_aeps_gateway);
+                            }
+                            if(!"Y".equalsIgnoreCase(servicesModel.getDmr1())) {
+                                Util.hideView(id_money_transfer);
+                            }
+
+                            if(!"Y".equalsIgnoreCase(servicesModel.getDmr2())) {
+                                Util.hideView(id_money_transfer2);
+                            }
+
                             kycStatus=res.getKycStatus();
 
                             tv_main_wallet.setText(res.getDebit());
@@ -763,18 +793,6 @@ public class MainActivity extends BaseActivity{
                                     startActivity(intent);
                                     finish();
                                 });
-
-                                /*if(res.getKycStatus() == 2){
-                                    text.setText("Your KYC Verification is pending. Please contact to support.");
-                                    trans_status.setText("Close");
-                                    trans_status.setOnClickListener(v -> {
-                                        dialog_status.dismiss();
-                                        Intent intent = new Intent();
-                                        intent.setClass(getApplicationContext(), LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    });
-                                }*/
 
                                 dialog_status.show();
                             }
