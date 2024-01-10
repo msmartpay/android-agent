@@ -88,7 +88,9 @@ public class LICPremiumActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(et_lic_policy_number.getText().toString().trim())) {
-                    L.toastS(getApplicationContext(), "Please lic policy number");
+                    L.toastS(getApplicationContext(), "Please enter policy number");
+                } else if (TextUtils.isEmpty(binding.etLicDob.getText().toString().trim())) {
+                    L.toastS(getApplicationContext(), "Please enter date of birth");
                 } else if (TextUtils.isEmpty(et_lic_email.getText().toString().trim())) {
                     L.toastS(getApplicationContext(), "Please enter email id");
                 } else {
@@ -131,6 +133,7 @@ public class LICPremiumActivity extends BaseActivity {
         LicBillFetchRequestData data = new LicBillFetchRequestData();
         data.setCanumber(et_lic_policy_number.getText().toString());
         data.setAd1(et_lic_email.getText().toString());
+        data.setAd2(binding.etLicDob.getText().toString());
 
         request2.setData(data);
         RetrofitClient.getClient(this)

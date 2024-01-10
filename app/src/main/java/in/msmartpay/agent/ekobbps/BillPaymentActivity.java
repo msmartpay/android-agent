@@ -430,7 +430,7 @@ public class BillPaymentActivity extends BaseActivity {
 
                         @Override
                         public void onFailure(@NotNull Call<FetchBillResponse> call, @NotNull Throwable t) {
-                            L.toastS(getApplicationContext(), "data failuer " + t.getLocalizedMessage());
+                            L.toastS(getApplicationContext(), "data failure " + t.getLocalizedMessage());
                             pd.dismiss();
                         }
                     });

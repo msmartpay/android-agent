@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:openDrawer="">
+    tools:openDrawer="start">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -591,6 +591,28 @@
                                     android:weightSum="1.0">
 
                                     <LinearLayout
+                                        android:id="@+id/id_bbps"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:onClick="click"
+                                        android:orientation="vertical"
+                                        android:layout_weight="0.25">
+
+                                        <LinearLayout
+                                            style="@style/ll_home">
+
+                                            <ImageView
+                                                style="@style/iv_home"
+                                                android:src="@drawable/creditcard" />
+                                        </LinearLayout>
+
+                                        <TextView
+                                            style="@style/tv_main_large"
+                                            android:text="BBPS\nPayment" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
                                         android:id="@+id/id_mobile_postpaid"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -657,30 +679,11 @@
                                             android:text="Electricity\nBill" />
                                     </LinearLayout>
 
-                                    <LinearLayout
-                                        android:id="@+id/id_gas"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:onClick="click"
-                                        android:orientation="vertical"
-                                        android:layout_weight="0.25">
 
-                                        <LinearLayout
-                                            style="@style/ll_home">
-
-                                            <ImageView
-                                                style="@style/iv_home"
-                                                android:src="@drawable/gas" />
-                                        </LinearLayout>
-
-                                        <TextView
-                                            style="@style/tv_main_large"
-                                            android:text="Gas\nBill" />
-                                    </LinearLayout>
 
 
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -808,7 +811,7 @@
                                     android:weightSum="1.0">
 
                                     <LinearLayout
-                                        android:id="@+id/id_bbps"
+                                        android:id="@+id/id_gas"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
@@ -821,13 +824,14 @@
 
                                             <ImageView
                                                 style="@style/iv_home"
-                                                android:src="@drawable/creditcard" />
+                                                android:src="@drawable/gas" />
                                         </LinearLayout>
 
                                         <TextView
                                             style="@style/tv_main_large"
-                                            android:text="BBPS\nPayment" />
+                                            android:text="Gas\nBill" />
                                     </LinearLayout>
+
 
                                     <LinearLayout
                                         android:id="@+id/id_emi"

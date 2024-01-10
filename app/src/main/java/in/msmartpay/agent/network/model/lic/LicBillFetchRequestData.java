@@ -5,6 +5,14 @@ public class LicBillFetchRequestData {
     private String canumber;
     private String ad1;
 
+    public String getAd2() {
+        return ad2;
+    }
+    public void setAd2(String ad2) {
+        this.ad2 = ad2;
+    }
+    private String ad2;
+
     public String getCanumber() {
         return canumber;
     }

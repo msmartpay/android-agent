@@ -36,6 +36,18 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/til_main_ot"
+            android:hint="Enter DOB (DD/MM/YYYY)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_lic_dob"
+                style="@style/til_main_ot"
+                android:ems="10"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/til_main_ot"
             android:hint="Enter Email Id"
             android:layout_marginTop="10dp">
 

@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity{
 
     private TextView balanceview,tv_main_wallet;
     private ImageView img, iv_activate;
-    private LinearLayout id_fastag,my_profile, id_money_transfer, id_money_transfer2,id_fino_cms,id_claim_refund,
+    private LinearLayout id_bbps,id_fastag,my_profile, id_money_transfer, id_money_transfer2,id_fino_cms,id_claim_refund,
             id_paysprint_aeps,id_eko_aeps_api,id_eko_aeps_gateway;
 
     private FloatingActionButton floatingButtonCall;
@@ -176,6 +176,7 @@ public class MainActivity extends BaseActivity{
 
     private void homeInitialize() {
 
+        id_bbps = findViewById(R.id.id_bbps);
         id_eko_aeps_gateway = findViewById(R.id.id_eko_aeps_gateway);
         id_eko_aeps_api = findViewById(R.id.id_eko_aeps_api);
         id_paysprint_aeps=findViewById(R.id.id_paysprint_aeps);
@@ -405,12 +406,14 @@ public class MainActivity extends BaseActivity{
                     L.toastL(context,getResources().getString(R.string.service_not_available));
                 }
             }else if (view.getId() == R.id.id_bbps) {
-                if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
+                if("Y".equalsIgnoreCase(servicesModel.getEkobbps())) {
                     view.getResources().getColor(R.color.active_tab);
                     Intent in = new Intent(context, BillPaymentActivity.class);
                     startActivity(in);
                 }else{
                     L.toastL(context,getResources().getString(R.string.service_not_available));
+                    Intent in=new Intent(context, ActivateAepsActivity.class);
+                    startActivity(in);
                 }
             }else if (view.getId() == R.id.id_lpg) {
                 if("Y".equalsIgnoreCase(servicesModel.getUtility())) {
@@ -753,6 +756,9 @@ public class MainActivity extends BaseActivity{
 
                             if(!"Y".equalsIgnoreCase(servicesModel.getDmr2())) {
                                 Util.hideView(id_money_transfer2);
+                            }
+                            if(!"Y".equalsIgnoreCase(servicesModel.getEkobbps())) {
+                                Util.hideView(id_bbps);
                             }
 
                             kycStatus=res.getKycStatus();

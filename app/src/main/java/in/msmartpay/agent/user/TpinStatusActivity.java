@@ -61,9 +61,15 @@ public class TpinStatusActivity extends BaseActivity {
         if("Y".equalsIgnoreCase(loginTpinStatus)){
             tpin_status_switch.setChecked(true);
             tpin_status_switch.setText("Enable");
+            tpinStatus="Y";
         }else if("N".equalsIgnoreCase(loginTpinStatus)){
             tpin_status_switch.setChecked(false);
             tpin_status_switch.setText("Disable");
+            tpinStatus="N";
+        }else{
+            tpin_status_switch.setChecked(false);
+            tpin_status_switch.setText("Disable");
+            tpinStatus="N";
         }
 
         tpin_status_switch.setOnClickListener(new View.OnClickListener() {

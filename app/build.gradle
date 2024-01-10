@@ -13,8 +13,8 @@ android {
         applicationId "in.msmartpay.agent"
         minSdk 21
         targetSdk 34
-        versionCode 36
-        versionName "33.3"
+        versionCode 37
+        versionName "33.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

@@ -316,7 +316,7 @@ public class PrepaidMobileActivity extends BaseActivity {
                                 }
                             } else {
                                 L.toastS(getApplicationContext(), "No Response");
-                                finish();
+                                //finish();
                             }
                         }
 
@@ -325,7 +325,7 @@ public class PrepaidMobileActivity extends BaseActivity {
                             if(pd!=null)
                                 pd.dismiss();
                             L.toastS(getApplicationContext(), "Error " + t.getMessage());
-                            finish();
+                            //finish();
                         }
                     });
         }

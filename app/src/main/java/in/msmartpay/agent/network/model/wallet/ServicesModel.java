@@ -28,6 +28,16 @@ public class ServicesModel implements Serializable {
     private String dmr2;
     private String lic;
 
+    private String ekobbps;
+
+    public String getEkobbps() {
+        return ekobbps;
+    }
+
+    public void setEkobbps(String ekobbps) {
+        this.ekobbps = ekobbps;
+    }
+
     public String getPg() {
         return pg;
     }
