@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorLightPrimary"
+    android:paddingBottom="5.0dip">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/whitecolor"
+        android:weightSum="2.0">
+
+        <LinearLayout
+            android:id="@+id/ll_txn_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.15">
+
+            <in.msmartpay.agent.utility.VerticalTextView
+                android:id="@+id/tx_c_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:rotation="180"
+                android:text="Success"
+                android:inputType="textCapCharacters"
+                android:textColor="@color/whitecolor"
+                android:background="@color/colorPrimary"
+                android:textSize="18dp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.85"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Order Id: "
+                    android:layout_weight="0.7"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_order_id"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="XXXXXXXXXXXXXXXXX"
+                    android:layout_weight="1.3"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Order Date: "
+                    android:layout_weight="0.7"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_order_date"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:hint="XXXXXXXXXXXXXXXXX"
+                    android:layout_weight="1.3"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Order Details:"
+                    android:layout_weight="0.7"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_order_details"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXX"
+                    android:layout_weight="1.3"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Traking Id:"
+                    android:layout_weight="0.7"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_tracking_id"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXX"
+                    android:layout_weight="1.3"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2.0">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="Remark:"
+                    android:layout_weight="0.7"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_remark"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXX"
+                    android:layout_weight="1.5"
+                    android:padding="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

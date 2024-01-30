@@ -10,7 +10,7 @@
     <style name="et_main_round">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <item name="android:textColor">@color/blue</item>
         <item name="android:singleLine">true</item>
         <item name="android:padding">16dp</item>
@@ -21,7 +21,7 @@
     <style name="et_main_round_br_gray">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <item name="android:textColor">@color/blue</item>
         <item name="android:singleLine">true</item>
         <item name="android:padding">@dimen/_16sdp</item>
@@ -48,7 +48,7 @@
        <!-- <item name="android:textColorHint">@color/hint_color</item>-->
         <!-- Hint ON TOP of the box, when the  TextInputEditText is focused. -->
       <!--  <item name="hintTextColor">@color/hint_color</item>-->
-        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
        <!-- <item name="hintTextAppearance">@style/HintTextStyle</item>-->
         <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
         <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
@@ -77,7 +77,7 @@
         <!-- <item name="android:textColorHint">@color/hint_color</item>-->
         <!-- Hint ON TOP of the box, when the  TextInputEditText is focused. -->
         <!--  <item name="hintTextColor">@color/hint_color</item>-->
-        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <!-- <item name="hintTextAppearance">@style/HintTextStyle</item>-->
         <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
         <item name="textAppearanceCaption">@style/TextAppearance.App.Caption</item>
@@ -87,7 +87,7 @@
     </style>
 
     <style name="TextLabel_sp_2" parent="TextLabel_sp">
-        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <item name="hintTextAppearance">@style/HintTextStyle_2</item>
     </style>
 
@@ -120,13 +120,13 @@
     </style>
 
     <style name="HintTextStyle" parent="TextAppearance.Design.Hint">
-        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <item name="hintTextColor">@color/black</item>
         <item name="android:textColorHint">@color/black</item>
     </style>
 
     <style name="HintTextStyle_2" parent="TextAppearance.Design.Hint">
-        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
         <item name="hintTextColor">@color/black</item>
         <item name="android:textColorHint">@color/black</item>
     </style>

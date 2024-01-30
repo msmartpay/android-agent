@@ -55,6 +55,13 @@ public class BaseActivity extends AppCompatActivity {
     public static Gson gson;
     private String ba_email, ba_password;
 
+    public void gotoHomeScreen(){
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
     public Gson getGson(){
         if(gson==null)
             gson = new Gson();

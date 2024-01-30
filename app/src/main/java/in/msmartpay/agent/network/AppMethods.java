@@ -76,6 +76,10 @@ import in.msmartpay.agent.network.model.matm.MicroInitiateTransactionRequest;
 import in.msmartpay.agent.network.model.matm.MicroInitiateTransactionResponse;
 import in.msmartpay.agent.network.model.matm.MicroPostTransactionRequest;
 import in.msmartpay.agent.network.model.matm.MicroPostTransactionResponse;
+import in.msmartpay.agent.network.model.order.OrderProductDetailsResponse;
+import in.msmartpay.agent.network.model.order.OrderProductHistoryResponse;
+import in.msmartpay.agent.network.model.order.OrderProductListResponse;
+import in.msmartpay.agent.network.model.order.OrderProductsRequest;
 import in.msmartpay.agent.network.model.post.EMIOperatorResponse;
 import in.msmartpay.agent.network.model.setting.UpdateTPINRequest;
 import in.msmartpay.agent.network.model.setting.UpdateTPINStatusRequest;
@@ -483,4 +487,17 @@ public interface AppMethods {
     Call<PayBillResponse>  payBillRequest(@Body PayBillRequest request);
 
     /***** End Eko Bill Pay ****/
+
+    /***** ORDER PRODUCTS ****/
+    @POST(BASE_URL + "OrderProduct/FetchProductTypeList")
+    Call<OrderProductListResponse>  fetchProductTypeList(@Body MainRequest2 request);
+    @POST(BASE_URL + "OrderProduct/FetchProductOrderDetailsList")
+    Call<OrderProductHistoryResponse>  fetchProductOrderHistory(@Body MainRequest2 request);
+    @POST(BASE_URL + "OrderProduct/FetchProductOrderDetails")
+    Call<OrderProductDetailsResponse>  fetchProductOrderDetails(@Body MainRequest2 request);
+
+    @POST(BASE_URL + "OrderProduct/SaveProductOrderDetails")
+    Call<MainResponse2>  saveProductOrderDetails(@Body OrderProductsRequest request);
+    /***** END ORDER PRODUCTS ****/
+
 }

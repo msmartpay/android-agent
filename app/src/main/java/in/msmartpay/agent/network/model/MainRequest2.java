@@ -6,8 +6,16 @@ public class MainRequest2 {
     private Object data;
     private String ip;
     private String ipaddress;
-
     private String transactionPin;
+    private String SlNo;
+
+    public String getSlNo() {
+        return SlNo;
+    }
+
+    public void setSlNo(String slNo) {
+        SlNo = slNo;
+    }
 
     public String getTransactionPin() {
         return transactionPin;

@@ -57,6 +57,7 @@ import in.msmartpay.agent.network.model.MainResponse2;
 import in.msmartpay.agent.network.model.wallet.BalanceRequest;
 import in.msmartpay.agent.network.model.wallet.BalanceResponse;
 import in.msmartpay.agent.network.model.wallet.ServicesModel;
+import in.msmartpay.agent.orderProducts.OrderProductsActivity;
 import in.msmartpay.agent.rechargeBillPay.CablePayActivity;
 import in.msmartpay.agent.rechargeBillPay.CreditCardActivity;
 import in.msmartpay.agent.rechargeBillPay.EMIPayActivity;
@@ -316,8 +317,16 @@ public class MainActivity extends BaseActivity{
     public void click(View view) {
         if (isConnectionAvailable()) {
             //overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-
-            if (view.getId() == R.id.id_fastag) {
+            if (view.getId() == R.id.id_order_products) {
+                //if("Y".equalsIgnoreCase(servicesModel.getFastag())) {
+                    view.getResources().getColor(R.color.active_tab);
+                    Intent in = new Intent(context, OrderProductsActivity.class);
+                    startActivity(in);
+//                }else{
+//                    L.toastL(context,getResources().getString(R.string.service_not_available));
+//                }
+            }
+            else if (view.getId() == R.id.id_fastag) {
                 if("Y".equalsIgnoreCase(servicesModel.getFastag())) {
                     view.getResources().getColor(R.color.active_tab);
                     Intent in = new Intent(context, FastTagActivity.class);

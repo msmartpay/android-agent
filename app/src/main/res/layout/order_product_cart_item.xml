@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5.0dip"
+        android:weightSum="2.0">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_product"
+            style="@style/tv_details"
+            android:layout_weight="0.8"
+            android:text="Product"
+            android:textSize="@dimen/_12ssp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_qty"
+            style="@style/tv_details"
+            android:layout_weight="0.3"
+            android:text="Qty"
+            android:textSize="@dimen/_12ssp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/tv_details"
+            android:id="@+id/tv_rate"
+            android:layout_weight="0.45"
+            android:text="Rate"
+            android:textSize="@dimen/_12ssp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/tv_details"
+            android:id="@+id/tv_total"
+            android:layout_weight="0.45"
+            android:text="Total"
+            android:textSize="@dimen/_12ssp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
