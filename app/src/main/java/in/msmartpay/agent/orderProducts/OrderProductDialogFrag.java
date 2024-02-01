@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ import in.msmartpay.agent.utility.L;
 import in.msmartpay.agent.utility.Util;
 
 
-public class OrderProductDialogFrag extends DialogFragment {
+public class OrderProductDialogFrag extends BottomSheetDialogFragment {
     private ImageView iv_back;
     private RecyclerView rv_list;
     private TextView tv_title;
@@ -37,10 +39,10 @@ public class OrderProductDialogFrag extends DialogFragment {
         this.listener = listener;
     }
 
-    @Override
-    public int getTheme() {
-        return R.style.DialogTheme;
-    }
+//    @Override
+//    public int getTheme() {
+//        return R.style.DialogTheme;
+//    }
 
     @Nullable
     @Override

@@ -107,8 +107,8 @@ public class OrderProductsAddFragment extends BaseFragment {
             @Override
             public void onSelectProduct(OrderProduct m, int position) {
                 OrderProductDialogFrag dialogFrag = OrderProductDialogFrag.newInstance(list, model -> {
-                    model.setQty(m.getQty());
-                    model.setPrice(m.getPrice());
+                    model.setQty(1);
+                    model.setPrice(model.getAgentPrice());
                     listRequest.remove(position);
                     listRequest.add(position, model);
                     adapter.notifyDataSetChanged();

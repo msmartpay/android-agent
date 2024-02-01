@@ -3,6 +3,7 @@ package in.msmartpay.agent.orderProducts;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,9 @@ public class OrderProductsHistoryFragment extends BaseFragment {
 
     private void setUpAdapter() {
         adapter = new OrderProductsHistoryAdapter(list, modal -> {
-
+            Intent intent = new Intent(context,OrderProductsDetailsActivity.class);
+            intent.putExtra(Keys.OBJECT,Util.getJsonFromModel(modal));
+            startActivity(intent);
         });
         rv_list.setAdapter(adapter);
     }
@@ -99,7 +102,7 @@ public class OrderProductsHistoryFragment extends BaseFragment {
                             OrderProductHistoryResponse res = response.body();
                             if ("0".equalsIgnoreCase(res.getStatus())) {
                                 if (res.getData() != null && res.getData().size() > 0) {
-                                    list.addAll((ArrayList<OrderProductHistoryData>) res.getData());
+                                    list.addAll(res.getData());
                                 }
                             }
                         }

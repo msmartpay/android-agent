@@ -77,6 +77,11 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
         <activity
+            android:name=".orderProducts.OrderProductsDetailsActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
             android:name=".user.SetupTpinActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"

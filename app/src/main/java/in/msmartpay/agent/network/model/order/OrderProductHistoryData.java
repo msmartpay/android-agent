@@ -30,7 +30,7 @@ public class OrderProductHistoryData {
 	private String orderDate;
 
 	@SerializedName("orderDescription")
-	private List<OrderProductDesc> orderDescription;
+	private List<OrderProduct> orderDescription;
 
 	@SerializedName("deliveryTrackingId")
 	private String deliveryTrackingId;
@@ -41,51 +41,165 @@ public class OrderProductHistoryData {
 	@SerializedName("slNo")
 	private String slNo;
 
-	public String getOrderAddress(){
+	@SerializedName("orderAmount")
+	private String orderAmount;
+	private String netAmount;
+	private String charge;
+	private String orderName;
+	@SerializedName("gst")
+	private String gstAmount;
+	private String mobile;
+	private String txnStatus;
+
+	public String getTxnStatus() {
+		return txnStatus;
+	}
+
+	public void setTxnStatus(String txnStatus) {
+		this.txnStatus = txnStatus;
+	}
+
+	public String getOrderAddress() {
 		return orderAddress;
 	}
 
-	public String getOrderTime(){
+	public void setOrderAddress(String orderAddress) {
+		this.orderAddress = orderAddress;
+	}
+
+	public String getOrderTime() {
 		return orderTime;
 	}
 
-	public String getOrderPincode(){
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
+	}
+
+	public String getOrderPincode() {
 		return orderPincode;
 	}
 
-	public String getOrderId(){
+	public void setOrderPincode(String orderPincode) {
+		this.orderPincode = orderPincode;
+	}
+
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public String getGstNo(){
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getGstNo() {
 		return gstNo;
 	}
 
-	public String getOrderDetail(){
+	public void setGstNo(String gstNo) {
+		this.gstNo = gstNo;
+	}
+
+	public String getOrderDetail() {
 		return orderDetail;
 	}
 
-	public String getRemark(){
+	public void setOrderDetail(String orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
+	public String getRemark() {
 		return remark;
 	}
 
-	public String getOrderDate(){
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public List<OrderProductDesc> getOrderDescription(){
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public List<OrderProduct> getOrderDescription() {
 		return orderDescription;
 	}
 
-	public String getDeliveryTrackingId(){
+	public void setOrderDescription(List<OrderProduct> orderDescription) {
+		this.orderDescription = orderDescription;
+	}
+
+	public String getDeliveryTrackingId() {
 		return deliveryTrackingId;
 	}
 
-	public String getDeliveryStatus(){
+	public void setDeliveryTrackingId(String deliveryTrackingId) {
+		this.deliveryTrackingId = deliveryTrackingId;
+	}
+
+	public String getDeliveryStatus() {
 		return deliveryStatus;
 	}
 
-	public String getSlNo(){
+	public void setDeliveryStatus(String deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
+
+	public String getSlNo() {
 		return slNo;
+	}
+
+	public void setSlNo(String slNo) {
+		this.slNo = slNo;
+	}
+
+	public String getOrderAmount() {
+		return orderAmount;
+	}
+
+	public void setOrderAmount(String orderAmount) {
+		this.orderAmount = orderAmount;
+	}
+
+	public String getNetAmount() {
+		return netAmount;
+	}
+
+	public void setNetAmount(String netAmount) {
+		this.netAmount = netAmount;
+	}
+
+	public String getCharge() {
+		return charge;
+	}
+
+	public void setCharge(String charge) {
+		this.charge = charge;
+	}
+
+	public String getOrderName() {
+		return orderName;
+	}
+
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
+
+	public String getGstAmount() {
+		return gstAmount;
+	}
+
+	public void setGstAmount(String gstAmount) {
+		this.gstAmount = gstAmount;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 }

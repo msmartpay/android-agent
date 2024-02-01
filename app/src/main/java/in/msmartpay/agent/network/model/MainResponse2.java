@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class MainResponse2 {
     @SerializedName("Status")
     String status;
+
     @SerializedName("message")
     String message;
 
@@ -16,6 +17,16 @@ public class MainResponse2 {
     private String userCode;
     @SerializedName("data")
     Object data;
+    @SerializedName("status")
+    String mStatus;
+
+    public String getmStatus() {
+        return mStatus;
+    }
+
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
+    }
 
     public String getUserCode() {
         return userCode;

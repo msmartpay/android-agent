@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_20sdp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1.2">
+                        <TextView
+                            android:id="@+id/label1"
+                            style="@style/tv_history"
+                            android:layout_width="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:text="Billed To"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16.0sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/label1"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="Name"
+                            android:textColor="@color/colorPrimaryDark" />
+                        <TextView
+                            android:id="@+id/tv_mob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/email"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="xxxxxx9857"
+                            android:textColor="@color/colorPrimaryDark" />
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/email"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="xxxxxx9857"
+                            android:textColor="@color/colorPrimaryDark" />
+                        <TextView
+                            android:id="@+id/tv_gst_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/email"
+                            android:layout_marginTop="5.0dip"
+                            android:hint="xxxxxx9857"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="0.8">
+
+                        <ImageView
+                            android:id="@+id/iv_logo"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/tv_txn_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10.0dip"
+                            android:hint="Status"
+                            android:gravity="center"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_marginBottom="10.0dip"
+                    android:background="@drawable/custom_menu_header" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.8"
+                        android:text="Product"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.3"
+                        android:text="Qty"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.45"
+                        android:text="Rate"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="0.45"
+                        android:text="Total"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_12ssp"
+                    android:background="@color/grey_line"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="1"
+                        android:text="Total"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:id="@+id/tv_total"
+                        android:layout_weight="1"
+                        android:text="00.00"
+                        android:gravity="end"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="1"
+                        android:text="GST"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_gst"
+                        style="@style/tv_details"
+                        android:layout_weight="1"
+                        android:text="00.00"
+                        android:gravity="end"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/grey_line"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:weightSum="2.0">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:layout_weight="1"
+                        android:text="Gross Total"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/tv_details"
+                        android:id="@+id/tv_gross_total"
+                        android:layout_weight="1"
+                        android:text="00.00"
+                        android:gravity="end"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/grey_line"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Delivery Details"
+                        android:textSize="@dimen/_16ssp"
+                        android:textStyle="bold" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/tv_details"
+                            android:layout_weight="1"
+                            android:text="Tracking ID"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/tv_details"
+                            android:id="@+id/tv_tracking_id"
+                            android:layout_weight="1"
+                            android:text="id"
+                            android:gravity="end"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5.0dip"
+                        android:weightSum="2.0">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/tv_details"
+                            android:layout_weight="1"
+                            android:text="Delivery Status"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/tv_details"
+                            android:id="@+id/tv_delivery_status"
+                            android:layout_weight="1"
+                            android:text="Status"
+                            android:gravity="end"
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

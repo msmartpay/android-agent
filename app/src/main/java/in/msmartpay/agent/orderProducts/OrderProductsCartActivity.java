@@ -6,22 +6,16 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -33,7 +27,6 @@ import java.util.List;
 import java.util.Objects;
 
 import in.msmartpay.agent.R;
-import in.msmartpay.agent.dmr.ImpsNeftActivity;
 import in.msmartpay.agent.network.RetrofitClient;
 import in.msmartpay.agent.network.model.MainResponse2;
 import in.msmartpay.agent.network.model.order.OrderProduct;
@@ -64,7 +57,7 @@ public class OrderProductsCartActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_product_cart_dialog);
+        setContentView(R.layout.order_product_cart_activity);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setTitle("Cart Details");
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -91,7 +84,7 @@ public class OrderProductsCartActivity extends BaseActivity {
         Objects.requireNonNull(tid_name.getEditText()).setText(Util.LoadPrefData(context,Keys.AGENT_NAME));
         Objects.requireNonNull(tid_mob.getEditText()).setText(Util.LoadPrefData(context,Keys.AGENT_MOB));
         Objects.requireNonNull(tid_address.getEditText()).setText(Util.LoadPrefData(context,Keys.AGENT_ADDRESS));
-        Objects.requireNonNull(tid_zip.getEditText()).setText(Util.LoadPrefData(context,Keys.AGENT_OFFICE_PINCODE));
+        Objects.requireNonNull(tid_zip.getEditText()).setText(Util.LoadPrefData(context,Keys.PINCODE));
         if (getIntent() != null) {
             String strJson = getIntent().getStringExtra("List");
             if (strJson != null) {
@@ -101,12 +94,12 @@ public class OrderProductsCartActivity extends BaseActivity {
                     adapter = new OrderProductsCartAdapter(list);
                     rv_list.setAdapter(adapter);
                     for (int i = 0;i<list.size();i++){
-                        total = total+ list.get(i).getPrice();
-//                        gross = gross+ list.get(i).getPrice();
-//                        gst = gst+ list.get(i).getPrice();
+                        total = total + list.get(i).getPrice();
                     }
+                    gst = (total * 18)/100;
+                    gross = total + gst;
                 }
-                tv_gst.setText(""+gross);
+                tv_gst.setText(""+gst);
                 tv_gross_total.setText(""+gross);
                 tv_total.setText(""+total);
             }
@@ -204,8 +197,9 @@ public class OrderProductsCartActivity extends BaseActivity {
         request.setMobile(mobile);
         request.setOrderAddress(address);
         request.setPinCode(zip);
-        request.setOrderPrice(""+total);
+        request.setOrderPrice(""+gross);
         request.setOrderDescription(Util.getJsonFromModel(list));
+        request.setTransactionPin(tpin);
         RetrofitClient.getClient(context)
                 .saveProductOrderDetails(request).enqueue(new Callback<MainResponse2>() {
                     @Override
@@ -213,7 +207,7 @@ public class OrderProductsCartActivity extends BaseActivity {
                         pd.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             MainResponse2 res = response.body();
-                            if ("0".equalsIgnoreCase(res.getStatus())) {
+                            if ("0".equalsIgnoreCase(res.getmStatus())) {
                                 gotoHomeScreen();
                             }else {
                                 L.toastL(context,res.getMessage()==null?"Ops!":res.getMessage());

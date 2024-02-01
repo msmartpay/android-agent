@@ -24,7 +24,7 @@ public class OrderProductDetails {
 	private String orderDate;
 
 	@SerializedName("orderDescription")
-	private List<OrderProductDesc> orderDescription;
+	private List<OrderProduct> orderDescription;
 
 	@SerializedName("deliveryTrackingId")
 	private String deliveryTrackingId;
@@ -59,7 +59,7 @@ public class OrderProductDetails {
 		return orderDate;
 	}
 
-	public List<OrderProductDesc> getOrderDescription(){
+	public List<OrderProduct> getOrderDescription(){
 		return orderDescription;
 	}
 
