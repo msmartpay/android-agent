@@ -69,17 +69,21 @@ public class OrderProductsListAdapter extends RecyclerView.Adapter<OrderProducts
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        double price = modal.getAgentPrice();
-                        int qty = 0;
-                        if (count>0){
+                        if(modal!=null && modal.getAgentPrice()>0) {
+                            double price = modal.getAgentPrice();
+                            int qty = 0;
+                            //if (count>0){
                             String ss = s.toString().trim();
                             if (!ss.isEmpty())
-                            qty = Integer.parseInt(ss);
+                                qty = Integer.parseInt(ss);
+                            //}
+                            modal.setPrice(price * qty);
+                            modal.setQty(qty);
+                            et_price.setText("" + modal.getPrice());
+                            listener.onUpdate(modal, position);
+                        }else{
+
                         }
-                        modal.setPrice(price*qty);
-                        modal.setQty(qty);
-                        et_price.setText(""+modal.getPrice());
-                        listener.onUpdate(modal,position);
                     }
 
                     @Override
@@ -89,6 +93,7 @@ public class OrderProductsListAdapter extends RecyclerView.Adapter<OrderProducts
                 });
                 rl_select.setOnClickListener(v -> {
                     listener.onSelectProduct(modal,position);
+
                 });
                 tv_delete.setOnClickListener(v -> {
                     listener.onDelete(modal,position);

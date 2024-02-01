@@ -36,13 +36,13 @@
                     <TextView
                         android:id="@+id/tv_product"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
                         android:paddingStart="@dimen/_5sdp"
                         android:text="Select Product"
                         android:gravity="start"
                         android:layout_alignParentStart="true"
                         android:layout_toStartOf="@+id/down_aro"
-                        android:textSize="@dimen/_10ssp"/>
+                        android:textSize="@dimen/_12ssp"/>
 
                     <ImageView
                         android:id="@+id/down_aro"
@@ -80,17 +80,18 @@
                         android:paddingStart="@dimen/_5sdp"
                         android:text="Quantity : "
                         android:textStyle="bold"
-                        android:textSize="@dimen/_10ssp"/>
+                        android:textSize="@dimen/_12ssp"/>
 
                     <EditText
                         android:id="@+id/et_qty"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/aa_rect_et_bg_grey"
                         android:hint="0"
+                        android:inputType="number"
                         android:minWidth="@dimen/_40sdp"
                         android:maxLines="1"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="@dimen/_12ssp"
                         android:paddingStart="@dimen/_5sdp"
                         android:paddingTop="@dimen/_2sdp"
                         android:paddingEnd="@dimen/_5sdp"
@@ -108,19 +109,20 @@
                         android:paddingStart="@dimen/_5sdp"
                         android:text="Price : "
                         android:textStyle="bold"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_12ssp" />
 
                     <EditText
                         android:id="@+id/et_price"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/aa_rect_et_bg_grey"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:hint="0"
+                        android:inputType="number"
                         android:minWidth="@dimen/_50sdp"
                         android:maxLines="1"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="@dimen/_12ssp"
                         android:paddingStart="@dimen/_5sdp"
                         android:paddingTop="@dimen/_2sdp"
                         android:paddingEnd="@dimen/_5sdp"
