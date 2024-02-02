@@ -496,6 +496,8 @@ public interface AppMethods {
     @POST(BASE_URL + "OrderProduct/FetchProductOrderDetails")
     Call<OrderProductDetailsResponse>  fetchProductOrderDetails(@Body MainRequest2 request);
 
+    @POST(BASE_URL + "OrderProduct/cancelOrder")
+    Call<MainResponse2>  cancelOrder(@Body MainRequest2 request);
     @POST(BASE_URL + "OrderProduct/SaveProductOrderDetails")
     Call<MainResponse2>  saveProductOrderDetails(@Body OrderProductsRequest request);
     /***** END ORDER PRODUCTS ****/

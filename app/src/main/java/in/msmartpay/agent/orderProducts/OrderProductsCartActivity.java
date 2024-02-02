@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -197,7 +198,7 @@ public class OrderProductsCartActivity extends BaseActivity {
         request.setMobile(mobile);
         request.setOrderAddress(address);
         request.setPinCode(zip);
-        request.setOrderPrice(""+gross);
+        request.setOrderPrice(""+total);
         request.setOrderDescription(Util.getJsonFromModel(list));
         request.setTransactionPin(tpin);
         RetrofitClient.getClient(context)
@@ -207,11 +208,7 @@ public class OrderProductsCartActivity extends BaseActivity {
                         pd.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             MainResponse2 res = response.body();
-                            if ("0".equalsIgnoreCase(res.getmStatus())) {
-                                gotoHomeScreen();
-                            }else {
-                                L.toastL(context,res.getMessage()==null?"Ops!":res.getMessage());
-                            }
+                            showConfirmationDialog(res.getMessage());
                         }
                     }
                     @Override
@@ -220,6 +217,28 @@ public class OrderProductsCartActivity extends BaseActivity {
                         pd.dismiss();
                     }
                 });
+    }
+
+    public void showConfirmationDialog(String msg) {
+        // TODO Auto-generated method stub
+        final Dialog d = new Dialog(context, R.style.AppCompatAlertDialogStyle);
+        d.setCancelable(false);
+        d.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        d.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        d.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        d.setContentView(R.layout.common_confirmation_dialog);
+
+        final TextView tv_confirmation_dialog = (TextView) d.findViewById(R.id.tv_confirmation_dialog);
+        tv_confirmation_dialog.setText(msg);
+        tv_confirmation_dialog.setVisibility(View.VISIBLE);
+        final Button btn_ok = (Button) d.findViewById(R.id.btn_ok);
+
+        btn_ok.setOnClickListener(view ->{
+            d.dismiss();
+            gotoHomeScreen();
+        });
+
+        d.show();
     }
     @Override
     public boolean onSupportNavigateUp() {

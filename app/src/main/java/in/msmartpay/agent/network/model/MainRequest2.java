@@ -8,6 +8,15 @@ public class MainRequest2 {
     private String ipaddress;
     private String transactionPin;
     private String SlNo;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getSlNo() {
         return SlNo;

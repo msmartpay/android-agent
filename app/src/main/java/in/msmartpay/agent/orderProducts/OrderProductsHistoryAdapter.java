@@ -37,13 +37,13 @@ public class OrderProductsHistoryAdapter extends RecyclerView.Adapter<OrderProdu
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_amount, tv_tracking_id, tv_order_details, tv_order_date, tv_order_id,tx_c_status;
+        TextView tv_amount, tv_tracking_id, tv_order_date, tv_order_id,tx_c_status;
         LinearLayout ll_item;
         public MyViewHolder(@NonNull View v) {
             super(v);
             tv_amount = v.findViewById(R.id.tv_amount);
             tv_tracking_id = v.findViewById(R.id.tv_tracking_id);
-            tv_order_details = v.findViewById(R.id.tv_order_details);
+            //tv_order_details = v.findViewById(R.id.tv_order_details);
             tv_order_date = v.findViewById(R.id.tv_order_date);
             tv_order_id = v.findViewById(R.id.tv_order_id);
             tx_c_status = v.findViewById(R.id.tx_c_status);
@@ -52,12 +52,12 @@ public class OrderProductsHistoryAdapter extends RecyclerView.Adapter<OrderProdu
 
         public void bind(OrderProductHistoryData modal,MyListener listener) {
             if (modal != null) {
-                tv_order_details.setText(modal.getOrderDetail());
+                //tv_order_details.setText(modal.getOrderDetail());
                 tv_order_date.setText(modal.getOrderTime());
                 tv_order_id.setText(modal.getOrderId());
                 tv_tracking_id.setText(modal.getDeliveryTrackingId());
-                tv_amount.setText(modal.getOrderAmount());
-                tx_c_status.setText(modal.getDeliveryStatus());
+                tv_amount.setText(modal.getNetAmount());
+                tx_c_status.setText(modal.getTxnStatus());
                 ll_item.setOnClickListener(v -> {
                     listener.onClick(modal);
                 });

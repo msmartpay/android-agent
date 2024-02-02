@@ -28,8 +28,9 @@
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1.2">
+                        android:layout_weight="1.2"
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/label1"
                             style="@style/tv_history"
@@ -48,6 +49,7 @@
                             android:layout_marginTop="5.0dip"
                             android:hint="Name"
                             android:textColor="@color/colorPrimaryDark" />
+
                         <TextView
                             android:id="@+id/tv_mob"
                             android:layout_width="match_parent"
@@ -56,6 +58,7 @@
                             android:layout_marginTop="5.0dip"
                             android:hint="xxxxxx9857"
                             android:textColor="@color/colorPrimaryDark" />
+
                         <TextView
                             android:id="@+id/tv_address"
                             android:layout_width="match_parent"
@@ -64,6 +67,7 @@
                             android:layout_marginTop="5.0dip"
                             android:hint="xxxxxx9857"
                             android:textColor="@color/colorPrimaryDark" />
+
                         <TextView
                             android:id="@+id/tv_gst_no"
                             android:layout_width="match_parent"
@@ -73,11 +77,12 @@
                             android:hint="xxxxxx9857"
                             android:textColor="@color/colorPrimaryDark" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="0.8">
+                        android:layout_weight="0.8"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/iv_logo"
@@ -90,9 +95,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10.0dip"
-                            android:hint="Status"
                             android:gravity="center"
+                            android:hint="Status"
                             android:textColor="@color/colorPrimaryDark" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/tv_cancel_order"
+                                style="@style/tv_btn_main_my"
+                                android:text="Cancel Order"
+                                android:textSize="@dimen/_10ssp"/>
+                        </LinearLayout>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
